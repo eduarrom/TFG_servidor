@@ -2,12 +2,8 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldNullException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoNullException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
-import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidatorTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,6 +27,11 @@ class SA_EmpleadoTest {
 
     final static Logger log = LoggerFactory.getLogger(SA_EmpleadoTest.class);
 
+
+    /******************************************************************
+     **********************   METODO INICIALES   **********************
+     ******************************************************************/
+
     @BeforeAll
     static void initSA() {
         log.info("Creando SA...");
@@ -38,18 +39,30 @@ class SA_EmpleadoTest {
     }
 
     @BeforeEach
-    void initEmpleado() throws EmpleadoException {
+    void iniciarContexto() throws EmpleadoException {
         e1 = new Empleado("empleado", "1234", Rol.valueOf("EMPLEADO"));
         log.info("Creando empleado ");
-        e1 = sa.crearEmpleado(e1);
+        if (sa.buscarByEmail(e1.getEmail()) == null) {
+            e1 = sa.crearEmpleado(e1);
+        }
     }
 
 
     @AfterEach
-    void eliminarEmpleado() {
+    void finalizarContexto() {
+
+        assertFalse(sa.transactionIsActive(), "Transacción no cerrada");
+
+        assertFalse(sa.emIsOpen(), "Entity Manager no cerrado");
+
         log.info("Eliminado empleado");
         sa.eliminarEmpleado(e1);
     }
+
+
+    /******************************************************************
+     ********************   TEST CREAR EMPLEADO   *********************
+     ******************************************************************/
 
 
     @ParameterizedTest
@@ -153,8 +166,15 @@ class SA_EmpleadoTest {
 
     }
 
-/*
 
+
+
+    /******************************************************************
+     *******************   TEST BUSCAR EMPLEADO   *********************
+     ******************************************************************/
+
+
+/*
     @Test
     void buscarUsuarioByID() throws EmpleadoException {
         log.info("BuscarUserTest");
@@ -223,51 +243,123 @@ class SA_EmpleadoTest {
 
         assertTrue(sa.saludar(nombre).equals(str));
     }
+    */
 
 
-    @ParameterizedTest(name = "-> {0}, {1}")
-    @CsvSource({"emple, 1234, EMPLEADO", "admin, 1234, ADMIN"})
-    void loginTest(String nombre, String pass, String rol) throws EmpleadoException {
-        String email = nombre.concat("@gmail.com");
 
-        Empleado emple = new Empleado(nombre, pass, email, Rol.valueOf(rol));
+    /******************************************************************
+     ********************   TEST LOGIN EMPLEADO   *********************
+     ******************************************************************/
 
-        if (!sa.buscarByEmail(email).equalsWithOutVersion(emple)) {
-            //sa.crearEmpleado(emple);
-        }
+
+
+    //@ParameterizedTest(name = "-> {0}, {1}")
+    //@CsvSource({"emple, 1234, EMPLEADO", "admin, 1234, ADMIN"})
+    @Test
+    void loginTest() throws EmpleadoException {
+        String email = e1.getEmail();
+        String pass = e1.getPassword();
+
 
         log.info("Login: {email='" + email + ", pass='" + pass + "'}");
-        Boolean result = sa.login(email, pass);
+        Boolean result = sa.loginEmpleado(email, pass);
 
         log.debug("result = '" + result + "'");
         assertTrue(result);
 
-        sa.eliminarEmpleado(emple);
+    }
+
+    @Test
+    void loginParamErroneosTest() {
+
+        log.info("Login email erroneo");
+        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+
+            boolean login = sa.loginEmpleado("kajsdnflaf", "1234");
+
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex1.getMessage());
 
     }
 
 
-    @ParameterizedTest(name = "-> {0}, {1}, {2}")
-    @CsvSource({",1234, EMPLEADO", "rodri,,EMPLEADO"})
-    void loginErroneoTest(String nombre, String pass, String rol) {
-        *//*String email = nombre.concat("@gmail.com");*//*
-        String email = "";
+    @Test
+    void loginEmpleadoInexistenteTest() {
 
-        Empleado emple = new Empleado(nombre, pass, email, Rol.valueOf(rol));
+        log.info("Login empleado inexistente");
+        Throwable ex1 = assertThrows(EmpleadoLoginErroneo.class, () -> {
+
+            boolean login = sa.loginEmpleado("kajsdnflaf@gmail.com", "1234");
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex1.getMessage());
+
+    }
+
+    @Test
+    void loginEmailNulloVacioTest() {
+
+        log.info("Login email null");
+        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+
+            boolean login = sa.loginEmpleado(null, "1234");
+
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex1.getMessage());
 
 
-        log.info("Login: {email='" + email + ", pass='" + pass + "'}");
-        Boolean result = sa.login(email, pass);
+        log.info("Login email vacio");
+        Throwable ex2 = assertThrows(EmpleadoFieldNullException.class, () -> {
 
-        log.debug("result = '" + result + "'");
-        assertFalse(result);
+            boolean login = sa.loginEmpleado("", "1234");
 
-        sa.eliminarEmpleado(emple);
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex2.getMessage());
 
 
     }
 
-    */
+    @Test
+    void loginPassNulloVacioTest() {
+
+        log.info("Login pass null");
+        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+
+            boolean login = sa.loginEmpleado("kajsdnflaf", null);
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex1.getMessage());
+
+        log.info("Login pass vacia");
+        Throwable ex2 = assertThrows(EmpleadoFieldNullException.class, () -> {
+
+            boolean login = sa.loginEmpleado("kajsdnflaf", "");
+            assertFalse(login);
+
+        });
+
+        log.info("Excepcion capturada:" + ex2.getMessage());
+
+    }
+
+
+
+    /******************************************************************
+     *******************   TEST BUSCAR BY EMAIL   *********************
+     ******************************************************************/
 
     @ParameterizedTest
     @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
@@ -300,10 +392,6 @@ class SA_EmpleadoTest {
 
     }
 
-
-    public static Object[][] InvalidEmailProvider() {
-        return EmailValidatorTest.InvalidEmailProvider();
-    }
 
 
     @ParameterizedTest
@@ -351,6 +439,20 @@ class SA_EmpleadoTest {
 
         log.info("Excepcion capturada:" + ex1.getMessage());
 
+    }
+
+
+
+
+
+    /******************************************************************
+     *********************   METODOS AUXILIARES   *********************
+     ******************************************************************/
+
+
+
+    public static Object[][] InvalidEmailProvider() {
+        return EmailValidatorTest.InvalidEmailProvider();
     }
 
 

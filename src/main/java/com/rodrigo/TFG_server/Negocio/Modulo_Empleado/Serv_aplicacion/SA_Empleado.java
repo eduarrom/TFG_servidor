@@ -22,7 +22,7 @@ public interface SA_Empleado {
 
     String saludar(String nombre);
 
-    Boolean login(String email, String pass);
+    Boolean loginEmpleado(String email, String pass) throws EmpleadoException;
 
     Empleado buscarByEmail(String email) throws EmpleadoException, EmpleadoFieldNullException ;
 

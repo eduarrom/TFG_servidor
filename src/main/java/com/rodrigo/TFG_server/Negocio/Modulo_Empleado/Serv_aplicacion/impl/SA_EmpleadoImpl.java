@@ -2,10 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldNullException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoNullException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
 import org.hibernate.PropertyValueException;
@@ -187,24 +184,93 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         return "Hola " + nombre + ", un saludo desde el servidor CXF :)";
     }
 
-    public Boolean login(String email, String pass) {
-        Empleado emple;
+    public Boolean loginEmpleado(String email, String pass) throws EmpleadoException {
+        Empleado emple = null;
+        log.debug("email = '" + email + "'");
 
 
-        em = emf.createEntityManager();
-        {
-            em.getTransaction().begin();
+        //Validacion del email
+        if (email == null || email == "" || !new EmailValidator().validate(email)) {
+            log.error("El email es invalido");
 
-            log.info("Buscando empleado...");
-            emple = (Empleado) em
-                    .createNamedQuery("Empleado.buscarPorEmail")
-                    .setParameter("email", email)
-                    .getResultList().get(0);
-
-
-            em.getTransaction().commit();
+            try {
+                throw new EmpleadoFieldNullException(
+                        new PropertyValueException("Empleado.email es erroneo.",
+                                Empleado.class.toString(),
+                                Empleado.class.getDeclaredField("email").toString()));
+            } catch (NoSuchFieldException e) {
+                log.error("Ocurrio un error inesperado.");
+                throw new EmpleadoException("Ocurrio un error con el email.");
+            }
         }
-        em.close();
+
+
+        //Validacion del pass
+        log.debug("pass = '" + pass + "'");
+        if (pass == null || pass == "") {
+            log.error("La password es invalido");
+
+            try {
+                throw new EmpleadoFieldNullException(
+                        new PropertyValueException("Empleado.password es erroneo.",
+                                Empleado.class.toString(),
+                                Empleado.class.getDeclaredField("password").toString()));
+            } catch (NoSuchFieldException e) {
+                log.error("Ocurrio un error inesperado.");
+                throw new EmpleadoException("Ocurrio un error con la password.");
+            }
+        }
+
+
+        try {
+
+            em = emf.createEntityManager();
+            {
+                log.debug("Iniciando transacción...");
+                em.getTransaction().begin();
+                {
+                    log.info("Buscando empleado en BBDD...");
+
+                    List result = em
+                            .createNamedQuery("Empleado.buscarPorEmail")
+                            .setParameter("email", email)
+                            .getResultList();
+
+                    if (result.size() > 0) {
+                        emple = (Empleado) result.get(0);
+                    }
+
+
+                    log.debug("emple = '" + emple + "'");
+
+                }
+                log.debug("Terminando transacción...");
+                em.getTransaction().commit();
+            }
+
+        /*} catch (PersistenceException e2) {
+            log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
+            log.error(e2.getStackTrace().toString());
+            em.getTransaction().rollback();
+
+            throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());*/
+
+        } catch (Exception e) {
+            log.error("Ocurrió una error al persisitir en BBDD.");
+            log.error("Mensaje: " + e.getMessage());
+            log.error(e.getStackTrace().toString());
+            em.getTransaction().rollback();
+
+            throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
+        } finally {
+
+            em.close();
+        }
+
+
+        if (emple == null) {
+            throw new EmpleadoLoginErroneo("Datos loginEmpleado incorrectos");
+        }
 
         log.info("Comporbando credenciales");
 
@@ -270,4 +336,14 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         return emple;
     }
+
+
+    public boolean emIsOpen() {
+        return em.isOpen();
+    }
+
+    public boolean transactionIsActive() {
+        return em.getTransaction().isActive();
+    }
+
 }

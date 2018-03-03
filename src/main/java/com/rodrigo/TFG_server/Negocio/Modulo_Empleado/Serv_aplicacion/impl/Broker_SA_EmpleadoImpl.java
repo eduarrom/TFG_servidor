@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado;
 
 import javax.jws.WebParam;
@@ -43,5 +44,10 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         return new SA_EmpleadoImpl().saludar(nombre);
     }
 
+
+
+    public boolean loginEmpleado(String email, String pass) throws EmpleadoException {
+        return new SA_EmpleadoImpl().loginEmpleado(email, pass);
+    }
 
 }
