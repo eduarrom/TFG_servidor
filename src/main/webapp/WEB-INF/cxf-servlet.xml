@@ -13,9 +13,9 @@
         http://cxf.apache.org/schemas/jaxws.xsd">
 
 
-    <jaxws:endpoint id="BrokerSAUsuario"
-                    implementor="com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Serv_aplicacion.imp.BrokerSAUsuario"
-                    address="/SA_Usuarios">
+    <jaxws:endpoint id="Broker_SA_Empleado"
+                    implementor="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl"
+                    address="/SA_Empleado">
         <jaxws:features>
             <bean class="org.apache.cxf.feature.LoggingFeature"/>
         </jaxws:features>

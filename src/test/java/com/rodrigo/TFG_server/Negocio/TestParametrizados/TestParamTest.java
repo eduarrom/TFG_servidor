@@ -29,7 +29,7 @@ public class TestParamTest {
 
 
 
-    @ParameterizedTest(name = "run #{index} with [{arguments}]")
+    @ParameterizedTest(name = "#{index} with [{arguments}]")
     @ValueSource(strings = { "Hello", "JUnit" })
     void withValueSource(String word) {
         log.info("Word: " + word);

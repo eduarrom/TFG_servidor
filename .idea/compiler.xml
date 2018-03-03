@@ -10,13 +10,11 @@
         <module name="pruebaCXF-PEPE" />
         <module name="pruebaCXFMaven" />
         <module name="pruebaCXFPEPE" />
+        <module name="TFG_server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="pruebaCXF" target="1.8" />
-      <module name="pruebaCXF-PEPE" target="1.5" />
-      <module name="pruebaCXFMaven" target="1.5" />
-      <module name="pruebaCXFPEPE" target="1.5" />
+      <module name="TFG_server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,35 +1,40 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Serv_aplicacion;
+package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Serv_aplicacion.imp.SAUsuarioImp;
-import com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Entidad.Usuario;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class SAUsuarioTest {
+class Broker_SA_EmpleadoTest {
 
-    static SAUsuarioImp sa;
 
-    final static Logger log = LoggerFactory.getLogger(SAUsuarioTest.class);
+    private static Broker_SA_EmpleadoImpl b;
+
+    final static Logger log = LoggerFactory.getLogger(Broker_SA_EmpleadoTest.class);
+
 
     @BeforeAll
     static void initSA() {
         log.info("before");
-        sa = new SAUsuarioImp();
+        b = new Broker_SA_EmpleadoImpl();
     }
 
-    @Test
-    void crearUsuario() {
+    @ParameterizedTest(name = "-> {0}, {1}")
+    @CsvSource({"juan, 1234",",1234","rodri,"})
+    void crearUsuario(String nombre, String pass) {
         log.info("crearUserTest");
-        Usuario user = new Usuario("juan", "1234");
 
-        Usuario nuevo = sa.crearUsuario(user);
+        log.info("nombre = '" + nombre + "'");
+
+        Empleado user = new Empleado("juan", "1234");
+
+        Empleado nuevo = b.crearUsuario(user);
 
         assertNotNull(nuevo);
         assertNotNull(nuevo.getId());
@@ -38,8 +43,8 @@ class SAUsuarioTest {
     @Test
     void buscarUsuarioByID() {
         log.info("BuscarUserTest");
-        Usuario nuevo = sa.crearUsuario(new Usuario("test2", "1234"));
-        Usuario userB = sa.buscarUsuarioByID(nuevo.getId());
+        Empleado nuevo = b.crearUsuario(new Empleado("test2", "1234"));
+        Empleado userB = b.buscarUsuarioByID(nuevo.getId());
 
         log.info(userB.toString());
 
@@ -55,32 +60,32 @@ class SAUsuarioTest {
     void eliminarUsuario() {
         log.info("EliminarUser Test");
 
-        Usuario u = new Usuario("Eliminar", "pass");
-        u = sa.crearUsuario(u);
+        Empleado u = new Empleado("Eliminar", "pass");
+        u = b.crearUsuario(u);
 
-        assertTrue(sa.eliminarUsuario(u));
+        assertTrue(b.eliminarUsuario(u));
 
-        assertNull(sa.buscarUsuarioByID(u.getId()));
+        assertNull(b.buscarUsuarioByID(u.getId()));
     }
 
     @Test
     void listarUsuarios() {
         log.info("ListarUsersTest");
 
-        assertNotNull(sa.listarUsuarios());
+        assertNotNull(b.listarUsuarios());
 
     }
 
     @Test
     void saludo(){
-        log.info("---- SAUsuarioTest.saludo ---- ");
+        log.info("---- SA_EmpleadoTest.saludo ---- ");
 
         String nombre = "Rodrigo";
         String str = "Hola " + nombre + ", un saludo desde el servidor CXF :)";
 
-        assertNotNull(sa.saludar(nombre));
+        assertNotNull(b.saludar(nombre));
 
-        assertTrue(sa.saludar(nombre).equals(str));
+        assertTrue(b.saludar(nombre).equals(str));
     }
 
     @Test
@@ -99,6 +104,5 @@ class SAUsuarioTest {
 
 
     }
-
 
 }
