@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -50,7 +52,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         if (empleadoNuevo == null) {
             log.error("Empleado es null");
-            throw new EmpleadoNullException("Argument empleadoNuevo is null");
+            throw new EmpleadoException("El empleado para persistir en null",new EmpleadoNullException("El empleado para persistir en null"));
         }
 
         if (empleadoNuevo.getEmail() == null || empleadoNuevo.getEmail() == "") {
@@ -96,16 +98,18 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
 
                     } catch (Exception e) {
-                        log.error("Ocurrió una error al persisitir en BBDD.");
-                        log.error(e.getStackTrace().toString());
+                        log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
+                        log.error("EXCEPCION!",e);
                         em.getTransaction().rollback();
 
                         throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
+                    } finally {
+
+                        em.close();
                     }
 
                 }
             }
-            em.close();
         } else {
             throw new EmpleadoYaExisteExcepcion("Empleado ya existente");
         }

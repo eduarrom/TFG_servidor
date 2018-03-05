@@ -9,4 +9,9 @@ public class EmpleadoException extends Exception{
     public EmpleadoException(Throwable cause) {
         super(cause);
     }
+
+
+    public EmpleadoException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

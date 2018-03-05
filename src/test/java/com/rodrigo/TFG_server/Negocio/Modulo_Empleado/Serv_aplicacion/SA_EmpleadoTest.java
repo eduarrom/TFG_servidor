@@ -456,4 +456,9 @@ class SA_EmpleadoTest {
     }
 
 
+    @Test
+    void buscarUnEmple() throws EmpleadoException {
+
+        log.info(sa.buscarByEmail("administrador@gmail.com").toString());
+    }
 }

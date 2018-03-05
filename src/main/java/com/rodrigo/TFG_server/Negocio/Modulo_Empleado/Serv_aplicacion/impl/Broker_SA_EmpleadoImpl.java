@@ -9,7 +9,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-//@WebService(targetNamespace = "http://Servicio_Usuarios/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
+//@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
 @WebService(
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
         serviceName="Broker_SA_EmpleadoImpl")
@@ -18,23 +18,23 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     public Broker_SA_EmpleadoImpl() {}
 
     @Override
-    public Empleado crearUsuario(@WebParam(name="Empleado") Empleado empleadoNuevo) {
+    public Empleado crearEmpleado(@WebParam(name="Empleado") Empleado empleadoNuevo) throws EmpleadoException {
 
-        //return new SA_EmpleadoImpl().crearEmpleado(empleadoNuevo);
-        return null;
+        return new SA_EmpleadoImpl().crearEmpleado(empleadoNuevo);
+        //return null;
     }
 
 
-    public Empleado buscarUsuarioByID(@WebParam(name="id") Long id) {
+    public Empleado buscarEmpleadoByID(@WebParam(name="id") Long id) {
         return new SA_EmpleadoImpl().buscarByID(id);
     }
 
-    public boolean eliminarUsuario(@WebParam(name="Empleado") Empleado empleadoEliminar) {
+    public boolean eliminarEmpleado(@WebParam(name="Empleado") Empleado empleadoEliminar) {
 
         return new SA_EmpleadoImpl().eliminarEmpleado(empleadoEliminar);
     }
 
-    public List<Empleado> listarUsuarios() {
+    public List<Empleado> listarEmpleados() {
 
         return new SA_EmpleadoImpl().listarEmpleados();
     }
@@ -48,6 +48,11 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     public boolean loginEmpleado(String email, String pass) throws EmpleadoException {
         return new SA_EmpleadoImpl().loginEmpleado(email, pass);
+    }
+
+    @Override
+    public Empleado buscarByEmail(String email) throws EmpleadoException {
+        return new SA_EmpleadoImpl().buscarByEmail(email);
     }
 
 }

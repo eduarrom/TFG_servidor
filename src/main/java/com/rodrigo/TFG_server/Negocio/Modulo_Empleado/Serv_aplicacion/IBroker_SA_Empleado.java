@@ -12,24 +12,28 @@ import java.util.List;
 public interface IBroker_SA_Empleado {
 
     @WebMethod(operationName="crearEmpleado")
-    public Empleado crearUsuario(@WebParam(name = "Empleado") Empleado empleadoNuevo);
+    public Empleado crearEmpleado(@WebParam(name = "Empleado") Empleado empleadoNuevo) throws EmpleadoException;
 
     @WebMethod(operationName="buscarByID")
-    public Empleado buscarUsuarioByID(@WebParam(name = "id") Long id);
+    public Empleado buscarEmpleadoByID(@WebParam(name = "id") Long id);
 
 
     @WebMethod(operationName="eliminarEmpleado")
-    public boolean eliminarUsuario(@WebParam(name = "Empleado") Empleado empleadoEliminar) ;
+    public boolean eliminarEmpleado(@WebParam(name = "Empleado") Empleado empleadoEliminar) ;
 
 
     @WebMethod(operationName="listarEmpleados")
-    public List<Empleado> listarUsuarios();
+    public List<Empleado> listarEmpleados();
 
     @WebMethod(operationName="saludar")
     public String saludar(@WebParam(name="nombre") String nombre);
 
     @WebMethod(operationName="loginEmpleado")
     public boolean loginEmpleado(String email, String pass) throws EmpleadoException;
+
+    @WebMethod(operationName="buscarByEmail")
+    public Empleado buscarByEmail(String email) throws EmpleadoException;
+
 
 
 }

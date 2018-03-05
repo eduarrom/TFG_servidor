@@ -3,6 +3,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -36,7 +37,7 @@ public class Empleado implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Rol rol;
 
