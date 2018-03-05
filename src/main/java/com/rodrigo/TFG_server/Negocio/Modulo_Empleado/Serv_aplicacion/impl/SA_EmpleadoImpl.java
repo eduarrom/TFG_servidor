@@ -103,7 +103,8 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
                     } finally {
 
-                        em.close();
+                        if (em.isOpen())
+                            em.close();
                     }
 
                 }
