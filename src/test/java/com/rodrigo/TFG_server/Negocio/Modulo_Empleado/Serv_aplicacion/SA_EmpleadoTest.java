@@ -5,6 +5,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidatorTest;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.ErrorMessages_es;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -108,13 +109,15 @@ class SA_EmpleadoTest {
     void crearEmpleadoNull() {
 
 
-        Throwable exception = assertThrows(EmpleadoNullException.class, () -> {
+        Throwable exception = assertThrows(EmpleadoException.class, () -> {
             Empleado empleCreado;
             empleCreado = sa.crearEmpleado(null);
 
             assertNull(empleCreado);
 
         });
+
+        log.error("----  EXCEPCION! ----", exception);
 
     }
 
