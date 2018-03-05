@@ -9,10 +9,7 @@ import org.hibernate.PropertyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,9 +21,9 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
     private final static Logger log = LoggerFactory.getLogger(SA_EmpleadoImpl.class);
 
+
     static private EntityManagerFactory emf;
 
-    private EntityManager em;
 
     /**
      * Instantiates a new Sa empleado.
@@ -52,7 +49,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         if (empleadoNuevo == null) {
             log.error("Empleado es null");
-            throw new EmpleadoException("El empleado para persistir en null",new EmpleadoNullException("El empleado para persistir en null"));
+            throw new EmpleadoException("El empleado para persistir en null", new EmpleadoNullException("El empleado para persistir en null"));
         }
 
         if (empleadoNuevo.getEmail() == null || empleadoNuevo.getEmail() == "") {
@@ -69,6 +66,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
+        EntityManager em;
 
         log.info("Buscando por email...");
         if (buscarByEmail(empleadoNuevo.getEmail()) == null) {
@@ -99,7 +97,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
                     } catch (Exception e) {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
-                        log.error("EXCEPCION!",e);
+                        log.error("EXCEPCION!", e);
                         em.getTransaction().rollback();
 
                         throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
@@ -123,7 +121,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         Empleado user;
 
         log.info("Creando Entity Manager");
-        em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         {
             em.getTransaction().begin();
@@ -143,7 +141,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         boolean result;
 
-        em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         {
             em.getTransaction().begin();
@@ -153,13 +151,14 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 result = true;
                 em.getTransaction().commit();
             } catch (Exception e) {
-                em.getTransaction().rollback();
+                //em.getTransaction().rollback();
                 result = false;
             }
 
 
         }
-        em.close();
+        if (em.isOpen())
+            em.close();
 
 
         return result;
@@ -171,7 +170,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         List<Empleado> lista;
 
 
-        em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
         {
             em.getTransaction().begin();
 
@@ -225,26 +224,31 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
-
+        EntityManager em = emf.createEntityManager();
         try {
 
-            em = emf.createEntityManager();
+
             {
                 log.debug("Iniciando transacción...");
                 em.getTransaction().begin();
                 {
                     log.info("Buscando empleado en BBDD...");
 
-                    List result = em
-                            .createNamedQuery("Empleado.buscarPorEmail")
-                            .setParameter("email", email)
-                            .getResultList();
+                    log.info("Buscando empleado...");
+                    try {
+                        emple = (Empleado) em
+                                .createNamedQuery("Empleado.buscarPorEmail")
+                                .setParameter("email", email)
+                                .getSingleResult();
 
-                    if (result.size() > 0) {
-                        emple = (Empleado) result.get(0);
+
+                    } catch (NoResultException e) {
+                        log.info("Empleado con email '" + email + "' no encontrado");
+                        emple = null;
                     }
-
-
+                    /*if (result.size() > 0) {
+                        emple = (Empleado) result.get(0);
+                    }*/
                     log.debug("emple = '" + emple + "'");
 
                 }
@@ -263,12 +267,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error("Ocurrió una error al persisitir en BBDD.");
             log.error("Mensaje: " + e.getMessage());
             log.error(e.getStackTrace().toString());
-            em.getTransaction().rollback();
+            //em.getTransaction().rollback();
 
             throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
         } finally {
 
-            em.close();
+            if (em.isOpen())
+                em.close();
         }
 
 
@@ -320,34 +325,48 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
         log.info("Email correcto");
-        em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
+
         {
             em.getTransaction().begin();
 
             log.info("Buscando empleado...");
-            List result = em
-                    .createNamedQuery("Empleado.buscarPorEmail")
-                    .setParameter("email", email)
-                    .getResultList();
+            try {
+                emple = (Empleado) em
+                        .createNamedQuery("Empleado.buscarPorEmail")
+                        .setParameter("email", email)
+                        .getSingleResult();
 
-            if (result.size() > 0) {
-                emple = (Empleado) result.get(0);
+
+            } catch (NoResultException e) {
+                log.info("Empleado con email '" + email + "' no encontrado");
+                emple = null;
             }
+            /*if (result.size() > 0) {
+                emple = (Empleado) result.get(0);
+            }*/
 
             em.getTransaction().commit();
         }
-        em.close();
+        if (em.isOpen())
+            em.close();
 
         return emple;
     }
 
 
-    public boolean emIsOpen() {
+  /*  public boolean emIsOpen() {
         return em.isOpen();
     }
 
     public boolean transactionIsActive() {
         return em.getTransaction().isActive();
-    }
+    }*/
 
+    @Override
+    protected void finalize() throws Throwable {
+        log.info("CERRANDO EMF");
+        emf.close();
+        super.finalize();
+    }
 }
