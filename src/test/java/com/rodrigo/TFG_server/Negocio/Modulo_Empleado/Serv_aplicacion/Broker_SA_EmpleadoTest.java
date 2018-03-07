@@ -34,7 +34,7 @@ class Broker_SA_EmpleadoTest {
      ******************************************************************/
 
     @BeforeAll
-    static void initSA() {
+    static void initBroker() {
         log.info("Creando SA...");
         b = new Broker_SA_EmpleadoImpl();
     }

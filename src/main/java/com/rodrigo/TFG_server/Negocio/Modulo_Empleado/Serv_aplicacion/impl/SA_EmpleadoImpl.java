@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
+import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
@@ -10,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -20,18 +19,6 @@ import java.util.List;
 public class SA_EmpleadoImpl implements SA_Empleado {
 
     private final static Logger log = LoggerFactory.getLogger(SA_EmpleadoImpl.class);
-
-
-    static private EntityManagerFactory emf;
-
-
-    /**
-     * Instantiates a new Sa empleado.
-     */
-    public SA_EmpleadoImpl() {
-        emf = Persistence.createEntityManagerFactory("aplicacion");
-    }
-
 
     /**
      * Inserta un empleado en la BBDD
@@ -44,7 +31,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
     public Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException {
         log.info("creando empleado...");
 
-        Empleado result = null;
+        Empleado emple = null;
         log.debug("empleadoNuevo = '" + empleadoNuevo + "'");
 
         if (empleadoNuevo == null) {
@@ -66,22 +53,32 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
-        EntityManager em;
-
-        log.info("Buscando por email...");
-        if (buscarByEmail(empleadoNuevo.getEmail()) == null) {
-            em = emf.createEntityManager();
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
+        {
+            log.debug("Iniciando transacción...");
+            em.getTransaction().begin();
             {
-                log.debug("Iniciando transacción...");
-                em.getTransaction().begin();
-                {
 
+                log.info("Buscando por email...");
+                try {
+                    emple = (Empleado) em
+                            .createNamedQuery("Empleado.buscarPorEmail")
+                            .setParameter("email", empleadoNuevo.getEmail())
+                            .getSingleResult();
+
+
+                } catch (NoResultException e) {
+                    log.info("Empleado con email '" + empleadoNuevo.getEmail() + "' no encontrado");
+                }
+
+
+                if (emple == null) {
 
                     try {
 
                         log.info("Persistiendo empleado en BBDD...");
-                        result = em.merge(empleadoNuevo);
-                        log.debug("result = '" + result + "'");
+                        emple = em.merge(empleadoNuevo);
+                        log.debug("result = '" + emple + "'");
 
 
                         log.debug("Terminando transacción...");
@@ -107,13 +104,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             em.close();
                     }
 
+                } else {
+                    throw new EmpleadoYaExisteExcepcion("Empleado ya existente");
                 }
             }
-        } else {
-            throw new EmpleadoYaExisteExcepcion("Empleado ya existente");
         }
 
-        return result;
+        return emple;
     }
 
 
@@ -122,7 +119,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         Empleado user;
 
         log.info("Creando Entity Manager");
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
             em.getTransaction().begin();
@@ -142,7 +139,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         boolean result;
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
             em.getTransaction().begin();
@@ -171,7 +168,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         List<Empleado> lista;
 
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
         {
             em.getTransaction().begin();
 
@@ -225,7 +222,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
         try {
 
 
@@ -326,8 +323,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
         log.info("Email correcto");
-        EntityManager em = emf.createEntityManager();
-
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
         {
             em.getTransaction().begin();
 
@@ -364,10 +360,10 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         return em.getTransaction().isActive();
     }*/
 
-    @Override
+  /*  @Override
     protected void finalize() throws Throwable {
         log.info("CERRANDO EMF");
-        emf.close();
+        EMFSingleton.getInstance().close();
         super.finalize();
-    }
+    }*/
 }

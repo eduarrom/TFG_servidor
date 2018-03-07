@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -39,7 +40,8 @@ public class EmailValidatorTest {
                 "rodri123@gmail.a", "rodri123@.com", "rodri123@.com.com",
                 ".rodri@rodri.com", "rodri()*@gmail.com", "rodri@%*.com",
                 "rodri..2002@gmail.com", "rodri.@gmail.com",
-                "rodri@rodri@gmail.com", "rodri@gmail.com.1a" } } };
+                "rodri@rodri@gmail.com", "rodri@gmail.com.1a",
+                "", " ", "", } } };
     }
 
     @ParameterizedTest
@@ -57,6 +59,18 @@ public class EmailValidatorTest {
     @ParameterizedTest
     @MethodSource("InvalidEmailProvider")
     public void emailInvalidoTest(String[] Email) {
+
+        for (String temp : Email) {
+            boolean valid = emailValidator.validate(temp);
+            System.out.println("Email no valido : " + temp + " , " + valid);
+            assertFalse(valid);
+        }
+    }
+
+
+    @Test
+    public void emailNullTest() {
+        String[] Email = new String[]{null, "", "  ","   rodri@gmail.com.1a    " }  ;
 
         for (String temp : Email) {
             boolean valid = emailValidator.validate(temp);

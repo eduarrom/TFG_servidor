@@ -12,31 +12,28 @@
         <properties>
             <!--MYSQL-REMOTO-->
 
-             <!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/TFG_BBDD" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="" />
+            <!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/TFG_BBDD"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
 
 
-            <property name="hibernate.c3p0.min_size" value="5" />
-            <property name="hibernate.c3p0.max_size" value="20" />
-            <property name="hibernate.c3p0.timeout" value="300" />
-            <property name="hibernate.c3p0.max_statements" value="50" />
-            <property name="hibernate.c3p0.idle_test_period" value="3000" />
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/qxp814" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="" />-->
+            <property name="hibernate.c3p0.min_size" value="10"/>
+            <property name="hibernate.c3p0.max_size" value="30"/>
+            <!-- <property name="hibernate.c3p0.timeout" value="300" /> -->
+            <!-- <property name="hibernate.c3p0.max_statements" value="50" /> -->
+            <!-- <property name="hibernate.c3p0.idle_test_period" value="3000" /> -->
 
 
             <property name="hibernate.connection.autocommit" value="false"/>
             <!--OTRAS PROPIEDADES-->
             <property name="hibernate.show.sql" value="false"/>
-            <property name="hibernate.format_sql" value="false" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-            <property name="hibernate.use_sql_comments" value="true" />
-            <property name="hibernate.jdbc.wrap_result_sets" value="true" />
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.jdbc.wrap_result_sets" value="true"/>
             <property name="hibernate.hibernate.cache.use_query_cache" value="true" />
 
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->

@@ -18,14 +18,19 @@ public class EmailValidator {
     /**
      * Validate hex with regular expression
      *
-     * @param hex
-     *            hex for validation
+     * @param email email for validation
      * @return true valid hex, false invalid hex
      */
-    public boolean validate(final String hex) {
+    public boolean validate(String email) {
 
-        matcher = pattern.matcher(hex);
-        return matcher.matches();
+        if(email != null){
+            email = email.trim();
+            if(email != "") {
+                matcher = pattern.matcher(email);
+                return matcher.matches();
+            } else
+                return false;
+        }else return false;
 
     }
 }
