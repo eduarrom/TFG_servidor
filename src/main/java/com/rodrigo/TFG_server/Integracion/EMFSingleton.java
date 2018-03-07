@@ -1,23 +1,16 @@
 package com.rodrigo.TFG_server.Integracion;
 
 
-
 public class EMFSingleton {
 
-    private static javax.persistence.EntityManagerFactory ourInstance;
+    private static javax.persistence.EntityManagerFactory ourInstance = javax.persistence.Persistence.createEntityManagerFactory("aplicacion");
 
-    public static javax.persistence.EntityManagerFactory getInstance() {
-
-        if(ourInstance == null){
-            ourInstance =  javax.persistence.Persistence.createEntityManagerFactory("aplicacion");
-        }
-        return ourInstance;
-    }
+    public static javax.persistence.EntityManagerFactory getInstance() { return ourInstance;    }
 
 
     @Override
     protected void finalize() throws Throwable {
-        if(ourInstance.isOpen()){
+        if (ourInstance.isOpen()) {
             ourInstance.close();
         }
         super.finalize();

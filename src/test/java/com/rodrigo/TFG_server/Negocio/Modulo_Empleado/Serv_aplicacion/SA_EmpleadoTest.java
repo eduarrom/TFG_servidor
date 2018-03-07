@@ -1,5 +1,6 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
@@ -22,21 +23,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SA_EmpleadoTest {
 
-    static SA_EmpleadoImpl sa;
+    static SA_Empleado sa;
 
     private Empleado e1;
 
     final static Logger log = LoggerFactory.getLogger(SA_EmpleadoTest.class);
 
 
-    /******************************************************************
-     **********************   METODO INICIALES   **********************
-     ******************************************************************/
+    /*******************************************************************
+     **********************   METODOS INICIALES   **********************
+     *******************************************************************/
 
     @BeforeAll
     static void initSA() {
         log.info("Creando SA...");
-        sa = new SA_EmpleadoImpl();
+        sa = FactoriaSA.getInstance().crearSAEmpleado();
     }
 
     @BeforeEach

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface SA_Empleado {
 
-    Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException, NoSuchFieldException;
+    Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException;
 
     Empleado buscarByID(Long id);
 
