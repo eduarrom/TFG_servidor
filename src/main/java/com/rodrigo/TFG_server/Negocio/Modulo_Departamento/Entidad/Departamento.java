@@ -3,7 +3,6 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -12,11 +11,9 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Empleado.listar", query = "FROM Empleado"),
-        @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
-
+        @NamedQuery(name = "Departamento.listar", query = "FROM Empleado"),
 })
-@XmlRootElement(name = "Empleado")
+@XmlRootElement(name = "Departamento")
 public class Departamento implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
@@ -162,3 +159,4 @@ public class Departamento implements Serializable {
         return Objects.hash(getId(), getNombre(), getPassword(), getVersion());
     }
 }
+
