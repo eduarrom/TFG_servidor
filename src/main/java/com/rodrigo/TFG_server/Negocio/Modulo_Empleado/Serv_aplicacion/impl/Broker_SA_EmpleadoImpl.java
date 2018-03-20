@@ -9,10 +9,10 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-//@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
+//@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_ProyectoImpl", serviceName = "Broker_SA_ProyectoImpl")
 @WebService(
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
-        serviceName="Broker_SA_EmpleadoImpl")
+        serviceName="Broker_SA_ProyectoImpl")
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     public Broker_SA_EmpleadoImpl() {}

@@ -1,7 +1,6 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
+package com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import org.hibernate.annotations.Cascade;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,15 +14,13 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Departamento.listar", query = "FROM Departamento"),
-        @NamedQuery(name = "Departamento.buscarPorSiglas", query = "from Departamento e where e.siglas = :siglas")
-
+        @NamedQuery(name = "Recurso.listar", query = "FROM Empleado"),
 })
-@XmlRootElement(name = "Departamento")
-public class Departamento implements Serializable {
+@XmlRootElement(name = "Recurso")
+public class Recurso implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    @Column/*(name = "id_depart")*/
+    @Column
     @Id protected Long id;
 
     @NotBlank
@@ -31,13 +28,9 @@ public class Departamento implements Serializable {
     private String nombre;
 
 
-    @NotBlank
-    @Column(nullable = false, unique = true)
-    private String siglas;
-    
-    @OneToMany/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<Empleado> empleados;
+    @OneToMany
+    private List<ProyectoRecurso> proyectos;
+
 
     @Version protected long version;
 
@@ -47,26 +40,23 @@ public class Departamento implements Serializable {
      ****************************/
 
 
-    public Departamento(String nombre, String password) {
+    public Recurso(String nombre, String password) {
         this.nombre = nombre;
-        this.siglas = nombre.toLowerCase().concat("@gmail.com");
     }
 
 
-    public Departamento(Long id, String nombre, String password, String siglas, long version) {
+    public Recurso(Long id, String nombre, String password, String email, long version) {
         this.id = id;
         this.nombre = nombre;
-        this.siglas = siglas;
         this.version = version;
     }
 
-    public Departamento(String nombre, String password, String siglas) {
+    public Recurso(String nombre, String password, String email) {
         this.nombre = nombre;
-        this.siglas = siglas;
 
     }
 
-    public Departamento() {
+    public Recurso() {
     }
 
     /****************************
@@ -92,6 +82,7 @@ public class Departamento implements Serializable {
     }
 
 
+
     @XmlElement(name = "version", required = true)
     public long getVersion() {
         return version;
@@ -101,10 +92,6 @@ public class Departamento implements Serializable {
         this.version = version;
     }
 
-    @XmlElement(name = "siglas", required = true)
-    public String getSiglas() { return siglas;}
-
-    public void setSiglas(String siglas) {this.siglas = siglas;}
 
 
 
@@ -117,7 +104,6 @@ public class Departamento implements Serializable {
         return "Departamento{" +
                 "  id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", mail='" + siglas + '\'' +
                 ", version=" + version +
                 '}';
     }
@@ -126,21 +112,19 @@ public class Departamento implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Departamento)) return false;
-        Departamento depto = (Departamento) o;
-        return getVersion() == depto.getVersion() &&
-                Objects.equals(getId(), depto.getId()) &&
-                Objects.equals(getNombre(), depto.getNombre()) &&
-                Objects.equals(getSiglas(), depto.getSiglas());
+        if (!(o instanceof Recurso)) return false;
+        Recurso recurso = (Recurso) o;
+        return getVersion() == recurso.getVersion() &&
+                Objects.equals(getId(), recurso.getId()) &&
+                Objects.equals(getNombre(), recurso.getNombre());
     }
 
     public boolean equalsWithOutVersion(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Departamento)) return false;
-        Departamento dpto = (Departamento) o;
-        return  Objects.equals(getId(), dpto.getId()) &&
-                Objects.equals(getNombre(), dpto.getNombre()) &&
-                Objects.equals(getSiglas(), dpto.getSiglas());
+        if (!(o instanceof Recurso)) return false;
+        Recurso recurso = (Recurso) o;
+        return  Objects.equals(getId(), recurso.getId()) &&
+                Objects.equals(getNombre(), recurso.getNombre());
     }
 
     @Override

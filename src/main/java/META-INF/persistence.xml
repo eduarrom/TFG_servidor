@@ -8,6 +8,19 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial</class>
+
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento</class>
+
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.ClavesEmpleadoProyecto</class>
+
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.Recurso</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ProyectoRecurso</class>
+        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ClavesProyectoRecurso</class>
+
 
         <properties>
             <!--MYSQL-REMOTO-->

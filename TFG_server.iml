@@ -32,6 +32,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
+          <factory-entry name="TFG_server" />
           <factory-entry name="aplicacion" />
           <factory-entry name="app" />
           <factory-entry name="com.rodrigo.TFG.pruebaCXF" />

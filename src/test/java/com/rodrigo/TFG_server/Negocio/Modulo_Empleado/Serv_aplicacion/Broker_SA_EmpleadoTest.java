@@ -179,7 +179,7 @@ class Broker_SA_EmpleadoTest {
         Empleado e = new Empleado("test2", "1234");
         Empleado nuevo = null;
 
-        nuevo = b.buscarByEmail(e.getEmail());
+        nuevo = b.buscarBySiglas(e.getEmail());
         if (nuevo == null) {
             //nuevo = b.crearEmpleado(e);
         }
@@ -204,7 +204,7 @@ class Broker_SA_EmpleadoTest {
         Empleado u = new Empleado("Eliminar", "pass");
 
 
-        if (!b.buscarByEmail(u.getEmail()).equalsWithOutVersion(u)) {
+        if (!b.buscarBySiglas(u.getEmail()).equalsWithOutVersion(u)) {
             //u = b.crearEmpleado(u);
         }
 

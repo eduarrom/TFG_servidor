@@ -1,12 +1,10 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
+package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ProyectoRecurso;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -15,17 +13,14 @@ import java.util.Objects;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "Empleado.listar", query = "FROM Empleado"),
-        @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
-
+        @NamedQuery(name = "Proyecto.listar", query = "FROM Empleado"),
 })
-@XmlRootElement(name = "Empleado")
-public class Empleado implements Serializable {
+@XmlRootElement(name = "Proyecto")
+public class Proyecto implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    @Column/*(name = "id_empleado")*/
+    @Column/*(name = "id_proyecto")*/
     @Id protected Long id;
 
     @NotBlank
@@ -42,17 +37,13 @@ public class Empleado implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @NotNull
-    @Column(nullable = false)
-    private Rol rol;
 
+    @OneToMany
+    private List<EmpleadoProyecto> empleados;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Departamento departamento;
+    @OneToMany
+    private List<ProyectoRecurso> recursos;
 
-    //@OneToMany
-    //private List<EmpleadoProyecto> proyectos;
 
     @Version protected long version;
 
@@ -62,42 +53,29 @@ public class Empleado implements Serializable {
      ****************************/
 
 
-    public Empleado(String nombre, String password, Rol rol) {
+    public Proyecto(String nombre, String password) {
         this.nombre = nombre;
         this.password = password;
         this.email = nombre.toLowerCase().concat("@gmail.com");
-        this.rol = rol;
     }
 
 
-    /** Constructor
-     *  Rol por defecto = Rol.EMPLEADO
-     * */
-    public Empleado(String nombre, String password) {
-        this.nombre = nombre;
-        this.password = password;
-        this.rol = Rol.EMPLEADO;
-        this.email = nombre.toLowerCase().concat("@gmail.com");
-    }
-
-    public Empleado(Long id, String nombre, String password, String email, Rol rol, long version) {
+    public Proyecto(Long id, String nombre, String password, String email, long version) {
         this.id = id;
         this.nombre = nombre;
         this.password = password;
-        this.rol = rol;
         this.email = email;
         this.version = version;
     }
 
-    public Empleado(String nombre, String password, String email, Rol rol) {
+    public Proyecto(String nombre, String password, String email) {
         this.nombre = nombre;
         this.password = password;
-        this.rol = rol;
         this.email = email;
 
     }
 
-    public Empleado() {
+    public Proyecto() {
     }
 
     /****************************
@@ -131,13 +109,6 @@ public class Empleado implements Serializable {
         this.password = password;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 
     @XmlElement(name = "version", required = true)
     public long getVersion() {
@@ -161,12 +132,11 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" +
+        return "Departamento{" +
                 "  id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", password='" + password + '\'' +
                 ", mail='" + email + '\'' +
-                ", rol='" + rol + '\'' +
                 ", version=" + version +
                 '}';
     }
@@ -175,29 +145,28 @@ public class Empleado implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Empleado)) return false;
-        Empleado empleado = (Empleado) o;
+        if (!(o instanceof Proyecto)) return false;
+        Proyecto empleado = (Proyecto) o;
         return getVersion() == empleado.getVersion() &&
                 Objects.equals(getId(), empleado.getId()) &&
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
-                Objects.equals(getPassword(), empleado.getPassword()) &&
-                getRol() == empleado.getRol();
+                Objects.equals(getPassword(), empleado.getPassword());
     }
 
     public boolean equalsWithOutVersion(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Empleado)) return false;
-        Empleado empleado = (Empleado) o;
+        if (!(o instanceof Proyecto)) return false;
+        Proyecto empleado = (Proyecto) o;
         return  Objects.equals(getId(), empleado.getId()) &&
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
-                Objects.equals(getPassword(), empleado.getPassword()) &&
-                Objects.equals(getRol(), empleado.getRol());
+                Objects.equals(getPassword(), empleado.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getPassword(), getRol(), getVersion());
+        return Objects.hash(getId(), getNombre(), getPassword(), getVersion());
     }
 }
+

@@ -74,7 +74,7 @@ class EmpleadoTest {
 
     @Test
     void equalsWithOutVersionConBBDD() throws EmpleadoException {
-        log.info("creando SA_Empleado");
+        log.info("creando SA_Proyecto");
 
         Empleado admin2 = new SA_EmpleadoImpl().crearEmpleado(admin);
         admin.setId(admin2.getId());

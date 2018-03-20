@@ -1,4 +1,4 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Expeciones;
+package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones;
 
 public class DepartamentoException extends Exception{
     public DepartamentoException(String message) {

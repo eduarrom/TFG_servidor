@@ -31,7 +31,7 @@ public interface IBroker_SA_Empleado {
     @WebMethod(operationName="loginEmpleado")
     public boolean loginEmpleado(String email, String pass) throws EmpleadoException;
 
-    @WebMethod(operationName="buscarByEmail")
+    @WebMethod(operationName="buscarBySiglas")
     public Empleado buscarByEmail(String email) throws EmpleadoException;
 
 

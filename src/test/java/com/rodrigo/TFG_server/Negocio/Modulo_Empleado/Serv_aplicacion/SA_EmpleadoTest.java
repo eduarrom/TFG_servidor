@@ -185,7 +185,7 @@ class SA_EmpleadoTest {
         Empleado e = new Empleado("test2", "1234");
         Empleado nuevo = null;
 
-        nuevo = sa.buscarByEmail(e.getEmail());
+        nuevo = sa.buscarBySiglas(e.getEmail());
         if (nuevo == null) {
             //nuevo = sa.crearEmpleado(e);
         }
@@ -210,7 +210,7 @@ class SA_EmpleadoTest {
         Empleado u = new Empleado("Eliminar", "pass");
 
 
-        if (!sa.buscarByEmail(u.getEmail()).equalsWithOutVersion(u)) {
+        if (!sa.buscarBySiglas(u.getEmail()).equalsWithOutVersion(u)) {
             //u = sa.crearEmpleado(u);
         }
 
