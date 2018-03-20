@@ -7,34 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa6ce28-e499-4f5f-94e1-568c17ec17c9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Excepciones/DepartamentoFieldNullException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/IBroker_SA_Departamento.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/SA_Departamento.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/impl/Broker_SA_DepartamentoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/impl/SA_DepartamentoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/EmpleadoProyecto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Excepciones/ProyectoFieldNullException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/IBroker_SA_Proyecto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/SA_Proyecto.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/impl/Broker_SA_ProyectoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/impl/SA_ProyectoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/TFG_server.iml" afterPath="$PROJECT_DIR$/TFG_server.iml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EMFSingleton.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EMFSingleton.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Expeciones/DepartamentoException.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Excepciones/DepartamentoException.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/IBroker_SA_Empleado.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/IBroker_SA_Empleado.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/Broker_SA_EmpleadoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/Broker_SA_EmpleadoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1343,7 +1316,7 @@
       <workItem from="1521327281916" duration="551000" />
       <workItem from="1521376464441" duration="118000" />
       <workItem from="1521376626247" duration="194000" />
-      <workItem from="1521462724289" duration="5828000" />
+      <workItem from="1521462724289" duration="6063000" />
     </task>
     <servers />
   </component>
@@ -1380,7 +1353,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221096000" />
+    <option name="totallyTimeSpent" value="221331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

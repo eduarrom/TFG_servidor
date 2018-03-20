@@ -1,10 +1,10 @@
-# PruebaCXF
+# TFG_server
 
-Proyecto de ejemplo para practicar con el lado del servior y aprender a usar **JAX-WS** con la implementación **CXF** usando servicios **SOAP**.
+Proyecto con el backend de mi TFG, usa **JAX-WS** y **JAX-RS** con la implementación **CXF** usando servicios **SOAP** y **REST**.
 
-Está montado con **Maven** y se usa **Jenkins** para hacer pruebas iniciales con la Integración Continua. (Posteriormente se añadirá **JUnit** para las pruebas unitarias)
+Está montado con **Maven** y se usa **Jenkins** para hacer pruebas iniciales con la Integración Continua y **JUnit** para las pruebas unitarias. Posterior mente se usará **JMeter** para las pruebas de carga.
 
-El proyecto contiene pruebas para ver el funcionamiento dentro del marco de mi del [Trabajo de Final de Grado](https://cv-rodrigodemiguel.herokuapp.com/#TFG) de Ingeniería del Software.
+El proyecto forma parte de mi TFG [Trabajo de Final de Grado](https://hunzagit.github.io/Portfolio-Online/#TFG) de Ingeniería del Software.
 
 ## Entorno
 
@@ -14,27 +14,31 @@ El proyecto contiene pruebas para ver el funcionamiento dentro del marco de mi d
  - **Maven** 3.3.9
  - **JUnit** 5.0.2
  - **Hibernate** 4.2.21
+ - **MySQL** 5.0.11
  - **Apache Tomcat** 8.5.23
  - **IntelliJ IDEA** 2017.2.6
  - **Jenkins** 2.92
  
+
+
+## Branches
+
+La rama **Development** contiene el código que se está desarrollando y que no ha pasado satisfactoriamente todas las pruebas.
+La rama **master** contiene el codigo que ha pasado satisfactoriamente las pruebas, todo ello gestionado por Jenkins.
+
+
 ## Dependencias
 
-No tiene dependencias de otros proyectos externos, aunque tiene una [aplicación cliente](https://github.com/hunzaGit/pruebaCXF-cliente) (también de prueba) que consume los servicios expuestos mediante **WSDL**.
+No tiene dependencias de otros proyectos externos, aunque tiene una [aplicación cliente](https://github.com/hunzaGit/TFG_cliente) que consume los servicios expuestos mediante **WSDL** y **REST**.
  
-## Funcionamiento
- 
-Simplemente tiene una clase que expone un servicio el cual recibe un nombre y retorna un saludo
-
 
 ## Instalación
-
 
     $ mvn clean package
     
 Desplegar el .war en Tomcat con Tomcat_Manager o:
 
-    $ cp target/pruebaCXF.war $CATALINA_BASE/webapps/
+    $ cp target/TFG_server.war $CATALINA_BASE/webapps/
     
-    $ open http://localhost:${tomcat_port}/pruebaCXF/
+    $ open http://localhost:${tomcat_port}/TFG_server/
 
