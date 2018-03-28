@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Departamento>
+    <id>0</id>
+    <nombre>Ingenieria del Software</nombre>
+    <siglas>IdS</siglas>
+    <empleados xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="empleadoTParcial">
+        <nombre>rodri</nombre>
+        <email>rodri@gmail.com</email>
+        <password>1234</password>
+        <rol>ADMIN</rol>
+        <departamento>
+            <id>0</id>
+            <nombre>Ingenieria del Software</nombre>
+            <siglas>IdS</siglas>
+            <version>0</version>
+        </departamento>
+        <version>0</version>
+        <horasJornada>5</horasJornada>
+        <precioHora>10</precioHora>
+    </empleados>
+    <empleados xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="empleadoTCompleto">
+        <nombre>Juan</nombre>
+        <email>juan@gmail.com</email>
+        <password>1234</password>
+        <rol>EMPLEADO</rol>
+        <departamento>
+            <id>0</id>
+            <nombre>Ingenieria del Software</nombre>
+            <siglas>IdS</siglas>
+            <version>0</version>
+        </departamento>
+        <version>0</version>
+        <antiguedad>0</antiguedad>
+        <sueldoBase>1200</sueldoBase>
+    </empleados>
+    <version>0</version>
+</Departamento>

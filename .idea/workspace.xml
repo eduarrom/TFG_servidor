@@ -7,7 +7,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa6ce28-e499-4f5f-94e1-568c17ec17c9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/macrodri.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_antlr_3_2_0_v201206041011.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_asm_3_3_1_v201206041142.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_core_2_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_moxy_2_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/DepartmentPointer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/jaxb.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/TestMOXY_XML/PruebaXML.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/input.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TFG_server_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/TFG_server_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TFG_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TFG_server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/Recurso.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Expeciones/RecursoException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,15 +46,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/TFG_server$EmailValidatorTest_emailNullTest.coverage" NAME="EmailValidatorTest.emailNullTest Coverage Results" MODIFIED="1520324313553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.rodrigo.TFG_server.Negocio.Utils.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/TFG_server$AllTest.coverage" NAME="AllTest Coverage Results" MODIFIED="1520422072974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.rodrigo.TFG_server.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/pruebaCXF$Main.coverage" NAME="Main Coverage Results" MODIFIED="1518648046271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TFG_server$FactoriaSAImplTest.coverage" NAME="FactoriaSAImplTest Coverage Results" MODIFIED="1520421568746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.rodrigo.TFG_server.Negocio.FactoriaSA.impl.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/pruebaCXF$Main.coverage" NAME="Main Coverage Results" MODIFIED="1518648046271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TFG_server$EmailValidatorTest_emailNullTest.coverage" NAME="EmailValidatorTest.emailNullTest Coverage Results" MODIFIED="1520324313553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.rodrigo.TFG_server.Negocio.Utils.*</FILTER>
     </SUITE>
   </component>
   <component name="CoverageViewManager">
@@ -49,17 +76,6 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="TFG_BBDD_server@localhost" type="feb32156:DbDataSourceImpl" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="TFG_BBDD_server@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="TFG_BBDD_server@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="TFG_BBDD_server: schema" type="c314c289:MysqlImplModel$Schema" />
-      </path>
     </expand>
     <select />
   </component>
@@ -79,126 +95,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EmpleadoProyecto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/EmpleadoProyecto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="68" lean-forward="false" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Proyecto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="44" column="23" lean-forward="false" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="persistence.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/persistence.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="94" lean-forward="false" selection-start-line="10" selection-start-column="94" selection-end-line="10" selection-end-column="94" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmpleadoTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProyectoRecurso.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="25" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Recurso.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/Recurso.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-58">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1049#1050#0" expanded="true" />
-                <element signature="e#1085#1086#0" expanded="true" />
-                <element signature="e#1579#1580#0" expanded="true" />
-                <element signature="e#1604#1605#0" expanded="true" />
-                <element signature="e#1638#1639#0" expanded="true" />
-                <element signature="e#1666#1667#0" expanded="true" />
-                <element signature="e#1749#1750#0" expanded="true" />
-                <element signature="e#1778#1779#0" expanded="true" />
-                <element signature="e#1822#1823#0" expanded="true" />
-                <element signature="e#1858#1859#0" expanded="true" />
-                <element signature="e#1943#1944#0" expanded="true" />
-                <element signature="e#1973#1974#0" expanded="true" />
-                <element signature="e#2017#2018#0" expanded="true" />
-                <element signature="e#2055#2056#0" expanded="true" />
-                <element signature="e#3108#3109#0" expanded="true" />
-                <element signature="e#3179#3180#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClavesProyectoRecurso.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmpleadoTCompleto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmpleadoTParcial.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Empleado.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Empleado.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="47" lean-forward="false" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-              <folding />
+            <state relative-caret-position="145">
+              <caret line="65" column="19" lean-forward="true" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+              <folding>
+                <element signature="method#Empleado#0;class#Empleado#0" />
+                <element signature="method#Empleado#1;class#Empleado#0" />
+                <element signature="docComment;method#Empleado#2;class#Empleado#0" />
+                <element signature="method#Empleado#2;class#Empleado#0" />
+                <element signature="method#Empleado#3;class#Empleado#0" />
+                <element signature="method#Empleado#4;class#Empleado#0" />
+                <element signature="method#equalsWithOutVersion#0;class#Empleado#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Departamento.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="43" column="52" lean-forward="true" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1392#1402#0" expanded="true" />
+                <element signature="method#toString#0;class#Departamento#0" />
+                <element signature="method#equals#0;class#Departamento#0" />
+                <element signature="method#equalsWithOutVersion#0;class#Departamento#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PruebaXML.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/TestMOXY_XML/PruebaXML.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="51" column="45" lean-forward="true" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmpleadoClassExtractor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="2" selection-end-line="21" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -218,16 +162,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>USUARIO</find>
-      <find>wrongInput</find>
-      <find>wrongInput()</find>
-      <find>persistence</find>
-      <find>set</find>
-      <find>setM</find>
-      <find>crearEmpleado()</find>
-      <find>elimin</find>
-      <find>contexto</find>
-      <find>Usuario</find>
       <find>sa.</find>
       <find>log</find>
       <find>logi</find>
@@ -248,6 +182,16 @@
       <find>emple</find>
       <find>depart</find>
       <find>empleado</find>
+      <find>EMF</find>
+      <find>EMFS</find>
+      <find>EMFSingle</find>
+      <find>Email correcto</find>
+      <find>private</find>
+      <find>new Empleado(</find>
+      <find>Bar</find>
+      <find>moxy</find>
+      <find>empleados</find>
+      <find>&lt;font&gt;&lt;/font&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>Usuario</replace>
@@ -260,7 +204,6 @@
       <replace>equalsWithOutVersion</replace>
       <replace>empleado</replace>
       <replace>EMPLEADO</replace>
-      <replace>Empleado</replace>
       <replace>b.</replace>
       <replace>.loginEmpleado(</replace>
       <replace>EMFSingleton.getInstance().</replace>
@@ -273,6 +216,10 @@
       <replace>departamento</replace>
       <replace>proy</replace>
       <replace>recurso</replace>
+      <replace>protected</replace>
+      <replace>new EmpleadoTParcial(</replace>
+      <replace>Empleado</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado</dir>
@@ -282,25 +229,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/Broker_SA_EmpleadoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Excepciones/EmpleadoException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Utils/EmailValidator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Utils/EmailValidatorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EntityManagerFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EntityManagerFactorySingleton.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/SA_EmpleadoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/FactoriaSA.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_Empleado.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/impl/FactoriaSAImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/impl/FactoriaSAImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Empleado.java" />
@@ -330,17 +261,28 @@
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/impl/SA_ProyectoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/impl/SA_DepartamentoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EMFSingleton.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/EmpleadoProyecto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/Recurso.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/jaxb.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/DepartmentPointer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/PruebaXML.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java" />
+        <option value="$PROJECT_DIR$/src/test/resources/input.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/TestMOXY_XML/PruebaXML.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java" />
       </list>
     </option>
   </component>
@@ -386,92 +328,9 @@
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Android &gt; Lint &gt; Performance</id>
-          </State>
-          <State>
-            <id>Android Lint for Kotlin</id>
-          </State>
-          <State>
-            <id>ArquillianJava</id>
-          </State>
-          <State>
-            <id>Code maturity issuesJava</id>
-          </State>
-          <State>
-            <id>Code style issuesJava</id>
-          </State>
-          <State>
-            <id>Error handlingJava</id>
-          </State>
-          <State>
-            <id>GeneralJava</id>
-          </State>
-          <State>
-            <id>Internationalization issuesJava</id>
-          </State>
-          <State>
-            <id>JBoss Seam issues</id>
-          </State>
-          <State>
-            <id>JPA issues</id>
-          </State>
-          <State>
-            <id>JUnit issuesJava</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-          <State>
-            <id>Kotlin</id>
-          </State>
-          <State>
-            <id>Logging issuesJava</id>
-          </State>
-          <State>
-            <id>SetupSpring CoreSpring</id>
-          </State>
-          <State>
-            <id>Spring</id>
-          </State>
-          <State>
-            <id>Spring CoreSpring</id>
-          </State>
-          <State>
-            <id>TestNGJava</id>
-          </State>
-          <State>
-            <id>Web Services</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>JpaAttributeTypeInspection</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -486,6 +345,165 @@
               <item name="TFG_server" type="58d84e3e:PackageViewProjectNode" />
               <item name="TFG_server" type="616d4139:PackageViewModuleNode" />
               <item name="com.rodrigo.TFG_server.Negocio" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Departamento" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Departamento" type="462c0819:PsiDirectoryNode" />
+              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
+              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
+              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
+              <item name="TestMOXY_XML" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -566,206 +584,23 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Integracion" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Departamento" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Departamento" type="462c0819:PsiDirectoryNode" />
-              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Empleado" type="462c0819:PsiDirectoryNode" />
-              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Proyecto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Proyecto" type="462c0819:PsiDirectoryNode" />
-              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Recurso" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="Negocio" type="462c0819:PsiDirectoryNode" />
-              <item name="Modulo_Recurso" type="462c0819:PsiDirectoryNode" />
-              <item name="Entidad" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TFG_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TFG_server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.15911193" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="ToolWindowAnt Build.ShowToolbar" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.15911193" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -779,6 +614,7 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad" />
       <recent name="com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Serv_aplicacion" />
       <recent name="com.rodrigo.TFG_server.Negocio.Modulo_Usuario.Entidad" />
       <recent name="HolaMundo" />
@@ -792,11 +628,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/META-INF" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto" />
       <recent name="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento" />
       <recent name="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad" />
       <recent name="$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado" />
-      <recent name="$PROJECT_DIR$/src/test" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones" />
@@ -818,54 +654,32 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AllTest">
+  <component name="RunManager" selected="Application.PruebaXML">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
+    </configuration>
+    <configuration name="PruebaXML" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.rodrigo.TFG_server.Negocio.TestMOXY_XML.PruebaXML" />
+      <module name="TFG_server" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rodrigo.TFG_server.Negocio.TestMOXY_XML.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
     </configuration>
-    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pruebaCXF" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-    </configuration>
-    <configuration name="AllTest" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
+    <configuration name="AllTest Loop" type="JUnit" factoryName="JUnit" repeat_count="100" repeat_mode="N Times">
+      <module name="TFG_server" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.rodrigo.TFG_server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="TFG_server" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -875,12 +689,10 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <dir value="$PROJECT_DIR$/src/test" />
       <patterns />
       <method>
@@ -888,9 +700,105 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AllTest" type="JUnit" factoryName="JUnit">
+      <module name="TFG_server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rodrigo.TFG_server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="directory" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <dir value="$PROJECT_DIR$/src/test" />
+      <patterns />
+      <method>
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean" />
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Broker_SA_EmpleadoTest.crearEmpleadoNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TFG_server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion" />
+      <option name="MAIN_CLASS_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.Broker_SA_EmpleadoTest" />
+      <option name="METHOD_NAME" value="crearEmpleadoNull" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="EmpleadoTest.equalsWithOutVersionConBBDD [10]" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true" repeat_count="10" repeat_mode="N Times">
+      <module name="TFG_server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rodrigo.TFG_server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad" />
+      <option name="MAIN_CLASS_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTest" />
+      <option name="METHOD_NAME" value="equalsWithOutVersionConBBDD" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <dir value="$PROJECT_DIR$/src/test" />
+      <patterns />
+    </configuration>
+    <configuration name="SA_EmpleadoTest.buscarByEmailSimple" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TFG_server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion" />
+      <option name="MAIN_CLASS_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_EmpleadoTest" />
+      <option name="METHOD_NAME" value="buscarByEmailSimple" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -900,22 +808,20 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
     <configuration name="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion in TFG_server" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <module name="TFG_server" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="TFG_server" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion" />
@@ -925,81 +831,23 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
+      <module name="pruebaCXF" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="pruebaCXF" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pruebaCXF" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-    </configuration>
-    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pruebaCXF" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pruebaCXF" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -1012,29 +860,14 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <module name="pruebaCXF" />
     </configuration>
     <configuration name="Tomcat 8.5.23" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.23" ALTERNATIVE_JRE_ENABLED="false">
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
@@ -1054,7 +887,6 @@
       <predefined_log_file id="Tomcat Manager" enabled="true" />
       <predefined_log_file id="Tomcat Host Manager" enabled="true" />
       <predefined_log_file id="Tomcat Localhost Access" enabled="true" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="64438" />
       </RunnerSettings>
@@ -1122,7 +954,6 @@
       <predefined_log_file id="Tomcat Manager" enabled="false" />
       <predefined_log_file id="Tomcat Host Manager" enabled="false" />
       <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="64438" />
       </RunnerSettings>
@@ -1171,6 +1002,89 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pruebaCXF" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pruebaCXF" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pruebaCXF" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pruebaCXF" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="pruebaCXF" />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -1259,14 +1173,24 @@
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.AllTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion in TFG_server" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 8.5.23" />
+    <list>
+      <item itemvalue="JUnit.AllTest" />
+      <item itemvalue="JUnit.AllTest Loop" />
+      <item itemvalue="JUnit.com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion in TFG_server" />
+      <item itemvalue="Tomcat Server.Tomcat 8.5.23" />
+      <item itemvalue="JUnit.Broker_SA_EmpleadoTest.crearEmpleadoNull" />
+      <item itemvalue="JUnit.SA_EmpleadoTest.buscarByEmailSimple" />
+      <item itemvalue="JUnit.EmpleadoTest.equalsWithOutVersionConBBDD [10]" />
+      <item itemvalue="Application.PruebaXML" />
     </list>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PruebaXML" />
+        <item itemvalue="JUnit.EmpleadoTest.equalsWithOutVersionConBBDD [10]" />
+        <item itemvalue="JUnit.SA_EmpleadoTest.buscarByEmailSimple" />
+        <item itemvalue="JUnit.Broker_SA_EmpleadoTest.crearEmpleadoNull" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_LAMBDA,SHOW_INTERFACES" />
@@ -1316,44 +1240,49 @@
       <workItem from="1521327281916" duration="551000" />
       <workItem from="1521376464441" duration="118000" />
       <workItem from="1521376626247" duration="194000" />
-      <workItem from="1521462724289" duration="6063000" />
+      <workItem from="1521462724289" duration="6624000" />
+      <workItem from="1521630439437" duration="2840000" />
+      <workItem from="1521638690179" duration="1655000" />
+      <workItem from="1521715912643" duration="2976000" />
+      <workItem from="1522235201753" duration="5586000" />
+      <workItem from="1522255179188" duration="4369000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AllTest - 2018.03.20 at 15h 46m 54s.xml">
+    <history-entry file="AllTest - 2018.03.22 at 12h 19m 47s.xml">
       <configuration name="AllTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 47m 47s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 11h 59m 20s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 48m 26s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 11h 59m 44s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 51m 51s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 02m 54s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 52m 53s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 07m 55s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 59m 27s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 09m 31s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 15h 59m 59s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 40m 45s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 16h 01m 13s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 50m 19s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 16h 02m 18s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="AllTest_Loop - 2018.03.22 at 12h 54m 32s.xml">
+      <configuration name="AllTest Loop" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AllTest - 2018.03.20 at 16h 03m 37s.xml">
-      <configuration name="AllTest" configurationId="JUnit" />
+    <history-entry file="EmpleadoTest_equalsWithOutVersionConBBDD_[10] - 2018.03.22 at 12h 11m 45s.xml">
+      <configuration name="EmpleadoTest.equalsWithOutVersionConBBDD [10]" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221331000" />
+    <option name="totallyTimeSpent" value="239318000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1366,87 +1295,90 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30472636" sideWeight="0.50858366" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.116595134" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1416309" sideWeight="0.4939759" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.48734176" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.24964234" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3868159" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34079602" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" x="819" y="-1036" width="1756" height="506" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36442786" sideWeight="0.4914163" order="4" side_tool="false" content_ui="tabs" x="0" y="44" width="1037" height="852" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17167382" sideWeight="0.40275386" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20386267" sideWeight="0.5721393" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3297568" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13662376" sideWeight="0.50870645" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34950247" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23104435" sideWeight="0.4278607" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5074627" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5937053" sideWeight="0.5060241" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50858366" side_tool="true" weight="0.30472636" />
+      <window_info anchor="bottom" id="Application Servers" order="14" weight="0.329602" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.116595134" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.3297568" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="8" />
+      <window_info anchor="right" id="Database" order="8" sideWeight="0.4939759" weight="0.1416309" />
+      <window_info id="Structure" order="3" sideWeight="0.48734176" side_tool="true" weight="0.24964234" />
+      <window_info anchor="right" auto_hide="true" id="Ant Build" internal_type="SLIDING" order="4" show_stripe_button="false" type="SLIDING" weight="0.24964234" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.3042394" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.329602" />
+      <window_info anchor="bottom" x="819" y="-1036" width="1756" height="506" id="Messages" order="10" sideWeight="0.49713877" weight="0.33915213" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.329602" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
+      <window_info anchor="bottom" x="0" y="44" width="1037" height="852" id="Run" order="4" sideWeight="0.4914163" visible="true" weight="0.41396508" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.329602" />
+      <window_info anchor="bottom" id="Spring" order="2" weight="0.329602" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.32936507" />
+      <window_info id="Persistence" order="0" sideWeight="0.40275386" side_tool="true" weight="0.17167382" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.5721393" visible="true" weight="0.20958512" />
+      <window_info anchor="right" id="Bean Validation" order="2" show_stripe_button="false" weight="0.3297568" />
+      <window_info id="Web" order="6" sideWeight="0.50870645" side_tool="true" weight="0.13662376" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.34950247" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info id="Favorites" order="7" sideWeight="0.4278607" side_tool="true" weight="0.23104435" />
+      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.5060241" weight="0.5937053" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="13" weight="0.3297568" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="1" weight="0.3297568" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Problems" order="15" />
+      <window_info anchor="right" id="CDI" order="13" />
+      <window_info anchor="bottom" id="Dependency Viewer" order="0" weight="0.5074627" />
+      <window_info anchor="right" id="Commander" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="1" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30472636" sideWeight="0.50858366" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.116595134" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5074627" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1423462" sideWeight="0.4939759" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.48734176" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.24964234" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3868159" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34146342" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" x="819" y="-1036" width="1756" height="506" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2144309" sideWeight="0.4914163" order="4" side_tool="false" content_ui="tabs" x="0" y="44" width="1037" height="852" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5937053" sideWeight="0.5060241" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17167382" sideWeight="0.40275386" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23104435" sideWeight="0.5972461" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3297568" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13662376" sideWeight="0.50870645" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34950247" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14592275" sideWeight="0.43656716" order="7" side_tool="true" content_ui="tabs" />
+      <window_info anchor="right" auto_hide="true" id="Ant Build" internal_type="SLIDING" order="4" show_stripe_button="false" type="SLIDING" weight="0.24964234" />
+      <window_info anchor="bottom" id="Application Servers" order="14" weight="0.329602" />
+      <window_info id="Designer" order="8" />
+      <window_info anchor="right" id="Palette" order="12" />
+      <window_info anchor="bottom" x="0" y="44" width="1037" height="852" id="Run" order="4" sideWeight="0.4914163" weight="0.2144309" />
+      <window_info anchor="bottom" id="Spring" order="2" weight="0.329602" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="right" id="Commander" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="0" sideWeight="0.5060241" weight="0.5937053" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Web" order="6" sideWeight="0.50870645" side_tool="true" weight="0.13662376" />
+      <window_info id="Favorites" order="7" sideWeight="0.43656716" side_tool="true" weight="0.14592275" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.32936507" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="10" />
+      <window_info anchor="right" id="CDI" order="13" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50858366" side_tool="true" weight="0.30472636" />
+      <window_info anchor="bottom" x="819" y="-1036" width="1756" height="506" id="Messages" order="10" sideWeight="0.49713877" weight="0.34146342" />
+      <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.3297568" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.5972461" visible="true" weight="0.23104435" />
+      <window_info anchor="bottom" id="Problems" order="15" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.329602" />
+      <window_info anchor="bottom" id="Dependency Viewer" order="0" weight="0.5074627" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.329602" />
+      <window_info id="Persistence" order="0" sideWeight="0.40275386" side_tool="true" weight="0.17167382" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.116595134" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.34950247" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="1" weight="0.3297568" />
+      <window_info anchor="right" id="Database" order="8" sideWeight="0.4939759" weight="0.1423462" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.329602" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info id="Structure" order="3" sideWeight="0.48734176" weight="0.24964234" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.3868159" />
+      <window_info anchor="right" id="Bean Validation" order="2" show_stripe_button="false" weight="0.3297568" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1472,138 +1404,78 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java</url>
-          <line>134</line>
+          <line>135</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java</url>
-          <line>267</line>
+          <line>268</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/TestMOXY_XML/PruebaXML.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java</url>
+          <line>49</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java</url>
+          <line>46</line>
+          <properties />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="43" />
+      <option name="time" value="61" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/IBroker_SA_Empleado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/FactoriaSA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/impl/FactoriaSAImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/impl/FactoriaSAImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Empleado.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Excepciones/EmpleadoException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/EmpleadoTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/resources/word-lengths.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5746">
-          <caret line="338" column="20" lean-forward="false" selection-start-line="323" selection-start-column="8" selection-end-line="338" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/cxf-servlet.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="17" column="41" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="41" />
-          <folding />
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/List.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Expeciones/RecursoException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Expeciones/RecursoException.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/EventosNegocio.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/Broker_SA_EmpleadoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
@@ -1624,7 +1496,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="253.0" y="268.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="253.0" y="269.0" />
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
@@ -1639,8 +1511,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Rol.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1661,7 +1532,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.6550522648083623" x="260.5" y="554.0" />
+          <settings layout="Hierarchic Group" zoom="0.6550522648083623" x="261.0" y="554.0" />
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
@@ -1691,7 +1562,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="90.5" y="285.0" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="91.0" y="285.0" />
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
@@ -1703,50 +1574,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_Empleado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="76" lean-forward="false" selection-start-line="14" selection-start-column="76" selection-end-line="14" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Excepciones/DepartamentoFieldNullException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
-          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding>
-            <element signature="e#815#816#0" expanded="false" />
-            <element signature="e#845#846#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#929#930#0" expanded="false" />
-            <element signature="e#966#967#0" expanded="false" />
-            <element signature="e#999#1000#0" expanded="false" />
-            <element signature="e#1051#1052#0" expanded="false" />
-            <element signature="e#1095#1096#0" expanded="false" />
-            <element signature="e#1134#1135#0" expanded="false" />
-            <element signature="e#1169#1170#0" expanded="false" />
-            <element signature="e#1225#1226#0" expanded="false" />
-            <element signature="e#1273#1274#0" expanded="false" />
-          </folding>
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Excepciones/DepartamentoException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="14" column="12" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding />
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/impl/Broker_SA_DepartamentoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
-          <caret line="33" column="74" lean-forward="false" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="33" column="74" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -1754,263 +1599,275 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="49" lean-forward="true" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/SA_Departamento.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Excepciones/EmpleadoFieldNullException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="643">
-          <caret line="56" column="5" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="56" selection-end-column="5" />
-          <folding />
+          <caret line="56" column="5" lean-forward="true" selection-start-line="6" selection-end-line="56" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Excepciones/ProyectoFieldNullException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-          <folding>
-            <element signature="e#791#792#0" expanded="false" />
-            <element signature="e#826#827#0" expanded="false" />
-            <element signature="e#882#883#0" expanded="false" />
-            <element signature="e#930#931#0" expanded="false" />
-            <element signature="e#967#968#0" expanded="false" />
-            <element signature="e#1000#1001#0" expanded="false" />
-            <element signature="e#1052#1053#0" expanded="false" />
-            <element signature="e#1096#1097#0" expanded="false" />
-            <element signature="e#1144#1145#0" expanded="false" />
-            <element signature="e#1174#1175#0" expanded="false" />
-            <element signature="e#1220#1221#0" expanded="false" />
-            <element signature="e#1258#1259#0" expanded="false" />
-          </folding>
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Excepciones/ProyectoException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="25" lean-forward="false" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-          <folding />
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/SA_Proyecto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/IBroker_SA_Proyecto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="21" column="86" lean-forward="false" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
-          <folding />
+          <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/impl/SA_ProyectoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="34" />
-          <folding />
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Serv_aplicacion/impl/SA_DepartamentoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
-          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="109" column="9" lean-forward="false" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
-          <folding>
-            <element signature="e#3118#3251#0" expanded="false" />
-            <element signature="method#crearEmpleadoVacio#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="e#3739#3827#0" expanded="false" />
-            <element signature="method#crearEmpleadoEmailNull#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="e#4068#4211#0" expanded="false" />
-            <element signature="e#4445#4586#0" expanded="false" />
-            <element signature="method#loginEmpleadoInexistenteTest#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="method#loginPassNulloVacioTest#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="method#buscarByEmailInexistente#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="method#buscarByEmailIncorrecto#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="method#buscarByEmailNull#0;class#SA_EmpleadoTest#0" expanded="false" />
-            <element signature="method#buscarUnEmple#0;class#SA_EmpleadoTest#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/SA_EmpleadoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="docComment;method#crearEmpleado#0;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="method#buscarByID#0;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="method#eliminarEmpleado#0;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="method#listarEmpleados#0;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="method#loginEmpleado#0;class#SA_EmpleadoImpl#0" expanded="false" />
-            <element signature="docComment;method#buscarByEmail#0;class#SA_EmpleadoImpl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EMFSingleton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
+          <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Serv_aplicacion/impl/Broker_SA_ProyectoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="61" lean-forward="false" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
-          <folding />
+          <caret line="3" column="61" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/Recurso.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/FactoriaSA/FactoriaSA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="221">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/IBroker_SA_Empleado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Integracion/EMFSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_Empleado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/ClavesEmpleadoProyecto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        <state relative-caret-position="723">
+          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/EmpleadoProyecto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/Proyecto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="44" column="23" lean-forward="false" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="17">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="imports" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/impl/SA_EmpleadoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+          <folding>
+            <element signature="docComment;class#SA_EmpleadoImpl#0" />
+            <element signature="docComment;method#crearEmpleado#0;class#SA_EmpleadoImpl#0" />
+            <element signature="method#buscarByID#0;class#SA_EmpleadoImpl#0" />
+            <element signature="method#eliminarEmpleado#0;class#SA_EmpleadoImpl#0" />
+            <element signature="method#listarEmpleados#0;class#SA_EmpleadoImpl#0" />
+            <element signature="method#loginEmpleado#0;class#SA_EmpleadoImpl#0" />
+            <element signature="docComment;method#buscarByEmail#0;class#SA_EmpleadoImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/SA_EmpleadoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="131" column="60" selection-start-line="131" selection-start-column="60" selection-end-line="131" selection-end-column="60" />
+          <folding>
+            <element signature="method#buscarByEmailInexistente#0;class#SA_EmpleadoTest#0" />
+            <element signature="method#buscarByEmailIncorrecto#0;class#SA_EmpleadoTest#0" />
+            <element signature="method#buscarByEmailNull#0;class#SA_EmpleadoTest#0" />
+            <element signature="method#buscarUnEmple#0;class#SA_EmpleadoTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Serv_aplicacion/Broker_SA_EmpleadoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-605">
+          <caret line="125" column="60" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="530">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/Recurso.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jaxb.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1049#1050#0" expanded="true" />
-            <element signature="e#1085#1086#0" expanded="true" />
-            <element signature="e#1579#1580#0" expanded="true" />
-            <element signature="e#1604#1605#0" expanded="true" />
-            <element signature="e#1638#1639#0" expanded="true" />
-            <element signature="e#1666#1667#0" expanded="true" />
-            <element signature="e#1749#1750#0" expanded="true" />
-            <element signature="e#1778#1779#0" expanded="true" />
-            <element signature="e#1822#1823#0" expanded="true" />
-            <element signature="e#1858#1859#0" expanded="true" />
-            <element signature="e#1943#1944#0" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2017#2018#0" expanded="true" />
-            <element signature="e#2055#2056#0" expanded="true" />
-            <element signature="e#3108#3109#0" expanded="true" />
-            <element signature="e#3179#3180#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ProyectoRecurso.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="25" lean-forward="false" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="208">
+          <caret line="152" column="29" selection-start-line="152" selection-start-column="29" selection-end-line="152" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Recurso/Entidad/ClavesProyectoRecurso.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Proyecto/Entidad/EmpleadoProyecto.java">
+    <entry file="file://$PROJECT_DIR$/src/test/resources/input.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="68" lean-forward="false" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="148">
+          <caret line="20" column="76" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/DepartmentPointer.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/rodrigo/TFG_server/Negocio/TestMOXY_XML/PruebaXML.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="47" lean-forward="false" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="248">
+          <caret line="51" column="45" lean-forward="true" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTCompleto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="272">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="26" />
+          <folding>
+            <element signature="e#1100#1101#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoTParcial.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="28" />
+          <folding>
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1183#1184#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/EmpleadoClassExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="94" lean-forward="false" selection-start-line="10" selection-start-column="94" selection-end-line="10" selection-end-column="94" />
-          <folding />
+        <state>
+          <caret column="2" selection-end-line="21" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Departamento/Entidad/Departamento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="43" column="52" lean-forward="true" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1392#1402#0" expanded="true" />
+            <element signature="method#toString#0;class#Departamento#0" />
+            <element signature="method#equals#0;class#Departamento#0" />
+            <element signature="method#equalsWithOutVersion#0;class#Departamento#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rodrigo/TFG_server/Negocio/Modulo_Empleado/Entidad/Empleado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="65" column="19" lean-forward="true" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
+          <folding>
+            <element signature="method#Empleado#0;class#Empleado#0" />
+            <element signature="method#Empleado#1;class#Empleado#0" />
+            <element signature="docComment;method#Empleado#2;class#Empleado#0" />
+            <element signature="method#Empleado#2;class#Empleado#0" />
+            <element signature="method#Empleado#3;class#Empleado#0" />
+            <element signature="method#Empleado#4;class#Empleado#0" />
+            <element signature="method#equalsWithOutVersion#0;class#Empleado#0" />
+          </folding>
         </state>
       </provider>
     </entry>

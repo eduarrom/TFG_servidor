@@ -1,14 +1,15 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.sun.xml.bind.CycleRecoverable;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,11 +21,13 @@ import java.util.Objects;
 
 })
 @XmlRootElement(name = "Departamento")
-public class Departamento implements Serializable {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Departamento implements Serializable, CycleRecoverable {
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
     @Column/*(name = "id_depart")*/
-    @Id protected Long id;
+    @Id
+    protected long id;
 
     @NotBlank
     @Column(nullable = false)
@@ -34,46 +37,57 @@ public class Departamento implements Serializable {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String siglas;
-    
-    @OneToMany/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<Empleado> empleados;
 
-    @Version protected long version;
+    @OneToMany(mappedBy = "departamento")/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@XmlAnyElement(lax = true)
+    private List<Empleado> empleados = new ArrayList<Empleado>();
+
+    @Version
+    protected long version;
 
 
     /****************************
      ******* CONSTRUCTORES ******
      ****************************/
 
+    public Departamento() {
+    }
 
-    public Departamento(String nombre, String password) {
+    public Departamento(String nombre) {
         this.nombre = nombre;
-        this.siglas = nombre.toLowerCase().concat("@gmail.com");
+        this.siglas = String.valueOf(
+                Arrays.stream(nombre.split(" "))
+                        .reduce("", (acum, pal) -> acum + String.valueOf(pal.charAt(0))));
     }
 
 
-    public Departamento(Long id, String nombre, String password, String siglas, long version) {
+    public Departamento(Long id, String nombre, String siglas, long version) {
         this.id = id;
         this.nombre = nombre;
         this.siglas = siglas;
         this.version = version;
+
     }
 
-    public Departamento(String nombre, String password, String siglas) {
+    public Departamento(String nombre, String siglas) {
         this.nombre = nombre;
         this.siglas = siglas;
-
     }
 
-    public Departamento() {
+    public Departamento(Departamento d) {
+        this.id = d.id;
+        this.nombre = d.nombre;
+        this.siglas = d.siglas;
+        this.version = d.version;
     }
+
 
     /****************************
      **** GETTERS AND SETTERS ***
      ****************************/
 
-    @XmlElement(name = "id", required = true)
+    //@XmlAttribute(name = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -82,7 +96,7 @@ public class Departamento implements Serializable {
         this.id = id;
     }
 
-    @XmlElement(name = "nombre", required = true)
+    //@XmlElement(name = "nombre", required = true)
     public String getNombre() {
         return nombre;
     }
@@ -92,7 +106,7 @@ public class Departamento implements Serializable {
     }
 
 
-    @XmlElement(name = "version", required = true)
+    //@XmlElement(name = "version", required = true)
     public long getVersion() {
         return version;
     }
@@ -101,12 +115,25 @@ public class Departamento implements Serializable {
         this.version = version;
     }
 
-    @XmlElement(name = "siglas", required = true)
-    public String getSiglas() { return siglas;}
+    //@XmlElement(name = "siglas", required = true)
+    public String getSiglas() {
+        return siglas;
+    }
 
-    public void setSiglas(String siglas) {this.siglas = siglas;}
+    public void setSiglas(String siglas) {
+        this.siglas = siglas;
+    }
 
 
+    //@XmlElement
+
+    public List<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(List<Empleado> empleados) {
+        this.empleados = empleados;
+    }
 
     /****************************
      ****** OTHER METHODS *******
@@ -117,7 +144,8 @@ public class Departamento implements Serializable {
         return "Departamento{" +
                 "  id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", mail='" + siglas + '\'' +
+                ", siglas='" + siglas + '\'' +
+                ", EmpleadosSize='" + empleados.size() + '\'' +
                 ", version=" + version +
                 '}';
     }
@@ -138,7 +166,7 @@ public class Departamento implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Departamento)) return false;
         Departamento dpto = (Departamento) o;
-        return  Objects.equals(getId(), dpto.getId()) &&
+        return Objects.equals(getId(), dpto.getId()) &&
                 Objects.equals(getNombre(), dpto.getNombre()) &&
                 Objects.equals(getSiglas(), dpto.getSiglas());
     }
@@ -147,5 +175,20 @@ public class Departamento implements Serializable {
     public int hashCode() {
         return Objects.hash(getId(), getNombre(), getVersion());
     }
+
+
+    @Override
+    public Object onCycleDetected(Context cycleRecoveryContext) {
+        // Context provides access to the Marshaller being used:
+        System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
+
+        //DepartmentPointer p = new DepartmentPointer();
+        //p.id = this.id;
+        Departamento p = new Departamento(this);
+        return p;
+    }
+
 }
+
+
 

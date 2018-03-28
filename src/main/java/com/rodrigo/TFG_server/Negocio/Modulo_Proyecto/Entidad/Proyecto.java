@@ -1,6 +1,5 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ProyectoRecurso;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -38,11 +37,8 @@ public class Proyecto implements Serializable {
     private String password;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "empleado")
     private List<EmpleadoProyecto> empleados;
-
-    @OneToMany
-    private List<ProyectoRecurso> recursos;
 
 
     @Version protected long version;

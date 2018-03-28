@@ -2,13 +2,14 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
+import org.eclipse.persistence.oxm.annotations.XmlClassExtractor;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -21,16 +22,28 @@ import java.util.Objects;
         @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
 
 })
-@XmlRootElement(name = "Empleado")
-public class Empleado implements Serializable {
+//@XmlRootElement(name = "Empleado")
+@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlClassExtractor(EmpleadoClassExtractor.class)
+/*@XmlSeeAlso({
+        EmpleadoTParcial.class,
+        EmpleadoTCompleto.class
+})*/
+public abstract class Empleado implements Serializable {
+
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
     @Column/*(name = "id_empleado")*/
-    @Id protected Long id;
+    @Id
+    protected Long id;
 
     @NotBlank
     @Column(nullable = false)
-    private String nombre;
+    protected String nombre;
 
 
     @NotBlank
@@ -40,26 +53,32 @@ public class Empleado implements Serializable {
 
 
     @Column(nullable = false)
-    private String password;
+    protected String password;
 
     @NotNull
     @Column(nullable = false)
-    private Rol rol;
+    protected Rol rol;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private Departamento departamento;
+    @XmlInverseReference(mappedBy = "empleados")
+    protected Departamento departamento;
 
-    //@OneToMany
-    //private List<EmpleadoProyecto> proyectos;
+    //@OneToMany(mappedBy = "proyecto")
+    //protected List<EmpleadoProyecto> proyectos;
 
-    @Version protected long version;
+    @Version
+    protected long version;
 
 
     /****************************
      ******* CONSTRUCTORES ******
      ****************************/
+
+
+    public Empleado() {
+    }
 
 
     public Empleado(String nombre, String password, Rol rol) {
@@ -70,9 +89,10 @@ public class Empleado implements Serializable {
     }
 
 
-    /** Constructor
-     *  Rol por defecto = Rol.EMPLEADO
-     * */
+    /**
+     * Constructor
+     * Rol por defecto = Rol.EMPLEADO
+     */
     public Empleado(String nombre, String password) {
         this.nombre = nombre;
         this.password = password;
@@ -97,14 +117,19 @@ public class Empleado implements Serializable {
 
     }
 
-    public Empleado() {
-    }
+
+    /****************************
+     ********** METODOS *********
+     ****************************/
+
+    public abstract double calcularNominaMes();
+
 
     /****************************
      **** GETTERS AND SETTERS ***
      ****************************/
 
-    @XmlElement(name = "id", required = true)
+    //@XmlAttribute(name = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -113,7 +138,8 @@ public class Empleado implements Serializable {
         this.id = id;
     }
 
-    @XmlElement(name = "nombre", required = true)
+
+    //@XmlElement(name = "nombre", required = true)
     public String getNombre() {
         return nombre;
     }
@@ -122,7 +148,8 @@ public class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlElement(name = "password", required = true)
+
+    //@XmlElement(name = "password", required = true)
     public String getPassword() {
         return password;
     }
@@ -130,6 +157,7 @@ public class Empleado implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public Rol getRol() {
         return rol;
@@ -139,7 +167,8 @@ public class Empleado implements Serializable {
         this.rol = rol;
     }
 
-    @XmlElement(name = "version", required = true)
+
+    //@XmlElement(name = "version", required = true)
     public long getVersion() {
         return version;
     }
@@ -148,11 +177,24 @@ public class Empleado implements Serializable {
         this.version = version;
     }
 
-    @XmlElement(name = "email", required = true)
-    public String getEmail() { return email;}
 
-    public void setEmail(String email) {this.email = email;}
+    //@XmlElement(name = "email", required = true)
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 
 
     /****************************
@@ -167,6 +209,7 @@ public class Empleado implements Serializable {
                 ", password='" + password + '\'' +
                 ", mail='" + email + '\'' +
                 ", rol='" + rol + '\'' +
+                ", dept='" + departamento.getSiglas() + '\'' +
                 ", version=" + version +
                 '}';
     }
@@ -189,7 +232,7 @@ public class Empleado implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Empleado)) return false;
         Empleado empleado = (Empleado) o;
-        return  Objects.equals(getId(), empleado.getId()) &&
+        return Objects.equals(getId(), empleado.getId()) &&
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
                 Objects.equals(getPassword(), empleado.getPassword()) &&

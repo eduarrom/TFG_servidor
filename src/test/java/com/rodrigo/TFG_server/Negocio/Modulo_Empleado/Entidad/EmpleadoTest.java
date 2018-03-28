@@ -24,8 +24,8 @@ class EmpleadoTest {
     @BeforeAll
     static void beforeAll(){
 
-        emple = new Empleado("emple", "1234", Rol.EMPLEADO);
-        admin = new Empleado("admin", "1234", Rol.ADMIN);
+        emple = new EmpleadoTParcial("emple", "1234", Rol.EMPLEADO);
+        admin = new EmpleadoTParcial("admin", "1234", Rol.ADMIN);
 
     }
 
@@ -57,7 +57,7 @@ class EmpleadoTest {
         assertFalse(admin.equalsWithOutVersion(emple));
 
 
-        Empleado emple3 = new Empleado("emple3", "1234", Rol.EMPLEADO);
+        Empleado emple3 = new EmpleadoTParcial("emple3", "1234", Rol.EMPLEADO);
         log.debug("emple3 = '" + emple3 + "'");
 
         log.debug("emple.equalsWithOutVersion(emple3)");

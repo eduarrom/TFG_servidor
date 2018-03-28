@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl;
@@ -41,7 +42,7 @@ class Broker_SA_EmpleadoTest {
 
     @BeforeEach
     void iniciarContexto() throws EmpleadoException {
-        e1 = new Empleado("empleado", "1234", Rol.valueOf("EMPLEADO"));
+        e1 = new EmpleadoTParcial("empleado", "1234", Rol.valueOf("EMPLEADO"));
         log.info("Creando empleado ");
         if (b.buscarByEmail(e1.getEmail()) == null) {
             e1 = b.crearEmpleado(e1);
@@ -67,7 +68,7 @@ class Broker_SA_EmpleadoTest {
     @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
     void crearEmpleado(String nombre, String pass, String rol) throws EmpleadoException {
 
-        Empleado e1 = new Empleado(nombre, pass, Rol.valueOf(rol));
+        Empleado e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol));
         Empleado empleCreado = b.crearEmpleado(e1);
 
         assertNotNull(empleCreado);
@@ -83,7 +84,7 @@ class Broker_SA_EmpleadoTest {
     @Test
     void crearEmpleadoExistente() throws EmpleadoException {
 
-        /*Empleado e1 = new Empleado("juan", "1234", Rol.valueOf("EMPLEADO"));
+        /*Empleado e1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf("EMPLEADO"));
 
         log.info("Creando empleado 1");
         e1 = b.crearEmpleado(e1);*/
@@ -122,7 +123,7 @@ class Broker_SA_EmpleadoTest {
 
         Throwable exception = assertThrows(EmpleadoFieldNullException.class, () -> {
 
-            Empleado empleCreado = b.crearEmpleado(new Empleado());
+            Empleado empleCreado = b.crearEmpleado(new EmpleadoTParcial());
 
         });
 
@@ -171,12 +172,12 @@ class Broker_SA_EmpleadoTest {
      *******************   TEST BUSCAR EMPLEADO   *********************
      ******************************************************************/
 
-
 /*
+
     @Test
     void buscarUsuarioByID() throws EmpleadoException {
         log.info("BuscarUserTest");
-        Empleado e = new Empleado("test2", "1234");
+        Empleado e = new EmpleadoTParcial("test2", "1234");
         Empleado nuevo = null;
 
         nuevo = b.buscarBySiglas(e.getEmail());
@@ -201,7 +202,7 @@ class Broker_SA_EmpleadoTest {
     void eliminarUsuario() throws EmpleadoException {
         log.info("EliminarUser Test");
 
-        Empleado u = new Empleado("Eliminar", "pass");
+        Empleado u = new EmpleadoTParcial("Eliminar", "pass");
 
 
         if (!b.buscarBySiglas(u.getEmail()).equalsWithOutVersion(u)) {
@@ -362,7 +363,7 @@ class Broker_SA_EmpleadoTest {
     @ParameterizedTest
     @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
     void buscarByEmail(String nombre, String pass, String rol) throws EmpleadoException {
-        Empleado nuevo, e1 = new Empleado(nombre, pass, Rol.valueOf(rol));
+        Empleado nuevo, e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol));
         String email = e1.getEmail();
 
         log.info("Creando empleado");

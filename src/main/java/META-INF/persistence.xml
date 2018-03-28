@@ -17,9 +17,11 @@
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.ClavesEmpleadoProyecto</class>
 
+        <!--
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.Recurso</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ProyectoRecurso</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ClavesProyectoRecurso</class>
+-->
 
 
         <properties>
@@ -44,6 +46,7 @@
             <property name="hibernate.show.sql" value="false"/>
             <property name="hibernate.format_sql" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
+
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.jdbc.wrap_result_sets" value="true"/>
