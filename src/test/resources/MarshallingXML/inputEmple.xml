@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EmpleadoTParcial>
+    <nombre>emple1</nombre>
+    <email>emple1@gmail.com</email>
+    <password>1234</password>
+    <rol>ADMIN</rol>
+    <departamento>
+        <id>0</id>
+        <nombre>Ingenieria del Software</nombre>
+        <siglas>IdS</siglas>
+        <empleados xsi:type="empleadoTParcial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <nombre>emple1</nombre>
+            <email>emple1@gmail.com</email>
+            <password>1234</password>
+            <rol>ADMIN</rol>
+            <departamento>
+                <id>0</id>
+                <nombre>Ingenieria del Software</nombre>
+                <siglas>IdS</siglas>
+                <version>0</version>
+            </departamento>
+            <version>0</version>
+            <horasJornada>5</horasJornada>
+            <precioHora>10</precioHora>
+        </empleados>
+        <empleados xsi:type="empleadoTCompleto" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <nombre>emple2</nombre>
+            <email>emple2@gmail.com</email>
+            <password>1234</password>
+            <rol>EMPLEADO</rol>
+            <departamento>
+                <id>0</id>
+                <nombre>Ingenieria del Software</nombre>
+                <siglas>IdS</siglas>
+                <version>0</version>
+            </departamento>
+            <version>0</version>
+            <antiguedad>0</antiguedad>
+            <sueldoBase>1200</sueldoBase>
+        </empleados>
+        <version>0</version>
+    </departamento>
+    <version>0</version>
+    <horasJornada>5</horasJornada>
+    <precioHora>10</precioHora>
+</EmpleadoTParcial>

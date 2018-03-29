@@ -1,7 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
+import com.sun.xml.bind.CycleRecoverable;
 import org.eclipse.persistence.oxm.annotations.XmlClassExtractor;
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
@@ -11,9 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,14 +20,13 @@ import java.util.Objects;
         @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
 
 })
-//@XmlRootElement(name = "Empleado")
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlClassExtractor(EmpleadoClassExtractor.class)
-/*@XmlSeeAlso({
+@XmlClassExtractor(EmpleadoClassExtractor.class)
+@XmlSeeAlso({
         EmpleadoTParcial.class,
         EmpleadoTCompleto.class
-})*/
-public abstract class Empleado implements Serializable {
+})
+public abstract class Empleado implements Serializable, CycleRecoverable {
 
     /****************************
      ********* ATRIBUTOS ********
@@ -37,7 +34,7 @@ public abstract class Empleado implements Serializable {
 
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    @Column/*(name = "id_empleado")*/
+    //@Column(name = "id")
     @Id
     protected Long id;
 
@@ -60,8 +57,8 @@ public abstract class Empleado implements Serializable {
     protected Rol rol;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @ManyToOne/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
+    //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
     protected Departamento departamento;
 
@@ -115,6 +112,16 @@ public abstract class Empleado implements Serializable {
         this.rol = rol;
         this.email = email;
 
+    }
+
+    public Empleado(Empleado e) {
+        this.id = e.id;
+        this.nombre = e.nombre;
+        this.password = e.password;
+        this.rol = e.rol;
+        this.email = e.email;
+        this.version = e.version;
+        this.departamento = new Departamento(e.departamento);
     }
 
 

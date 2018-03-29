@@ -3,6 +3,8 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
@@ -61,10 +63,12 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
                 log.info("Buscando por email...");
                 try {
-                    emple = (Empleado) em
+                    Object obj = em
                             .createNamedQuery("Empleado.buscarPorEmail")
                             .setParameter("email", empleadoNuevo.getEmail())
                             .getSingleResult();
+
+                    emple = (obj instanceof EmpleadoTParcial)?(EmpleadoTParcial) obj:(EmpleadoTCompleto) obj;
 
 
                 } catch (NoResultException e) {
@@ -88,9 +92,10 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                     } catch (PersistenceException e2) {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
-                        em.getTransaction().rollback();
+                        //em.getTransaction().rollback();
 
-                        throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
+                        throw e2;
+                        //throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
 
                     } catch (Exception e) {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
@@ -329,10 +334,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
             log.info("Buscando empleado...");
             try {
-                emple = (Empleado) em
+                Object obj = (Object) em
                         .createNamedQuery("Empleado.buscarPorEmail")
                         .setParameter("email", email)
                         .getSingleResult();
+
+                emple = (obj instanceof EmpleadoTParcial)?(EmpleadoTParcial) obj:(EmpleadoTCompleto) obj;
+
 
 
             } catch (NoResultException e) {

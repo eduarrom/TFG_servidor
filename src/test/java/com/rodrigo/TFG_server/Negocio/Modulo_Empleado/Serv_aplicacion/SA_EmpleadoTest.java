@@ -1,7 +1,10 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
@@ -26,7 +29,8 @@ class SA_EmpleadoTest {
 
     static SA_Empleado sa;
 
-    private Empleado e1;
+    static private Empleado e1;
+    static private Departamento dept;
 
     final static Logger log = LoggerFactory.getLogger(SA_EmpleadoTest.class);
 
@@ -36,14 +40,28 @@ class SA_EmpleadoTest {
      *******************************************************************/
 
     @BeforeAll
-    static void initSA() {
+    static void initSA() throws DepartamentoException, EmpleadoException {
         log.info("Creando SA...");
         sa = FactoriaSA.getInstance().crearSAEmpleado();
+
+        //dept = new Departamento("Ingenieria del Software");
+        dept = FactoriaSA.getInstance().crearSADepartamento().buscarByID(3L);
+
+        e1 = new EmpleadoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
+
+        //dept = FactoriaSA.getInstance().crearSADepartamento().buscarByID(1L);
+        //dept = FactoriaSA.getInstance().crearSADepartamento().crearDepartamento(dept);
+
+        dept.getEmpleados().add(e1);
+        e1.setDepartamento(dept);
+
+        e1 = FactoriaSA.getInstance().crearSAEmpleado().buscarByEmail(e1.getEmail());
     }
 
     @BeforeEach
     void iniciarContexto() throws EmpleadoException {
-        e1 = new EmpleadoTParcial("empleado", "1234", Rol.valueOf("EMPLEADO"));
+        e1 = new EmpleadoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
+
         log.info("Creando empleado ");
         if (sa.buscarByEmail(e1.getEmail()) == null) {
             e1 = sa.crearEmpleado(e1);
@@ -72,7 +90,7 @@ class SA_EmpleadoTest {
     @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
     void crearEmpleado(String nombre, String pass, String rol) throws EmpleadoException {
 
-        Empleado e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol));
+        Empleado e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept);
         Empleado empleCreado = sa.crearEmpleado(e1);
 
         assertNotNull(empleCreado);
@@ -88,7 +106,7 @@ class SA_EmpleadoTest {
     @Test
     void crearEmpleadoExistente() throws EmpleadoException {
 
-        /*Empleado e1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf("EMPLEADO"));
+        /*Empleado e1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
 
         log.info("Creando empleado 1");
         e1 = sa.crearEmpleado(e1);*/
@@ -367,9 +385,13 @@ class SA_EmpleadoTest {
      ******************************************************************/
 
     @ParameterizedTest
-    @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
+    @CsvSource({"Administrador, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
     void buscarByEmail(String nombre, String pass, String rol) throws EmpleadoException {
-        Empleado nuevo, e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol));
+        Empleado nuevo, e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept);
+        e1.setDepartamento(dept);
+        dept.getEmpleados().add(e1);
+
+
         String email = e1.getEmail();
 
         log.info("Creando empleado");
@@ -384,9 +406,22 @@ class SA_EmpleadoTest {
 
     }
 
+    /*public static void main(String[] args) throws EmpleadoException, DepartamentoException {
+        initSA();
+        Empleado nuevo, e1 = new EmpleadoTParcial("empleado", "1234", Rol.EMPLEADO, dept);
+        String email = e1.getEmail();
+
+        //log.info("Creando empleado");
+        //nuevo = sa.crearEmpleado(e1);
+
+        log.info("buscnado empleado");
+        e1 = sa.buscarByEmail(email);
+
+    }*/
+
     @Test
     void buscarByEmailSimple() throws EmpleadoException {
-        Empleado nuevo, e1 = new EmpleadoTParcial("administrador", "1234", Rol.valueOf("ADMIN"));
+        Empleado nuevo, e1 = new EmpleadoTParcial("administrador", "1234", Rol.ADMIN, dept);
         String email = e1.getEmail();
 
         log.info("Creando empleado");

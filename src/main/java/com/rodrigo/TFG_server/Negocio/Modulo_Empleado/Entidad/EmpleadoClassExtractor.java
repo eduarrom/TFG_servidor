@@ -1,4 +1,4 @@
-/*package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
+package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import org.eclipse.persistence.descriptors.ClassExtractor;
@@ -19,4 +19,4 @@ public class EmpleadoClassExtractor extends ClassExtractor {
     }
 
 
-}*/
+}

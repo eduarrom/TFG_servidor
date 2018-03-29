@@ -38,8 +38,8 @@ public class Departamento implements Serializable, CycleRecoverable {
     @Column(nullable = false, unique = true)
     private String siglas;
 
-    @OneToMany(mappedBy = "departamento")/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
+    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     //@XmlAnyElement(lax = true)
     private List<Empleado> empleados = new ArrayList<Empleado>();
 
@@ -180,7 +180,7 @@ public class Departamento implements Serializable, CycleRecoverable {
     @Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
-        System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
+        //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
 
         //DepartmentPointer p = new DepartmentPointer();
         //p.id = this.id;

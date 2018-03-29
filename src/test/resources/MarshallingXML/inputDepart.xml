@@ -3,9 +3,9 @@
     <id>0</id>
     <nombre>Ingenieria del Software</nombre>
     <siglas>IdS</siglas>
-    <empleados xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="empleadoTParcial">
-        <nombre>rodri</nombre>
-        <email>rodri@gmail.com</email>
+    <empleados xsi:type="empleadoTParcial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <nombre>emple1</nombre>
+        <email>emple1@gmail.com</email>
         <password>1234</password>
         <rol>ADMIN</rol>
         <departamento>
@@ -18,9 +18,9 @@
         <horasJornada>5</horasJornada>
         <precioHora>10</precioHora>
     </empleados>
-    <empleados xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="empleadoTCompleto">
-        <nombre>Juan</nombre>
-        <email>juan@gmail.com</email>
+    <empleados xsi:type="empleadoTCompleto" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <nombre>emple2</nombre>
+        <email>emple2@gmail.com</email>
         <password>1234</password>
         <rol>EMPLEADO</rol>
         <departamento>

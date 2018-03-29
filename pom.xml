@@ -22,6 +22,7 @@
         <jdk.version>1.8</jdk.version>
         <cxf.version>3.2.1</cxf.version>
         <jaxb.version>2.2.11</jaxb.version>
+        <moxy.version>2.4.1</moxy.version>
         <spring.version>4.0.0.RELEASE</spring.version> <!-- ERROR: 4.3.12.RELEASE -->
         <hibernate.version>4.2.21.Final</hibernate.version>
         <slf4j.version>1.5.8</slf4j.version>
@@ -150,7 +151,7 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.moxy</artifactId>
-            <version>2.4.1</version>
+            <version>${moxy.version}</version>
         </dependency>
 
 
@@ -293,7 +294,20 @@
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
             <version>1.0.0</version>
+            <scope>test</scope>
         </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+            <scope>test</scope>
+        </dependency>
+
+
 
 
     </dependencies>

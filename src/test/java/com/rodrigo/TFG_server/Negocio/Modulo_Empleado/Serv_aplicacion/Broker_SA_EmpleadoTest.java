@@ -361,7 +361,7 @@ class Broker_SA_EmpleadoTest {
      ******************************************************************/
 
     @ParameterizedTest
-    @CsvSource({"Admin, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
+    @CsvSource({"Administrador, 1234, ADMIN", "rodri, 1234, EMPLEADO", "emple,1234, EMPLEADO"})
     void buscarByEmail(String nombre, String pass, String rol) throws EmpleadoException {
         Empleado nuevo, e1 = new EmpleadoTParcial(nombre, pass, Rol.valueOf(rol));
         String email = e1.getEmail();
