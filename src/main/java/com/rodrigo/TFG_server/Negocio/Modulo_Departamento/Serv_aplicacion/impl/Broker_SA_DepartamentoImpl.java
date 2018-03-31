@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.IBroker_SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
@@ -43,6 +44,11 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Override
     public Departamento buscarBySiglas(String siglas) throws DepartamentoException {
         return new SA_DepartamentoImpl().buscarBySiglas(siglas);
+    }
+
+    @Override
+    public String saludoREST(String nombre) {
+        return FactoriaSA.getInstance().crearSA_Departamento().saludoREST(nombre);
     }
 
 }

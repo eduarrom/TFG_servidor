@@ -27,7 +27,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
      * @param departamentoNuevo
      * @return Departamento insertado en BBDD o null si la entidad ya existe
      */
-    public Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException{
+    public Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException {
         Departamento depart;
 
         log.info("Creando Entity Manager");
@@ -112,14 +112,13 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
 
-
     public Departamento buscarBySiglas(String siglas) throws DepartamentoException {
         Departamento depart = null;
         log.debug("siglas = '" + siglas + "'");
 
 
         //Validacion del email
-        if (siglas == null || siglas == "" || !new EmailValidator().validate(siglas)) {
+        if (siglas == null || siglas == "") {
             log.error("Las siglas es invalido");
 
             try {
@@ -159,6 +158,11 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.close();
 
         return depart;
+    }
+
+    @Override
+    public String saludoREST(String nombre) {
+        return "Hola " + nombre + " desde servicio REST :)";
     }
 
 }

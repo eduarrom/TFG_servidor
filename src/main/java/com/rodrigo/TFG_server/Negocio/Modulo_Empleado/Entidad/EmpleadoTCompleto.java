@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @PrimaryKeyJoinColumn(name="id")
 @XmlRootElement(name ="EmpleadoTCompleto")
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlDiscriminatorValue("EmpleadoTCompleto-classifier")
 public class EmpleadoTCompleto extends Empleado implements Serializable {
 
 
@@ -50,6 +52,12 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
         this.departamento = d;
     }
 
+    /** Copia el empleado con:
+     * - Departamento vacio
+     * - Lista de proyectos vacia
+     *
+     * @param e EmpeladoTCompleto
+     */
     public EmpleadoTCompleto(EmpleadoTCompleto e) {
         super(e);
         antiguedad = e.antiguedad;
@@ -100,7 +108,7 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-
+        System.out.println("EmpleadoTCompleto.onCycleDetected");
         EmpleadoTCompleto e = new EmpleadoTCompleto(this);
         return e;
     }

@@ -4,6 +4,7 @@ import com.rodrigo.TFG_server.Negocio.FactoriaSA.impl.FactoriaSAImpl;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
 
 public abstract class FactoriaSA {
 
@@ -14,9 +15,11 @@ public abstract class FactoriaSA {
     }
 
 
-    public abstract SA_Empleado crearSAEmpleado();
+    public abstract SA_Empleado crearSA_Empleado();
 
-    public abstract SA_Departamento crearSADepartamento();
+    public abstract SA_Departamento crearSA_Departamento();
+
+    public abstract SA_Proyecto crearSA_Proyecto();
 
 
 

@@ -350,11 +350,17 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             /*if (result.size() > 0) {
                 emple = (Empleado) result.get(0);
             }*/
-
+            log.info("*********************************************************");
+            log.info("*********************************************************");
+            log.debug("emple = '" + emple + "'");
+            log.info("*********************************************************");
+            log.info("*********************************************************");
             em.getTransaction().commit();
         }
         if (em.isOpen())
             em.close();
+
+
 
         return emple;
     }

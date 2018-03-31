@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Proyecto>
+    <nombre>Pruebas Marshaling</nombre>
+    <descripcion>Descripción del proyecto Pruebas Marshaling</descripcion>
+    <fechaInicio>2018-03-30T21:20:56.273+02:00</fechaInicio>
+    <fechaFin>2018-09-08T00:00:00+02:00</fechaFin>
+    <empleados>
+        <id/>
+        <empleado xsi:type="empleadoTParcial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <nombre>emple1</nombre>
+            <email>emple1@gmail.com</email>
+            <password>1234</password>
+            <rol>ADMIN</rol>
+            <departamento>
+                <id>0</id>
+                <nombre>Pruebas de Marshaling</nombre>
+                <siglas>PdM</siglas>
+                <empleados xsi:type="empleadoTParcial">
+                    <nombre>emple1</nombre>
+                    <email>emple1@gmail.com</email>
+                    <password>1234</password>
+                    <rol>ADMIN</rol>
+                    <departamento>
+                        <id>0</id>
+                        <version>0</version>
+                    </departamento>
+                    <version>0</version>
+                    <horasJornada>5</horasJornada>
+                    <precioHora>10</precioHora>
+                </empleados>
+                <empleados xsi:type="empleadoTCompleto">
+                    <nombre>emple2</nombre>
+                    <email>emple2@gmail.com</email>
+                    <password>1234</password>
+                    <rol>EMPLEADO</rol>
+                    <departamento>
+                        <id>0</id>
+                        <nombre>Pruebas de Marshaling</nombre>
+                        <siglas>PdM</siglas>
+                        <version>0</version>
+                    </departamento>
+                    <version>0</version>
+                    <antiguedad>0</antiguedad>
+                    <sueldoBase>1200</sueldoBase>
+                </empleados>
+                <version>0</version>
+            </departamento>
+            <proyectos>
+                <id/>
+                <horas>0</horas>
+                <version>0</version>
+            </proyectos>
+            <version>0</version>
+            <horasJornada>5</horasJornada>
+            <precioHora>10</precioHora>
+        </empleado>
+        <proyecto>
+            <nombre>Pruebas Marshaling</nombre>
+            <descripcion>Descripción del proyecto Pruebas Marshaling</descripcion>
+            <fechaInicio>2018-03-30T21:20:56.273+02:00</fechaInicio>
+            <fechaFin>2018-09-08T00:00:00+02:00</fechaFin>
+            <version>0</version>
+        </proyecto>
+        <horas>5</horas>
+        <version>0</version>
+    </empleados>
+    <version>0</version>
+</Proyecto>

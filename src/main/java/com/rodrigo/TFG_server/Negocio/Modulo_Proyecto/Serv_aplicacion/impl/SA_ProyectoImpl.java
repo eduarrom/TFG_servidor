@@ -2,6 +2,8 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldNullException;
@@ -44,6 +46,27 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         em.close();
 
         return proy;
+    }
+
+    @Override
+    public EmpleadoProyecto añadirEmpleadoAProyecto(Empleado e, Proyecto p, int horas) {
+        Proyecto proy;
+
+        log.info("Creando Entity Manager");
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
+
+
+        EmpleadoProyecto ep = new EmpleadoProyecto(e, p, horas);
+        {
+            em.getTransaction().begin();
+            log.info("Persistiendo proyecto en BBDD");
+            ep = em.merge(ep);
+
+            em.getTransaction().commit();
+        }
+        em.close();
+
+        return ep;
     }
 
 

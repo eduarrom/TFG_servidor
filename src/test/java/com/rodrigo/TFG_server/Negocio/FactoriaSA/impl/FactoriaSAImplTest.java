@@ -1,7 +1,6 @@
 package com.rodrigo.TFG_server.Negocio.FactoriaSA.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ class FactoriaSAImplTest {
     @Test
     void crearSAEmpleado() {
 
-        assertTrue(FactoriaSA.getInstance().crearSAEmpleado() instanceof SA_EmpleadoImpl);
+        assertTrue(FactoriaSA.getInstance().crearSA_Empleado() instanceof SA_EmpleadoImpl);
 
     }
 }

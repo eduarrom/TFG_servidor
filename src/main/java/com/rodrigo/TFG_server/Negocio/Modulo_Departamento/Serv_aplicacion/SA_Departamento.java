@@ -20,4 +20,6 @@ public interface SA_Departamento {
 
     Departamento buscarBySiglas(String email) throws DepartamentoException;
 
+    public String saludoREST(String nombre);
+
 }

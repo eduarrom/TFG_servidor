@@ -2,6 +2,9 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 @PrimaryKeyJoinColumn(name="id")
 @XmlRootElement(name = "EmpleadoTParcial")
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlDiscriminatorValue("EmpleadoTParcial-classifier")
 public class EmpleadoTParcial extends Empleado implements Serializable {
 
     /****************************
@@ -32,6 +36,9 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
 
     @NotBlank
     private int precioHora = 10;
+
+
+    private final static Logger log = LoggerFactory.getLogger(EmpleadoTParcial.class);
 
 
 
@@ -52,11 +59,16 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
         this.departamento = d;
     }
 
+    /** Copia el empleado con:
+     * - Departamento vacio
+     * - Lista de proyectos vacia
+     *
+     * @param e EmpleadoTParcial
+     */
     public EmpleadoTParcial(EmpleadoTParcial e) {
         super(e);
         this.horasJornada = e.horasJornada;
         this.precioHora = e.precioHora;
-
     }
 
 
@@ -103,10 +115,10 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
     @Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
-        //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-
+        //log.info("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
+        log.info("EmpleadoTParcial.onCycleDetected");
         EmpleadoTParcial e = new EmpleadoTParcial(this);
-        e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
+//        e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
         return e;
     }
 }

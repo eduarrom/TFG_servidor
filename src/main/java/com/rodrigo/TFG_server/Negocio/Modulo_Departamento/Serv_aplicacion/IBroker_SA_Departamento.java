@@ -8,7 +8,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-@WebService
 public interface IBroker_SA_Departamento {
 
     @WebMethod(operationName="crearDepartamento")
@@ -30,6 +29,7 @@ public interface IBroker_SA_Departamento {
     public Departamento buscarBySiglas(String siglas) throws DepartamentoException;
 
 
+    public String saludoREST(String nombre);
 
 }
 

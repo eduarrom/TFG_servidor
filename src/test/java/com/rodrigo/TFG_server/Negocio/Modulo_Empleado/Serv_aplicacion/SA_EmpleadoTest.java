@@ -8,9 +8,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidatorTest;
-import com.sun.org.apache.xalan.internal.xsltc.runtime.ErrorMessages_es;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,25 +40,25 @@ class SA_EmpleadoTest {
     @BeforeAll
     static void initSA() throws DepartamentoException, EmpleadoException {
         log.info("Creando SA...");
-        sa = FactoriaSA.getInstance().crearSAEmpleado();
+        sa = FactoriaSA.getInstance().crearSA_Empleado();
 
-        //dept = new Departamento("Ingenieria del Software");
-        dept = FactoriaSA.getInstance().crearSADepartamento().buscarByID(3L);
+        /*//dept = new Departamento("Ingenieria del Software");
+        dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
 
         e1 = new EmpleadoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
 
-        //dept = FactoriaSA.getInstance().crearSADepartamento().buscarByID(1L);
-        //dept = FactoriaSA.getInstance().crearSADepartamento().crearDepartamento(dept);
+        //dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(1L);
+        //dept = FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(dept);
 
         dept.getEmpleados().add(e1);
         e1.setDepartamento(dept);
 
-        e1 = FactoriaSA.getInstance().crearSAEmpleado().buscarByEmail(e1.getEmail());
+        e1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(e1.getEmail());*/
     }
 
     @BeforeEach
     void iniciarContexto() throws EmpleadoException {
-        e1 = new EmpleadoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
+        e1 = new EmpleadoTCompleto("emple1", "1234", Rol.EMPLEADO, dept);
 
         log.info("Creando empleado ");
         if (sa.buscarByEmail(e1.getEmail()) == null) {

@@ -1,8 +1,14 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.sun.xml.bind.CycleRecoverable;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +30,8 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Departamento implements Serializable, CycleRecoverable {
 
+    private final static Logger log = LoggerFactory.getLogger(Departamento.class);
+
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
     @Column/*(name = "id_depart")*/
     @Id
@@ -38,9 +46,14 @@ public class Departamento implements Serializable, CycleRecoverable {
     @Column(nullable = false, unique = true)
     private String siglas;
 
-    @OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
+    @LazyCollection(LazyCollectionOption.FALSE)
     //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     //@XmlAnyElement(lax = true)
+    @XmlElements({
+            @XmlElement(name = "EmpleadoTParcial", type = EmpleadoTParcial.class),
+            @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class)
+    })
     private List<Empleado> empleados = new ArrayList<Empleado>();
 
     @Version
@@ -75,12 +88,29 @@ public class Departamento implements Serializable, CycleRecoverable {
         this.siglas = siglas;
     }
 
+    /** Copia el Departamento con
+     *  - Listado de empleados vacio
+     *
+     * @param d
+     */
     public Departamento(Departamento d) {
         this.id = d.id;
         this.nombre = d.nombre;
         this.siglas = d.siglas;
         this.version = d.version;
     }
+
+
+    /****************************
+     ********** METODOS *********
+     ****************************/
+
+    public boolean agregarEmpleado(Empleado e) {
+        e.setDepartamento(this);
+        return this.empleados.add(e);
+    }
+
+
 
 
     /****************************
@@ -180,8 +210,9 @@ public class Departamento implements Serializable, CycleRecoverable {
     @Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
-        //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
+        //log.info("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
 
+        log.info("Departamento.onCycleDetected");
         //DepartmentPointer p = new DepartmentPointer();
         //p.id = this.id;
         Departamento p = new Departamento(this);
