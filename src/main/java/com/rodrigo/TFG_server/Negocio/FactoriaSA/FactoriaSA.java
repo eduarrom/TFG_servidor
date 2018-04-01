@@ -16,11 +16,11 @@ public abstract class FactoriaSA {
     }
 
 
-    public abstract SA_Empleado crearSAEmpleado();
+    public abstract SA_Empleado crearSA_Empleado();
 
-    public abstract SA_Departamento crearSADepartamento();
+    public abstract SA_Departamento crearSA_Departamento();
 
+    public abstract SA_Proyecto crearSA_Proyecto();
 
-    public abstract SA_Proyecto crearSAProyecto();
 
 }

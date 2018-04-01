@@ -1,9 +1,13 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
+import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.sun.xml.bind.CycleRecoverable;
-import org.eclipse.persistence.oxm.annotations.XmlClassExtractor;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
+import org.eclipse.persistence.oxm.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,15 +29,18 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlClassExtractor(EmpleadoClassExtractor.class)
 @XmlSeeAlso({
-        EmpleadoTParcial.class,
-        EmpleadoTCompleto.class
+        EmpleadoTCompleto.class,
+        EmpleadoTParcial.class
 })
+//@XmlTransient
+//@XmlDiscriminatorNode("@classifier")
 public abstract class Empleado implements Serializable, CycleRecoverable {
 
     /****************************
      ********* ATRIBUTOS ********
      ****************************/
 
+    private final static Logger log = LoggerFactory.getLogger(Empleado.class);
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
     //@Column(name = "id")
@@ -57,13 +66,19 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     protected Rol rol;
 
 
-    @ManyToOne/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
+    @ManyToOne(fetch=FetchType.LAZY)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
-    protected Departamento departamento;
+    protected Departamento departamento = null;
+//    protected Departamento departamento = new Departamento();
 
-    //@OneToMany(mappedBy = "proyecto")
-    //protected List<EmpleadoProyecto> proyectos;
+//    @OneToMany(mappedBy = "proyecto")
+//    protected List<EmpleadoProyecto> proyectos = null;
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY/*, cascade = CascadeType.ALL*/)
+    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
+    protected List<EmpleadoProyecto> proyectos  = null;
+//    protected List<EmpleadoProyecto> proyectos  = new ArrayList<>();
+
 
     @Version
     protected long version;
@@ -76,7 +91,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
 
     public Empleado() {
     }
-
 
     public Empleado(String nombre, String password, Rol rol) {
         this.nombre = nombre;
@@ -114,6 +128,12 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
 
     }
 
+    /** Copia el empleado con:
+     * - Departamento vacio
+     * - Lista de proyectos vacia
+     *
+     * @param e Empleado
+     */
     public Empleado(Empleado e) {
         this.id = e.id;
         this.nombre = e.nombre;
@@ -121,7 +141,10 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
         this.rol = e.rol;
         this.email = e.email;
         this.version = e.version;
-        this.departamento = new Departamento(e.departamento);
+//        this.departamento = new Departamento(e.departamento);
+//        this.proyectos = e.proyectos.stream()
+//                .map((ep) -> new EmpleadoProyecto(ep))
+//                .collect(Collectors.toList());
     }
 
 
@@ -136,7 +159,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
      **** GETTERS AND SETTERS ***
      ****************************/
 
-    //@XmlAttribute(name = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -146,7 +168,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     }
 
 
-    //@XmlElement(name = "nombre", required = true)
     public String getNombre() {
         return nombre;
     }
@@ -156,7 +177,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     }
 
 
-    //@XmlElement(name = "password", required = true)
     public String getPassword() {
         return password;
     }
@@ -175,7 +195,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     }
 
 
-    //@XmlElement(name = "version", required = true)
     public long getVersion() {
         return version;
     }
@@ -185,7 +204,6 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     }
 
 
-    //@XmlElement(name = "email", required = true)
     public String getEmail() {
         return email;
     }
@@ -204,23 +222,39 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     }
 
 
+    public List<EmpleadoProyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<EmpleadoProyecto> proyectos) {
+        this.proyectos = proyectos;
+    }
+
     /****************************
      ****** OTHER METHODS *******
      ****************************/
 
+
+
     @Override
     public String toString() {
         return "Empleado{" +
-                "  id=" + id +
+                "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", mail='" + email + '\'' +
-                ", rol='" + rol + '\'' +
+                ", rol=" + rol +
                 ", dept='" + departamento.getSiglas() + '\'' +
+                ", proySize=" + proyectos.size() +
                 ", version=" + version +
                 '}';
     }
 
+
+//    @Override
+//    public Object onCycleDetected(Context context) {
+//        return null;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -232,7 +266,9 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
                 Objects.equals(getPassword(), empleado.getPassword()) &&
-                getRol() == empleado.getRol();
+                getRol() == empleado.getRol() &&
+                Objects.equals(getDepartamento(), empleado.getDepartamento()) &&
+                Objects.equals(proyectos, empleado.proyectos);
     }
 
     public boolean equalsWithOutVersion(Object o) {
@@ -243,11 +279,16 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
                 Objects.equals(getPassword(), empleado.getPassword()) &&
-                Objects.equals(getRol(), empleado.getRol());
+                getRol() == empleado.getRol() &&
+                Objects.equals(getDepartamento(), empleado.getDepartamento()) &&
+                Objects.equals(proyectos, empleado.proyectos);
     }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getPassword(), getRol(), getVersion());
+
+        return Objects.hash(getId(), getNombre(), getEmail(), getPassword(), getRol(),
+                getDepartamento(), proyectos, getVersion());
     }
 }

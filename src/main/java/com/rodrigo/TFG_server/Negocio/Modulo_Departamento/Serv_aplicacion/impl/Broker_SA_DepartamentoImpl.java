@@ -9,7 +9,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 
-import javax.jws.WebParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,10 +25,8 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Produces("application/json")
     //@Produces("text/plain")
     public String saludoREST(@PathParam("nombre") String nombre) {
-
-        return FactoriaSA.getInstance().crearSADepartamento().saludoREST(nombre);
+        return FactoriaSA.getInstance().crearSA_Departamento().saludoREST(nombre);
     }
-
 
     @GET
     @Path("/deptSencillo")
@@ -49,40 +46,26 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
         System.out.println("********************************************");
         System.out.println("************ getDepartamentoCompleto **********");
         System.out.println("********************************************");
-        return FactoriaSA.getInstance().crearSADepartamento().buscarByID(id);
-    }
-
-
-    @GET
-    @Path("/emple")
-    @Produces("application/xml")
-    public Empleado getEmpleadoCompleto() throws EmpleadoException {
-        System.out.println("********************************************");
-        System.out.println("************ getEmpleadoCompleto **********");
-        System.out.println("********************************************");
-        return FactoriaSA.getInstance().crearSAEmpleado().buscarByEmail("admin@gmail.com");
+        return FactoriaSA.getInstance().crearSA_Departamento().buscarByID(id);
     }
 
 
     @Override
-    public Departamento crearDepartamento(@WebParam(name="Departamento") Departamento departamentoNuevo) throws DepartamentoException {
-
+    public Departamento crearDepartamento( Departamento departamentoNuevo) throws DepartamentoException {
         return new SA_DepartamentoImpl().crearDepartamento(departamentoNuevo);
-        //return null;
     }
 
 
-    public Departamento buscarDepartamentoByID(@WebParam(name="id") Long id) {
+    public Departamento buscarDepartamentoByID(Long id) {
         return new SA_DepartamentoImpl().buscarByID(id);
     }
 
-    public boolean eliminarDepartamento(@WebParam(name="Departamento") Departamento departamentoEliminar) {
+    public boolean eliminarDepartamento(Departamento departamentoEliminar) {
 
         return new SA_DepartamentoImpl().eliminarDepartamento(departamentoEliminar);
     }
 
     public List<Departamento> listarDepartamentos() {
-
         return new SA_DepartamentoImpl().listarDepartamentos();
     }
 
@@ -91,8 +74,5 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     public Departamento buscarBySiglas(String siglas) throws DepartamentoException {
         return new SA_DepartamentoImpl().buscarBySiglas(siglas);
     }
-
-
-
 
 }

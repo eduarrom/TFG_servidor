@@ -2,25 +2,25 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
 @XmlRootElement(name = "EmpleadoTParcial")
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlDiscriminatorValue("EmpleadoTParcial-classifier")
 public class EmpleadoTParcial extends Empleado implements Serializable {
 
     /****************************
@@ -32,6 +32,9 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
 
     @NotBlank
     private int precioHora = 10;
+
+
+    private final static Logger log = LoggerFactory.getLogger(EmpleadoTParcial.class);
 
 
 
@@ -52,11 +55,16 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
         this.departamento = d;
     }
 
+    /** Copia el empleado con:
+     * - Departamento vacio
+     * - Lista de proyectos vacia
+     *
+     * @param e EmpleadoTParcial
+     */
     public EmpleadoTParcial(EmpleadoTParcial e) {
         super(e);
         this.horasJornada = e.horasJornada;
         this.precioHora = e.precioHora;
-
     }
 
 
@@ -110,6 +118,7 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
 
         EmpleadoTParcial e = new EmpleadoTParcial(this);
         //e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
+
         return e;
     }
 }

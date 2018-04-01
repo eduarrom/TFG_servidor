@@ -12,19 +12,17 @@ public class FactoriaSAImpl extends FactoriaSA {
 
 
     @Override
-    public SA_Empleado crearSAEmpleado(){
+    public SA_Empleado crearSA_Empleado(){
         return new SA_EmpleadoImpl();
     }
 
     @Override
-    public SA_Departamento crearSADepartamento() {
+    public SA_Departamento crearSA_Departamento() {
         return new SA_DepartamentoImpl();
     }
 
     @Override
-    public SA_Proyecto crearSAProyecto() {
+    public SA_Proyecto crearSA_Proyecto() {
         return new SA_ProyectoImpl();
     }
-
-
 }
