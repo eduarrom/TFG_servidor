@@ -105,8 +105,11 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
 
+        System.out.println(" -------- EmpleadoTParcial.onCycleDetected -------- ");
+
+
         EmpleadoTParcial e = new EmpleadoTParcial(this);
-        e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
+        //e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
         return e;
     }
 }

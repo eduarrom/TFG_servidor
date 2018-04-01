@@ -1,35 +1,36 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.DeptSencillo;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebService;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import java.util.List;
 
-@WebService
+@Path("/player")
 public interface IBroker_SA_Departamento {
 
-    @WebMethod(operationName="crearDepartamento")
-    public Departamento crearDepartamento(@WebParam(name = "Departamento") Departamento departamentoNuevo) throws DepartamentoException;
+    public Departamento crearDepartamento( Departamento departamentoNuevo) throws DepartamentoException;
 
-    @WebMethod(operationName="buscarByID")
-    public Departamento buscarDepartamentoByID(@WebParam(name = "id") Long id);
+    public Departamento buscarDepartamentoByID(Long id);
 
 
-    @WebMethod(operationName="eliminarDepartamento")
-    public boolean eliminarDepartamento(@WebParam(name = "Departamento") Departamento departamentoEliminar) ;
+    public boolean eliminarDepartamento( Departamento departamentoEliminar) ;
 
 
-    @WebMethod(operationName="listarDepartamentos")
     public List<Departamento> listarDepartamentos();
 
 
-    @WebMethod(operationName="buscarBySiglas")
     public Departamento buscarBySiglas(String siglas) throws DepartamentoException;
 
 
+    public String saludoREST(String nombre);
+
+    public DeptSencillo getDepartamentoSencillo();
 
 }
 

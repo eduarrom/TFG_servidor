@@ -100,6 +100,8 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
+        System.out.println(" -------- EmpleadoTCompleto.onCycleDetected -------- ");
+
 
         EmpleadoTCompleto e = new EmpleadoTCompleto(this);
         return e;

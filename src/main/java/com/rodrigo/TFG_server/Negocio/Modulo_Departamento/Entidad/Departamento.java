@@ -82,6 +82,10 @@ public class Departamento implements Serializable, CycleRecoverable {
         this.version = d.version;
     }
 
+    public Departamento(long id) {
+        this.id = id;
+    }
+
 
     /****************************
      **** GETTERS AND SETTERS ***
@@ -182,10 +186,29 @@ public class Departamento implements Serializable, CycleRecoverable {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
 
-        //DepartmentPointer p = new DepartmentPointer();
-        //p.id = this.id;
-        Departamento p = new Departamento(this);
-        return p;
+        System.out.println(" -------- Departamento.onCycleDetected -------- ");
+        Object obj;
+
+        //Esta opción peta por no tener un DepartmantePointer como field
+        obj = new DepartmentPointer(this.id);
+        System.out.println("Enviando Departamento pointer por ciclo ");
+
+
+        // Retorna un departamento solo con el ID
+        //Departamento --> empleados --> Departamento(Solo con el ID)
+        //obj = new Departamento(this.id);
+
+
+        // Retorna un departamento sin los empleados
+        // Departamento --> empleados --> Departamento(Sin empleados)
+        //obj = new Departamento(this);
+
+
+        //Con null al detectar el ciclo envia un <departamento/>
+        // Departamento --> empleados --> <departamento/>
+        //obj = null;
+
+        return obj;
     }
 
 }

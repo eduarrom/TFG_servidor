@@ -341,6 +341,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
                 emple = (obj instanceof EmpleadoTParcial)?(EmpleadoTParcial) obj:(EmpleadoTCompleto) obj;
 
+                log.info("emple = '" + emple + "'");
 
 
             } catch (NoResultException e) {

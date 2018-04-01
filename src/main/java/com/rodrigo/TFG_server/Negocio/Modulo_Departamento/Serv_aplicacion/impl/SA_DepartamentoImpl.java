@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.*;
@@ -37,6 +38,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
             log.info("Persistiendo departamento en BBDD");
             depart = em.merge(departamentoNuevo);
+            System.out.println(depart);
 
             em.getTransaction().commit();
         }
@@ -57,7 +59,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
             log.info("Buscando departamento en BBDD");
             depart = em.find(Departamento.class, id);
-
+            System.out.println("depart = [" + depart + "]");
+            depart.getEmpleados().stream().forEach(System.out::println);
             em.getTransaction().commit();
         }
         em.close();
@@ -159,6 +162,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.close();
 
         return depart;
+    }
+
+
+
+    public String saludoREST(String nombre) {
+        return "Hola " + nombre + " desde servico REST :)";
     }
 
 }

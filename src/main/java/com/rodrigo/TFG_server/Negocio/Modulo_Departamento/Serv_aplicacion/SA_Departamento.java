@@ -1,5 +1,6 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion;
 
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 
@@ -19,5 +20,8 @@ public interface SA_Departamento {
     List<Departamento> listarDepartamentos();
 
     Departamento buscarBySiglas(String email) throws DepartamentoException;
+
+
+    public String saludoREST(String nombre);
 
 }

@@ -7,18 +7,25 @@
 
     <!--<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/> -->
 
-    <description>cxf</description>
-    <display-name>cxf</display-name>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/cxf-servlet.xml</param-value>
-    </context-param>
+    <display-name>TFG_server__webb-app-name</display-name>
+
+    <description>Descripcion del fichero</description>
 
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!-- ************************************************************************* -->
+    <!-- ********************************* SOAP ********************************** -->
+    <!-- ************************************************************************* -->
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/cxf-servlet.xml</param-value>
+    </context-param>
 
     <servlet>
         <description>Apache CXF Endpoint</description>
@@ -28,15 +35,46 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-
-
     <servlet-mapping>
         <servlet-name>cxf</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
+    <!-- ************************************************************************* -->
+    <!-- ********************************* REST ********************************** -->
+    <!-- ************************************************************************* -->
+
+    <!--<context-param>
+        <param-name>contextConfigLocationREST</param-name>
+        <param-value>WEB-INF/rest-servlet.xml</param-value>
+    </context-param>-->
+
+   <!-- <servlet>
+        <servlet-name>CXFServletREST</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        &lt;!&ndash;rest&ndash;&gt;
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>
+                com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.DeptApplication
+            </param-value>
+        </init-param>
+        &lt;!&ndash;rest&ndash;&gt;
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CXFServletREST</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>-->
+
+
+
+    <!-- ************************************************************************* -->
+    <!-- ****************************** OTRA CONFIG ****************************** -->
+    <!-- ************************************************************************* -->
 
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
+
 </web-app>
