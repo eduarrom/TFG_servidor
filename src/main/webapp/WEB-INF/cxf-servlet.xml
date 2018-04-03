@@ -49,9 +49,9 @@ http://cxf.apache.org/schemas/jaxws.xsd">
         <jaxrs:serviceBeans>
             <ref bean="broker_SA_Depart" />
         </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
-        </jaxrs:providers>
+        <!--<jaxrs:providers>-->
+            <!--<bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>-->
+        <!--</jaxrs:providers>-->
     </jaxrs:server>
 
 

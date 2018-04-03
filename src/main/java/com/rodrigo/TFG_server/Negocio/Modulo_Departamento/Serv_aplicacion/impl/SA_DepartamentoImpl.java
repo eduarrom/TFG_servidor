@@ -69,7 +69,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
     @Override
-    public boolean eliminarDepartamento(Departamento departamentoEliminar) {
+    public boolean eliminarDepartamento(Long id) {
 
         boolean result;
 
@@ -79,7 +79,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
 
             try {
-                em.remove(em.find(Departamento.class, departamentoEliminar.getId()));
+                em.remove(em.find(Departamento.class, id));
                 result = true;
                 em.getTransaction().commit();
             } catch (Exception e) {
@@ -106,12 +106,39 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
 
             lista = em.createNamedQuery("Departamento.listar").getResultList();
+            log.debug("lista = '" + lista + "'");
 
             em.getTransaction().commit();
         }
         em.close();
 
         return lista;
+    }
+
+
+    public static List<Departamento> listarDepartamentosStatic() {
+
+        List<Departamento> lista;
+
+
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
+        {
+            em.getTransaction().begin();
+
+            lista = em.createNamedQuery("Departamento.listar").getResultList();
+            log.debug("lista = '" + lista + "'");
+
+            em.getTransaction().commit();
+        }
+        em.close();
+
+        return lista;
+    }
+    public static void main(String[] args){
+        List<Departamento> lista = listarDepartamentosStatic();
+
+        System.out.println("lista = [" + lista + "]");
+        
     }
 
 
@@ -154,6 +181,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 depart = null;
             }
 
+            log.info("depart = [" + depart + "]");
+            depart.getEmpleados().stream().forEach(System.out::println);
 
             em.getTransaction().commit();
         }

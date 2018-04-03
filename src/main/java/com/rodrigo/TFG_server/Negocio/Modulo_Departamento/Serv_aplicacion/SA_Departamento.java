@@ -15,7 +15,7 @@ public interface SA_Departamento {
     
     Departamento buscarByID(Long id);
 
-    boolean eliminarDepartamento(Departamento departamentoEliminar);
+    boolean eliminarDepartamento(Long id);
 
     List<Departamento> listarDepartamentos();
 

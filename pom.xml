@@ -128,11 +128,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-            <version>1.9.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.codehaus.jackson</groupId>-->
+            <!--<artifactId>jackson-jaxrs</artifactId>-->
+            <!--<version>1.9.0</version>-->
+        <!--</dependency>-->
 
 
         <!-- ************************************ -->
@@ -262,6 +262,12 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -356,6 +362,11 @@
 
 
 
+        <!-- ************************************ -->
+        <!-- **********  DEPENDENCIAS  ********** -->
+        <!-- *************  OTROS  ************** -->
+        <!-- ************************************ -->
+
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -420,7 +431,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <targetPath>resources</targetPath>
+                <!--<targetPath>resources</targetPath>-->
                 <includes>
                     <include>log4j.properties</include>
                     <include>jaxb.properties</include>

@@ -6,13 +6,9 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.DeptSencillo;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.IBroker_SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/departamento")
@@ -24,6 +20,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/saludo/{nombre}")
     @Produces("application/json")
     //@Produces("text/plain")
+    @Override
     public String saludoREST(@PathParam("nombre") String nombre) {
         return FactoriaSA.getInstance().crearSA_Departamento().saludoREST(nombre);
     }
@@ -31,6 +28,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("/deptSencillo")
     @Produces("application/xml")
+    @Override
     public DeptSencillo getDepartamentoSencillo() {
         System.out.println("********************************************");
         System.out.println("************ getDepartamentoSencillo **********");
@@ -50,29 +48,71 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     }
 
 
+
+    @PUT
+    //@Path("/crear")
+    @Produces("application/xml")
     @Override
     public Departamento crearDepartamento( Departamento departamentoNuevo) throws DepartamentoException {
         return new SA_DepartamentoImpl().crearDepartamento(departamentoNuevo);
     }
 
 
-    public Departamento buscarDepartamentoByID(Long id) {
+    @GET
+    @Path("/{id}")
+    @Produces("application/xml")
+    @Override
+    public Departamento buscarByID(@PathParam("id") Long id) {
+        System.out.println("********************************************");
+        System.out.println("************ buscarByID **********");
+        System.out.println("id = [" + id + "]");
+        System.out.println("********************************************");
+
         return new SA_DepartamentoImpl().buscarByID(id);
     }
 
-    public boolean eliminarDepartamento(Departamento departamentoEliminar) {
 
-        return new SA_DepartamentoImpl().eliminarDepartamento(departamentoEliminar);
-    }
-
-    public List<Departamento> listarDepartamentos() {
-        return new SA_DepartamentoImpl().listarDepartamentos();
-    }
-
-
+    @GET
+    @Path("bySiglas/{siglas}")
+    @Produces("application/xml")
     @Override
-    public Departamento buscarBySiglas(String siglas) throws DepartamentoException {
+    public Departamento buscarBySiglas(@PathParam("siglas") String siglas) throws DepartamentoException {
+        System.out.println("********************************************");
+        System.out.println("************ buscarBySiglas **********");
+        System.out.println("siglas = [" + siglas + "]");
+        System.out.println("********************************************");
         return new SA_DepartamentoImpl().buscarBySiglas(siglas);
     }
+
+
+    @DELETE
+    @Path("/{id}")
+    @Produces("application/xml")
+    @Override
+    public boolean eliminarDepartamento(Long id) {
+        return new SA_DepartamentoImpl().eliminarDepartamento(id);
+    }
+
+
+    @GET
+    @Path("/listar")
+    @Produces("application/xml")
+    @Override
+    public Departamento[] listarDepartamentos() {
+        System.out.println("Listando Departamentos simple");
+        List<Departamento> lista = new SA_DepartamentoImpl().listarDepartamentos();
+
+        lista.stream()
+                .forEach(System.out::println);
+
+        lista.stream()
+                .forEach((d)->d.getEmpleados().stream()
+                        .forEach((e -> e.setProyectos(null))));
+
+        return lista.toArray(new Departamento[]{});
+    }
+
+
+
 
 }
