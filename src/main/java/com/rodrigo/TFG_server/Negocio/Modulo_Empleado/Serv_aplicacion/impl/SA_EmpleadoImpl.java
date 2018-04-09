@@ -130,7 +130,8 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.getTransaction().begin();
             log.info("Buscando empleado en BBDD");
             user = em.find(Empleado.class, id);
-
+            log.debug("user = '" + user + "'");
+            log.debug("user.getDepartamento() = '" + user.getDepartamento() + "'");
             em.getTransaction().commit();
         }
         em.close();

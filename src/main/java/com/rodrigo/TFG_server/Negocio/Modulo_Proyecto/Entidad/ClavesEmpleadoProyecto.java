@@ -1,12 +1,14 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ClavesEmpleadoProyecto implements Serializable {
-
 
     /****************************
      ********* ATRIBUTOS ********
@@ -20,6 +22,10 @@ public class ClavesEmpleadoProyecto implements Serializable {
     private Long idEmpleado;
 
     private Long idProyecto;
+
+
+
+
 
     public ClavesEmpleadoProyecto() {
     }

@@ -1,11 +1,8 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
-import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-import com.sun.xml.bind.CycleRecoverable;
 import org.eclipse.persistence.oxm.annotations.*;
-import org.hibernate.annotations.Cascade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,14 +23,16 @@ import java.util.Objects;
 
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlClassExtractor(EmpleadoClassExtractor.class)
+//@XmlClassExtractor(EmpleadoClassExtractor.class)
 @XmlSeeAlso({
         EmpleadoTCompleto.class,
         EmpleadoTParcial.class
 })
 //@XmlTransient
 //@XmlDiscriminatorNode("@classifier")
-public abstract class Empleado implements Serializable, CycleRecoverable {
+@XmlDiscriminatorNode("@tipo")
+//@XmlCustomizer(EmpleadoCustomizer.class)
+public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     /****************************
      ********* ATRIBUTOS ********
@@ -69,15 +67,23 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
     @ManyToOne(fetch=FetchType.LAZY)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
-    protected Departamento departamento = null;
+    //@XmlTransient
+    protected Departamento departamento;
 //    protected Departamento departamento = new Departamento();
+
+
+
 
 //    @OneToMany(mappedBy = "proyecto")
 //    protected List<EmpleadoProyecto> proyectos = null;
     @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY/*, cascade = CascadeType.ALL*/)
     //@Cascade(org.hibernate.annotations.CascadeType.ALL)
-    protected List<EmpleadoProyecto> proyectos  = null;
+    @XmlInverseReference(mappedBy = "empleado")
+    protected List<EmpleadoProyecto> proyectos;
 //    protected List<EmpleadoProyecto> proyectos  = new ArrayList<>();
+
+
+
 
 
     @Version
@@ -244,8 +250,8 @@ public abstract class Empleado implements Serializable, CycleRecoverable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", rol=" + rol +
-                ", dept='" + departamento.getSiglas() + '\'' +
-                ", proySize=" + proyectos.size() +
+                ", dept='" + ((departamento==null)?"null": departamento.getSiglas()) + '\'' +
+                ", proySize=" +((proyectos==null)?"null": proyectos.size()) +
                 ", version=" + version +
                 '}';
     }

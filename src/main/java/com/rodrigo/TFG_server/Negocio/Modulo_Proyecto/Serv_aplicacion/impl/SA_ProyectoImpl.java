@@ -30,7 +30,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
      * @param proyectoNuevo
      * @return Proyecto insertado en BBDD o null si la entidad ya existe
      */
-    public Proyecto crearProyecto(Proyecto proyectoNuevo) throws ProyectoException{
+    public Proyecto crearProyecto(Proyecto proyectoNuevo) throws ProyectoException {
         Proyecto proy;
 
         log.info("Creando Entity Manager");
@@ -81,6 +81,12 @@ public class SA_ProyectoImpl implements SA_Proyecto {
             em.getTransaction().begin();
             log.info("Buscando proyecto en BBDD");
             proy = em.find(Proyecto.class, id);
+            log.debug("proy = '" + proy + "'");
+            proy.getEmpleados().stream()
+                    .forEach(ep -> {
+                        ep.getEmpleado().toString();
+                        ep.getProyecto().toString();
+                    });
 
             em.getTransaction().commit();
         }
@@ -134,5 +140,5 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
         return lista;
     }
-    
+
 }

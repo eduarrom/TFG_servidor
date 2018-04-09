@@ -9,6 +9,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.ClavesEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
@@ -20,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import javax.sound.sampled.Port;
 import javax.xml.bind.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +40,7 @@ public class Marshalling_UnmarshalingTest {
     @BeforeAll
     static void setUp() throws JAXBException, ParseException, ProyectoException, DepartamentoException, EmpleadoException {
         jc = JAXBContext.newInstance(new Class[]{Departamento.class, Empleado.class,
-                EmpleadoTCompleto.class, EmpleadoTParcial.class, Proyecto.class, EmpleadoProyecto.class});
+                EmpleadoTCompleto.class, EmpleadoTParcial.class, Proyecto.class, EmpleadoProyecto.class, ClavesEmpleadoProyecto.class});
 
 
         emple1 = new EmpleadoTParcial("emple1", "1234", Rol.ADMIN);
@@ -48,11 +48,22 @@ public class Marshalling_UnmarshalingTest {
         emple1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(23L);
 
         dept1 = new Departamento("Dept1");
-        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
+//        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
+        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas("DdP");
 
         proy1 = new Proyecto("Proy1");
         proy1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(1L);
         proy1.setFechaInicio(new SimpleDateFormat("dd-MM-yyyy").parse("10-07-2018"));
+
+
+        //PRUBAS PARA MARSHALING DE DEPT Y EMPLE
+        //emple1.setProyectos(null);
+       // proy1.setEmpleados(null);
+        //dept1.getEmpleados().stream().forEach((emple)->{ emple.setProyectos(null);});
+
+
+
+
 //        proy2 = new Proyecto("Proy2");
 //        proy2.setFechaInicio(new SimpleDateFormat("dd-MM-yyyy").parse("10-07-2018"));
 
@@ -94,10 +105,10 @@ public class Marshalling_UnmarshalingTest {
 
         File xmlOut = new File("src/test/resources/MarshallingXML/outputDepart.xml");
         FileWriter fw = new FileWriter(xmlOut);
+        marshaller.marshal(dept1, System.out);
         marshaller.marshal(dept1, fw);
-        //marshaller.marshal(dept1, System.out);
 
-        File xmlIn = new File("src/test/resources/MarshallingXML/inputDepart.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/outputDepart.xml");
 
         assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
                 FileUtils.readFileToString(xmlOut, "utf-8"));
@@ -114,11 +125,11 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/inputDepart.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/outputDepart.xml");
 
         Departamento deptIn = (Departamento) unmarshaller.unmarshal(xmlIn);
 
-        log.debug("dept1 = '" + dept1 + "'");
+        log.debug("dept1  = '" + dept1 + "'");
         log.debug("deptIn = '" + deptIn + "'");
 
         for (Empleado e : deptIn.getEmpleados()) {
@@ -149,10 +160,10 @@ public class Marshalling_UnmarshalingTest {
         File xmlOut = new File("src/test/resources/MarshallingXML/outputEmple.xml");
         FileWriter fw = new FileWriter(xmlOut);
 
-        //marshaller.marshal(emple1, System.out);
+        marshaller.marshal(emple1, System.out);
         marshaller.marshal(emple1, fw);
 
-        File xmlIn = new File("src/test/resources/MarshallingXML/inputEmple.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/outputEmple.xml");
 
         assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
                 FileUtils.readFileToString(xmlOut, "utf-8"));
@@ -169,7 +180,7 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/inputEmple.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/outputEmple.xml");
 
         Empleado empleIn = (Empleado) unmarshaller.unmarshal(xmlIn);
 
@@ -200,13 +211,11 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        File xmlOut = new File("src/test/resources/MarshallingXML/outputProyecto.xml");
-        FileWriter fw = new FileWriter(xmlOut);
+        marshaller.marshal(proy1, System.out);
 
-//        marshaller.marshal(proy1, System.out);
-        marshaller.marshal(proy1, fw);
+        marshaller.marshal(proy1, new FileWriter("src/test/resources/MarshallingXML/outputProyecto.xml"));
 
-//        File xmlIn = new File("src/test/resources/MarshallingXML/inputProyecto.xml.xml");
+//        File xmlIn = new File("src/test/resources/MarshallingXML/outputProyecto.xml.xml");
 //
 //        assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
 //                FileUtils.readFileToString(xmlOut, "utf-8"));
@@ -223,7 +232,7 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/inputProyecto.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/outputProyecto.xml");
 
         Proyecto proyIn = (Proyecto) unmarshaller.unmarshal(xmlIn);
 

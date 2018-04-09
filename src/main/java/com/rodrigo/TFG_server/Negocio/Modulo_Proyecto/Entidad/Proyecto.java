@@ -5,6 +5,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.sun.xml.bind.CycleRecoverable;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.hibernate.annotations.Cascade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ import java.util.Objects;
 })
 @XmlRootElement(name = "Proyecto")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Proyecto implements Serializable, CycleRecoverable {
+public class Proyecto implements Serializable/*, CycleRecoverable*/ {
 
 
     private final static Logger log = LoggerFactory.getLogger(Proyecto.class);
@@ -58,11 +59,18 @@ public class Proyecto implements Serializable, CycleRecoverable {
     private Date fechaFin;
 
 
+
+
+
 //    @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
 //    private List<EmpleadoProyecto> empleados = null;
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
     //@Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@XmlInverseReference(mappedBy = "proyecto")
     private List<EmpleadoProyecto> empleados = new ArrayList<>();
+
+
+
 
 
     @Version
@@ -245,7 +253,7 @@ public class Proyecto implements Serializable, CycleRecoverable {
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
-                ", empleados=" + empleados +
+                ", empleadosSize=" + ((empleados==null)?"null":empleados.size()) +
                 ", version=" + version +
                 '}';
     }
@@ -284,6 +292,7 @@ public class Proyecto implements Serializable, CycleRecoverable {
                 getFechaInicio(), getFechaFin(), getEmpleados(), getVersion());
     }
 
+/*
     @Override
     public Object onCycleDetected(Context context) {
         // Context provides access to the Marshaller being used:
@@ -293,5 +302,7 @@ public class Proyecto implements Serializable, CycleRecoverable {
         Proyecto p = new Proyecto(this);
         return null;
     }
+*/
+
 }
 

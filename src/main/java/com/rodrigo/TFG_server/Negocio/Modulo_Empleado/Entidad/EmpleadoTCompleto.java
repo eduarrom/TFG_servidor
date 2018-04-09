@@ -21,6 +21,7 @@ import java.io.Serializable;
 @XmlRootElement(name ="EmpleadoTCompleto")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlDiscriminatorValue("EmpleadoTCompleto-classifier")
+@XmlDiscriminatorValue("EmpleadoTCompleto")
 public class EmpleadoTCompleto extends Empleado implements Serializable {
 
 
@@ -104,7 +105,7 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
                 "} " + super.toString();
     }
 
-    @Override
+    /*@Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
@@ -112,5 +113,5 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
 
         EmpleadoTCompleto e = new EmpleadoTCompleto(this);
         return e;
-    }
+    }*/
 }

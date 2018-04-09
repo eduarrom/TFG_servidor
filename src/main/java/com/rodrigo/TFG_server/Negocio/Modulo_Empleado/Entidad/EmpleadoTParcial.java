@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,7 @@ import java.io.Serializable;
 @XmlRootElement(name = "EmpleadoTParcial")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlDiscriminatorValue("EmpleadoTParcial-classifier")
+@XmlDiscriminatorValue("EmpleadoTParcial")
 public class EmpleadoTParcial extends Empleado implements Serializable {
 
     /****************************
@@ -108,7 +110,7 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
                 "} " + super.toString();
     }
 
-    @Override
+    /*@Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
         //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
@@ -120,5 +122,5 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
         //e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
 
         return e;
-    }
+    }*/
 }

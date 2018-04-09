@@ -57,10 +57,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
         {
             em.getTransaction().begin();
+
             log.info("Buscando departamento en BBDD");
             depart = em.find(Departamento.class, id);
             System.out.println("depart = [" + depart + "]");
             depart.getEmpleados().stream().forEach(System.out::println);
+
             em.getTransaction().commit();
         }
         em.close();

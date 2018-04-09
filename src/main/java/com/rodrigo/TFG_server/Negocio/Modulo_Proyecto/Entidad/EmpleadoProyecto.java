@@ -5,6 +5,8 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.sun.xml.bind.CycleRecoverable;
+import org.eclipse.persistence.oxm.annotations.XmlCustomizer;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,19 +14,20 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @Entity
-//@IdClass(ClavesEventoServicio.class)
+//@IdClass(ClavesEmpleadoProyecto.class)
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"empleado_id", "proyecto_id"})
 })
 @XmlRootElement(name = "EmpleadoProyecto")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlCustomizer(EmpleadoProyectoCustomizer.class)
 public class EmpleadoProyecto implements Serializable, CycleRecoverable {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoProyecto.class);
-
     private static final long serialVersionUID = 0;
 
     @EmbeddedId
@@ -32,10 +35,13 @@ public class EmpleadoProyecto implements Serializable, CycleRecoverable {
 
     @ManyToOne
     @MapsId("idEmpleado")
+    //@XmlInverseReference(mappedBy = "proyectos")
+    //@XmlTransient
     private Empleado empleado;
 
     @ManyToOne
     @MapsId("idProyecto")
+    @XmlInverseReference(mappedBy = "empleados")
     private Proyecto proyecto;
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EmpleadoTParcial tipo="EmpleadoTParcial">
+<EmpleadoTParcial>
    <id>23</id>
    <nombre>emple1</nombre>
    <email>emple1@gmail.com</email>

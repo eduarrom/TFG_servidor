@@ -1,10 +1,6 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-import com.sun.xml.bind.CycleRecoverable;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.slf4j.Logger;
@@ -14,10 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -28,7 +21,7 @@ import java.util.Objects;
 })
 @XmlRootElement(name = "Departamento")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Departamento implements Serializable, CycleRecoverable {
+public class Departamento implements Serializable/*, CycleRecoverable */{
 
     private final static Logger log = LoggerFactory.getLogger(Departamento.class);
 
@@ -46,15 +39,16 @@ public class Departamento implements Serializable, CycleRecoverable {
     @Column(nullable = false, unique = true)
     private String siglas;
 
-    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy = "empleado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)*/
-    @LazyCollection(LazyCollectionOption.FALSE)
+
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy="departamento", fetch= FetchType.EAGER, cascade={CascadeType.PERSIST})*/
+    //@LazyCollection(LazyCollectionOption.FALSE)
     //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     //@XmlAnyElement(lax = true)
     /*@XmlElements({ //Con esto hace que se guarde la lista como -->
             @XmlElement(name = "EmpleadoTParcial", type = EmpleadoTParcial.class), //<empleados xsi:type="empleadoTParcial">
             @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
     })*/
-    private List<Empleado> empleados = new ArrayList<Empleado>();
+    private Collection<Empleado> empleados = new ArrayList<Empleado>();
 
     @Version
     protected long version;
@@ -161,11 +155,11 @@ public class Departamento implements Serializable, CycleRecoverable {
 
     //@XmlElement
 
-    public List<Empleado> getEmpleados() {
+    public Collection<Empleado> getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(List<Empleado> empleados) {
+    public void setEmpleados(Collection<Empleado> empleados) {
         this.empleados = empleados;
     }
 
@@ -179,7 +173,7 @@ public class Departamento implements Serializable, CycleRecoverable {
                 "  id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", siglas='" + siglas + '\'' +
-                ", EmpleadosSize='" + empleados.size() + '\'' +
+                ", EmpleadosSize='" +((empleados==null)?"null":empleados.size()) + '\'' +
                 ", version=" + version +
                 '}';
     }
@@ -211,7 +205,7 @@ public class Departamento implements Serializable, CycleRecoverable {
     }
 
 
-    @Override
+    /*@Override
     public Object onCycleDetected(Context cycleRecoveryContext) {
         // Context provides access to the Marshaller being used:
         //log.info("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
@@ -245,7 +239,7 @@ public class Departamento implements Serializable, CycleRecoverable {
 
         return obj;
 
-    }
+    }*/
 
 }
 
