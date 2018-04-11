@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.slf4j.Logger;
@@ -48,7 +49,8 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
             @XmlElement(name = "EmpleadoTParcial", type = EmpleadoTParcial.class), //<empleados xsi:type="empleadoTParcial">
             @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
     })*/
-    private Collection<Empleado> empleados = new ArrayList<Empleado>();
+    //@XmlInverseReference(mappedBy = "departamento")
+    private Collection<Empleado> empleados;
 
     @Version
     protected long version;
@@ -162,6 +164,19 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
     public void setEmpleados(Collection<Empleado> empleados) {
         this.empleados = empleados;
     }
+
+    /****************************
+     ********** METODOS *********
+     ****************************/
+
+    public double calcularNominaMes(){
+
+        return empleados.stream()
+                .map(Empleado::calcularNominaMes)
+                .reduce(0.0,(acum, val)->acum + val);
+    }
+
+
 
     /****************************
      ****** OTHER METHODS *******

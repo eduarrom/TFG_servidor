@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -64,7 +64,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     protected Rol rol;
 
 
-    @ManyToOne(fetch=FetchType.LAZY)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
+    @ManyToOne(fetch=FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
     //@XmlTransient
@@ -72,16 +72,15 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 //    protected Departamento departamento = new Departamento();
 
 
+    /****************************
+      ******   EMPLEADO   ******
+     ****************************/
 
 
-//    @OneToMany(mappedBy = "proyecto")
 //    protected List<EmpleadoProyecto> proyectos = null;
     @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY/*, cascade = CascadeType.ALL*/)
-    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @XmlInverseReference(mappedBy = "empleado")
-    protected List<EmpleadoProyecto> proyectos;
-//    protected List<EmpleadoProyecto> proyectos  = new ArrayList<>();
-
+    //@XmlInverseReference(mappedBy = "empleado")
+    protected Collection<EmpleadoProyecto> proyectos;
 
 
 
@@ -228,11 +227,11 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     }
 
 
-    public List<EmpleadoProyecto> getProyectos() {
+    public Collection<EmpleadoProyecto> getProyectos() {
         return proyectos;
     }
 
-    public void setProyectos(List<EmpleadoProyecto> proyectos) {
+    public void setProyectos(Collection<EmpleadoProyecto> proyectos) {
         this.proyectos = proyectos;
     }
 
@@ -251,7 +250,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 ", password='" + password + '\'' +
                 ", rol=" + rol +
                 ", dept='" + ((departamento==null)?"null": departamento.getSiglas()) + '\'' +
-                ", proySize=" +((proyectos==null)?"null": proyectos.size()) +
+                ", proySize=" +((proyectos==null)?"0": proyectos.size()) +
                 ", version=" + version +
                 '}';
     }

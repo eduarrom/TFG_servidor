@@ -50,6 +50,15 @@ public class ClavesEmpleadoProyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
+
+    @Override
+    public String toString() {
+        return "ClavesEmpleadoProyecto{" +
+                "idEmpleado=" + idEmpleado +
+                ", idProyecto=" + idProyecto +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

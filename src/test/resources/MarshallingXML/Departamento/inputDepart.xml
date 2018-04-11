@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Departamento>
+   <id>3</id>
+   <nombre>Departamento de Pruebas</nombre>
+   <siglas>DdP</siglas>
+   <empleados tipo="EmpleadoTParcial">
+      <id>20</id>
+      <nombre>empleado</nombre>
+      <email>empleado@gmail.com</email>
+      <password>1234</password>
+      <rol>EMPLEADO</rol>
+      <version>0</version>
+      <horasJornada>5</horasJornada>
+      <precioHora>10</precioHora>
+   </empleados>
+   <empleados tipo="EmpleadoTCompleto">
+      <id>21</id>
+      <nombre>admin</nombre>
+      <email>admin@gmail.com</email>
+      <password>1234</password>
+      <rol>ADMIN</rol>
+      <proyectos>
+         <idEmpleado>21</idEmpleado>
+         <idProyecto>1</idProyecto>
+         <proyecto>
+            <id>1</id>
+            <nombre>Proy1</nombre>
+            <descripcion>Descripción del proyecto Proy1</descripcion>
+            <fechaInicio>2018-07-09T02:00:00.0</fechaInicio>
+            <fechaFin>2018-09-07T02:00:00.0</fechaFin>
+            <version>0</version>
+         </proyecto>
+         <horas>4</horas>
+         <version>0</version>
+      </proyectos>
+      <version>0</version>
+      <antiguedad>0</antiguedad>
+      <sueldoBase>1200</sueldoBase>
+   </empleados>
+   <empleados tipo="EmpleadoTParcial">
+      <id>23</id>
+      <nombre>emple1</nombre>
+      <email>emple1@gmail.com</email>
+      <password>1234</password>
+      <rol>ADMIN</rol>
+      <proyectos>
+         <idEmpleado>23</idEmpleado>
+         <idProyecto>1</idProyecto>
+         <proyecto>
+            <id>1</id>
+            <nombre>Proy1</nombre>
+            <descripcion>Descripción del proyecto Proy1</descripcion>
+            <fechaInicio>2018-07-09T02:00:00.0</fechaInicio>
+            <fechaFin>2018-09-07T02:00:00.0</fechaFin>
+            <version>0</version>
+         </proyecto>
+         <horas>5</horas>
+         <version>0</version>
+      </proyectos>
+      <version>0</version>
+      <horasJornada>5</horasJornada>
+      <precioHora>10</precioHora>
+   </empleados>
+   <version>0</version>
+</Departamento>

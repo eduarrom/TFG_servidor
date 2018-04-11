@@ -25,7 +25,7 @@ import java.io.Serializable;
 @XmlRootElement(name = "EmpleadoProyecto")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlCustomizer(EmpleadoProyectoCustomizer.class)
-public class EmpleadoProyecto implements Serializable, CycleRecoverable {
+public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoProyecto.class);
     private static final long serialVersionUID = 0;
@@ -35,13 +35,12 @@ public class EmpleadoProyecto implements Serializable, CycleRecoverable {
 
     @ManyToOne
     @MapsId("idEmpleado")
-    //@XmlInverseReference(mappedBy = "proyectos")
-    //@XmlTransient
+    @XmlInverseReference(mappedBy = "proyectos")
     private Empleado empleado;
 
     @ManyToOne
     @MapsId("idProyecto")
-    @XmlInverseReference(mappedBy = "empleados")
+    //@XmlInverseReference(mappedBy = "empleados")
     private Proyecto proyecto;
 
 
@@ -134,11 +133,26 @@ public class EmpleadoProyecto implements Serializable, CycleRecoverable {
     }
 
     @Override
+    public String toString() {
+        return "EmpleadoProyecto{" +
+                "id=" + id +
+                ", empleado=" + empleado +
+                ", proyecto=" + proyecto +
+                ", horas=" + horas +
+                ", version=" + version +
+                '}';
+    }
+
+
+
+
+
+    /*@Override
     public Object onCycleDetected(Context context) {
 
         log.info("EmpleadoProyecto.onCycleDetected");
 
         EmpleadoProyecto ep = new EmpleadoProyecto(this);
         return null;
-    }
+    }*/
 }

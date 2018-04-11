@@ -32,7 +32,7 @@ public class Marshalling_UnmarshalingTest {
     static JAXBContext jc;
 
     static Empleado emple1;
-//    static Empleado emple2;
+    //    static Empleado emple2;
     static Departamento dept1;
     static Proyecto proy1;
 //    static Proyecto proy2;
@@ -49,19 +49,17 @@ public class Marshalling_UnmarshalingTest {
 
         dept1 = new Departamento("Dept1");
 //        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
-        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas("DdP");
+        dept1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas("DdP");
 
         proy1 = new Proyecto("Proy1");
         proy1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(1L);
-        proy1.setFechaInicio(new SimpleDateFormat("dd-MM-yyyy").parse("10-07-2018"));
+        //proy1.setFechaInicio(new SimpleDateFormat("dd-MM-yyyy").parse("10-07-2018"));
 
 
         //PRUBAS PARA MARSHALING DE DEPT Y EMPLE
         //emple1.setProyectos(null);
-       // proy1.setEmpleados(null);
+        // proy1.setEmpleados(null);
         //dept1.getEmpleados().stream().forEach((emple)->{ emple.setProyectos(null);});
-
-
 
 
 //        proy2 = new Proyecto("Proy2");
@@ -87,8 +85,7 @@ public class Marshalling_UnmarshalingTest {
         //FactoriaSA.getInstance().crearSA_Proyecto().crearProyecto(proy1);
 
 
-
-//        System.out.println(emple1);
+//        log.info(emple1);
     }
 
 
@@ -103,12 +100,13 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        File xmlOut = new File("src/test/resources/MarshallingXML/outputDepart.xml");
+        File xmlOut = new File("src/test/resources/MarshallingXML/Departamento/outputDepart.xml");
         FileWriter fw = new FileWriter(xmlOut);
+
         marshaller.marshal(dept1, System.out);
         marshaller.marshal(dept1, fw);
 
-        File xmlIn = new File("src/test/resources/MarshallingXML/outputDepart.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/Departamento/inputDepart.xml");
 
         assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
                 FileUtils.readFileToString(xmlOut, "utf-8"));
@@ -125,22 +123,26 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/outputDepart.xml");
 
-        Departamento deptIn = (Departamento) unmarshaller.unmarshal(xmlIn);
+        Departamento deptIn = (Departamento) unmarshaller.unmarshal(new File("src/test/resources/MarshallingXML/Departamento/inputDepart.xml"));
 
         log.debug("dept1  = '" + dept1 + "'");
         log.debug("deptIn = '" + deptIn + "'");
 
         for (Empleado e : deptIn.getEmpleados()) {
-            System.out.println("e = [" + e + "]");
-            System.out.println(e.calcularNominaMes());
+            log.info("e = [" + e + "]");
+            log.info(String.valueOf(e.calcularNominaMes()));
         }
+
+        log.debug("Nomina dept1 = '" + dept1.calcularNominaMes() + "'");
+        log.debug("Nomina deptIn = '" + deptIn.calcularNominaMes() + "'");
 
 
         assertEquals(dept1.toString(), deptIn.toString());
-        assertEquals(dept1.getEmpleados(), deptIn.getEmpleados());
+
         assertEquals(dept1.getEmpleados().toString(), deptIn.getEmpleados().toString());
+
+        assertEquals(dept1.calcularNominaMes(), deptIn.calcularNominaMes());
 
 
     }
@@ -157,19 +159,20 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        File xmlOut = new File("src/test/resources/MarshallingXML/outputEmple.xml");
+        File xmlOut = new File("src/test/resources/MarshallingXML/Empleado/outputEmple.xml");
         FileWriter fw = new FileWriter(xmlOut);
 
         marshaller.marshal(emple1, System.out);
         marshaller.marshal(emple1, fw);
 
-        File xmlIn = new File("src/test/resources/MarshallingXML/outputEmple.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/Empleado/inputEmple.xml");
 
         assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
                 FileUtils.readFileToString(xmlOut, "utf-8"));
 
 
     }
+
 
     @Test
     void UnMarchalEmpleado() throws JAXBException {
@@ -180,24 +183,28 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/outputEmple.xml");
 
-        Empleado empleIn = (Empleado) unmarshaller.unmarshal(xmlIn);
+        EmpleadoTParcial empleIn = (EmpleadoTParcial) unmarshaller.unmarshal(new File("src/test/resources/MarshallingXML/Empleado/inputEmple.xml"));
 
         log.debug("empleIn = '" + empleIn + "'");
 
 
-        for (Empleado e : empleIn.getDepartamento().getEmpleados()) {
-            System.out.println("e = [" + e + "]");
-            System.out.println(e.calcularNominaMes());
-        }
+        assertEquals(emple1.getId(), empleIn.getId());
+        assertEquals(emple1.getNombre(), empleIn.getNombre());
+        assertEquals(emple1.getEmail(), empleIn.getEmail());
+        assertEquals(emple1.getPassword(), empleIn.getPassword());
+        assertEquals(emple1.getRol(), empleIn.getRol());
+        //assertEquals(emple1.getDepartamento(), empleIn.getDepartamento());
+        assertEquals(emple1.getProyectos().size(), empleIn.getProyectos().size());
 
-        assertEquals(emple1.toString(), empleIn.toString());
-        assertEquals(emple1.getDepartamento(), empleIn.getDepartamento());
-        assertEquals(emple1.getDepartamento().getEmpleados(), empleIn.getDepartamento().getEmpleados());
+        assertEquals(((EmpleadoTParcial) emple1).getHorasJornada(), empleIn.getHorasJornada());
+        assertEquals(((EmpleadoTParcial) emple1).getPrecioHora(), empleIn.getPrecioHora());
+
         assertEquals(emple1.calcularNominaMes(), empleIn.calcularNominaMes());
+        assertEquals(emple1.getProyectos().size(),empleIn.getProyectos().size() );
 
     }
+
 
 
     @Test
@@ -211,17 +218,21 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+        File xmlOut = new File("src/test/resources/MarshallingXML/Proyecto/outputProyecto.xml");
+
         marshaller.marshal(proy1, System.out);
+        marshaller.marshal(proy1, new FileWriter(xmlOut));
 
-        marshaller.marshal(proy1, new FileWriter("src/test/resources/MarshallingXML/outputProyecto.xml"));
 
-//        File xmlIn = new File("src/test/resources/MarshallingXML/outputProyecto.xml.xml");
-//
-//        assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
-//                FileUtils.readFileToString(xmlOut, "utf-8"));
+
+        File xmlIn = new File("src/test/resources/MarshallingXML/Proyecto/inputProyecto.xml");
+
+        assertEquals(FileUtils.readFileToString(xmlIn, "utf-8"),
+                FileUtils.readFileToString(xmlOut, "utf-8"));
 
 
     }
+
 
     @Test
     void UnMarchalProyecto() throws JAXBException {
@@ -232,22 +243,21 @@ public class Marshalling_UnmarshalingTest {
         log.info("******************************************************");
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        File xmlIn = new File("src/test/resources/MarshallingXML/outputProyecto.xml");
+        File xmlIn = new File("src/test/resources/MarshallingXML/Proyecto/inputProyecto.xml");
 
         Proyecto proyIn = (Proyecto) unmarshaller.unmarshal(xmlIn);
 
         log.debug("empleIn = '" + proyIn + "'");
 
 
-        for (EmpleadoProyecto ep : proyIn.getEmpleados()) {
-            System.out.println("ep.getEmpleado = [" + ep.getEmpleado() + "]");
-            System.out.println(ep.getEmpleado().calcularNominaMes());
-        }
-
-        assertEquals(proy1.toString(), proyIn.toString());
-        assertEquals(proy1.getEmpleados(), proyIn.getEmpleados());
+        assertEquals(proy1.getId(), proyIn.getId());
+        assertEquals(proy1.getNombre(), proyIn.getNombre());
+        assertEquals(proy1.getDescripcion(), proyIn.getDescripcion());
+        assertEquals(proy1.getFechaInicio(), proyIn.getFechaInicio());
+        assertEquals(proy1.getFechaFin(), proyIn.getFechaFin());
 
     }
+
 
 
 }

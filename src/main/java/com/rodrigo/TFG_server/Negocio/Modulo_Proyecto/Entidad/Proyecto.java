@@ -17,10 +17,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -60,14 +57,13 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
 
 
 
+    /****************************
+      ******   PROYECTO   ******
+     ****************************/
 
-
-//    @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
-//    private List<EmpleadoProyecto> empleados = null;
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
-    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
-    //@XmlInverseReference(mappedBy = "proyecto")
-    private List<EmpleadoProyecto> empleados = new ArrayList<>();
+    @XmlInverseReference(mappedBy = "proyecto")
+    private Collection<EmpleadoProyecto> empleados;
 
 
 
@@ -185,11 +181,11 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         this.fechaFin = fechaFin;
     }
 
-    public List<EmpleadoProyecto> getEmpleados() {
+    public Collection<EmpleadoProyecto> getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(List<EmpleadoProyecto> empleados) {
+    public void setEmpleados(Collection<EmpleadoProyecto> empleados) {
         this.empleados = empleados;
     }
 
