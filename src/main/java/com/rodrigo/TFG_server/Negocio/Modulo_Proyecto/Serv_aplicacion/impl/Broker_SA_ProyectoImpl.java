@@ -18,18 +18,18 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     public Broker_SA_ProyectoImpl() {}
 
     @Override
-    public Proyecto crearProyecto(@WebParam(name="Proyecto") Proyecto proyectoNuevo) throws ProyectoException {
+    public Proyecto crearProyecto(@WebParam(name="proyectoNuevo") Proyecto proyectoNuevo) throws ProyectoException {
 
         return new SA_ProyectoImpl().crearProyecto(proyectoNuevo);
         //return null;
     }
 
 
-    public Proyecto buscarProyectoByID(@WebParam(name="id") Long id) {
+    public Proyecto buscarByID(@WebParam(name="id") Long id) {
         return new SA_ProyectoImpl().buscarByID(id);
     }
 
-    public boolean eliminarProyecto(@WebParam(name="Proyecto") Proyecto proyectoEliminar) {
+    public boolean eliminarProyecto(@WebParam(name="proyectoEliminar") Proyecto proyectoEliminar) {
 
         return new SA_ProyectoImpl().eliminarProyecto(proyectoEliminar);
     }

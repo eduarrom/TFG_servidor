@@ -20,17 +20,6 @@ public class EmpleadoProyectoCustomizer implements DescriptorCustomizer {
         descriptor.addPrimaryKeyFieldName("idProyecto/text()");
 
 
-        //********************************************************
-        //****************   PARA EL EMPLEADO     ****************
-        //********************************************************
-
-        /*XMLObjectReferenceMapping contactMapping = new XMLObjectReferenceMapping();
-
-        contactMapping.setAttributeName("empleado");
-        contactMapping.setReferenceClass(Empleado.class);
-
-        contactMapping.addSourceToTargetKeyFieldAssociation("contact/@id", "id/text()");
-        descriptor.addMapping(contactMapping);*/
 
 
     }

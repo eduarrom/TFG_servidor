@@ -32,6 +32,11 @@ http://cxf.apache.org/schemas/jaxws.xsd">
     <!--<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />-->
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
+
+    <!--  ***********************************************************************************  -->
+    <!--  ***********************************  JAX-WS  **************************************  -->
+    <!--  ***********************************************************************************  -->
+
     <jaxws:endpoint id="Broker_SA_Empleado"
                     implementor="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl"
                     address="/SA_Empleado">
@@ -41,8 +46,19 @@ http://cxf.apache.org/schemas/jaxws.xsd">
     </jaxws:endpoint>
 
 
+    <jaxws:endpoint id="Broker_SA_Proyecto"
+                    implementor="com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl.Broker_SA_ProyectoImpl"
+                    address="/SA_Proyecto">
+        <jaxws:features>
+            <bean class="org.apache.cxf.feature.LoggingFeature"/>
+        </jaxws:features>
+    </jaxws:endpoint>
 
-    <!-- JAX-RS -->
+
+    <!--  ***********************************************************************************  -->
+    <!--  ***********************************  JAX-RS  **************************************  -->
+    <!--  ***********************************************************************************  -->
+
     <jaxrs:server id="Broker_Departamento"
                   address="/SA_Departamento">
 

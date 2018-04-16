@@ -9,19 +9,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotBlank;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
-@XmlRootElement(name ="EmpleadoTCompleto")
+//@XmlRootElement(name ="EmpleadoTCompleto")
+//@XmlRootElement/*(name = "EmpleadoTCompleto")*/
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlDiscriminatorValue("EmpleadoTCompleto-classifier")
 @XmlDiscriminatorValue("EmpleadoTCompleto")
+//@XmlType/*(name = "EmpleadoTCompleto")*/
 public class EmpleadoTCompleto extends Empleado implements Serializable {
 
 
@@ -30,9 +28,11 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
      ****************************/
 
     @NotBlank
+//    @XmlAttribute
     private int antiguedad = 0;
 
     @NotBlank
+//    @XmlAttribute
     private int sueldoBase = 1200;
 
 

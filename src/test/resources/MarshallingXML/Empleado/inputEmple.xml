@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EmpleadoTParcial tipo="EmpleadoTParcial">
+<empleadoTParcial tipo="EmpleadoTParcial">
    <id>23</id>
    <nombre>emple1</nombre>
    <email>emple1@gmail.com</email>
@@ -22,4 +22,4 @@
    <version>0</version>
    <horasJornada>5</horasJornada>
    <precioHora>10</precioHora>
-</EmpleadoTParcial>
+</empleadoTParcial>

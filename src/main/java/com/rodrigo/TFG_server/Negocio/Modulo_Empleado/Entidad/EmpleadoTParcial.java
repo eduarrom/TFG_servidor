@@ -11,18 +11,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotBlank;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
-@XmlRootElement(name = "EmpleadoTParcial")
+//@XmlRootElement/*(name = "EmpleadoTParcial")*/
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlDiscriminatorValue("EmpleadoTParcial-classifier")
 @XmlDiscriminatorValue("EmpleadoTParcial")
+//@XmlType/*(name = "EmpleadoTParcial")*/
 public class EmpleadoTParcial extends Empleado implements Serializable {
 
     /****************************
@@ -30,9 +29,11 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
      ****************************/
 
     @NotBlank
+//    @XmlAttribute
     private int horasJornada = 5;
 
     @NotBlank
+//    @XmlAttribute
     private int precioHora = 10;
 
 

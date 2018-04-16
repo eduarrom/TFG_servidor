@@ -24,7 +24,7 @@ import java.util.*;
 @NamedQueries({
         @NamedQuery(name = "Proyecto.listar", query = "FROM Empleado"),
 })
-@XmlRootElement(name = "Proyecto")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Proyecto implements Serializable/*, CycleRecoverable*/ {
 
@@ -218,13 +218,18 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         return ok;
     }
 
+    /** Agrega un empleadoProyeto al proyecto this y al empleado pasado por param
+     *
+     * @param ep EmpleadoProyecto
+     * @return true si es correcto
+     */
     public boolean agregarEmpleado(EmpleadoProyecto ep) {
         boolean ok = false;
         //EmpleadoProyecto ep = new EmpleadoProyecto(ep.getEmpleado(), ep.getProyecto(), ep.getHoras());
 
         log.info("Agregando empleado '" + ep.getEmpleado().getNombre() + "' a proyecto '" + ep.getProyecto().nombre + "'");
         if (ep.getEmpleado().getProyectos().add(ep)) {
-            if (ep.getProyecto().empleados.add(ep)) {
+            if (this.empleados.add(ep)) {
                 ok = true;
                 log.info("Agregado correctamente");
             } else {

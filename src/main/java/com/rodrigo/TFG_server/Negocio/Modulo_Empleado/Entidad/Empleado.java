@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -23,20 +24,23 @@ import java.util.Objects;
 
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlClassExtractor(EmpleadoClassExtractor.class)
+@XmlClassExtractor(EmpleadoClassExtractor.class)
+@XmlRootElement
+//@XmlTransient
+@XmlDiscriminatorNode("@tipo")
+//@XmlCustomizer(EmpleadoCustomizer.class)
+//@XmlType/*(name = "Empleado")*/
 @XmlSeeAlso({
         EmpleadoTCompleto.class,
         EmpleadoTParcial.class
 })
-//@XmlTransient
-//@XmlDiscriminatorNode("@classifier")
-@XmlDiscriminatorNode("@tipo")
-//@XmlCustomizer(EmpleadoCustomizer.class)
-public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
+public class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     /****************************
      ********* ATRIBUTOS ********
      ****************************/
+
+
 
     private final static Logger log = LoggerFactory.getLogger(Empleado.class);
 
@@ -55,7 +59,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     @Email
     protected String email;
 
-
+    @NotBlank
     @Column(nullable = false)
     protected String password;
 
@@ -68,19 +72,15 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
     //@XmlTransient
+    @NotNull
     protected Departamento departamento;
 //    protected Departamento departamento = new Departamento();
 
 
-    /****************************
-      ******   EMPLEADO   ******
-     ****************************/
-
-
 //    protected List<EmpleadoProyecto> proyectos = null;
-    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY/*, cascade = CascadeType.ALL*/)
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //@XmlInverseReference(mappedBy = "empleado")
-    protected Collection<EmpleadoProyecto> proyectos;
+    protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
 
 
 
@@ -157,8 +157,15 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
      ********** METODOS *********
      ****************************/
 
-    public abstract double calcularNominaMes();
+    public  double calcularNominaMes(){
+        System.out.println("Empleado.calcularNominaMes");
+        return 0;
+    }
 
+
+    public void agregarProyecto(EmpleadoProyecto ep){
+        proyectos.add(ep);
+    }
 
     /****************************
      **** GETTERS AND SETTERS ***

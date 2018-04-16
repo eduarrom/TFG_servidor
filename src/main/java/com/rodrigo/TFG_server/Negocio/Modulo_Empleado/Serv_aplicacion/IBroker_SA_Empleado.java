@@ -15,11 +15,11 @@ public interface IBroker_SA_Empleado {
     public Empleado crearEmpleado(@WebParam(name = "Empleado") Empleado empleadoNuevo) throws EmpleadoException;
 
     @WebMethod(operationName="buscarByID")
-    public Empleado buscarEmpleadoByID(@WebParam(name = "id") Long id);
+    public Empleado buscarByID(@WebParam(name = "id") Long id) throws EmpleadoException;
 
 
     @WebMethod(operationName="eliminarEmpleado")
-    public boolean eliminarEmpleado(@WebParam(name = "Empleado") Empleado empleadoEliminar) ;
+    public boolean eliminarEmpleado(@WebParam(name = "Empleado") Empleado empleadoEliminar) throws EmpleadoException;
 
 
     @WebMethod(operationName="listarEmpleados")

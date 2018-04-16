@@ -14,9 +14,9 @@ public interface SA_Empleado {
 
     Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException;
 
-    Empleado buscarByID(Long id);
+    Empleado buscarByID(Long id) throws EmpleadoException;
 
-    boolean eliminarEmpleado(Empleado empleadoEliminar);
+    boolean eliminarEmpleado(Empleado empleadoEliminar) throws EmpleadoException;
 
     List<Empleado> listarEmpleados();
 

@@ -68,7 +68,12 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
         System.out.println("id = [" + id + "]");
         System.out.println("********************************************");
 
-        return new SA_DepartamentoImpl().buscarByID(id);
+        Departamento dept = new SA_DepartamentoImpl().buscarByID(id);
+//        dept.setEmpleados(null);
+
+        System.out.println("dept = [" + dept + "]");
+
+        return dept;
     }
 
 

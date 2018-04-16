@@ -35,6 +35,8 @@ public class Marshalling_UnmarshalingTest {
     //    static Empleado emple2;
     static Departamento dept1;
     static Proyecto proy1;
+    private static Marshaller ms;
+    private static Unmarshaller um;
 //    static Proyecto proy2;
 
     @BeforeAll
@@ -42,6 +44,11 @@ public class Marshalling_UnmarshalingTest {
         jc = JAXBContext.newInstance(new Class[]{Departamento.class, Empleado.class,
                 EmpleadoTCompleto.class, EmpleadoTParcial.class, Proyecto.class, EmpleadoProyecto.class, ClavesEmpleadoProyecto.class});
 
+        ms = jc.createMarshaller();
+        ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+
+        um = jc.createUnmarshaller();
 
         emple1 = new EmpleadoTParcial("emple1", "1234", Rol.ADMIN);
 //        emple2 = new EmpleadoTCompleto("emple2", "1234", Rol.EMPLEADO);
@@ -97,14 +104,12 @@ public class Marshalling_UnmarshalingTest {
         log.info("************  MARSHAL DEPARTAMENTO  ******************");
         log.info("******************************************************");
 
-        Marshaller marshaller = jc.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         File xmlOut = new File("src/test/resources/MarshallingXML/Departamento/outputDepart.xml");
         FileWriter fw = new FileWriter(xmlOut);
 
-        marshaller.marshal(dept1, System.out);
-        marshaller.marshal(dept1, fw);
+        ms.marshal(dept1, System.out);
+        ms.marshal(dept1, fw);
 
         File xmlIn = new File("src/test/resources/MarshallingXML/Departamento/inputDepart.xml");
 
@@ -159,7 +164,7 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        File xmlOut = new File("src/test/resources/MarshallingXML/Empleado/outputEmple.xml");
+        File xmlOut = new File("src/test/resources/MarshallingXML/Empleado/outputEmple22222.xml");
         FileWriter fw = new FileWriter(xmlOut);
 
         marshaller.marshal(emple1, System.out);
@@ -175,18 +180,24 @@ public class Marshalling_UnmarshalingTest {
 
 
     @Test
-    void UnMarchalEmpleado() throws JAXBException {
+    void UnMarchalEmpleado() throws JAXBException, IOException {
 
         //Desserializar
         log.info("******************************************************");
         log.info("************  UNMARSHAL EMPLEADO  ***************");
         log.info("******************************************************");
 
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
 
-        EmpleadoTParcial empleIn = (EmpleadoTParcial) unmarshaller.unmarshal(new File("src/test/resources/MarshallingXML/Empleado/inputEmple.xml"));
+
+        ms.marshal(emple1, System.out);
+//        jc.createMarshaller().marshal(emple1, new FileWriter("src/test/resources/MarshallingXML/Empleado/outputEmpleXXXX.xml"));
+
+
+        EmpleadoTParcial empleIn = (EmpleadoTParcial) um.unmarshal(new File("src/test/resources/MarshallingXML/Empleado/inputEmple.xml"));
+        Empleado empleado = (Empleado) um.unmarshal(new File("src/test/resources/MarshallingXML/Empleado/inputEmple.xml"));
 
         log.debug("empleIn = '" + empleIn + "'");
+        log.debug("empleado = '" + empleado + "'");
 
 
         assertEquals(emple1.getId(), empleIn.getId());
@@ -201,10 +212,9 @@ public class Marshalling_UnmarshalingTest {
         assertEquals(((EmpleadoTParcial) emple1).getPrecioHora(), empleIn.getPrecioHora());
 
         assertEquals(emple1.calcularNominaMes(), empleIn.calcularNominaMes());
-        assertEquals(emple1.getProyectos().size(),empleIn.getProyectos().size() );
+        assertEquals(emple1.getProyectos().size(), empleIn.getProyectos().size());
 
     }
-
 
 
     @Test
@@ -222,7 +232,6 @@ public class Marshalling_UnmarshalingTest {
 
         marshaller.marshal(proy1, System.out);
         marshaller.marshal(proy1, new FileWriter(xmlOut));
-
 
 
         File xmlIn = new File("src/test/resources/MarshallingXML/Proyecto/inputProyecto.xml");
@@ -257,7 +266,6 @@ public class Marshalling_UnmarshalingTest {
         assertEquals(proy1.getFechaFin(), proyIn.getFechaFin());
 
     }
-
 
 
 }

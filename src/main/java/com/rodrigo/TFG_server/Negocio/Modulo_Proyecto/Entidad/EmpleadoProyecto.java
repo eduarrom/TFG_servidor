@@ -22,7 +22,7 @@ import java.io.Serializable;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"empleado_id", "proyecto_id"})
 })
-@XmlRootElement(name = "EmpleadoProyecto")
+@XmlRootElement/*(name = "EmpleadoProyecto")*/
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlCustomizer(EmpleadoProyectoCustomizer.class)
 public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {

@@ -22,7 +22,7 @@
         <jdk.version>1.8</jdk.version>
         <cxf.version>3.2.1</cxf.version>
         <jaxb.version>2.2.11</jaxb.version>
-        <moxy.version>2.4.1</moxy.version>
+        <moxy.version>2.7.1</moxy.version> <!-- 2.4.1 -->
         <spring.version>4.0.0.RELEASE</spring.version> <!-- ERROR: 4.3.12.RELEASE -->
         <hibernate.version>4.2.21.Final</hibernate.version>
         <slf4j.version>1.5.8</slf4j.version>
@@ -168,7 +168,6 @@
         <!-- **************  JAXB  ************** -->
         <!-- ************************************ -->
 
-
         <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-core -->
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
@@ -193,6 +192,13 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-tools-wsdlto-databinding-jaxb</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-tools-wsdlto-frontend-jaxws</artifactId>
             <version>${cxf.version}</version>
         </dependency>
 
@@ -381,6 +387,142 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+
+
+
+
+
+
+
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.core -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.core</artifactId>
+            <version>${moxy.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.asm -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.asm</artifactId>
+            <version>${moxy.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.antlr -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.antlr</artifactId>
+            <version>${moxy.version}</version>
+        </dependency>
+
+
+
+
+
+        <!--cxf-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-bindings-xml -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-bindings-xml</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-security-xml -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-xml</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+
+        <!-- open saml xml-->
+
+
+        <!-- https://mvnrepository.com/artifact/org.opensaml/opensaml-xmlsec-api -->
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xmlsec-api</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.opensaml/opensaml-xmlsec-impl -->
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-xmlsec-impl</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+
+
+        <!-- xml -->
+
+        <!-- https://mvnrepository.com/artifact/xml-resolver/xml-resolver -->
+        <dependency>
+            <groupId>xml-resolver</groupId>
+            <artifactId>xml-resolver</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.ws.xmlschema/xmlschema-core -->
+        <dependency>
+            <groupId>org.apache.ws.xmlschema</groupId>
+            <artifactId>xmlschema-core</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.santuario/xmlsec -->
+        <dependency>
+            <groupId>org.apache.santuario</groupId>
+            <artifactId>xmlsec</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+
+
+
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+
+
+
+
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+
+
+
+
+
+
+
+
 
     </dependencies>
 

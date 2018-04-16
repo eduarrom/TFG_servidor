@@ -1,5 +1,6 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldNullException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoNullException;
@@ -22,10 +23,12 @@ class EmpleadoTest {
 
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() throws EmpleadoException {
 
-        emple = new EmpleadoTParcial("emple", "1234", Rol.EMPLEADO);
-        admin = new EmpleadoTParcial("admin", "1234", Rol.ADMIN);
+        emple = new EmpleadoTParcial("empleado", "1234", Rol.EMPLEADO);
+        emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(emple.getEmail());
+        admin = new EmpleadoTCompleto("admin", "1234", Rol.ADMIN);
+        admin = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(admin.getEmail());
 
     }
 
@@ -76,7 +79,7 @@ class EmpleadoTest {
     void equalsWithOutVersionConBBDD() throws EmpleadoException {
         log.info("creando SA_Proyecto");
 
-        Empleado admin2 = new SA_EmpleadoImpl().crearEmpleado(admin);
+        Empleado admin2 = admin;
         admin.setId(admin2.getId());
 
         log.debug("admin2 = '" + admin2 + "'");
@@ -87,8 +90,6 @@ class EmpleadoTest {
         log.debug("admin2.equalsWithOutVersion(admin)");
         assertTrue(admin2.equalsWithOutVersion(admin));
 
-        Boolean resutl = new SA_EmpleadoImpl().eliminarEmpleado(admin);
-        log.debug("resutl = '" + resutl + "'");
     }
 
 }

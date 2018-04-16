@@ -26,9 +26,9 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      * Inserta un empleado en la BBDD
      *
      * @param empleadoNuevo
-     * @return Empleado insertado en BBDD o null si la entidad ya existe
+     * @return Empleado  insertado en BBDD o null si la entidad ya existe
      * @throws EmpleadoNullException      Si el param es null
-     * @throws EmpleadoFieldNullException Si el parametro es
+     * @throws EmpleadoFieldNullException Si algún parámetro es null
      */
     public Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException {
         log.info("creando empleado...");
@@ -41,19 +41,12 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             throw new EmpleadoException("El empleado para persistir en null", new EmpleadoNullException("El empleado para persistir en null"));
         }
 
-        if (empleadoNuevo.getEmail() == null || empleadoNuevo.getEmail() == "") {
+        if (empleadoNuevo.getEmail() == null || empleadoNuevo.getEmail() == "" || !new EmailValidator().validate(empleadoNuevo.getEmail())) {
             log.error("Email de empleado es null");
+            throw new EmpleadoException("Ocurrio un erro con el email.");
 
-            try {
-                throw new EmpleadoFieldNullException(
-                        new PropertyValueException("Empleado.email es erroneo.",
-                                Empleado.class.toString(),
-                                empleadoNuevo.getClass().getDeclaredField("email").toString()));
-            } catch (NoSuchFieldException e) {
-                log.error("Ocurrio un error inesperado.");
-                throw new EmpleadoException("Ocurrio un erro con el email.");
-            }
         }
+
 
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
         {
@@ -68,7 +61,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             .setParameter("email", empleadoNuevo.getEmail())
                             .getSingleResult();
 
-                    emple = (obj instanceof EmpleadoTParcial)?(EmpleadoTParcial) obj:(EmpleadoTCompleto) obj;
+                    emple = (obj instanceof EmpleadoTParcial) ? (EmpleadoTParcial) obj : (EmpleadoTCompleto) obj;
 
 
                 } catch (NoResultException e) {
@@ -93,6 +86,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
                         //em.getTransaction().rollback();
+
 
                         throw e2;
                         //throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
@@ -120,7 +114,55 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
     @Override
-    public Empleado buscarByID(Long id) {
+    public Empleado buscarByID(Long id) throws EmpleadoException {
+        Empleado emple;
+
+        log.info("id = [" + id + "]");
+
+        if (id == null || id <= 0) {
+            log.error("El id para buscar en null, 0 o negativo");
+            throw new EmpleadoException("El id para buscar en null, 0 o negativo");
+        }
+
+        log.info("Creando Entity Manager");
+        EntityManager em = EMFSingleton.getInstance().createEntityManager();
+
+        {
+            em.getTransaction().begin();
+            log.info("Buscando empleado en BBDD");
+            try {
+
+
+                emple = em.find(Empleado.class, id);
+
+
+                log.debug("emple = '" + emple + "'");
+                if(emple != null) {
+                    log.debug("emple.getDepartamento() = '" + emple.getDepartamento() + "'");
+                    log.debug("Proyectos: ");
+                    emple.getProyectos().stream().forEach(System.out::println);
+                }
+
+                em.getTransaction().commit();
+
+            } catch (IllegalArgumentException e) {
+                log.error("Ocurrió una error al buscar en BBDD: " + e.getMessage());
+                log.error("EXCEPCION!", e);
+                em.getTransaction().rollback();
+
+                throw new EmpleadoException("Ocurrió una error al buscar en BBDD.");
+            }
+
+        }
+        if (em.isOpen())
+            em.close();
+
+        return emple;
+    }
+
+    /*
+
+    public Empleado buscarByIDSuperCutre(Long id) {
         Empleado user;
 
         log.info("Creando Entity Manager");
@@ -137,13 +179,25 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         em.close();
 
         return user;
-    }
+    }*/
 
     @Override
-    public boolean eliminarEmpleado(Empleado empleadoEliminar) {
-
+    public boolean eliminarEmpleado(Empleado empleadoEliminar) throws EmpleadoException {
 
         boolean result;
+
+        log.info("empleadoEliminar = [" + empleadoEliminar + "]");
+
+        if (empleadoEliminar == null) {
+            log.error("Empleado es null");
+            throw new EmpleadoException("El empleado para eliminar en null", new EmpleadoNullException("El empleado para eliminar en null"));
+        }
+
+        if (empleadoEliminar.getId() == null || empleadoEliminar.getId() <= 0) {
+            log.error("El id para buscar en null, 0 o negativo");
+            throw new EmpleadoException("El id para buscar en null, 0 o negativo");
+        }
+
 
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
@@ -340,9 +394,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         .setParameter("email", email)
                         .getSingleResult();
 
-                emple = (obj instanceof EmpleadoTParcial)?(EmpleadoTParcial) obj:(EmpleadoTCompleto) obj;
+                emple = (obj instanceof EmpleadoTParcial) ? (EmpleadoTParcial) obj : (EmpleadoTCompleto) obj;
 
+                log.info("*********************************************************");
+                log.info("*********************************************************");
                 log.info("emple = '" + emple + "'");
+                log.info("*********************************************************");
+                log.info("*********************************************************");
 
 
             } catch (NoResultException e) {
@@ -352,34 +410,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             /*if (result.size() > 0) {
                 emple = (Empleado) result.get(0);
             }*/
-            log.info("*********************************************************");
-            log.info("*********************************************************");
-            log.debug("emple = '" + emple + "'");
-            log.info("*********************************************************");
-            log.info("*********************************************************");
             em.getTransaction().commit();
         }
         if (em.isOpen())
             em.close();
 
 
-
         return emple;
     }
 
-
-  /*  public boolean emIsOpen() {
-        return em.isOpen();
-    }
-
-    public boolean transactionIsActive() {
-        return em.getTransaction().isActive();
-    }*/
-
-  /*  @Override
-    protected void finalize() throws Throwable {
-        log.info("CERRANDO EMF");
-        EMFSingleton.getInstance().close();
-        super.finalize();
-    }*/
 }

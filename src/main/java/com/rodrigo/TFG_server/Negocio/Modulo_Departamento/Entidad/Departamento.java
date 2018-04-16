@@ -1,9 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.sun.xml.txw2.annotation.XmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +18,7 @@ import java.util.*;
         @NamedQuery(name = "Departamento.buscarPorSiglas", query = "from Departamento e where e.siglas = :siglas")
 
 })
-@XmlRootElement(name = "Departamento")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Departamento implements Serializable/*, CycleRecoverable */{
 
@@ -50,6 +48,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
             @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
     })*/
     //@XmlInverseReference(mappedBy = "departamento")
+    @XmlElementRef
     private Collection<Empleado> empleados;
 
     @Version

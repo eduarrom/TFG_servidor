@@ -15,7 +15,7 @@ public interface IBroker_SA_Proyecto {
     public Proyecto crearProyecto(@WebParam(name = "Proyecto") Proyecto proyectoNuevo) throws ProyectoException;
 
     @WebMethod(operationName="buscarByID")
-    public Proyecto buscarProyectoByID(@WebParam(name = "id") Long id);
+    public Proyecto buscarByID(@WebParam(name = "id") Long id);
 
 
     @WebMethod(operationName="eliminarProyecto")

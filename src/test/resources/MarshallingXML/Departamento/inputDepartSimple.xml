@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Departamento>
+   <id>3</id>
+   <nombre>Departamento de Pruebas</nombre>
+   <siglas>DdP</siglas>
+   <version>0</version>
+</Departamento>

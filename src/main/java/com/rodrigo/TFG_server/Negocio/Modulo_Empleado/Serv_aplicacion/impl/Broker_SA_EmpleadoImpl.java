@@ -25,11 +25,25 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     }
 
 
-    public Empleado buscarEmpleadoByID(@WebParam(name="id") Long id) {
-        return new SA_EmpleadoImpl().buscarByID(id);
+    public Empleado buscarByID(@WebParam(name="id") Long id) throws EmpleadoException {
+        Empleado emple = new SA_EmpleadoImpl().buscarByID(id);
+
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println();
+
+        System.out.println("emple = [" + emple + "]");
+
+        System.out.println();
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+
+        return emple;
     }
 
-    public boolean eliminarEmpleado(@WebParam(name="Empleado") Empleado empleadoEliminar) {
+    public boolean eliminarEmpleado(@WebParam(name="Empleado") Empleado empleadoEliminar) throws EmpleadoException {
 
         return new SA_EmpleadoImpl().eliminarEmpleado(empleadoEliminar);
     }
