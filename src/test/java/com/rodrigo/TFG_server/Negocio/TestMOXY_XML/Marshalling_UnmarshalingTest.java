@@ -50,9 +50,9 @@ public class Marshalling_UnmarshalingTest {
 
         um = jc.createUnmarshaller();
 
-        emple1 = new EmpleadoTParcial("emple1", "1234", Rol.ADMIN);
+        emple1 = new EmpleadoTParcial("empleado", "1234", Rol.ADMIN);
 //        emple2 = new EmpleadoTCompleto("emple2", "1234", Rol.EMPLEADO);
-        emple1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(23L);
+        emple1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
         dept1 = new Departamento("Dept1");
 //        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
@@ -164,7 +164,7 @@ public class Marshalling_UnmarshalingTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        File xmlOut = new File("src/test/resources/MarshallingXML/Empleado/outputEmple22222.xml");
+        File xmlOut = new File("src/test/resources/MarshallingXML/Empleado/outputEmple.xml");
         FileWriter fw = new FileWriter(xmlOut);
 
         marshaller.marshal(emple1, System.out);

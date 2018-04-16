@@ -24,7 +24,7 @@ import java.util.Objects;
 
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlClassExtractor(EmpleadoClassExtractor.class)
+//@XmlClassExtractor(EmpleadoClassExtractor.class)
 //@XmlRootElement
 //@XmlTransient
 @XmlDiscriminatorNode("@tipo")

@@ -3,15 +3,29 @@
    <id>3</id>
    <nombre>Departamento de Pruebas</nombre>
    <siglas>DdP</siglas>
-   <empleado>
+   <empleadoTParcial tipo="EmpleadoTParcial">
       <id>20</id>
       <nombre>empleado</nombre>
       <email>empleado@gmail.com</email>
       <password>1234</password>
       <rol>EMPLEADO</rol>
+      <proyectos>
+         <idEmpleado>20</idEmpleado>
+         <idProyecto>1</idProyecto>
+         <proyecto>
+            <id>1</id>
+            <nombre>Proy1</nombre>
+            <descripcion>Descripción del proyecto Proy1</descripcion>
+            <fechaInicio>2018-07-09T02:00:00+02:00</fechaInicio>
+            <fechaFin>2018-09-07T02:00:00+02:00</fechaFin>
+            <version>0</version>
+         </proyecto>
+         <horas>6</horas>
+         <version>0</version>
+      </proyectos>
       <version>0</version>
       <horasJornada>5</horasJornada>
       <precioHora>10</precioHora>
-   </empleado>
+   </empleadoTParcial>
    <version>0</version>
 </departamento>
