@@ -25,7 +25,7 @@ import java.util.Objects;
 })
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlClassExtractor(EmpleadoClassExtractor.class)
-@XmlRootElement
+//@XmlRootElement
 //@XmlTransient
 @XmlDiscriminatorNode("@tipo")
 //@XmlCustomizer(EmpleadoCustomizer.class)
@@ -34,7 +34,7 @@ import java.util.Objects;
         EmpleadoTCompleto.class,
         EmpleadoTParcial.class
 })
-public class Empleado implements Serializable/*, CycleRecoverable*/ {
+public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     /****************************
      ********* ATRIBUTOS ********
@@ -157,10 +157,7 @@ public class Empleado implements Serializable/*, CycleRecoverable*/ {
      ********** METODOS *********
      ****************************/
 
-    public  double calcularNominaMes(){
-        System.out.println("Empleado.calcularNominaMes");
-        return 0;
-    }
+    public abstract double calcularNominaMes();
 
 
     public void agregarProyecto(EmpleadoProyecto ep){

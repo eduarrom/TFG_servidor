@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
 //@XmlRootElement/*(name = "EmpleadoTParcial")*/
-//@XmlRootElement
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlDiscriminatorValue("EmpleadoTParcial")
 //@XmlType/*(name = "EmpleadoTParcial")*/
