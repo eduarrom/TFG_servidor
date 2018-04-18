@@ -9,7 +9,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidatorTest;
@@ -27,12 +26,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Broker_SA_EmpleadoTest {
+class Broker_SA_EmpleadoImplTest {
 
 
     private static Broker_SA_EmpleadoImpl b;
 
-    final static Logger log = LoggerFactory.getLogger(Broker_SA_EmpleadoTest.class);
+    final static Logger log = LoggerFactory.getLogger(Broker_SA_EmpleadoImplTest.class);
 
     static private Empleado e1;
     static Empleado emple1;

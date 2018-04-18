@@ -14,13 +14,13 @@ import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
 //@XmlRootElement/*(name = "EmpleadoTParcial")*/
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlDiscriminatorValue("EmpleadoTParcial")
+//@XmlRootElement
+//@XmlDiscriminatorValue("EmpleadoTParcial")
 //@XmlType/*(name = "EmpleadoTParcial")*/
 public class EmpleadoTParcial extends Empleado implements Serializable {
 

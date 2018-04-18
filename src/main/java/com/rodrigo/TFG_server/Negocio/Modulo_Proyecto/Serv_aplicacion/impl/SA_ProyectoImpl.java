@@ -37,11 +37,11 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
-            em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
             log.info("Persistiendo proyecto en BBDD");
             proy = em.merge(proyectoNuevo);
 
-            em.getTransaction().commit();
+            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
         }
         em.close();
 
@@ -58,11 +58,11 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
         EmpleadoProyecto ep = new EmpleadoProyecto(e, p, horas);
         {
-            em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
             log.info("Persistiendo proyecto en BBDD");
             ep = em.merge(ep);
 
-            em.getTransaction().commit();
+            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
         }
         em.close();
 
@@ -78,7 +78,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
-            em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
             log.info("Buscando proyecto en BBDD");
             proy = em.find(Proyecto.class, id);
             log.debug("proy = '" + proy + "'");
@@ -88,7 +88,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                         ep.getProyecto().toString();
                     });
 
-            em.getTransaction().commit();
+            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
         }
         em.close();
 
@@ -103,14 +103,14 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
-            em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
 
             try {
                 em.remove(em.find(Proyecto.class, proyectoEliminar.getId()));
                 result = true;
-                em.getTransaction().commit();
+                log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
             } catch (Exception e) {
-                //em.getTransaction().rollback();
+                //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
                 result = false;
             }
 
@@ -130,11 +130,11 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
         {
-            em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
 
             lista = em.createNamedQuery("Proyecto.listar").getResultList();
 
-            em.getTransaction().commit();
+            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
         }
         em.close();
 

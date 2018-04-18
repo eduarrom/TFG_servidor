@@ -3,6 +3,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 
 import java.util.List;
 
@@ -11,15 +12,15 @@ import java.util.List;
  */
 public interface SA_Departamento {
 
-    Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException;
+    Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException, DepartamentoYaExisteExcepcion;
     
-    Departamento buscarByID(Long id);
+    Departamento buscarByID(Long id) throws DepartamentoException;
 
-    boolean eliminarDepartamento(Long id);
+    boolean eliminarDepartamento(Departamento departEliminar);
 
     List<Departamento> listarDepartamentos();
 
-    Departamento buscarBySiglas(String email) throws DepartamentoException;
+    Departamento buscarBySiglas(String siglas) throws DepartamentoException;
 
     public String saludoREST(String nombre);
 

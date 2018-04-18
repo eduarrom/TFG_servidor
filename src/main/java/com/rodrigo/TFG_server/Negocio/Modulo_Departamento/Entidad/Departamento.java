@@ -48,8 +48,8 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
             @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
     })*/
     //@XmlInverseReference(mappedBy = "departamento")
-    @XmlElementRef
-    private Collection<Empleado> empleados;
+//    @XmlElementRef
+    private Collection<Empleado> empleados =  new ArrayList();
 
     @Version
     protected long version;

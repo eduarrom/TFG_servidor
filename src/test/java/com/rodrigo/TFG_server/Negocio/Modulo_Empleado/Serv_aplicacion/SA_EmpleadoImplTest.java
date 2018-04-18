@@ -576,10 +576,4 @@ class SA_EmpleadoImplTest {
         return EmailValidatorTest.InvalidEmailProvider();
     }
 
-
-    @Test
-    void buscarUnEmple() throws EmpleadoException {
-
-        log.info(sa.buscarByEmail("administrador@gmail.com").toString());
-    }
 }

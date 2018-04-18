@@ -210,6 +210,9 @@
         </dependency>
 
 
+
+
+
         <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.moxy -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -381,13 +384,13 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
+-->
 
 
 
@@ -511,10 +514,6 @@
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-
-
-
 
 
 

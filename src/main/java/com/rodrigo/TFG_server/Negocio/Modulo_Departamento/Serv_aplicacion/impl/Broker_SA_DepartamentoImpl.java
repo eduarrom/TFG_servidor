@@ -40,7 +40,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("/deptCompleto/{id}")
     @Produces("application/xml")
-    public Departamento getDepartamentoCompleto(@PathParam("id") Long id) {
+    public Departamento getDepartamentoCompleto(@PathParam("id") Long id) throws DepartamentoException {
         System.out.println("********************************************");
         System.out.println("************ getDepartamentoCompleto **********");
         System.out.println("********************************************");
@@ -54,7 +54,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Produces("application/xml")
     @Override
     public Departamento crearDepartamento( Departamento departamentoNuevo) throws DepartamentoException {
-        return new SA_DepartamentoImpl().crearDepartamento(departamentoNuevo);
+        return FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(departamentoNuevo);
     }
 
 
@@ -62,13 +62,13 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/{id}")
     @Produces("application/xml")
     @Override
-    public Departamento buscarByID(@PathParam("id") Long id) {
+    public Departamento buscarByID(@PathParam("id") Long id) throws DepartamentoException {
         System.out.println("********************************************");
         System.out.println("************ buscarByID **********");
         System.out.println("id = [" + id + "]");
         System.out.println("********************************************");
 
-        Departamento dept = new SA_DepartamentoImpl().buscarByID(id);
+        Departamento dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(id);
 //        dept.setEmpleados(null);
 
         System.out.println("dept = [" + dept + "]");
@@ -86,7 +86,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
         System.out.println("************ buscarBySiglas **********");
         System.out.println("siglas = [" + siglas + "]");
         System.out.println("********************************************");
-        return new SA_DepartamentoImpl().buscarBySiglas(siglas);
+        return FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(siglas);
     }
 
 
@@ -94,8 +94,8 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/{id}")
     @Produces("application/xml")
     @Override
-    public boolean eliminarDepartamento(Long id) {
-        return new SA_DepartamentoImpl().eliminarDepartamento(id);
+    public boolean eliminarDepartamento(Departamento departEliminar) {
+        return FactoriaSA.getInstance().crearSA_Departamento().eliminarDepartamento(departEliminar);
     }
 
 
@@ -105,7 +105,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Override
     public Departamento[] listarDepartamentos() {
         System.out.println("Listando Departamentos simple");
-        List<Departamento> lista = new SA_DepartamentoImpl().listarDepartamentos();
+        List<Departamento> lista = FactoriaSA.getInstance().crearSA_Departamento().listarDepartamentos();
 
         lista.stream()
                 .forEach(System.out::println);

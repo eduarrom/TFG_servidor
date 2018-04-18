@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({EmpleadoTCompleto.class, EmpleadoTParcial.class})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
@@ -23,23 +26,17 @@ import java.util.Objects;
         @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
 
 })
-@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlClassExtractor(EmpleadoClassExtractor.class)
 //@XmlRootElement
 //@XmlTransient
-@XmlDiscriminatorNode("@tipo")
+//@XmlDiscriminatorNode("@tipo")
 //@XmlCustomizer(EmpleadoCustomizer.class)
 //@XmlType/*(name = "Empleado")*/
-@XmlSeeAlso({
-        EmpleadoTCompleto.class,
-        EmpleadoTParcial.class
-})
 public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     /****************************
      ********* ATRIBUTOS ********
      ****************************/
-
 
 
     private final static Logger log = LoggerFactory.getLogger(Empleado.class);
@@ -68,7 +65,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     protected Rol rol;
 
 
-    @ManyToOne(fetch=FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
+    @ManyToOne(fetch = FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
     @XmlInverseReference(mappedBy = "empleados")
     //@XmlTransient
@@ -77,12 +74,10 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 //    protected Departamento departamento = new Departamento();
 
 
-//    protected List<EmpleadoProyecto> proyectos = null;
+    //    protected List<EmpleadoProyecto> proyectos = null;
     @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //@XmlInverseReference(mappedBy = "empleado")
     protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
-
-
 
 
     @Version
@@ -133,7 +128,8 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     }
 
-    /** Copia el empleado con:
+    /**
+     * Copia el empleado con:
      * - Departamento vacio
      * - Lista de proyectos vacia
      *
@@ -160,7 +156,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     public abstract double calcularNominaMes();
 
 
-    public void agregarProyecto(EmpleadoProyecto ep){
+    public void agregarProyecto(EmpleadoProyecto ep) {
         proyectos.add(ep);
     }
 
@@ -244,7 +240,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
      ****************************/
 
 
-
     @Override
     public String toString() {
         return "Empleado{" +
@@ -253,8 +248,8 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", rol=" + rol +
-                ", dept='" + ((departamento==null)?"null": departamento.getSiglas()) + '\'' +
-                ", proySize=" +((proyectos==null)?"0": proyectos.size()) +
+                ", dept='" + ((departamento == null) ? "null" : departamento.getSiglas()) + '\'' +
+                ", proySize=" + ((proyectos == null) ? "0" : proyectos.size()) +
                 ", version=" + version +
                 '}';
     }

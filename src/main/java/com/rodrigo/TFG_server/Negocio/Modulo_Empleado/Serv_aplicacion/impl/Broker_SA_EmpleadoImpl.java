@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
+import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado;
@@ -20,13 +21,13 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     @Override
     public Empleado crearEmpleado(@WebParam(name="Empleado") Empleado empleadoNuevo) throws EmpleadoException {
 
-        return new SA_EmpleadoImpl().crearEmpleado(empleadoNuevo);
+        return FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(empleadoNuevo);
         //return null;
     }
 
 
     public Empleado buscarByID(@WebParam(name="id") Long id) throws EmpleadoException {
-        Empleado emple = new SA_EmpleadoImpl().buscarByID(id);
+        Empleado emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
 
         System.out.println("***********************************************");
         System.out.println("***********************************************");
@@ -45,28 +46,28 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     public boolean eliminarEmpleado(@WebParam(name="Empleado") Empleado empleadoEliminar) throws EmpleadoException {
 
-        return new SA_EmpleadoImpl().eliminarEmpleado(empleadoEliminar);
+        return FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(empleadoEliminar);
     }
 
     public List<Empleado> listarEmpleados() {
 
-        return new SA_EmpleadoImpl().listarEmpleados();
+        return FactoriaSA.getInstance().crearSA_Empleado().listarEmpleados();
     }
 
     @Override
     public String saludar(@WebParam(name="nombre") String nombre) {
-        return new SA_EmpleadoImpl().saludar(nombre);
+        return FactoriaSA.getInstance().crearSA_Empleado().saludar(nombre);
     }
 
 
 
     public boolean loginEmpleado(String email, String pass) throws EmpleadoException {
-        return new SA_EmpleadoImpl().loginEmpleado(email, pass);
+        return FactoriaSA.getInstance().crearSA_Empleado().loginEmpleado(email, pass);
     }
 
     @Override
     public Empleado buscarByEmail(String email) throws EmpleadoException {
-        return new SA_EmpleadoImpl().buscarByEmail(email);
+        return FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
     }
 
 }

@@ -58,6 +58,7 @@
             <property name="hibernate.jdbc.wrap_result_sets" value="true"/>
             <property name="hibernate.hibernate.cache.use_query_cache" value="true" />
 
+
             <!--<property name="hibernate.hbm2ddl.import_files" value="import.sql"/>-->
         </properties>
     </persistence-unit>
