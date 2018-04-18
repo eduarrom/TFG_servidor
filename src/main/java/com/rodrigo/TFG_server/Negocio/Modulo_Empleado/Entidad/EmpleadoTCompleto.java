@@ -9,10 +9,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlType(name = "empleadoTCompleto")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
@@ -27,11 +30,11 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
      ********* ATRIBUTOS ********
      ****************************/
 
-    @NotBlank
+    @NotNull
 //    @XmlAttribute
     private int antiguedad = 0;
 
-    @NotBlank
+    @NotNull
 //    @XmlAttribute
     private int sueldoBase = 1200;
 

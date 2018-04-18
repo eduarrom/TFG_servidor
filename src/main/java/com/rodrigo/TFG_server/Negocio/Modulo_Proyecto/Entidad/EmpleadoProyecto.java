@@ -40,7 +40,7 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     @ManyToOne
     @MapsId("idProyecto")
-    //@XmlInverseReference(mappedBy = "empleados")
+//    @XmlInverseReference(mappedBy = "empleados")
     private Proyecto proyecto;
 
 

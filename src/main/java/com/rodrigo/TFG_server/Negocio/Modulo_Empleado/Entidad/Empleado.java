@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({EmpleadoTCompleto.class, EmpleadoTParcial.class})
 @Entity
@@ -76,7 +76,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     //    protected List<EmpleadoProyecto> proyectos = null;
     @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //@XmlInverseReference(mappedBy = "empleado")
+//    @XmlInverseReference(mappedBy = "empleado")
     protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
 
 
