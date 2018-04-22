@@ -4,9 +4,10 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.sun.xml.bind.CycleRecoverable;
-import org.eclipse.persistence.oxm.annotations.XmlCustomizer;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
+//import org.eclipse.persistence.oxm.annotations.XmlCustomizer;
+//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ import java.io.Serializable;
 })
 @XmlRootElement/*(name = "EmpleadoProyecto")*/
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlCustomizer(EmpleadoProyectoCustomizer.class)
+//@XmlCustomizer(EmpleadoProyectoCustomizer.class)
 public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoProyecto.class);
@@ -35,7 +36,7 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     @ManyToOne
     @MapsId("idEmpleado")
-    @XmlInverseReference(mappedBy = "proyectos")
+//    @XmlInverseReference(mappedBy = "proyectos")
     private Empleado empleado;
 
     @ManyToOne
@@ -82,6 +83,18 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 //        this.proyecto = new Proyecto(ep.proyecto);
         this.proyecto = new Proyecto(ep.proyecto);
     }
+
+
+
+
+
+    public TEmpleadoProyecto crearTransferSimple(){
+        return new TEmpleadoProyecto(empleado.getId(), proyecto.getId(), horas);
+    }
+
+
+
+
 
     /****************************
      **** GETTERS AND SETTERS ***

@@ -21,8 +21,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
         <cxf.version>3.2.0</cxf.version><!--<cxf.version>3.2.1</cxf.version>-->
-        <!--<jaxb.version>2.3.0&lt;!&ndash;2.2.11&ndash;&gt;</jaxb.version>-->
-        <moxy.version>2.7.1</moxy.version> <!-- 2.4.1 -->
+        <jaxb.version>2.3.0<!--2.2.11--></jaxb.version>
+        <!--<moxy.version>2.7.1</moxy.version> &lt;!&ndash; 2.4.1 &ndash;&gt;-->
         <spring.version>4.0.0.RELEASE</spring.version> <!-- ERROR: 4.3.12.RELEASE -->
         <hibernate.version>4.2.21.Final</hibernate.version>
         <slf4j.version>1.5.8</slf4j.version>
@@ -168,33 +168,33 @@
         <!-- **************  JAXB  ************** -->
         <!-- ************************************ -->
 
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-core &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.sun.xml.bind</groupId>-->
-            <!--<artifactId>jaxb-core</artifactId>-->
-            <!--<version>${jaxb.version}</version>-->
-        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-core -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.sun.xml.bind</groupId>-->
-            <!--<artifactId>jaxb-impl</artifactId>-->
-            <!--<version>${jaxb.version}</version>-->
-        <!--</dependency>-->
-
-
-        <!--<dependency>-->
-            <!--<groupId>com.sun.xml.bind</groupId>-->
-            <!--<artifactId>jaxb-xjc</artifactId>-->
-            <!--<version>${jaxb.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
 
 
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>javax.xml.bind</groupId>-->
-        <!--<artifactId>jaxb-api</artifactId>-->
-        <!--<version>${jaxb.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-xjc</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>${jaxb.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -220,12 +220,12 @@
 
 
 
-        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.moxy -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.moxy</artifactId>
-            <version>${moxy.version}</version>
-        </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.moxy &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.persistence</groupId>-->
+            <!--<artifactId>org.eclipse.persistence.moxy</artifactId>-->
+            <!--<version>${moxy.version}</version>-->
+        <!--</dependency>-->
 
 
 
@@ -410,26 +410,26 @@
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 
-        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.core -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.core</artifactId>
-            <version>${moxy.version}</version>
-        </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.core &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.persistence</groupId>-->
+            <!--<artifactId>org.eclipse.persistence.core</artifactId>-->
+            <!--<version>${moxy.version}</version>-->
+        <!--</dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.asm -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.asm</artifactId>
-            <version>${moxy.version}</version>
-        </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.asm &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.persistence</groupId>-->
+            <!--<artifactId>org.eclipse.persistence.asm</artifactId>-->
+            <!--<version>${moxy.version}</version>-->
+        <!--</dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.antlr -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.antlr</artifactId>
-            <version>${moxy.version}</version>
-        </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.antlr &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.persistence</groupId>-->
+            <!--<artifactId>org.eclipse.persistence.antlr</artifactId>-->
+            <!--<version>${moxy.version}</version>-->
+        <!--</dependency>-->
 
 
 
@@ -607,6 +607,7 @@
                 <targetPath>META-INF</targetPath>
                 <includes>
                     <include>persistence.xml</include>
+                    <!--<include>jaxb.properties</include>-->
                 </includes>
             </resource>
             <resource>
@@ -614,7 +615,7 @@
                 <!--<targetPath>resources</targetPath>-->
                 <includes>
                     <include>log4j.properties</include>
-                    <include>jaxb.properties</include>
+                    <!--<include>jaxb.properties</include>-->
                 </includes>
             </resource>
         </resources>

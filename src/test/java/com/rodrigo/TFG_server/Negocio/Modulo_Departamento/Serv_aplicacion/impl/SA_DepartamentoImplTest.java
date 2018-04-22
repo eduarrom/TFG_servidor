@@ -1,3 +1,4 @@
+/*
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
@@ -36,9 +37,11 @@ class SA_DepartamentoImplTest {
     final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImplTest.class);
 
 
-    /*******************************************************************
+    */
+/*******************************************************************
      **********************   METODOS INICIALES   **********************
-     *******************************************************************/
+     *******************************************************************//*
+
 
     @BeforeAll
     static void initSA() throws DepartamentoException, EmpleadoException {
@@ -59,7 +62,9 @@ class SA_DepartamentoImplTest {
 
 
 
-        /*//dept = new Departamento("Ingenieria del Software");
+        */
+/*//*
+/dept = new Departamento("Ingenieria del Software");
         dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
 
         d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
@@ -70,7 +75,8 @@ class SA_DepartamentoImplTest {
         dept.getDepartamentos().add(d1);
         d1.setDepartamento(dept);
 
-        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*/
+        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*//*
+
     }
 
     @BeforeEach
@@ -89,18 +95,22 @@ class SA_DepartamentoImplTest {
     @AfterEach
     void finalizarContexto() throws DepartamentoException {
 
-       /* assertFalse(b.transactionIsActive(), "Transacción no cerrada");
+       */
+/* assertFalse(b.transactionIsActive(), "Transacción no cerrada");
 
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
-*/
+*//*
+
         log.info("Eliminado departamento");
         sa.eliminarDepartamento(d1);
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ******************   TEST CREAR DEPARTAMENTO   *******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @ParameterizedTest
@@ -128,10 +138,12 @@ class SA_DepartamentoImplTest {
     @Test
     void crearDepartamentoExistente() throws DepartamentoException {
 
-        /*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
+        */
+/*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
 
         log.info("Creando departamento 1");
-        d1 = b.crearDepartamento(d1);*/
+        d1 = b.crearDepartamento(d1);*//*
+
 
 
         Throwable exception = assertThrows(DepartamentoYaExisteExcepcion.class, () -> {
@@ -144,7 +156,9 @@ class SA_DepartamentoImplTest {
         });
 
 
-        /*b.eliminarDepartamento(d1);*/
+        */
+/*b.eliminarDepartamento(d1);*//*
+
     }
 
     @Test
@@ -212,9 +226,11 @@ class SA_DepartamentoImplTest {
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ****************   TEST BUSCAR DEPARTAMENTO ID  ******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @Test
@@ -277,11 +293,14 @@ class SA_DepartamentoImplTest {
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ******************   TEST ELIMINAR DEPARTAMENTO   ********************
-     ******************************************************************/
+     ******************************************************************//*
 
 
+
+*/
 /*    @Test
     void eliminarDepartamento() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
@@ -302,12 +321,15 @@ class SA_DepartamentoImplTest {
 
         assertNull(b.buscarByID(e.getId()));
 
-    }*/
+    }*//*
 
 
-    /******************************************************************
+
+    */
+/******************************************************************
      *****************   TEST LISTAR DEPARTAMENTOS   ******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @Test
@@ -326,6 +348,7 @@ class SA_DepartamentoImplTest {
 
     }
 
+*/
 /*
     @Test
     void saludo() {
@@ -338,14 +361,17 @@ class SA_DepartamentoImplTest {
 
         assertTrue(b.saludar(nombre).equals(str));
     }
+    *//*
+
+
+
+
+
     */
-
-
-
-
-    /******************************************************************
+/******************************************************************
      ******************   TEST BUSCAR BY SIGLAS   *********************
-     ******************************************************************/
+     ******************************************************************//*
+
 
     @ParameterizedTest
     @CsvSource({"Departamento busquedas 1", "Departamento busquedas 2"})
@@ -411,9 +437,11 @@ class SA_DepartamentoImplTest {
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      *********************   METODOS AUXILIARES   *********************
-     ******************************************************************/
+     ******************************************************************//*
 
 
-}
+
+}*/

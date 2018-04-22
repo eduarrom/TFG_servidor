@@ -1,8 +1,12 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-import org.eclipse.persistence.oxm.annotations.*;
+//import org.eclipse.persistence.oxm.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,10 +71,10 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
     @ManyToOne(fetch = FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
-    @XmlInverseReference(mappedBy = "empleados")
+//    @XmlInverseReference(mappedBy = "empleados")
     //@XmlTransient
-    @NotNull
-    protected Departamento departamento;
+    //@NotNull
+    protected Departamento departamento = new Departamento();
 //    protected Departamento departamento = new Departamento();
 
 
@@ -125,7 +129,14 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
         this.password = password;
         this.rol = rol;
         this.email = email;
+    }
 
+    public Empleado(Long id, String nombre, String password, Rol rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.password = password;
+        this.rol = rol;
+        this.email = nombre.toLowerCase().concat("@gmail.com");
     }
 
     /**
@@ -149,11 +160,31 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     }
 
 
+
+
     /****************************
      ********** METODOS *********
      ****************************/
 
     public abstract double calcularNominaMes();
+
+    public abstract TEmpleadoCompleto crearTransferCompleto();
+
+    public abstract TEmpleado crearTransferSimple();
+
+    public static Empleado crearEmpleado(TEmpleado te){
+        Empleado e = null;
+        if(te instanceof TEmpleadoTCompleto){
+            e = new EmpleadoTCompleto(te.getId(), te.getNombre(), te.getPassword(), te.getRol(),
+                    ((TEmpleadoTCompleto) te).getAntiguedad(), ((TEmpleadoTCompleto) te).getSueldoBase());
+        }else if(te instanceof TEmpleadoTParcial){
+            e = new EmpleadoTParcial(te.getId(), te.getNombre(), te.getPassword(), te.getRol(),
+                    ((TEmpleadoTParcial) te).getHorasJornada(), ((TEmpleadoTParcial) te).getPrecioHora());
+        }
+
+        return e;
+    }
+
 
 
     public void agregarProyecto(EmpleadoProyecto ep) {

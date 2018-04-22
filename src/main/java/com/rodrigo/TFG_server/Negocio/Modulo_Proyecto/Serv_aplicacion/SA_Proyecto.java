@@ -1,8 +1,10 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 
 import java.util.List;
@@ -12,14 +14,14 @@ import java.util.List;
  */
 public interface SA_Proyecto {
 
-    Proyecto crearProyecto(Proyecto proyectoNuevo) throws ProyectoException;
+    TProyecto crearProyecto(TProyecto proyectoNuevo) throws ProyectoException;
 
-    EmpleadoProyecto añadirEmpleadoAProyecto(Empleado e, Proyecto p, int horas);
+    TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas);
 
-    Proyecto buscarByID(Long id);
+    TProyectoCompleto buscarByID(Long id);
 
-    boolean eliminarProyecto(Proyecto proyectoEliminar);
+    boolean eliminarProyecto(TProyecto proyectoEliminar);
 
-    List<Proyecto> listarProyectos();
+    List<TProyecto> listarProyectos();
 
 }

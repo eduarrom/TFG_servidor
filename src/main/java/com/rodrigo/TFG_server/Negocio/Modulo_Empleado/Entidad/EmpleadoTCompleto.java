@@ -2,16 +2,21 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
-import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
+//import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.HashMap;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -56,6 +61,20 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
         this.departamento = d;
     }
 
+    public EmpleadoTCompleto(String nombre, String password, Rol rol, int antiguedad, int sueldoBase) {
+        super(nombre, password, rol);
+        this.antiguedad = antiguedad;
+        this.sueldoBase = sueldoBase;
+    }
+
+    public EmpleadoTCompleto(Long id, String nombre, String password, Rol rol, int antiguedad, int sueldoBase) {
+        super(id, nombre, password, rol);
+        this.antiguedad = antiguedad;
+        this.sueldoBase = sueldoBase;
+    }
+
+
+
     /** Copia el empleado con:
      * - Departamento vacio
      * - Lista de proyectos vacia
@@ -77,6 +96,39 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
     public double calcularNominaMes() {
         return sueldoBase+sueldoBase*0.05*antiguedad;
     }
+
+
+    @Override
+    public TEmpleado crearTransferSimple() {
+        return new TEmpleadoTCompleto(id, nombre, email, password, rol,
+                departamento.getId(), antiguedad, sueldoBase);
+    }
+
+
+    @Override
+    public TEmpleadoCompleto crearTransferCompleto() {
+
+        //Crear asociacion de proyectos del empleado
+        HashMap<Long, TProyecto> tProyectos = new HashMap<>();
+
+        HashMap<Long, TEmpleadoProyecto> tEmpleadosProyectos = new HashMap<>();
+
+        proyectos.stream().forEach((ep)->{
+            tProyectos.put(ep.getProyecto().getId(), ep.getProyecto().crearTrasferSimple());
+
+            tEmpleadosProyectos.put(ep.getProyecto().getId(), ep.crearTransferSimple());
+
+        });
+
+
+        TEmpleadoCompleto tec = new TEmpleadoCompleto(crearTransferSimple(), departamento.crearTransferSimple(), tProyectos, tEmpleadosProyectos);
+
+        System.out.println("tec = [" + tec + "]");
+
+        return tec;
+    }
+
+
 
 
     /****************************

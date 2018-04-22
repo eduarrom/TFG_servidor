@@ -2,11 +2,11 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
-import com.sun.xml.bind.CycleRecoverable;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
-import org.hibernate.annotations.Cascade;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,17 +56,13 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
     private Date fechaFin;
 
 
-
     /****************************
-      ******   PROYECTO   ******
+     ******   PROYECTO   ******
      ****************************/
 
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
-    @XmlInverseReference(mappedBy = "proyecto")
+//    @XmlInverseReference(mappedBy = "proyecto")
     private Collection<EmpleadoProyecto> empleados;
-
-
-
 
 
     @Version
@@ -107,6 +103,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
     }
 
 
+
     public Proyecto(@NotBlank String nombre, @NotBlank String descripcion, Date fechaInicio,
                     @NotNull Date fechaFin) {
         this.nombre = nombre;
@@ -114,6 +111,16 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
+
+    public Proyecto(Long id, @NotBlank String nombre, @NotBlank String descripcion, Date fechaInicio,
+                    @NotNull Date fechaFin) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
+
 
     public Proyecto(@NotBlank String nombre, @NotBlank String descripcion, Date fechaInicio,
                     @NotNull Date fechaFin, List<EmpleadoProyecto> empleados) {
@@ -136,6 +143,97 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         this.fechaInicio = p.fechaInicio;
         this.fechaFin = p.fechaFin;
     }
+
+
+    public Proyecto(TProyecto tp) {
+        this.id = tp.getId();
+        this.nombre = tp.getNombre();
+        this.descripcion = tp.getDescripcion();
+        this.fechaInicio = tp.getFechaInicio();
+        this.fechaFin = tp.getFechaFin();
+    }
+
+
+
+    /****************************
+     ********** METODOS *********
+     ****************************/
+
+    public TProyecto crearTrasferSimple(){
+        return new TProyecto(id, nombre, descripcion, fechaInicio, fechaFin);
+    }
+
+
+    public TProyectoCompleto crearTransferCompleto() {
+
+
+        HashMap<Long, TEmpleado> tEmpleados = new HashMap<>();
+
+
+        HashMap<Long, TEmpleadoProyecto> tEmpleadosProyectos = new HashMap<>();
+
+
+        empleados.stream().forEach((ep) -> {
+
+            tEmpleados.put(ep.getEmpleado().getId(),
+                    ep.getEmpleado().crearTransferSimple());
+
+            tEmpleadosProyectos.put(ep.getEmpleado().getId(),
+                    ep.crearTransferSimple());
+
+        });
+
+
+        TProyectoCompleto tpc = new TProyectoCompleto(crearTrasferSimple(), tEmpleados, tEmpleadosProyectos);
+
+        System.out.println("tpc = [" + tpc + "]");
+
+        return tpc;
+    }
+
+
+
+
+    public boolean agregarEmpleado(Empleado e, int horas) {
+        boolean ok = false;
+        EmpleadoProyecto ep = new EmpleadoProyecto(e, this, horas);
+        log.info("Agregando empleado '" + e.getNombre() + "' a proyecto '" + this.nombre + "'");
+        if (e.getProyectos().add(ep)) {
+            if (this.empleados.add(ep)) {
+                ok = true;
+                log.info("Agregado correctamente");
+            } else {
+                e.getProyectos().remove(ep);
+            }
+
+        }
+        return ok;
+    }
+
+    /**
+     * Agrega un empleadoProyeto al proyecto this y al empleado pasado por param
+     *
+     * @param ep EmpleadoProyecto
+     * @return true si es correcto
+     */
+    public boolean agregarEmpleado(EmpleadoProyecto ep) {
+        boolean ok = false;
+        //EmpleadoProyecto ep = new EmpleadoProyecto(ep.getEmpleado(), ep.getProyecto(), ep.getHoras());
+
+        log.info("Agregando empleado '" + ep.getEmpleado().getNombre() + "' a proyecto '" + ep.getProyecto().nombre + "'");
+        if (ep.getEmpleado().getProyectos().add(ep)) {
+            if (this.empleados.add(ep)) {
+                ok = true;
+                log.info("Agregado correctamente");
+            } else {
+                ep.getEmpleado().getProyectos().remove(ep);
+            }
+
+        }
+        return ok;
+    }
+
+
 
     /****************************
      **** GETTERS AND SETTERS ***
@@ -198,47 +296,6 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
     }
 
 
-    /****************************
-     ********** METODOS *********
-     ****************************/
-
-    public boolean agregarEmpleado(Empleado e, int horas) {
-        boolean ok = false;
-        EmpleadoProyecto ep = new EmpleadoProyecto(e, this, horas);
-        log.info("Agregando empleado '" + e.getNombre() + "' a proyecto '" + this.nombre + "'");
-        if (e.getProyectos().add(ep)) {
-            if (this.empleados.add(ep)) {
-                ok = true;
-                log.info("Agregado correctamente");
-            } else {
-                e.getProyectos().remove(ep);
-            }
-
-        }
-        return ok;
-    }
-
-    /** Agrega un empleadoProyeto al proyecto this y al empleado pasado por param
-     *
-     * @param ep EmpleadoProyecto
-     * @return true si es correcto
-     */
-    public boolean agregarEmpleado(EmpleadoProyecto ep) {
-        boolean ok = false;
-        //EmpleadoProyecto ep = new EmpleadoProyecto(ep.getEmpleado(), ep.getProyecto(), ep.getHoras());
-
-        log.info("Agregando empleado '" + ep.getEmpleado().getNombre() + "' a proyecto '" + ep.getProyecto().nombre + "'");
-        if (ep.getEmpleado().getProyectos().add(ep)) {
-            if (this.empleados.add(ep)) {
-                ok = true;
-                log.info("Agregado correctamente");
-            } else {
-                ep.getEmpleado().getProyectos().remove(ep);
-            }
-
-        }
-        return ok;
-    }
 
 
     /****************************
@@ -254,7 +311,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
-                ", empleadosSize=" + ((empleados==null)?"null":empleados.size()) +
+                ", empleadosSize=" + ((empleados == null) ? "null" : empleados.size()) +
                 ", version=" + version +
                 '}';
     }

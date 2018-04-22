@@ -1,7 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion;
 
-import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 
@@ -12,15 +12,15 @@ import java.util.List;
  */
 public interface SA_Departamento {
 
-    Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException, DepartamentoYaExisteExcepcion;
+    TDepartamento crearDepartamento(TDepartamento departamentoNuevo) throws DepartamentoException, DepartamentoYaExisteExcepcion;
     
-    Departamento buscarByID(Long id) throws DepartamentoException;
+    TDepartamentoCompleto buscarByID(Long id) throws DepartamentoException;
 
-    boolean eliminarDepartamento(Departamento departEliminar);
+    boolean eliminarDepartamento(TDepartamento departEliminar);
 
-    List<Departamento> listarDepartamentos();
+    List<TDepartamento> listarDepartamentos();
 
-    Departamento buscarBySiglas(String siglas) throws DepartamentoException;
+    TDepartamentoCompleto buscarBySiglas(String siglas) throws DepartamentoException;
 
     public String saludoREST(String nombre);
 

@@ -2,18 +2,11 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
-import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.*;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoNullException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
-import org.hibernate.PropertyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The type Sa departamento.
@@ -55,7 +49,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
         return depart;
     }*/
-    public Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException {
+    @Override
+    public TDepartamento crearDepartamento(TDepartamento departamentoNuevo) throws DepartamentoException {
         log.info("creando departamento...");
 
         Departamento depart = null;
@@ -98,7 +93,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                     try {
 
                         log.info("Persistiendo departamento en BBDD...");
-                        depart = em.merge(departamentoNuevo);
+                        depart = em.merge(new Departamento(departamentoNuevo));
                         log.debug("result = '" + depart + "'");
 
 
@@ -134,12 +129,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             }
         }
 
-        return depart;
+        return depart.crearTransferSimple();
     }
 
 
     @Override
-    public Departamento buscarByID(Long id) throws DepartamentoException {
+    public TDepartamentoCompleto buscarByID(Long id) throws DepartamentoException {
         Departamento depart;
 
         log.info("id = [" + id + "]");
@@ -187,11 +182,11 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         if (em.isOpen())
             em.close();
 
-        return depart;
+        return depart.crearTransferCompleto();
     }
 
     @Override
-    public boolean eliminarDepartamento(Departamento departEliminar) {
+    public boolean eliminarDepartamento(TDepartamento departEliminar) {
 
         boolean result;
 
@@ -220,7 +215,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
     @Override
-    public List<Departamento> listarDepartamentos() {
+    public List<TDepartamento> listarDepartamentos() {
 
         List<Departamento> lista;
 
@@ -246,19 +241,21 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.close();
 
 
-        return lista;
+        return lista.stream()
+                .map((d)-> d.crearTransferSimple())
+                .collect(Collectors.toList());
     }
 
 
     public static void main(String[] args) {
-        List<Departamento> lista = new SA_DepartamentoImpl().listarDepartamentos();
+        List<TDepartamento> lista = new SA_DepartamentoImpl().listarDepartamentos();
 
         System.out.println("lista = [" + lista + "]");
 
     }
 
 
-    public Departamento buscarBySiglas(String siglas) throws DepartamentoException {
+    public TDepartamentoCompleto buscarBySiglas(String siglas) throws DepartamentoException {
         Departamento depart = null;
         log.debug("siglas = '" + siglas + "'");
 
@@ -311,7 +308,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         if (em.isOpen())
             em.close();
 
-        return depart;
+        return depart.crearTransferCompleto();
     }
 
 

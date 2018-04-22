@@ -2,11 +2,11 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado;
 
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.GET;
@@ -25,7 +25,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     public Broker_SA_EmpleadoImpl() {}
 
     @Override
-    public Empleado crearEmpleado(@WebParam(name="Empleado") Empleado empleadoNuevo) throws EmpleadoException {
+    public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoException {
 
         return FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(empleadoNuevo);
         //return null;
@@ -36,8 +36,8 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     @GET
     @Path("/{id}")
     @Produces("application/xml")
-    public Empleado buscarByIDREST(@PathParam("id") Long id) throws EmpleadoException {
-        Empleado emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
+    public TEmpleadoCompleto buscarByIDREST(@PathParam("id") Long id) throws EmpleadoException {
+        TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
 
 
 
@@ -52,6 +52,8 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
         System.out.println("emple = [" + emple + "]");
 
+        System.out.println("emple.depart = [" + emple.getDepartamento() + "]");
+
         System.out.println();
         System.out.println("***********************************************");
         System.out.println("***********************************************");
@@ -63,8 +65,8 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
 
     @Override
-    public Empleado buscarByID(@WebParam(name="id") Long id) throws EmpleadoException {
-        Empleado emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
+    public TEmpleadoCompleto buscarByID(@WebParam(name="id") Long id) throws EmpleadoException {
+        TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
 
         System.out.println("***********************************************");
         System.out.println("***********************************************");
@@ -81,13 +83,12 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         return emple;
     }
 
-    public boolean eliminarEmpleado(@WebParam(name="Empleado") Empleado empleadoEliminar) throws EmpleadoException {
+    public boolean eliminarEmpleado(@WebParam(name="Empleado") TEmpleado empleadoEliminar) throws EmpleadoException {
 
         return FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(empleadoEliminar);
     }
 
-    public List<Empleado> listarEmpleados() {
-
+    public List<TEmpleado> listarEmpleados() {
         return FactoriaSA.getInstance().crearSA_Empleado().listarEmpleados();
     }
 
@@ -103,8 +104,34 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     }
 
     @Override
-    public Empleado buscarByEmail(String email) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoException {
         return FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
     }
 
+
+
+
+
+
+    @Override
+    public TEmpleadoCompleto buscarByIDTransfer(Long id) throws EmpleadoException {
+
+
+        TEmpleadoCompleto tec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
+
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println();
+
+        System.out.println("tec = [" + tec + "]");
+
+        System.out.println();
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+        System.out.println("***********************************************");
+
+
+        return tec;
+    }
 }

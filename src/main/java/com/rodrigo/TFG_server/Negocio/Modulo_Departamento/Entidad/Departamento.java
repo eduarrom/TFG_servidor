@@ -1,7 +1,10 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad;
 
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.sun.xml.txw2.annotation.XmlElement;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +23,7 @@ import java.util.*;
 })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Departamento implements Serializable/*, CycleRecoverable */{
+public class Departamento implements Serializable/*, CycleRecoverable */ {
 
     private final static Logger log = LoggerFactory.getLogger(Departamento.class);
 
@@ -47,9 +50,9 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
             @XmlElement(name = "EmpleadoTParcial", type = EmpleadoTParcial.class), //<empleados xsi:type="empleadoTParcial">
             @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
     })*/
-    //@XmlInverseReference(mappedBy = "departamento")
+//    @XmlInverseReference(mappedBy = "departamento")
 //    @XmlElementRef
-    private Collection<Empleado> empleados =  new ArrayList();
+    private Collection<Empleado> empleados = new ArrayList();
 
     @Version
     protected long version;
@@ -83,8 +86,9 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
         this.siglas = siglas;
     }
 
-    /** Copia el Departamento con
-     *  - Listado de empleados vacio
+    /**
+     * Copia el Departamento con
+     * - Listado de empleados vacio
      *
      * @param d
      */
@@ -95,6 +99,14 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
         this.version = d.version;
     }
 
+    public Departamento(TDepartamento td) {
+        this.id = td.getId();
+        this.nombre = td.getNombre();
+        this.siglas = td.getSiglas();
+    }
+
+
+
     public Departamento(long id) {
         this.id = id;
     }
@@ -104,12 +116,33 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
      ********** METODOS *********
      ****************************/
 
+
+    public TDepartamento crearTransferSimple() {
+        return new TDepartamento(id, nombre, siglas);
+    }
+
+
+    public TDepartamentoCompleto crearTransferCompleto() {
+
+        HashMap<Long, TEmpleado> tEmpleados = new HashMap<>();
+
+        empleados.stream().forEach((e) -> {
+            tEmpleados.put(e.getId(), e.crearTransferSimple());
+        });
+
+
+        TDepartamentoCompleto tdc = new TDepartamentoCompleto(crearTransferSimple(), tEmpleados);
+
+        System.out.println("tdc = [" + tdc + "]");
+
+        return tdc;
+    }
+
+
     public boolean agregarEmpleado(Empleado e) {
         e.setDepartamento(this);
         return this.empleados.add(e);
     }
-
-
 
 
     /****************************
@@ -168,13 +201,12 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
      ********** METODOS *********
      ****************************/
 
-    public double calcularNominaMes(){
+    public double calcularNominaMes() {
 
         return empleados.stream()
                 .map(Empleado::calcularNominaMes)
-                .reduce(0.0,(acum, val)->acum + val);
+                .reduce(0.0, (acum, val) -> acum + val);
     }
-
 
 
     /****************************
@@ -187,7 +219,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */{
                 "  id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", siglas='" + siglas + '\'' +
-                ", EmpleadosSize='" +((empleados==null)?"null":empleados.size()) + '\'' +
+                ", EmpleadosSize='" + ((empleados == null) ? "null" : empleados.size()) + '\'' +
                 ", version=" + version +
                 '}';
     }

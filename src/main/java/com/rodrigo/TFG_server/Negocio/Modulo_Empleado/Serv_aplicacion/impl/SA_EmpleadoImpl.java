@@ -2,9 +2,14 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
@@ -14,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The type Sa empleado.
@@ -30,7 +36,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      * @throws EmpleadoNullException      Si el param es null
      * @throws EmpleadoFieldNullException Si algún parámetro es null
      */
-    public Empleado crearEmpleado(Empleado empleadoNuevo) throws EmpleadoException {
+    public TEmpleadoCompleto crearEmpleado(TEmpleado empleadoNuevo) throws EmpleadoException {
         log.info("creando empleado...");
 
         Empleado emple = null;
@@ -74,8 +80,21 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
                     try {
 
+                        Empleado e = null;
+                        if(empleadoNuevo instanceof TEmpleadoTCompleto){
+                            e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                    ((TEmpleadoTCompleto) empleadoNuevo).getAntiguedad(), ((TEmpleadoTCompleto) empleadoNuevo).getSueldoBase());
+                        }else if(empleadoNuevo instanceof TEmpleadoTParcial){
+                            e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                    ((TEmpleadoTParcial) empleadoNuevo).getHorasJornada(), ((TEmpleadoTParcial) empleadoNuevo).getPrecioHora());
+                        }
+
+                        log.info("Asignando departamento a empleado");
+                        //e.setDepartamento(em.find(Departamento.class, empleadoNuevo.getDepartamento()));
+                        e.getDepartamento().setId(empleadoNuevo.getDepartamento());
+
                         log.info("Persistiendo empleado en BBDD...");
-                        emple = em.merge(empleadoNuevo);
+                        emple = em.merge(e);
                         log.debug("result = '" + emple + "'");
 
 
@@ -111,12 +130,12 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
-        return emple;
+        return emple.crearTransferCompleto();
     }
 
 
     @Override
-    public Empleado buscarByID(Long id) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByID(Long id) throws EmpleadoException {
         Empleado emple;
 
         log.info("id = [" + id + "]");
@@ -163,11 +182,11 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         if (em.isOpen())
             em.close();
 
-        return emple;
+        return (emple != null) ? emple.crearTransferCompleto() : null;
     }
 
     @Override
-    public boolean eliminarEmpleado(Empleado empleadoEliminar) throws EmpleadoException {
+    public boolean eliminarEmpleado(TEmpleado empleadoEliminar) throws EmpleadoException {
 
         boolean result;
 
@@ -210,7 +229,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
     }
 
     @Override
-    public List<Empleado> listarEmpleados() {
+    public List<TEmpleado> listarEmpleados() {
 
         List<Empleado> lista;
 
@@ -234,7 +253,9 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.close();
 
 
-        return lista;
+        return lista.stream()
+                .map((e)-> e.crearTransferSimple())
+                .collect(Collectors.toList());
     }
 
     public String saludar(String nombre) {
@@ -359,7 +380,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      * @return retrona el empleado de la BBDD
      * Null si no existe
      */
-    public Empleado buscarByEmail(String email) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoException {
         Empleado emple = null;
         log.debug("email = '" + email + "'");
 
@@ -416,7 +437,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.close();
 
 
-        return emple;
+        return (emple != null) ? emple.crearTransferCompleto() : null;
     }
 
 }

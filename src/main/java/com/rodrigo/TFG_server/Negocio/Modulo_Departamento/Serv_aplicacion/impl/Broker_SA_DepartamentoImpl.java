@@ -3,12 +3,13 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.DeptSencillo;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.IBroker_SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/departamento")
@@ -40,7 +41,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("/deptCompleto/{id}")
     @Produces("application/xml")
-    public Departamento getDepartamentoCompleto(@PathParam("id") Long id) throws DepartamentoException {
+    public TDepartamentoCompleto getDepartamentoCompleto(@PathParam("id") Long id) throws DepartamentoException {
         System.out.println("********************************************");
         System.out.println("************ getDepartamentoCompleto **********");
         System.out.println("********************************************");
@@ -53,7 +54,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     //@Path("/crear")
     @Produces("application/xml")
     @Override
-    public Departamento crearDepartamento( Departamento departamentoNuevo) throws DepartamentoException {
+    public TDepartamento crearDepartamento(TDepartamento departamentoNuevo) throws DepartamentoException {
         return FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(departamentoNuevo);
     }
 
@@ -62,13 +63,13 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/{id}")
     @Produces("application/xml")
     @Override
-    public Departamento buscarByID(@PathParam("id") Long id) throws DepartamentoException {
+    public TDepartamentoCompleto buscarByID(@PathParam("id") Long id) throws DepartamentoException {
         System.out.println("********************************************");
         System.out.println("************ buscarByID **********");
         System.out.println("id = [" + id + "]");
         System.out.println("********************************************");
 
-        Departamento dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(id);
+        TDepartamentoCompleto dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(id);
 //        dept.setEmpleados(null);
 
         System.out.println("dept = [" + dept + "]");
@@ -81,7 +82,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("bySiglas/{siglas}")
     @Produces("application/xml")
     @Override
-    public Departamento buscarBySiglas(@PathParam("siglas") String siglas) throws DepartamentoException {
+    public TDepartamentoCompleto buscarBySiglas(@PathParam("siglas") String siglas) throws DepartamentoException {
         System.out.println("********************************************");
         System.out.println("************ buscarBySiglas **********");
         System.out.println("siglas = [" + siglas + "]");
@@ -94,7 +95,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/{id}")
     @Produces("application/xml")
     @Override
-    public boolean eliminarDepartamento(Departamento departEliminar) {
+    public boolean eliminarDepartamento(TDepartamento departEliminar) {
         return FactoriaSA.getInstance().crearSA_Departamento().eliminarDepartamento(departEliminar);
     }
 
@@ -103,18 +104,31 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/listar")
     @Produces("application/xml")
     @Override
-    public Departamento[] listarDepartamentos() {
+    public TDepartamento[] listarDepartamentos() {
         System.out.println("Listando Departamentos simple");
-        List<Departamento> lista = FactoriaSA.getInstance().crearSA_Departamento().listarDepartamentos();
+        List<TDepartamento> lista = FactoriaSA.getInstance().crearSA_Departamento().listarDepartamentos();
 
         lista.stream()
                 .forEach(System.out::println);
 
-        lista.stream()
-                .forEach((d)->d.getEmpleados().stream()
-                        .forEach((e -> e.setProyectos(null))));
+        return lista.toArray(new TDepartamento[]{});
+    }
 
-        return lista.toArray(new Departamento[]{});
+
+
+
+
+    @GET
+    @Path("/tranfer/{id}")
+    @Produces("application/xml")
+    @Override
+    public TDepartamentoCompleto getDepartamentoTranfer(@PathParam("id") Long id) throws DepartamentoException {
+        System.out.println("********************************************");
+        System.out.println("************ getDepartamentoTranfer **********");
+        System.out.println("********************************************");
+        TDepartamentoCompleto td = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(id);
+        System.out.println("td = [" + td + "]");
+        return td;
     }
 
 

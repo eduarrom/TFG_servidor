@@ -3,19 +3,20 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldNullException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
-import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
-import org.hibernate.PropertyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The type Sa proyecto.
@@ -30,7 +31,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
      * @param proyectoNuevo
      * @return Proyecto insertado en BBDD o null si la entidad ya existe
      */
-    public Proyecto crearProyecto(Proyecto proyectoNuevo) throws ProyectoException {
+    public TProyecto crearProyecto(TProyecto proyectoNuevo) throws ProyectoException {
         Proyecto proy;
 
         log.info("Creando Entity Manager");
@@ -39,39 +40,45 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         {
             log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
             log.info("Persistiendo proyecto en BBDD");
-            proy = em.merge(proyectoNuevo);
+            proy = em.merge(new Proyecto(proyectoNuevo));
 
             log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
         }
         em.close();
 
-        return proy;
+        return proy.crearTrasferSimple();
     }
 
     @Override
-    public EmpleadoProyecto añadirEmpleadoAProyecto(Empleado e, Proyecto p, int horas) {
+    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) {
         Proyecto proy;
 
         log.info("Creando Entity Manager");
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
 
-        EmpleadoProyecto ep = new EmpleadoProyecto(e, p, horas);
+        EmpleadoProyecto ep = new EmpleadoProyecto(
+                Empleado.crearEmpleado(e),
+                new Proyecto(p),
+                horas);
         {
-            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
+            log.info("TRANSACCION --> BEGIN");
+            em.getTransaction().begin();
+
             log.info("Persistiendo proyecto en BBDD");
             ep = em.merge(ep);
 
-            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
+            log.info("TRANSACCION --> COMMIT");
+            em.getTransaction().commit();
         }
         em.close();
 
-        return ep;
+        return ep.crearTransferSimple();
     }
 
 
     @Override
-    public Proyecto buscarByID(Long id) {
+    public TProyectoCompleto buscarByID(Long id) {
         Proyecto proy;
 
         log.info("Creando Entity Manager");
@@ -92,11 +99,11 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         }
         em.close();
 
-        return proy;
+        return proy.crearTransferCompleto();
     }
 
     @Override
-    public boolean eliminarProyecto(Proyecto proyectoEliminar) {
+    public boolean eliminarProyecto(TProyecto proyectoEliminar) {
 
         boolean result;
 
@@ -123,7 +130,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
     }
 
     @Override
-    public List<Proyecto> listarProyectos() {
+    public List<TProyecto> listarProyectos() {
 
         List<Proyecto> lista;
 
@@ -138,7 +145,9 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         }
         em.close();
 
-        return lista;
+        return lista.stream()
+                .map((p)-> p.crearTrasferSimple())
+                .collect(Collectors.toList());
     }
 
 }

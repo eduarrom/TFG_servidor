@@ -1,10 +1,11 @@
+/*
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
@@ -19,7 +20,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,9 +40,11 @@ class Broker_SA_DepartamentoImplTest {
     final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImplTest.class);
 
 
-    /*******************************************************************
+    */
+/*******************************************************************
      **********************   METODOS INICIALES   **********************
-     *******************************************************************/
+     *******************************************************************//*
+
 
     @BeforeAll
     static void initSA() throws DepartamentoException, EmpleadoException {
@@ -60,7 +65,9 @@ class Broker_SA_DepartamentoImplTest {
 
 
 
-        /*//dept = new Departamento("Ingenieria del Software");
+        */
+/*//*
+/dept = new Departamento("Ingenieria del Software");
         dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
 
         d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
@@ -71,7 +78,8 @@ class Broker_SA_DepartamentoImplTest {
         dept.getDepartamentos().add(d1);
         d1.setDepartamento(dept);
 
-        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*/
+        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*//*
+
     }
 
     @BeforeEach
@@ -90,18 +98,22 @@ class Broker_SA_DepartamentoImplTest {
     @AfterEach
     void finalizarContexto() throws DepartamentoException {
 
-       /* assertFalse(b.transactionIsActive(), "Transacción no cerrada");
+       */
+/* assertFalse(b.transactionIsActive(), "Transacción no cerrada");
 
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
-*/
+*//*
+
         log.info("Eliminado departamento");
         b.eliminarDepartamento(d1);
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ******************   TEST CREAR DEPARTAMENTO   *******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @ParameterizedTest
@@ -129,10 +141,12 @@ class Broker_SA_DepartamentoImplTest {
     @Test
     void crearDepartamentoExistente() throws DepartamentoException {
 
-        /*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
+        */
+/*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
 
         log.info("Creando departamento 1");
-        d1 = b.crearDepartamento(d1);*/
+        d1 = b.crearDepartamento(d1);*//*
+
 
 
         Throwable exception = assertThrows(DepartamentoYaExisteExcepcion.class, () -> {
@@ -145,7 +159,9 @@ class Broker_SA_DepartamentoImplTest {
         });
 
 
-        /*b.eliminarDepartamento(d1);*/
+        */
+/*b.eliminarDepartamento(d1);*//*
+
     }
 
     @Test
@@ -213,9 +229,11 @@ class Broker_SA_DepartamentoImplTest {
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ****************   TEST BUSCAR DEPARTAMENTO ID  ******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @Test
@@ -278,11 +296,14 @@ class Broker_SA_DepartamentoImplTest {
     }
 
 
-    /******************************************************************
+    */
+/******************************************************************
      ******************   TEST ELIMINAR DEPARTAMENTO   ********************
-     ******************************************************************/
+     ******************************************************************//*
 
 
+
+*/
 /*    @Test
     void eliminarDepartamento() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
@@ -303,12 +324,15 @@ class Broker_SA_DepartamentoImplTest {
 
         assertNull(b.buscarByID(e.getId()));
 
-    }*/
+    }*//*
 
 
-    /******************************************************************
+
+    */
+/******************************************************************
      *****************   TEST LISTAR DEPARTAMENTOS   ******************
-     ******************************************************************/
+     ******************************************************************//*
+
 
 
     @Test
@@ -327,6 +351,7 @@ class Broker_SA_DepartamentoImplTest {
 
     }
 
+*/
 /*
     @Test
     void saludo() {
@@ -339,14 +364,17 @@ class Broker_SA_DepartamentoImplTest {
 
         assertTrue(b.saludar(nombre).equals(str));
     }
+    *//*
+
+
+
+
+
     */
-
-
-
-
-    /******************************************************************
+/******************************************************************
      ******************   TEST BUSCAR BY SIGLAS   *********************
-     ******************************************************************/
+     ******************************************************************//*
+
 
     @ParameterizedTest
     @CsvSource({"Departamento busquedas 1", "Departamento busquedas 2"})
@@ -411,10 +439,24 @@ class Broker_SA_DepartamentoImplTest {
 
     }
 
+    @Test
+    void buscarByIDTranfer() throws DepartamentoException, JAXBException {
 
-    /******************************************************************
+        TDepartamento d = b.getDepartamentoTranfer(3L);
+
+        System.out.println("d = [" + d + "]");
+
+        Marshaller ms = JAXBContext.newInstance(TDepartamento.class).createMarshaller();
+        ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        ms.marshal(d, System.out);
+
+    }
+    */
+/******************************************************************
      *********************   METODOS AUXILIARES   *********************
-     ******************************************************************/
+     ******************************************************************//*
 
 
-}
+
+}*/
