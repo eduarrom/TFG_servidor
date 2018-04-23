@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 
@@ -16,7 +17,7 @@ public interface SA_Departamento {
     
     TDepartamentoCompleto buscarByID(Long id) throws DepartamentoException;
 
-    boolean eliminarDepartamento(TDepartamento departEliminar);
+    boolean eliminarDepartamento(TDepartamento departEliminar) throws DepartamentoException, DepartamentoConEmpleadosException;
 
     List<TDepartamento> listarDepartamentos();
 

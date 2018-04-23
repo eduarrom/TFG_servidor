@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
         if (departamentoNuevo.getSiglas() == null || departamentoNuevo.getSiglas().equals("")) {
             log.error("Siglas de departamento es null");
-            throw new DepartamentoException("Ocurrio un erro con las Siglas.");
+            throw new DepartamentoException("Ocurrio un error con las Siglas.");
 
         }
 
@@ -182,11 +183,11 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         if (em.isOpen())
             em.close();
 
-        return depart.crearTransferCompleto();
+        return (depart != null) ? depart.crearTransferCompleto() : null;
     }
 
     @Override
-    public boolean eliminarDepartamento(TDepartamento departEliminar) {
+    public boolean eliminarDepartamento(TDepartamento departEliminar) throws DepartamentoException {
 
         boolean result;
 
@@ -202,8 +203,17 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 log.info("TRANSACCION --> COMMIT");
                 em.getTransaction().commit();
             } catch (Exception e) {
-                //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+                //log.info("TRANSACCION --> ROLLBACK");
+                //em.getTransaction().rollback();
+
+                log.debug("e = '" + e + "'");
                 result = false;
+
+                if(e.getCause().getCause() instanceof ConstraintViolationException ){
+                    throw new DepartamentoConEmpleadosException("Departamento con empleados asignados.");
+                }
+
+                throw new DepartamentoException("Hubo un error al eliminar el departamento");
             }
 
         }
@@ -242,7 +252,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
         return lista.stream()
-                .map((d)-> d.crearTransferSimple())
+                .map((d) -> d.crearTransferSimple())
                 .collect(Collectors.toList());
     }
 
@@ -308,7 +318,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         if (em.isOpen())
             em.close();
 
-        return depart.crearTransferCompleto();
+        return (depart != null) ? depart.crearTransferCompleto() : null;
     }
 
 

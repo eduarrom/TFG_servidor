@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TDepartamentoCompleto extends TDepartamento {
@@ -9,14 +10,17 @@ public class TDepartamentoCompleto extends TDepartamento {
 
     private TDepartamento departamento;
 
-    private Map<Long, TEmpleado> empleados;
+    private HashMap<Long, TEmpleado> empleados = new HashMap<>();
 
 
 
     public TDepartamentoCompleto() {}
 
+    public TDepartamentoCompleto(TDepartamento departamento) {
+        this.departamento = departamento;
+    }
 
-    public TDepartamentoCompleto(TDepartamento departamento, Map<Long, TEmpleado> empleados) {
+    public TDepartamentoCompleto(TDepartamento departamento, HashMap<Long, TEmpleado> empleados) {
         this.departamento = departamento;
         this.empleados = empleados;
     }
@@ -36,6 +40,7 @@ public class TDepartamentoCompleto extends TDepartamento {
         return departamento.getId();
     }
 
+    public String getSiglas(){ return departamento.getSiglas();}
 
 
     public TDepartamento getDepartamento() {
@@ -46,11 +51,11 @@ public class TDepartamentoCompleto extends TDepartamento {
         this.departamento = departamento;
     }
 
-    public Map<Long, TEmpleado> getEmpleados() {
+    public HashMap<Long, TEmpleado> getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(Map<Long, TEmpleado> empleados) {
+    public void setEmpleados(HashMap<Long, TEmpleado> empleados) {
         this.empleados = empleados;
     }
 

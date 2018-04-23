@@ -95,7 +95,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @Path("/{id}")
     @Produces("application/xml")
     @Override
-    public boolean eliminarDepartamento(TDepartamento departEliminar) {
+    public boolean eliminarDepartamento(TDepartamento departEliminar) throws DepartamentoException {
         return FactoriaSA.getInstance().crearSA_Departamento().eliminarDepartamento(departEliminar);
     }
 

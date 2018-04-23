@@ -34,7 +34,7 @@ class Broker_SA_DepartamentoImplTest {
     static private Departamento d1;
     static Empleado empld1;
     //    static Departamento emple2;
-    static Departamento dept;
+    static Departamento emple;
     static Proyecto proy1;
 
     final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImplTest.class);
@@ -56,9 +56,9 @@ class Broker_SA_DepartamentoImplTest {
 //        emple2 = new DepartamentoTCompleto("emple2", "1234", Rol.EMPLEADO);
         empld1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(23L);
 
-        dept = new Departamento("Dept1");
+        emple = new Departamento("Dept1");
 //        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
-        dept = b.buscarBySiglas("DdP");
+        emple = b.buscarBySiglas("DdP");
 
         proy1 = new Proyecto("Proy1");
         proy1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(1L);
@@ -67,16 +67,16 @@ class Broker_SA_DepartamentoImplTest {
 
         */
 /*//*
-/dept = new Departamento("Ingenieria del Software");
-        dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
+/emple = new Departamento("Ingenieria del Software");
+        emple = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
 
-        d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
+        d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, emple);
 
-        //dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(1L);
-        //dept = FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(dept);
+        //emple = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(1L);
+        //emple = FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(emple);
 
-        dept.getDepartamentos().add(d1);
-        d1.setDepartamento(dept);
+        emple.getDepartamentos().add(d1);
+        d1.setDepartamento(emple);
 
         d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*//*
 
@@ -142,7 +142,7 @@ class Broker_SA_DepartamentoImplTest {
     void crearDepartamentoExistente() throws DepartamentoException {
 
         */
-/*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
+/*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), emple);
 
         log.info("Creando departamento 1");
         d1 = b.crearDepartamento(d1);*//*
@@ -308,7 +308,7 @@ class Broker_SA_DepartamentoImplTest {
     void eliminarDepartamento() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        Departamento e = new EmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, dept);
+        Departamento e = new EmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, emple);
         log.info("Creando departamento");
         e = b.crearDepartamento(e);
         log.info("Asignando proyecto a departamento");

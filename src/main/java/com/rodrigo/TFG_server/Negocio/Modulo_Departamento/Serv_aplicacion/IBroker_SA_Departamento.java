@@ -17,7 +17,7 @@ public interface IBroker_SA_Departamento {
     public TDepartamentoCompleto buscarByID(Long id) throws DepartamentoException;
 
 
-    boolean eliminarDepartamento(TDepartamento departEliminar);
+    boolean eliminarDepartamento(TDepartamento departEliminar) throws DepartamentoException;
 
     public TDepartamento[] listarDepartamentos();
 

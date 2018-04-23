@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.Arrays;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TDepartamento {
@@ -15,6 +16,14 @@ public class TDepartamento {
 
     public TDepartamento() {
     }
+
+    public TDepartamento(String nombre) {
+        this.nombre = nombre;
+        this.siglas = String.valueOf(
+                Arrays.stream(nombre.split(" "))
+                        .reduce("", (acum, pal) -> acum + String.valueOf(pal.charAt(0))));
+    }
+
 
     public TDepartamento(long id, String nombre, String siglas) {
         this.id = id;

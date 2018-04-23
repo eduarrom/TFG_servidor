@@ -1,16 +1,18 @@
-/*
+
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,19 +31,21 @@ class SA_DepartamentoImplTest {
 
     static SA_Departamento sa;
 
-    static private Departamento d1;
-    static Empleado empld1;
+    static private TDepartamentoCompleto d1;
+    static private TEmpleadoCompleto e1;
+
+
+    static TEmpleadoCompleto empld1;
     //    static Departamento emple2;
-    static Departamento dept;
-    static Proyecto proy1;
+    static TDepartamentoCompleto dept;
+    static TProyectoCompleto proy1;
 
     final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImplTest.class);
 
 
-    */
-/*******************************************************************
+    /*******************************************************************
      **********************   METODOS INICIALES   **********************
-     *******************************************************************//*
+     *******************************************************************/
 
 
     @BeforeAll
@@ -49,76 +54,83 @@ class SA_DepartamentoImplTest {
         sa = FactoriaSA.getInstance().crearSA_Departamento();
 
 
-        empld1 = new EmpleadoTParcial("empld1", "1234", Rol.ADMIN);
 //        emple2 = new DepartamentoTCompleto("emple2", "1234", Rol.EMPLEADO);
-        empld1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(23L);
+        empld1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
-        dept = new Departamento("Dept1");
 //        dept1=FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
         dept = sa.buscarBySiglas("DdP");
 
-        proy1 = new Proyecto("Proy1");
         proy1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(1L);
+/*
 
 
+        emple = new Departamento("Ingenieria del Software");
+        emple = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
 
-        */
-/*//*
-/dept = new Departamento("Ingenieria del Software");
-        dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(3L);
+        d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, emple);
 
-        d1 = new DepartamentoTCompleto("empleTest", "1234", Rol.EMPLEADO, dept);
+        //emple = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(1L);
+        //emple = FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(emple);
 
-        //dept = FactoriaSA.getInstance().crearSA_Departamento().buscarByID(1L);
-        //dept = FactoriaSA.getInstance().crearSA_Departamento().crearDepartamento(dept);
+        emple.getDepartamentos().add(d1);
+        d1.setDepartamento(emple);
 
-        dept.getDepartamentos().add(d1);
-        d1.setDepartamento(dept);
-
-        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());*//*
+        d1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(d1.getSiglas());
+*/
 
     }
 
     @BeforeEach
-    void iniciarContexto() throws DepartamentoException {
-        d1 = new Departamento("d1");
+    void iniciarContexto() throws DepartamentoException, EmpleadoException {
+        String siglas = "DT";
 
         log.info("Creando departamento ");
-        Departamento aux = sa.buscarBySiglas(d1.getSiglas());
-        if (aux == null) {
-            d1 = sa.crearDepartamento(d1);
+        TDepartamentoCompleto auxD = sa.buscarBySiglas(siglas);
+        if (auxD == null) {
+            d1 = new TDepartamentoCompleto(sa.crearDepartamento(new TDepartamento("Departamento Test")));
         } else
-            d1 = aux;
+            d1 = auxD;
+
+
+        String nombre = "empleTest";
+
+        log.info("Creando empleado ");
+        TEmpleadoCompleto auxE = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
+
+        if (auxE == null) {
+            e1 = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, d1.getId()));
+        } else
+            e1 = auxE;
+
+
+        d1 = sa.buscarBySiglas(siglas);
+
+
     }
 
 
     @AfterEach
-    void finalizarContexto() throws DepartamentoException {
+    void finalizarContexto() throws DepartamentoException, EmpleadoException {
 
-       */
-/* assertFalse(b.transactionIsActive(), "Transacción no cerrada");
-
-        assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
-*//*
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado());
 
         log.info("Eliminado departamento");
         sa.eliminarDepartamento(d1);
+
     }
 
 
-    */
-/******************************************************************
+    /******************************************************************
      ******************   TEST CREAR DEPARTAMENTO   *******************
-     ******************************************************************//*
-
+     ******************************************************************/
 
 
     @ParameterizedTest
     @CsvSource({"crear1", "crear2", "crear3"})
     void crearDepartamento(String nombre) throws DepartamentoException {
 
-        Departamento d = new Departamento(nombre);
-        Departamento departCreado = sa.crearDepartamento(d);
+        TDepartamento d = new TDepartamento(nombre);
+        TDepartamento departCreado = sa.crearDepartamento(d);
 
 
         d.setId(departCreado.getId());
@@ -138,17 +150,17 @@ class SA_DepartamentoImplTest {
     @Test
     void crearDepartamentoExistente() throws DepartamentoException {
 
-        */
-/*Departamento d1 = new EmpleadoTParcial("juan", "1234", Rol.valueOf(rol), dept);
+
+        TDepartamento d = new TDepartamento("Existente");
 
         log.info("Creando departamento 1");
-        d1 = b.crearDepartamento(d1);*//*
+        d = sa.crearDepartamento(d);
 
 
-
+        TDepartamento finalD = d;
         Throwable exception = assertThrows(DepartamentoYaExisteExcepcion.class, () -> {
 
-            Departamento d2 = d1;
+            TDepartamento d2 = finalD;
 
             log.info("Creando departamento 2");
             d2 = sa.crearDepartamento(d2);
@@ -156,8 +168,7 @@ class SA_DepartamentoImplTest {
         });
 
 
-        */
-/*b.eliminarDepartamento(d1);*//*
+        sa.eliminarDepartamento(d);
 
     }
 
@@ -166,8 +177,7 @@ class SA_DepartamentoImplTest {
 
 
         Throwable exception = assertThrows(DepartamentoException.class, () -> {
-            Departamento departCreado;
-            departCreado = sa.crearDepartamento(null);
+            TDepartamento departCreado = sa.crearDepartamento(null);
 
             assertNull(departCreado);
 
@@ -183,7 +193,7 @@ class SA_DepartamentoImplTest {
 
         Throwable exception = assertThrows(DepartamentoException.class, () -> {
 
-            Departamento departCreado = sa.crearDepartamento(new Departamento());
+            TDepartamento departCreado = sa.crearDepartamento(new TDepartamento());
 
         });
 
@@ -200,7 +210,7 @@ class SA_DepartamentoImplTest {
 
             d1.setSiglas(null);
             log.debug("d1= " + d1);
-            Departamento departCreado = sa.crearDepartamento(d1);
+            TDepartamento departCreado = sa.crearDepartamento(d1);
 
         });
 
@@ -217,7 +227,7 @@ class SA_DepartamentoImplTest {
 
             d1.setSiglas("");
             log.debug("d1 = '" + d1 + "'");
-            Departamento empleCreado = sa.crearDepartamento(d1);
+            TDepartamento empleCreado = sa.crearDepartamento(d1);
 
         });
         log.info("Excepcion capturada:" + ex2.getMessage());
@@ -226,18 +236,16 @@ class SA_DepartamentoImplTest {
     }
 
 
-    */
-/******************************************************************
+    /******************************************************************
      ****************   TEST BUSCAR DEPARTAMENTO ID  ******************
-     ******************************************************************//*
-
+     ******************************************************************/
 
 
     @Test
     void buscarByID() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByID");
 
-        Departamento d = sa.buscarByID(d1.getId());
+        TDepartamentoCompleto d = sa.buscarByID(d1.getId());
         log.info(d.toString());
 
 
@@ -246,7 +254,7 @@ class SA_DepartamentoImplTest {
         assertEquals(d.getNombre(), d1.getNombre());
         assertEquals(d.toString(), d1.toString());
 
-        //b.eliminarDepartamento(nuevo);
+        //sa.eliminarDepartamento(nuevo);
 
     }
 
@@ -257,7 +265,7 @@ class SA_DepartamentoImplTest {
 
         Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
 
-            Departamento d = sa.buscarByID(-2L);
+            TDepartamentoCompleto d = sa.buscarByID(-2L);
 
 
         });
@@ -271,7 +279,7 @@ class SA_DepartamentoImplTest {
 
         Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
 
-            Departamento d = sa.buscarByID(0L);
+            TDepartamentoCompleto d = sa.buscarByID(0L);
 
 
         });
@@ -285,58 +293,86 @@ class SA_DepartamentoImplTest {
     void buscarByIDInexixtente() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDInexixtente");
 
-        d1.setId(30000L);
-        Departamento buscado = sa.buscarByID(d1.getId());
+        TDepartamentoCompleto buscado = sa.buscarByID(30000L);
 
         assertNull(buscado);
 
     }
 
 
-    */
-/******************************************************************
+    /******************************************************************
      ******************   TEST ELIMINAR DEPARTAMENTO   ********************
-     ******************************************************************//*
+     ******************************************************************/
 
 
-
-*/
-/*    @Test
-    void eliminarDepartamento() throws DepartamentoException {
+    @Test
+    void eliminarDepartamento() throws DepartamentoException, EmpleadoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        Departamento e = new EmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, dept);
+        TDepartamento d = new TDepartamento("Eliminar");
+
         log.info("Creando departamento");
-        e = b.crearDepartamento(e);
-        log.info("Asignando proyecto a departamento");
-        DepartamentoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirDepartamentoAProyecto(e, proy1, 5);
-        proy1.getDepartamentos().add(ep);
-        e.getProyectos().add(ep);
+        d = sa.crearDepartamento(d);
 
         log.info("Eliminando departamento");
-        boolean resutl = b.eliminarDepartamento(e);
+        boolean resutl = sa.eliminarDepartamento(d);
 
         log.debug("resutl = '" + resutl + "'");
 
+        assertNull(sa.buscarByID(d.getId()));
 
-        assertNull(b.buscarByID(e.getId()));
-
-    }*//*
-
+    }
 
 
-    */
-/******************************************************************
+    @Test
+    void eliminarDepartamentoConEmpleados() throws DepartamentoException, EmpleadoException {
+        log.info("SA_DepartamentoImplTest.eliminarDepartamento");
+
+        TDepartamento d = new TDepartamento("Eliminar");
+        log.info("Creando departamento");
+
+        d = sa.crearDepartamento(d);
+
+
+        String nombre = "EmpleEliminar";
+
+        log.info("Creando empleado ");
+        TEmpleadoCompleto auxE = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
+
+        if (auxE == null) {
+            auxE = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, d.getId()));
+        }
+
+        d = sa.buscarBySiglas(d.getSiglas());
+
+
+        TDepartamento finalD = d;
+        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+
+            log.info("Eliminando departamento");
+            boolean result = sa.eliminarDepartamento(finalD);
+
+
+        });
+
+        log.info("Excepcion capturada:" + ex1.getMessage());
+
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
+        boolean result = sa.eliminarDepartamento(finalD);
+
+    }
+
+
+    /******************************************************************
      *****************   TEST LISTAR DEPARTAMENTOS   ******************
-     ******************************************************************//*
-
+     ******************************************************************/
 
 
     @Test
     void listarDepartamentos() {
         log.info("SA_DepartamentoImplTest.listarDepartamentos");
 
-        ArrayList<Departamento> lista = (ArrayList) sa.listarDepartamentos();
+        List<TDepartamento> lista = sa.listarDepartamentos();
 
         assertNotNull(lista);
 
@@ -348,48 +384,30 @@ class SA_DepartamentoImplTest {
 
     }
 
-*/
-/*
-    @Test
-    void saludo() {
-        log.info("---- SA_DepartamentoImplTest.saludo ---- ");
 
-        String nombre = "Rodrigo";
-        String str = "Hola " + nombre + ", un saludo desde el servidor CXF :)";
-
-        assertNotNull(b.saludar(nombre));
-
-        assertTrue(b.saludar(nombre).equals(str));
-    }
-    *//*
-
-
-
-
-
-    */
-/******************************************************************
+    /******************************************************************
      ******************   TEST BUSCAR BY SIGLAS   *********************
-     ******************************************************************//*
+     ******************************************************************/
 
 
     @ParameterizedTest
-    @CsvSource({"Departamento busquedas 1", "Departamento busquedas 2"})
+    @CsvSource({"Departamento de Busquedas 1", "Departamento de Busquedas 2"})
     void buscarBySiglas(String nombre) throws DepartamentoException {
-        Departamento nuevo, d1 = new Departamento(nombre);
+        TDepartamentoCompleto d1 = new TDepartamentoCompleto(new TDepartamento(nombre));
+        TDepartamento nuevo;
 
         String siglas = d1.getSiglas();
 
         log.info("Creando departamento");
-        nuevo = sa.crearDepartamento(d1);
+        nuevo = sa.crearDepartamento(d1.getDepartamento());
 
-        log.info("buscnado departamento");
+        log.info("buscando departamento");
         d1 = sa.buscarBySiglas(siglas);
 
         assertNotNull(d1);
         assertNotNull(nuevo);
 
-        assertEquals(d1.toString(), nuevo.toString());
+        assertEquals(d1.getDepartamento().toString(), nuevo.toString());
 
         sa.eliminarDepartamento(nuevo);
 
@@ -400,12 +418,11 @@ class SA_DepartamentoImplTest {
     void buscarBySiglasInexistente() throws DepartamentoException {
 
 
-        Departamento e2 = sa.buscarBySiglas("asdfawefafafdwefa");
+        TDepartamentoCompleto e2 = sa.buscarBySiglas("asdfawefafafdwefa");
 
         assertNull(e2);
 
     }
-
 
 
     @Test
@@ -413,7 +430,7 @@ class SA_DepartamentoImplTest {
 
         Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
 
-            Departamento e2 = sa.buscarBySiglas("");
+            TDepartamentoCompleto e2 = sa.buscarBySiglas("");
 
 
         });
@@ -427,7 +444,7 @@ class SA_DepartamentoImplTest {
     void buscarBySiglasNull() {
         Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
 
-            Departamento e2 = sa.buscarBySiglas(null);
+            TDepartamentoCompleto e2 = sa.buscarBySiglas(null);
 
 
         });
@@ -437,11 +454,9 @@ class SA_DepartamentoImplTest {
     }
 
 
-    */
 /******************************************************************
-     *********************   METODOS AUXILIARES   *********************
-     ******************************************************************//*
+ *********************   METODOS AUXILIARES   *********************
+ ******************************************************************/
 
 
-
-}*/
+}

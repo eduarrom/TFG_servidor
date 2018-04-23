@@ -95,7 +95,6 @@ class SA_EmpleadoImplTest {
 
         if (aux == null) {
             e1 = sa.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, dept.getId()));
-
         } else
             e1 = aux;
     }
