@@ -2,7 +2,6 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
@@ -34,9 +33,9 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      * @param empleadoNuevo
      * @return Empleado  insertado en BBDD o null si la entidad ya existe
      * @throws EmpleadoNullException      Si el param es null
-     * @throws EmpleadoFieldNullException Si algún parámetro es null
+     * @throws EmpleadoFieldInvalidException Si algún parámetro es null
      */
-    public TEmpleadoCompleto crearEmpleado(TEmpleado empleadoNuevo) throws EmpleadoException {
+    public TEmpleadoCompleto crearEmpleado(TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
         log.info("creando empleado...");
 
         Empleado emple = null;
@@ -109,7 +108,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
                         throw e2;
-                        //throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
+                        //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
 
                     } catch (Exception e) {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
@@ -186,7 +185,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
     }
 
     @Override
-    public boolean eliminarEmpleado(TEmpleado empleadoEliminar) throws EmpleadoException {
+    public boolean eliminarEmpleado(TEmpleado empleadoEliminar) throws EmpleadoNullException, EmpleadoException {
 
         boolean result;
 
@@ -194,7 +193,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
         if (empleadoEliminar == null) {
             log.error("Empleado es null");
-            throw new EmpleadoException("El empleado para eliminar en null", new EmpleadoNullException("El empleado para eliminar en null"));
+            throw new EmpleadoNullException("El empleado para eliminar en null");
         }
 
         if (empleadoEliminar.getId() == null || empleadoEliminar.getId() <= 0) {
@@ -210,7 +209,18 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.getTransaction().begin();
 
             try {
-                em.remove(em.find(Empleado.class, empleadoEliminar.getId()));
+                Empleado emple = em.find(Empleado.class, empleadoEliminar.getId());
+                if (emple != null) {
+                    log.debug("Proyectos: ");
+                    emple.getProyectos().stream()
+                            .forEach(ep -> {
+                                System.out.println("Eliminando ep: " + ep);
+                                em.remove(ep);
+                            });
+                }
+
+
+                em.remove(emple);
                 result = true;
                 log.info("TRANSACCION --> COMMIT");
                 em.getTransaction().commit();
@@ -262,7 +272,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         return "Hola " + nombre + ", un saludo desde el servidor CXF :)";
     }
 
-    public Boolean loginEmpleado(String email, String pass) throws EmpleadoException {
+    public Boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException {
         Empleado emple = null;
         log.debug("email = '" + email + "'");
 
@@ -272,7 +282,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error("El email es invalido");
 
             try {
-                throw new EmpleadoFieldNullException(
+                throw new EmpleadoFieldInvalidException(
                         new PropertyValueException("Empleado.email es erroneo.",
                                 Empleado.class.toString(),
                                 Empleado.class.getDeclaredField("email").toString()));
@@ -289,7 +299,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error("La password es invalido");
 
             try {
-                throw new EmpleadoFieldNullException(
+                throw new EmpleadoFieldInvalidException(
                         new PropertyValueException("Empleado.password es erroneo.",
                                 Empleado.class.toString(),
                                 Empleado.class.getDeclaredField("password").toString()));
@@ -338,7 +348,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error(e2.getStackTrace().toString());
             log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
 
-            throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());*/
+            throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());*/
 
         } catch (Exception e) {
             log.error("Ocurrió una error al persisitir en BBDD.");
@@ -380,7 +390,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      * @return retrona el empleado de la BBDD
      * Null si no existe
      */
-    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
         Empleado emple = null;
         log.debug("email = '" + email + "'");
 
@@ -390,7 +400,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error("El email es invalido");
 
             try {
-                throw new EmpleadoFieldNullException(
+                throw new EmpleadoFieldInvalidException(
                         new PropertyValueException("Empleado.email es erroneo.",
                                 Empleado.class.toString(),
                                 Empleado.class.getDeclaredField("email").toString()));

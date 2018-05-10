@@ -1,6 +1,6 @@
 //package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 //
-//import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
+//import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Empleado;
 ////import org.eclipse.persistence.config.DescriptorCustomizer;
 //import org.eclipse.persistence.descriptors.ClassDescriptor;
 //import org.eclipse.persistence.oxm.mappings.XMLCompositeObjectMapping;

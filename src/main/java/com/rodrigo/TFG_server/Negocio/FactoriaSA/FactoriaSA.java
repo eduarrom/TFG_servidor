@@ -2,9 +2,7 @@ package com.rodrigo.TFG_server.Negocio.FactoriaSA;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.impl.FactoriaSAImpl;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.Broker_SA_DepartamentoImpl;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_EmpleadoImpl;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
 
 public abstract class FactoriaSA {

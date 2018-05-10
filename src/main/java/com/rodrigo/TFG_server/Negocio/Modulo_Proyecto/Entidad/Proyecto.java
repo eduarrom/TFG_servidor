@@ -7,6 +7,9 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 //import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,7 +25,8 @@ import java.util.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Proyecto.listar", query = "FROM Empleado"),
+        @NamedQuery(name = "Proyecto.buscarPorNombre", query = "from Proyecto e where e.nombre = :nombre"),
+        @NamedQuery(name = "Proyecto.listar", query = "FROM Proyecto"),
 })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -47,7 +51,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date fechaInicio = new Date();
+    private Date fechaInicio;// = new Date();
 
 
     @Temporal(TemporalType.DATE)
@@ -60,7 +64,9 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
      ******   PROYECTO   ******
      ****************************/
 
-    @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
+    @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @Fetch(value = FetchMode.SUBSELECT)
 //    @XmlInverseReference(mappedBy = "proyecto")
     private Collection<EmpleadoProyecto> empleados;
 
@@ -80,8 +86,13 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         this.nombre = nombre;
         this.descripcion = "Descripción del proyecto " + this.nombre;
 
+
+//        Date aux = new Date();
+//        fechaInicio = new Date(aux.getYear(), aux.getMonth(), aux.getDate());
+        fechaInicio = new Date();
+
         try {
-            this.fechaFin = new SimpleDateFormat("dd-MM-yyyy").parse("08-09-2018");
+            this.fechaFin = new SimpleDateFormat("dd-MM-yyyy HH").parse("31-12-2018 1");
         } catch (ParseException e) {
             e.printStackTrace();
             this.fechaFin = new Date();
@@ -159,7 +170,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
      ********** METODOS *********
      ****************************/
 
-    public TProyecto crearTrasferSimple(){
+    public TProyecto crearTransferSimple(){
         return new TProyecto(id, nombre, descripcion, fechaInicio, fechaFin);
     }
 
@@ -184,7 +195,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         });
 
 
-        TProyectoCompleto tpc = new TProyectoCompleto(crearTrasferSimple(), tEmpleados, tEmpleadosProyectos);
+        TProyectoCompleto tpc = new TProyectoCompleto(crearTransferSimple(), tEmpleados, tEmpleadosProyectos);
 
         System.out.println("tpc = [" + tpc + "]");
 

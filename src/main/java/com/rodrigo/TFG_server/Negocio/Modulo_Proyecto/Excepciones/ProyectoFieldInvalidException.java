@@ -1,20 +1,22 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones;
+package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones;
 
 import org.hibernate.PropertyValueException;
 
-public class EmpleadoFieldNullException extends EmpleadoException {
+public class ProyectoFieldInvalidException extends ProyectoException {
 
 
     private String message;
     private String entityName;
     private String propertyName;
 
-    public EmpleadoFieldNullException(String message) {
+
+    public ProyectoFieldInvalidException(String message) {
         super(message);
     }
 
 
-    public EmpleadoFieldNullException(PropertyValueException cause) {
+
+    public ProyectoFieldInvalidException(PropertyValueException cause) {
         super(cause);
 
         //Nombre de la entidad

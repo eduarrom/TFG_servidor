@@ -3,6 +3,9 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoLoginErroneo;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -13,7 +16,7 @@ import java.util.List;
 public interface IBroker_SA_Empleado {
 
     @WebMethod(operationName="crearEmpleado")
-    public TEmpleadoCompleto crearEmpleado(@WebParam(name = "Empleado") TEmpleado empleadoNuevo) throws EmpleadoException;
+    public TEmpleadoCompleto crearEmpleado(@WebParam(name = "Empleado") TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException;
 
     @WebMethod(operationName="buscarByID")
     public TEmpleadoCompleto buscarByID(@WebParam(name = "id") Long id) throws EmpleadoException;
@@ -30,10 +33,10 @@ public interface IBroker_SA_Empleado {
     public String saludar(@WebParam(name="nombre") String nombre);
 
     @WebMethod(operationName="loginEmpleado")
-    public boolean loginEmpleado(String email, String pass) throws EmpleadoException;
+    public boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException;
 
     @WebMethod(operationName="buscarByEmail")
-    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoException;
+    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException;
 
 
 

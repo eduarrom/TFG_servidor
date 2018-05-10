@@ -7,6 +7,9 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 //import org.eclipse.persistence.oxm.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +82,9 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
 
 
     //    protected List<EmpleadoProyecto> proyectos = null;
-    @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @Fetch(value = FetchMode.SUBSELECT)
 //    @XmlInverseReference(mappedBy = "empleado")
     protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
 

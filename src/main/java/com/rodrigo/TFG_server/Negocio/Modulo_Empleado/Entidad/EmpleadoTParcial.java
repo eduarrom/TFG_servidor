@@ -118,7 +118,7 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
         HashMap<Long, TEmpleadoProyecto> tEmpleadosProyectos = new HashMap<>();
 
         proyectos.stream().forEach((ep) -> {
-            tProyectos.put(ep.getProyecto().getId(),ep.getProyecto().crearTrasferSimple());
+            tProyectos.put(ep.getProyecto().getId(),ep.getProyecto().crearTransferSimple());
 
             tEmpleadosProyectos.put(ep.getProyecto().getId(), ep.crearTransferSimple());
 

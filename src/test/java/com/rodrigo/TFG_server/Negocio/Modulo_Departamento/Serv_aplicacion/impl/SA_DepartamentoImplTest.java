@@ -9,10 +9,13 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +52,7 @@ class SA_DepartamentoImplTest {
 
 
     @BeforeAll
-    static void initSA() throws DepartamentoException, EmpleadoException {
+    static void initSA() throws DepartamentoException, EmpleadoException, ProyectoException {
         log.info("Creando SA...");
         sa = FactoriaSA.getInstance().crearSA_Departamento();
 
@@ -254,7 +257,7 @@ class SA_DepartamentoImplTest {
         assertEquals(d.getNombre(), d1.getNombre());
         assertEquals(d.toString(), d1.toString());
 
-        //sa.eliminarDepartamento(nuevo);
+        //b.eliminarDepartamento(nuevo);
 
     }
 
@@ -359,6 +362,40 @@ class SA_DepartamentoImplTest {
 
         FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
         boolean result = sa.eliminarDepartamento(finalD);
+
+    }
+
+
+    @Test
+    void eliminarDepartamentoNull()  {
+
+
+        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+            boolean emple = sa.eliminarDepartamento(null);
+
+            assertNull(emple);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void eliminarDepartamentoIDNegativo()  {
+
+        TDepartamento depart = new TDepartamento("Eiminar");
+        depart.setId(-23L);
+
+
+        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+
+            boolean result = sa.eliminarDepartamento(depart);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
 
     }
 

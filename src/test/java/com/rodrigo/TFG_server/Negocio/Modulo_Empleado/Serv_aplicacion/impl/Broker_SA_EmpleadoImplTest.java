@@ -1,45 +1,35 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
+package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidatorTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SA_EmpleadoImplTest {
+class Broker_SA_EmpleadoImplTest {
 
-    static SA_Empleado sa;
+    static Broker_SA_EmpleadoImpl b;
 
     static private TEmpleadoCompleto e1;
     static TEmpleadoCompleto empleCompleto;
@@ -47,7 +37,7 @@ class SA_EmpleadoImplTest {
     static TDepartamentoCompleto dept;
     static TProyectoCompleto proy1;
 
-    final static Logger log = LoggerFactory.getLogger(SA_EmpleadoImplTest.class);
+    final static Logger log = LoggerFactory.getLogger(Broker_SA_EmpleadoImplTest.class);
 
 
     /*******************************************************************
@@ -55,13 +45,13 @@ class SA_EmpleadoImplTest {
      *******************************************************************/
 
     @BeforeAll
-    static void initSA() throws DepartamentoException, EmpleadoException {
+    static void initSA() throws DepartamentoException, EmpleadoException, ProyectoException {
         log.info("Creando SA...");
-        sa = FactoriaSA.getInstance().crearSA_Empleado();
+        b = new Broker_SA_EmpleadoImpl();
 
 
 //        empleCompleto = new EmpleadoTParcial("empleCompleto", "1234", Rol.ADMIN);
-        empleCompleto = sa.buscarByID(20L);
+        empleCompleto = b.buscarByID(20L);
 
 //        dept1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
 
@@ -91,10 +81,11 @@ class SA_EmpleadoImplTest {
         String nombre = "empleTest";
 
         log.info("Creando empleado ");
-        TEmpleadoCompleto aux = sa.buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
+        TEmpleadoCompleto aux = b.buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
 
         if (aux == null) {
-            e1 = sa.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, dept.getId()));
+            e1 = b.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, dept.getId()));
+
         } else
             e1 = aux;
     }
@@ -108,7 +99,7 @@ class SA_EmpleadoImplTest {
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
 */
         log.info("Eliminado empleado");
-        sa.eliminarEmpleado(e1.getEmpleado());
+        b.eliminarEmpleado(e1.getEmpleado());
     }
 
 
@@ -124,7 +115,7 @@ class SA_EmpleadoImplTest {
 
         TEmpleadoTParcial e = new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId());
 
-        TEmpleadoCompleto empleCreado = sa.crearEmpleado(e);
+        TEmpleadoCompleto empleCreado = b.crearEmpleado(e);
 
 
         e.setId(empleCreado.getEmpleado().getId());
@@ -137,7 +128,7 @@ class SA_EmpleadoImplTest {
         assertEquals(e.toString(), empleCreado.getEmpleado().toString());
 
 
-        sa.eliminarEmpleado(empleCreado.getEmpleado());
+        b.eliminarEmpleado(empleCreado.getEmpleado());
     }
 
 
@@ -155,7 +146,7 @@ class SA_EmpleadoImplTest {
             TEmpleadoCompleto e2 = e1;
 
             log.info("Creando empleado 2");
-            e2 = sa.crearEmpleado(e2.getEmpleado());
+            e2 = b.crearEmpleado(e2.getEmpleado());
 
         });
 
@@ -169,7 +160,7 @@ class SA_EmpleadoImplTest {
 
         Throwable exception = assertThrows(EmpleadoException.class, () -> {
             TEmpleadoCompleto empleCreado;
-            empleCreado = sa.crearEmpleado(null);
+            empleCreado = b.crearEmpleado(null);
 
             assertNull(empleCreado);
 
@@ -185,7 +176,7 @@ class SA_EmpleadoImplTest {
 
         Throwable exception = assertThrows(EmpleadoException.class, () -> {
 
-            TEmpleadoCompleto empleCreado = sa.crearEmpleado(new TEmpleadoTParcial());
+            TEmpleadoCompleto empleCreado = b.crearEmpleado(new TEmpleadoTParcial());
 
         });
 
@@ -202,7 +193,7 @@ class SA_EmpleadoImplTest {
 
             e1.getEmpleado().setEmail(null);
             log.debug("e1= " + e1);
-            TEmpleadoCompleto empleCreado = sa.crearEmpleado(e1.getEmpleado());
+            TEmpleadoCompleto empleCreado = b.crearEmpleado(e1.getEmpleado());
 
         });
 
@@ -219,7 +210,7 @@ class SA_EmpleadoImplTest {
 
             e1.getEmpleado().setEmail("");
             log.debug("e1 = '" + e1 + "'");
-            TEmpleadoCompleto empleCreado = sa.crearEmpleado(e1.getEmpleado());
+            TEmpleadoCompleto empleCreado = b.crearEmpleado(e1.getEmpleado());
 
         });
         log.info("Excepcion capturada:" + ex2.getMessage());
@@ -237,7 +228,7 @@ class SA_EmpleadoImplTest {
     void buscarByID() throws EmpleadoException {
         log.info("SA_EmpleadoImplTest.buscarUsuarioByID");
 
-        TEmpleadoCompleto e = sa.buscarByID(e1.getEmpleado().getId());
+        TEmpleadoCompleto e = b.buscarByID(e1.getEmpleado().getId());
         log.info(e.toString());
 
 
@@ -257,7 +248,7 @@ class SA_EmpleadoImplTest {
 
         Throwable ex2 = assertThrows(EmpleadoException.class, () -> {
 
-            TEmpleadoCompleto e = sa.buscarByID(-2L);
+            TEmpleadoCompleto e = b.buscarByID(-2L);
 
 
         });
@@ -271,7 +262,7 @@ class SA_EmpleadoImplTest {
 
         Throwable ex2 = assertThrows(EmpleadoException.class, () -> {
 
-            TEmpleadoCompleto e = sa.buscarByID(0L);
+            TEmpleadoCompleto e = b.buscarByID(0L);
 
 
         });
@@ -285,7 +276,7 @@ class SA_EmpleadoImplTest {
     void buscarByIDInexixtente() throws EmpleadoException {
         log.info("SA_EmpleadoImplTest.buscarByIDInexixtente");
 
-        TEmpleadoCompleto buscado = sa.buscarByID(30000L);
+        TEmpleadoCompleto buscado = b.buscarByID(30000L);
 
         assertNull(buscado);
 
@@ -303,7 +294,7 @@ class SA_EmpleadoImplTest {
 
 
         log.info("Creando empleado");
-        TEmpleadoCompleto e = sa.crearEmpleado(new TEmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, dept.getId()));
+        TEmpleadoCompleto e = b.crearEmpleado(new TEmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, dept.getId()));
 
         log.info("Asignando proyecto a empleado");
         TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
@@ -312,12 +303,12 @@ class SA_EmpleadoImplTest {
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());
 
         log.info("Eliminando empleado");
-        boolean resutl = sa.eliminarEmpleado(e.getEmpleado());
+        boolean resutl = b.eliminarEmpleado(e.getEmpleado());
 
         log.debug("resutl = '" + resutl + "'");
 
 
-        assertNull(sa.buscarByID(e.getId()));
+        assertNull(b.buscarByID(e.getId()));
 
     }
 
@@ -331,7 +322,7 @@ class SA_EmpleadoImplTest {
     void listarUsuarios() {
         log.info("ListarUsersTest");
 
-        List<TEmpleado> lista = sa.listarEmpleados();
+        List<TEmpleado> lista = b.listarEmpleados();
 
         assertNotNull(lista);
 
@@ -372,7 +363,7 @@ class SA_EmpleadoImplTest {
 
 
         log.info("Login: {email='" + email + ", pass='" + pass + "'}");
-        Boolean result = sa.loginEmpleado(email, pass);
+        Boolean result = b.loginEmpleado(email, pass);
 
         log.debug("result = '" + result + "'");
         assertTrue(result);
@@ -383,9 +374,9 @@ class SA_EmpleadoImplTest {
     void loginParamErroneosTest() {
 
         log.info("Login email erroneo");
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            boolean login = sa.loginEmpleado("kajsdnflaf", "1234");
+            boolean login = b.loginEmpleado("kajsdnflaf", "1234");
 
             assertFalse(login);
 
@@ -402,7 +393,7 @@ class SA_EmpleadoImplTest {
         log.info("Login empleado inexistente");
         Throwable ex1 = assertThrows(EmpleadoLoginErroneo.class, () -> {
 
-            boolean login = sa.loginEmpleado("kajsdnflaf@gmail.com", "1234");
+            boolean login = b.loginEmpleado("kajsdnflaf@gmail.com", "1234");
             assertFalse(login);
 
         });
@@ -415,9 +406,9 @@ class SA_EmpleadoImplTest {
     void loginEmailNulloVacioTest() {
 
         log.info("Login email null");
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            boolean login = sa.loginEmpleado(null, "1234");
+            boolean login = b.loginEmpleado(null, "1234");
 
             assertFalse(login);
 
@@ -427,9 +418,9 @@ class SA_EmpleadoImplTest {
 
 
         log.info("Login email vacio");
-        Throwable ex2 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex2 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            boolean login = sa.loginEmpleado("", "1234");
+            boolean login = b.loginEmpleado("", "1234");
 
             assertFalse(login);
 
@@ -444,9 +435,9 @@ class SA_EmpleadoImplTest {
     void loginPassNulloVacioTest() {
 
         log.info("Login pass null");
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            boolean login = sa.loginEmpleado("kajsdnflaf", null);
+            boolean login = b.loginEmpleado("kajsdnflaf", null);
             assertFalse(login);
 
         });
@@ -454,9 +445,9 @@ class SA_EmpleadoImplTest {
         log.info("Excepcion capturada:" + ex1.getMessage());
 
         log.info("Login pass vacia");
-        Throwable ex2 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex2 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            boolean login = sa.loginEmpleado("kajsdnflaf", "");
+            boolean login = b.loginEmpleado("kajsdnflaf", "");
             assertFalse(login);
 
         });
@@ -479,14 +470,14 @@ class SA_EmpleadoImplTest {
         String email = e1.getEmail();
 
         log.info("Creando empleado");
-        nuevo = sa.crearEmpleado(e1.getEmpleado());
+        nuevo = b.crearEmpleado(e1.getEmpleado());
 
         log.info("buscnado empleado");
-        e1 = sa.buscarByEmail(email);
+        e1 = b.buscarByEmail(email);
 
         assertEquals(e1.toString(), nuevo.toString());
 
-        sa.eliminarEmpleado(nuevo.getEmpleado());
+        b.eliminarEmpleado(nuevo.getEmpleado());
 
     }
 
@@ -524,7 +515,7 @@ class SA_EmpleadoImplTest {
     void buscarByEmailInexistente() throws EmpleadoException {
 
 
-        TEmpleadoCompleto e2 = sa.buscarByEmail("emailInexistente@gmail.com");
+        TEmpleadoCompleto e2 = b.buscarByEmail("emailInexistente@gmail.com");
 
         assertNull(e2);
 
@@ -537,10 +528,10 @@ class SA_EmpleadoImplTest {
     void buscarByEmailIncorrecto(String[] Email) {
 
 
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
             for (String temp : Email) {
-                sa.buscarByEmail(temp);
+                b.buscarByEmail(temp);
             }
 
 
@@ -554,9 +545,9 @@ class SA_EmpleadoImplTest {
     @Test
     void buscarByEmailVacio() {
 
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            TEmpleadoCompleto e2 = sa.buscarByEmail("");
+            TEmpleadoCompleto e2 = b.buscarByEmail("");
 
 
         });
@@ -568,9 +559,9 @@ class SA_EmpleadoImplTest {
 
     @Test
     void buscarByEmailNull() {
-        Throwable ex1 = assertThrows(EmpleadoFieldNullException.class, () -> {
+        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
 
-            TEmpleadoCompleto e2 = sa.buscarByEmail(null);
+            TEmpleadoCompleto e2 = b.buscarByEmail(null);
 
 
         });

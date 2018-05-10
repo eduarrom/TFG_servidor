@@ -1,4 +1,4 @@
-//package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad;
+//package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 //
 //
 ////import org.eclipse.persistence.descriptors.ClassExtractor;

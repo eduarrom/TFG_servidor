@@ -7,9 +7,9 @@
     <persistence-unit name="TFG_server" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
-<!--
-        <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado</class>
--->
+
+        <!--<class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado</class>-->
+
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial</class>
 
@@ -18,12 +18,6 @@
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto</class>
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.ClavesEmpleadoProyecto</class>
-
-        <!--
-        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.Recurso</class>
-        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ProyectoRecurso</class>
-        <class>com.rodrigo.TFG_server.Negocio.Modulo_Recurso.Entidad.ClavesProyectoRecurso</class>
--->
 
 
         <properties>
@@ -54,8 +48,8 @@
 -->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="hibernate.jdbc.wrap_result_sets" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+            <property name="hibernate.jdbc.wrap_result_sets" value="false"/>
             <property name="hibernate.hibernate.cache.use_query_cache" value="true" />
 
 

@@ -2,9 +2,14 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashMap;
 import java.util.Map;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TDepartamentoCompleto extends TDepartamento {
 
 

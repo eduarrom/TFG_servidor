@@ -1,17 +1,20 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones;
+package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones;
 
 import org.hibernate.PropertyValueException;
 
-public class DepartamentoFieldNullException extends DepartamentoException {
-
+public class EmpleadoFieldInvalidException extends EmpleadoException {
 
 
     private String message;
     private String entityName;
     private String propertyName;
 
+    public EmpleadoFieldInvalidException(String message) {
+        super(message);
+    }
 
-    public DepartamentoFieldNullException(PropertyValueException cause) {
+
+    public EmpleadoFieldInvalidException(PropertyValueException cause) {
         super(cause);
 
         //Nombre de la entidad
@@ -27,13 +30,13 @@ public class DepartamentoFieldNullException extends DepartamentoException {
 
 
 
-    @Override
-    public String getMessage() {
-        return message;
+
+    public String getPropertyName() {
+        return propertyName;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public String getEntityName() {
@@ -44,11 +47,12 @@ public class DepartamentoFieldNullException extends DepartamentoException {
         this.entityName = entityName;
     }
 
-    public String getPropertyName() {
-        return propertyName;
+    @Override
+    public String getMessage() {
+        return message;
     }
 
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -5,6 +5,9 @@ import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoLoginErroneo;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado;
 
 import javax.jws.WebParam;
@@ -25,7 +28,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     public Broker_SA_EmpleadoImpl() {}
 
     @Override
-    public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoException {
+    public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
 
         return FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(empleadoNuevo);
         //return null;
@@ -99,12 +102,12 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
 
 
-    public boolean loginEmpleado(String email, String pass) throws EmpleadoException {
+    public boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException {
         return FactoriaSA.getInstance().crearSA_Empleado().loginEmpleado(email, pass);
     }
 
     @Override
-    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
         return FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
     }
 

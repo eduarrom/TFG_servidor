@@ -2,10 +2,13 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldInvalidException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExistenteException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.IBroker_SA_Proyecto;
 
 import javax.jws.WebParam;
@@ -22,7 +25,7 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
-    public TProyecto crearProyecto(@WebParam(name = "proyectoNuevo") TProyecto proyectoNuevo) throws ProyectoException {
+    public TProyecto crearProyecto(@WebParam(name = "proyectoNuevo") TProyecto proyectoNuevo) throws ProyectoYaExistenteException, ProyectoFieldInvalidException, ProyectoException {
 
         return FactoriaSA.getInstance().crearSA_Proyecto().crearProyecto(proyectoNuevo);
         //return null;
@@ -30,12 +33,22 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
 
 
     @Override
-    public TProyectoCompleto buscarByID(@WebParam(name = "id") Long id) {
+    public TProyectoCompleto buscarByID(@WebParam(name = "id") Long id) throws ProyectoFieldInvalidException, ProyectoException {
         return FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(id);
     }
 
     @Override
-    public boolean eliminarProyecto(@WebParam(name = "proyectoEliminar") TProyecto proyectoEliminar) {
+    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) {
+        return FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e, p, horas);
+    }
+
+    @Override
+    public TProyectoCompleto buscarByNombre(@WebParam(name = "nombre") String nombre) throws ProyectoFieldInvalidException, ProyectoException {
+        return FactoriaSA.getInstance().crearSA_Proyecto().buscarByNombre(nombre);
+    }
+
+    @Override
+    public boolean eliminarProyecto(@WebParam(name = "proyectoEliminar") TProyecto proyectoEliminar) throws ProyectoFieldInvalidException, ProyectoException {
 
         return FactoriaSA.getInstance().crearSA_Proyecto().eliminarProyecto(proyectoEliminar);
     }

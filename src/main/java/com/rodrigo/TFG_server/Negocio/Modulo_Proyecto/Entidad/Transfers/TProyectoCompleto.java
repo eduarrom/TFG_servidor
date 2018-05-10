@@ -2,19 +2,23 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashMap;
 import java.util.Map;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TProyectoCompleto {
 
 
     private TProyecto proyecto;
 
 
-    private HashMap<Long, TEmpleadoProyecto> empleadoProyecto;
+    private HashMap<Long, TEmpleadoProyecto> empleadoProyecto = new HashMap<>();
 
-
-    private HashMap<Long, TEmpleado> empleados;
+    private HashMap<Long, TEmpleado> empleados = new HashMap<>();
 
 
 
@@ -29,6 +33,9 @@ public class TProyectoCompleto {
         this.empleados = empleados;
     }
 
+    public TProyectoCompleto(TProyecto tProyecto) {
+        this.proyecto = tProyecto;
+    }
 
 
     public void agregarEmpleadoProyecto(TEmpleadoProyecto ep, TEmpleado e){
@@ -64,6 +71,12 @@ public class TProyectoCompleto {
     public Long getId(){
         return proyecto.getId();
     }
+
+    public String getNombre(){
+        return proyecto.getNombre();
+    }
+
+
 
 
     public TProyecto getProyecto() {

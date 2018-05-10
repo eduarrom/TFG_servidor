@@ -1,8 +1,9 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones;
+package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones;
 
 import org.hibernate.PropertyValueException;
 
-public class ProyectoFieldNullException extends ProyectoException {
+public class DepartamentoFieldInvalidException extends DepartamentoException {
+
 
 
     private String message;
@@ -10,8 +11,7 @@ public class ProyectoFieldNullException extends ProyectoException {
     private String propertyName;
 
 
-
-    public ProyectoFieldNullException(PropertyValueException cause) {
+    public DepartamentoFieldInvalidException(PropertyValueException cause) {
         super(cause);
 
         //Nombre de la entidad
@@ -27,13 +27,13 @@ public class ProyectoFieldNullException extends ProyectoException {
 
 
 
-
-    public String getPropertyName() {
-        return propertyName;
+    @Override
+    public String getMessage() {
+        return message;
     }
 
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getEntityName() {
@@ -44,12 +44,11 @@ public class ProyectoFieldNullException extends ProyectoException {
         this.entityName = entityName;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public String getPropertyName() {
+        return propertyName;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 }

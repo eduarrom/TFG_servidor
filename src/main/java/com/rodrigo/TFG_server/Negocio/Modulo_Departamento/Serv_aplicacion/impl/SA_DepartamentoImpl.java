@@ -109,7 +109,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
                         throw e2;
-                        //throw new EmpleadoFieldNullException((PropertyValueException) e2.getCause());
+                        //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
 
                     } catch (Exception e) {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
@@ -191,6 +191,20 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
         boolean result;
 
+        log.info("departEliminar = [" + departEliminar + "]");
+
+        if (departEliminar == null) {
+            log.error("Departamento es null");
+            throw new DepartamentoException("El departamento para eliminar en null");
+        }
+
+        if (departEliminar.getId() == null || departEliminar.getId() <= 0) {
+            log.error("El id para buscar en null, 0 o negativo");
+            throw new DepartamentoException("El id para buscar en null, 0 o negativo");
+        }
+
+
+
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
@@ -270,19 +284,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         log.debug("siglas = '" + siglas + "'");
 
 
-        //Validacion del email
+        //Validacion del siglas
         if (siglas == null || siglas.equals("")) {
             log.error("Las siglas es invalido");
 
-//            try {
-//                throw new DepartamentoFieldNullException(
-//                        new PropertyValueException("Departamento.siglas es erroneo.",
-//                                Departamento.class.toString(),
-//                                Departamento.class.getDeclaredField("siglas").toString()));
-//            } catch (NoSuchFieldException e) {
             log.error("Ocurrio un error inesperado.");
             throw new DepartamentoException("Ocurrio un error con las siglas.");
-//            }
         }
 
 
