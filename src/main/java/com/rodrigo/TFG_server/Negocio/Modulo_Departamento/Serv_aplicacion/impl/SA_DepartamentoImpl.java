@@ -24,34 +24,9 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
     private final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImpl.class);
 
-    /**
-     * Inserta un departamento en la BBDD
-     *
-     * @param departamentoNuevo
-     * @return Departamento insertado en BBDD o null si la entidad ya existe
-     */
-    /*public Departamento crearDepartamento(Departamento departamentoNuevo) throws DepartamentoException {
-        Departamento depart;
 
-        log.info("Creando Entity Manager");
-        EntityManager em = EMFSingleton.getInstance().createEntityManager();
-
-        {
-            log.info("TRANSACCION --> BEGIN");
-            em.getTransaction().begin();
-            log.info("Persistiendo departamento en BBDD");
-            depart = em.merge(departamentoNuevo);
-            System.out.println(depart);
-
-            log.info("TRANSACCION --> COMMIT");
-            em.getTransaction().commit();
-        }
-        em.close();
-
-        return depart;
-    }*/
     @Override
-    public TDepartamento crearDepartamento(TDepartamento departamentoNuevo) throws DepartamentoException {
+    public TDepartamento crearDepartamento(TDepartamento departamentoNuevo) throws DepartamentoFieldInvalidException, DepartamentoYaExisteExcepcion, DepartamentoException {
         log.info("creando departamento...");
 
         Departamento depart = null;
@@ -59,12 +34,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
         if (departamentoNuevo == null) {
             log.error("Departamento es null");
-            throw new DepartamentoException("El departamento para persistir en null");
+            throw new DepartamentoFieldInvalidException("El departamento para persistir en null");
         }
 
         if (departamentoNuevo.getSiglas() == null || departamentoNuevo.getSiglas().equals("")) {
             log.error("Siglas de departamento es null");
-            throw new DepartamentoException("Ocurrio un error con las Siglas.");
+            throw new DepartamentoFieldInvalidException("Ocurrio un error con las Siglas.");
 
         }
 
@@ -125,7 +100,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                     }
 
                 } else {
-                    throw new DepartamentoYaExisteExcepcion("departamento ya existente");
+                    throw new DepartamentoYaExisteExcepcion();
                 }
             }
         }
@@ -135,14 +110,14 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
     @Override
-    public TDepartamentoCompleto buscarByID(Long id) throws DepartamentoException {
+    public TDepartamentoCompleto buscarByID(Long id) throws DepartamentoFieldInvalidException, DepartamentoException {
         Departamento depart;
 
         log.info("id = [" + id + "]");
 
         if (id == null || id <= 0) {
             log.error("El id para buscar en null, 0 o negativo");
-            throw new DepartamentoException("El id para buscar en null, 0 o negativo");
+            throw new DepartamentoFieldInvalidException("El id para buscar en null, 0 o negativo");
         }
 
         log.info("Creando Entity Manager");
@@ -187,20 +162,16 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
     @Override
-    public boolean eliminarDepartamento(TDepartamento departEliminar) throws DepartamentoException {
+    public boolean eliminarDepartamento(Long id) throws DepartamentoFieldInvalidException, DepartamentoConEmpleadosException, DepartamentoException {
 
         boolean result;
 
-        log.info("departEliminar = [" + departEliminar + "]");
+        log.info("departEliminar = [" + id + "]");
 
-        if (departEliminar == null) {
-            log.error("Departamento es null");
-            throw new DepartamentoException("El departamento para eliminar en null");
-        }
 
-        if (departEliminar.getId() == null || departEliminar.getId() <= 0) {
+        if (id == null || id <= 0) {
             log.error("El id para buscar en null, 0 o negativo");
-            throw new DepartamentoException("El id para buscar en null, 0 o negativo");
+            throw new DepartamentoFieldInvalidException("El id para buscar en null, 0 o negativo");
         }
 
 
@@ -212,7 +183,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
 
             try {
-                em.remove(em.find(Departamento.class, departEliminar.getId()));
+                em.remove(em.find(Departamento.class, id));
                 result = true;
                 log.info("TRANSACCION --> COMMIT");
                 em.getTransaction().commit();
@@ -289,7 +260,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             log.error("Las siglas es invalido");
 
             log.error("Ocurrio un error inesperado.");
-            throw new DepartamentoException("Ocurrio un error con las siglas.");
+            throw new DepartamentoFieldInvalidException("Ocurrio un error con las siglas.");
         }
 
 
@@ -329,8 +300,11 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
 
-    public String saludoREST(String nombre) {
-        return "Hola " + nombre + " desde servico REST :)";
-    }
 
-}
+
+
+
+
+
+
+    }

@@ -6,6 +6,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDep
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
@@ -118,7 +119,7 @@ class SA_DepartamentoImplTest {
         FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado());
 
         log.info("Eliminado departamento");
-        sa.eliminarDepartamento(d1);
+        sa.eliminarDepartamento(d1.getId());
 
     }
 
@@ -146,7 +147,7 @@ class SA_DepartamentoImplTest {
         assertEquals(d.toString(), departCreado.toString());
 
 
-        sa.eliminarDepartamento(departCreado);
+        sa.eliminarDepartamento(departCreado.getId());
     }
 
 
@@ -171,7 +172,7 @@ class SA_DepartamentoImplTest {
         });
 
 
-        sa.eliminarDepartamento(d);
+        sa.eliminarDepartamento(d.getId());
 
     }
 
@@ -179,7 +180,7 @@ class SA_DepartamentoImplTest {
     void crearDepartamentoNull() {
 
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        Throwable exception = assertThrows(DepartamentoFieldInvalidException.class, () -> {
             TDepartamento departCreado = sa.crearDepartamento(null);
 
             assertNull(departCreado);
@@ -194,7 +195,7 @@ class SA_DepartamentoImplTest {
     @Test
     void crearDepartamentoVacio() {
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        Throwable exception = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             TDepartamento departCreado = sa.crearDepartamento(new TDepartamento());
 
@@ -209,11 +210,11 @@ class SA_DepartamentoImplTest {
 
 
         log.info("forzando siglas = null");
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex1 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             d1.setSiglas(null);
             log.debug("d1= " + d1);
-            TDepartamento departCreado = sa.crearDepartamento(d1);
+            TDepartamento departCreado = sa.crearDepartamento(d1.getDepartamento());
 
         });
 
@@ -222,15 +223,15 @@ class SA_DepartamentoImplTest {
     }
 
     @Test
-    void crearDepartamentoSiglaVacio() {
+    void crearDepartamentoSiglasVacio() {
 
 
         log.info("forzando siglas = ''");
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex2 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             d1.setSiglas("");
-            log.debug("d1 = '" + d1 + "'");
-            TDepartamento empleCreado = sa.crearDepartamento(d1);
+            log.debug("d1 = [" + d1 + "]");
+            TDepartamento empleCreado = sa.crearDepartamento(d1.getDepartamento());
 
         });
         log.info("Excepcion capturada:" + ex2.getMessage());
@@ -254,7 +255,7 @@ class SA_DepartamentoImplTest {
 
         assertNotNull(d);
         assertEquals(d.getId(), d1.getId());
-        assertEquals(d.getNombre(), d1.getNombre());
+        assertEquals(d.getDepartamento().getNombre(), d1.getDepartamento().getNombre());
         assertEquals(d.toString(), d1.toString());
 
         //b.eliminarDepartamento(nuevo);
@@ -266,7 +267,7 @@ class SA_DepartamentoImplTest {
     void buscarByIDNegativo() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDNegativo");
 
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex2 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             TDepartamentoCompleto d = sa.buscarByID(-2L);
 
@@ -280,7 +281,7 @@ class SA_DepartamentoImplTest {
     void buscarByIDCero() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDCero");
 
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex2 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             TDepartamentoCompleto d = sa.buscarByID(0L);
 
@@ -312,13 +313,13 @@ class SA_DepartamentoImplTest {
     void eliminarDepartamento() throws DepartamentoException, EmpleadoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        TDepartamento d = new TDepartamento("Eliminar");
+        TDepartamento d = new TDepartamento("Eliminar 3");
 
         log.info("Creando departamento");
         d = sa.crearDepartamento(d);
 
         log.info("Eliminando departamento");
-        boolean resutl = sa.eliminarDepartamento(d);
+        boolean resutl = sa.eliminarDepartamento(d.getId());
 
         log.debug("resutl = '" + resutl + "'");
 
@@ -331,10 +332,10 @@ class SA_DepartamentoImplTest {
     void eliminarDepartamentoConEmpleados() throws DepartamentoException, EmpleadoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        TDepartamento d = new TDepartamento("Eliminar");
         log.info("Creando departamento");
 
-        d = sa.crearDepartamento(d);
+        TDepartamentoCompleto d = new TDepartamentoCompleto(
+                sa.crearDepartamento(new TDepartamento("Eliminar 3")));
 
 
         String nombre = "EmpleEliminar";
@@ -349,11 +350,11 @@ class SA_DepartamentoImplTest {
         d = sa.buscarBySiglas(d.getSiglas());
 
 
-        TDepartamento finalD = d;
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        TDepartamentoCompleto finalD = d;
+        Throwable ex1 = assertThrows(DepartamentoConEmpleadosException.class, () -> {
 
             log.info("Eliminando departamento");
-            boolean result = sa.eliminarDepartamento(finalD);
+            boolean result = sa.eliminarDepartamento(finalD.getId());
 
 
         });
@@ -361,7 +362,7 @@ class SA_DepartamentoImplTest {
         log.info("Excepcion capturada:" + ex1.getMessage());
 
         FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
-        boolean result = sa.eliminarDepartamento(finalD);
+        boolean result = sa.eliminarDepartamento(finalD.getId());
 
     }
 
@@ -370,7 +371,7 @@ class SA_DepartamentoImplTest {
     void eliminarDepartamentoNull()  {
 
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        Throwable exception = assertThrows(DepartamentoFieldInvalidException.class, () -> {
             boolean emple = sa.eliminarDepartamento(null);
 
             assertNull(emple);
@@ -389,9 +390,9 @@ class SA_DepartamentoImplTest {
         depart.setId(-23L);
 
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        Throwable exception = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
-            boolean result = sa.eliminarDepartamento(depart);
+            boolean result = sa.eliminarDepartamento(depart.getId());
 
         });
 
@@ -446,7 +447,7 @@ class SA_DepartamentoImplTest {
 
         assertEquals(d1.getDepartamento().toString(), nuevo.toString());
 
-        sa.eliminarDepartamento(nuevo);
+        sa.eliminarDepartamento(nuevo.getId());
 
     }
 
@@ -465,7 +466,7 @@ class SA_DepartamentoImplTest {
     @Test
     void buscarBySiglasVacio() {
 
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex1 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             TDepartamentoCompleto e2 = sa.buscarBySiglas("");
 
@@ -479,7 +480,7 @@ class SA_DepartamentoImplTest {
 
     @Test
     void buscarBySiglasNull() {
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        Throwable ex1 = assertThrows(DepartamentoFieldInvalidException.class, () -> {
 
             TDepartamentoCompleto e2 = sa.buscarBySiglas(null);
 

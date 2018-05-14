@@ -6,6 +6,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExistenteException;
@@ -48,7 +49,7 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
-    public boolean eliminarProyecto(@WebParam(name = "proyectoEliminar") TProyecto proyectoEliminar) throws ProyectoFieldInvalidException, ProyectoException {
+    public boolean eliminarProyecto(@WebParam(name = "proyectoEliminar") TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
 
         return FactoriaSA.getInstance().crearSA_Proyecto().eliminarProyecto(proyectoEliminar);
     }

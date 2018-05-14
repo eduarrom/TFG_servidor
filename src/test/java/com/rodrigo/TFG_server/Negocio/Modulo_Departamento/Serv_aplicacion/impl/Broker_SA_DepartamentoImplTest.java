@@ -4,8 +4,6 @@ import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
@@ -22,8 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.ws.rs.core.Response;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,7 +54,10 @@ class Broker_SA_DepartamentoImplTest {
 
         empld1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
-        dept = b.buscarBySiglas("DdP");
+        Response res = b.buscarBySiglas("DdP");
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
+
+        dept = res.readEntity(TDepartamentoCompleto.class);
 
         proy1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(1L);
 
@@ -64,15 +65,24 @@ class Broker_SA_DepartamentoImplTest {
     }
 
     @BeforeEach
-    void iniciarContexto() throws DepartamentoException, EmpleadoException {
+    void iniciarContexto() throws EmpleadoException {
         String siglas = "DT";
+        TDepartamentoCompleto auxD = null;
 
         log.info("Creando departamento ");
-        TDepartamentoCompleto auxD = b.buscarBySiglas(siglas);
-        if (auxD == null) {
-            d1 = new TDepartamentoCompleto(b.crearDepartamento(new TDepartamento("Departamento Test")));
-        } else
-            d1 = auxD;
+        Response res = b.buscarBySiglas(siglas);
+
+        if(res.getStatus() == Response.Status.OK.getStatusCode()) {
+            d1 = res.readEntity(TDepartamentoCompleto.class);
+
+        }else if (res.getStatus() == Response.Status.NOT_FOUND.getStatusCode()) {
+
+            res = b.crearDepartamento(new TDepartamento("Departamento Test"));
+            assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+            TDepartamento dept = res.readEntity(TDepartamento.class);
+            d1 = new TDepartamentoCompleto();
+            d1.setDepartamento(dept);
+        }
 
 
         String nombre = "empleTest";
@@ -86,7 +96,10 @@ class Broker_SA_DepartamentoImplTest {
             e1 = auxE;
 
 
-        d1 = b.buscarBySiglas(siglas);
+        res = b.buscarBySiglas(siglas);
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
+
+        d1 = res.readEntity(TDepartamentoCompleto.class);
 
 
     }
@@ -98,7 +111,7 @@ class Broker_SA_DepartamentoImplTest {
         FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado());
 
         log.info("Eliminado departamento");
-        b.eliminarDepartamento(d1);
+        b.eliminarDepartamento(d1.getId());
 
     }
 
@@ -113,7 +126,12 @@ class Broker_SA_DepartamentoImplTest {
     void crearDepartamento(String nombre) throws DepartamentoException {
 
         TDepartamento d = new TDepartamento(nombre);
-        TDepartamento departCreado = b.crearDepartamento(d);
+
+        Response res = b.crearDepartamento(d);
+        assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+
+
+        TDepartamento departCreado = res.readEntity(TDepartamento.class);
 
 
         d.setId(departCreado.getId());
@@ -122,11 +140,10 @@ class Broker_SA_DepartamentoImplTest {
 
         assertNotNull(departCreado);
         assertNotNull(departCreado.getId());
-
         assertEquals(d.toString(), departCreado.toString());
 
 
-        b.eliminarDepartamento(departCreado);
+        b.eliminarDepartamento(departCreado.getId());
     }
 
 
@@ -137,21 +154,20 @@ class Broker_SA_DepartamentoImplTest {
         TDepartamento d = new TDepartamento("Existente");
 
         log.info("Creando departamento 1");
-        d = b.crearDepartamento(d);
+        Response res = b.crearDepartamento(d);
+        assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+        d = res.readEntity(TDepartamento.class);
 
 
-        TDepartamento finalD = d;
-        Throwable exception = assertThrows(DepartamentoYaExisteExcepcion.class, () -> {
-
-            TDepartamento d2 = finalD;
-
-            log.info("Creando departamento 2");
-            d2 = b.crearDepartamento(d2);
-
-        });
+        TDepartamento d2 = d;
+        log.info("Creando departamento EXISTENTE");
+        Response res2 = b.crearDepartamento(d2);
 
 
-        b.eliminarDepartamento(d);
+        assertTrue(res2.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
+
+
+        b.eliminarDepartamento(d.getId());
 
     }
 
@@ -159,14 +175,10 @@ class Broker_SA_DepartamentoImplTest {
     void crearDepartamentoNull() {
 
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
-            TDepartamento departCreado = b.crearDepartamento(null);
+        Response res = b.crearDepartamento(null);
 
-            assertNull(departCreado);
+        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
-        });
-
-        log.error("----  EXCEPCION! ----", exception);
 
     }
 
@@ -174,13 +186,11 @@ class Broker_SA_DepartamentoImplTest {
     @Test
     void crearDepartamentoVacio() {
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        Response res = b.crearDepartamento(new TDepartamento());
 
-            TDepartamento departCreado = b.crearDepartamento(new TDepartamento());
+        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
-        });
 
-        log.info("Excepcion capturada:" + exception.getMessage());
     }
 
 
@@ -189,15 +199,15 @@ class Broker_SA_DepartamentoImplTest {
 
 
         log.info("forzando siglas = null");
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
 
-            d1.setSiglas(null);
-            log.debug("d1= " + d1);
-            TDepartamento departCreado = b.crearDepartamento(d1);
+        TDepartamento d = new TDepartamento("Siglas null");
+        d.setSiglas(null);
+        log.debug("d= " + d);
+        Response res = b.crearDepartamento(d);
 
-        });
+        System.out.println("res.getStatus() = [" + res.getStatus() + "]");
+        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
-        log.info("Excepcion capturada:" + ex1.getMessage());
 
     }
 
@@ -206,14 +216,14 @@ class Broker_SA_DepartamentoImplTest {
 
 
         log.info("forzando siglas = ''");
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
 
-            d1.setSiglas("");
-            log.debug("d1 = '" + d1 + "'");
-            TDepartamento empleCreado = b.crearDepartamento(d1);
+        TDepartamento d = new TDepartamento("Siglas null");
+        d.setSiglas("");
+        log.debug("d= " + d);
+        Response res = b.crearDepartamento(d);
 
-        });
-        log.info("Excepcion capturada:" + ex2.getMessage());
+        System.out.println("res.getStatus() = [" + res.getStatus() + "]");
+        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
 
     }
@@ -228,13 +238,18 @@ class Broker_SA_DepartamentoImplTest {
     void buscarByID() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByID");
 
-        TDepartamentoCompleto d = b.buscarByID(d1.getId());
+        Response res = b.buscarByID(d1.getId());
+
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
+
+        TDepartamentoCompleto d = res.readEntity(TDepartamentoCompleto.class);
+
         log.info(d.toString());
 
 
         assertNotNull(d);
         assertEquals(d.getId(), d1.getId());
-        assertEquals(d.getNombre(), d1.getNombre());
+        assertEquals(d.getDepartamento().getNombre(), d1.getDepartamento().getNombre());
         assertEquals(d.toString(), d1.toString());
 
         //b.eliminarDepartamento(nuevo);
@@ -246,13 +261,9 @@ class Broker_SA_DepartamentoImplTest {
     void buscarByIDNegativo() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDNegativo");
 
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
+        Response res = b.buscarByID(-2L);
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
-            TDepartamentoCompleto d = b.buscarByID(-2L);
-
-
-        });
-        log.info("Excepcion capturada:" + ex2.getMessage());
 
     }
 
@@ -260,14 +271,8 @@ class Broker_SA_DepartamentoImplTest {
     void buscarByIDCero() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDCero");
 
-        Throwable ex2 = assertThrows(DepartamentoException.class, () -> {
-
-            TDepartamentoCompleto d = b.buscarByID(0L);
-
-
-        });
-        log.info("Excepcion capturada:" + ex2.getMessage());
-
+        Response res = b.buscarByID(0L);
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
     }
 
@@ -276,9 +281,10 @@ class Broker_SA_DepartamentoImplTest {
     void buscarByIDInexixtente() throws DepartamentoException {
         log.info("SA_DepartamentoImplTest.buscarByIDInexixtente");
 
-        TDepartamentoCompleto buscado = b.buscarByID(30000L);
+        Response res = b.buscarByID(30000L);
+        System.out.println("res.getStatus() = [" + res.getStatus() + "]");
+        assertTrue(res.getStatus() == Response.Status.NOT_FOUND.getStatusCode());
 
-        assertNull(buscado);
 
     }
 
@@ -292,15 +298,17 @@ class Broker_SA_DepartamentoImplTest {
     void eliminarDepartamento() throws DepartamentoException, EmpleadoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        TDepartamento d = new TDepartamento("Eliminar");
+        TDepartamento d = new TDepartamento("Eliminar 1");
 
         log.info("Creando departamento");
-        d = b.crearDepartamento(d);
+        Response res = b.crearDepartamento(d);
+        assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+        d = res.readEntity(TDepartamento.class);
 
         log.info("Eliminando departamento");
-        boolean resutl = b.eliminarDepartamento(d);
+        res = b.eliminarDepartamento(d.getId());
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
 
-        log.debug("resutl = '" + resutl + "'");
 
         assertNull(b.buscarByID(d.getId()));
 
@@ -311,10 +319,11 @@ class Broker_SA_DepartamentoImplTest {
     void eliminarDepartamentoConEmpleados() throws DepartamentoException, EmpleadoException {
         log.info("SA_DepartamentoImplTest.eliminarDepartamento");
 
-        TDepartamento d = new TDepartamento("Eliminar");
+        TDepartamentoCompleto d = new TDepartamentoCompleto(new TDepartamento("Eliminar 2"));
         log.info("Creando departamento");
-
-        d = b.crearDepartamento(d);
+        Response res = b.crearDepartamento(d.getDepartamento());
+        assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+        d.setDepartamento(res.readEntity(TDepartamento.class));
 
 
         String nombre = "EmpleEliminar";
@@ -326,22 +335,23 @@ class Broker_SA_DepartamentoImplTest {
             auxE = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, d.getId()));
         }
 
-        d = b.buscarBySiglas(d.getSiglas());
+
+        log.info("Buscando departamento completo");
+        res = b.buscarBySiglas(d.getSiglas());
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
+        d = res.readEntity(TDepartamentoCompleto.class);
 
 
-        TDepartamento finalD = d;
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        TDepartamento finalD = d.getDepartamento();
 
-            log.info("Eliminando departamento");
-            boolean result = b.eliminarDepartamento(finalD);
+        log.info("Eliminando departamento con empleados");
+        Response res2 = b.eliminarDepartamento(finalD.getId());
 
+        assertTrue(res2.getStatus() == Response.Status.BAD_GATEWAY.getStatusCode());
 
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
 
         FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
-        boolean result = b.eliminarDepartamento(finalD);
+        res2 = b.eliminarDepartamento(finalD.getId());
 
     }
 
@@ -350,14 +360,10 @@ class Broker_SA_DepartamentoImplTest {
     void eliminarDepartamentoNull() {
 
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
-            boolean emple = b.eliminarDepartamento(null);
+        Response res = b.eliminarDepartamento(null);
 
-            assertNull(emple);
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
-        });
-
-        log.error("----  EXCEPCION! ----", exception);
 
     }
 
@@ -365,17 +371,11 @@ class Broker_SA_DepartamentoImplTest {
     @Test
     void eliminarDepartamentoIDNegativo() {
 
-        TDepartamento depart = new TDepartamento("Eiminar");
-        depart.setId(-23L);
 
+        Response res = b.eliminarDepartamento(-2L);
 
-        Throwable exception = assertThrows(DepartamentoException.class, () -> {
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
-            boolean result = b.eliminarDepartamento(depart);
-
-        });
-
-        log.error("----  EXCEPCION! ----", exception);
 
     }
 
@@ -416,28 +416,33 @@ class Broker_SA_DepartamentoImplTest {
         String siglas = d1.getSiglas();
 
         log.info("Creando departamento");
-        nuevo = b.crearDepartamento(d1.getDepartamento());
+        Response res = b.crearDepartamento(d1.getDepartamento());
+        assertTrue(res.getStatus() == Response.Status.CREATED.getStatusCode());
+        nuevo = res.readEntity(TDepartamento.class);
 
         log.info("buscando departamento");
-        d1 = b.buscarBySiglas(siglas);
+        res = b.buscarBySiglas(siglas);
+        assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
+
+
+        d1 = res.readEntity(TDepartamentoCompleto.class);
 
         assertNotNull(d1);
         assertNotNull(nuevo);
 
         assertEquals(d1.getDepartamento().toString(), nuevo.toString());
 
-        b.eliminarDepartamento(nuevo);
+        b.eliminarDepartamento(nuevo.getId());
 
     }
 
 
     @Test
-    void buscarBySiglasInexistente() throws DepartamentoException {
+    void buscarBySiglasInexistente() {
 
+        Response res = b.buscarBySiglas("asdfawefafafdwefa");
 
-        TDepartamentoCompleto e2 = b.buscarBySiglas("asdfawefafafdwefa");
-
-        assertNull(e2);
+        assertTrue(res.getStatus() == Response.Status.NOT_FOUND.getStatusCode());
 
     }
 
@@ -445,28 +450,20 @@ class Broker_SA_DepartamentoImplTest {
     @Test
     void buscarBySiglasVacio() {
 
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
+        Response res = b.buscarBySiglas("");
 
-            TDepartamentoCompleto e2 = b.buscarBySiglas("");
-
-
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
     }
 
 
     @Test
     void buscarBySiglasNull() {
-        Throwable ex1 = assertThrows(DepartamentoException.class, () -> {
 
-            TDepartamentoCompleto e2 = b.buscarBySiglas(null);
+        Response res = b.buscarBySiglas(null);
 
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
 
     }
 

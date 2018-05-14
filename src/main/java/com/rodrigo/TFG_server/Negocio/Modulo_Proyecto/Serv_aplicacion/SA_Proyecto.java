@@ -4,6 +4,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExistenteException;
@@ -23,7 +24,7 @@ public interface SA_Proyecto {
 
     TProyectoCompleto buscarByID(Long id) throws ProyectoFieldInvalidException, ProyectoException;
 
-    boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoFieldInvalidException, ProyectoException;
+    boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException;
 
     List<TProyecto> listarProyectos();
 

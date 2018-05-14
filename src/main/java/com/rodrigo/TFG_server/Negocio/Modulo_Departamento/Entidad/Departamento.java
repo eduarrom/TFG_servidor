@@ -118,7 +118,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
 
 
     public TDepartamento crearTransferSimple() {
-        return new TDepartamento(id, nombre, siglas);
+        return new TDepartamento(id, nombre, siglas, calcularNominaMes());
     }
 
 

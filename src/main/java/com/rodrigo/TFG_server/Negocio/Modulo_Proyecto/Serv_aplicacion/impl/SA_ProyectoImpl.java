@@ -2,6 +2,8 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoConEmpleadosException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
@@ -9,10 +11,12 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoConEmpleadosException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExistenteException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -290,7 +294,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
 
     @Override
-    public boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoFieldInvalidException, ProyectoException {
+    public boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
 
         boolean result;
 
@@ -334,6 +338,12 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                 //log.info("TRANSACCION --> ROLLBACK");
                 // em.getTransaction().rollback();
                 result = false;
+                if(e.getCause().getCause() instanceof ConstraintViolationException){
+                    throw new ProyectoConEmpleadosException();
+                }
+
+                throw new ProyectoException("Hubo un error al eliminar el proyecto.");
+
             }
 
         }

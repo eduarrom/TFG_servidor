@@ -481,36 +481,6 @@ class Broker_SA_EmpleadoImplTest {
 
     }
 
-    /*public static void main(String[] args) throws EmpleadoException, DepartamentoException {
-        initSA();
-        Empleado nuevo, e1 = new EmpleadoTParcial("empleado", "1234", Rol.EMPLEADO, dept);
-        String email = e1.getEmail();
-
-        //log.info("Creando empleado");
-        //nuevo = b.crearEmpleado(e1);
-
-        log.info("buscnado empleado");
-        e1 = b.buscarByEmail(email);
-
-    }*/
-
-/*    @Test
-    void buscarByEmailSimple() throws EmpleadoException {
-        Empleado nuevo, e1 = new EmpleadoTParcial("administrador", "1234", Rol.ADMIN, dept);
-        String email = e1.getEmail();
-
-        log.info("Creando empleado");
-        //nuevo = b.crearEmpleado(e1);
-
-        log.info("buscnado empleado");
-        e1 = b.buscarByEmail(email);
-
-        //assertTrue(e1.equalsWithOutVersion(nuevo));
-
-        //b.eliminarEmpleado(nuevo);
-
-    }*/
-
     @Test
     void buscarByEmailInexistente() throws EmpleadoException {
 

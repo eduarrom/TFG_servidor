@@ -10,7 +10,7 @@ import java.util.Map;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TDepartamentoCompleto extends TDepartamento {
+public class TDepartamentoCompleto {
 
 
     private TDepartamento departamento;
@@ -18,8 +18,8 @@ public class TDepartamentoCompleto extends TDepartamento {
     private HashMap<Long, TEmpleado> empleados = new HashMap<>();
 
 
-
-    public TDepartamentoCompleto() {}
+    public TDepartamentoCompleto() {
+    }
 
     public TDepartamentoCompleto(TDepartamento departamento) {
         this.departamento = departamento;
@@ -31,22 +31,31 @@ public class TDepartamentoCompleto extends TDepartamento {
     }
 
 
-
-    public TEmpleado addTEmpeado(TEmpleado te){
-       return empleados.put(te.getId(), te);
+    public TEmpleado addTEmpeado(TEmpleado te) {
+        return empleados.put(te.getId(), te);
     }
 
-    public TEmpleado removeTEmpleado(Long id){
+    public TEmpleado removeTEmpleado(Long id) {
         return empleados.remove(id);
     }
 
 
-    public Long getId(){
+    public Long getId() {
         return departamento.getId();
     }
 
-    public String getSiglas(){ return departamento.getSiglas();}
+    public void setId(long id) {
+        this.departamento.setId(id);
+    }
 
+
+    public String getSiglas() {
+        return departamento.getSiglas();
+    }
+
+    public void setSiglas(String siglas) {
+        this.departamento.setSiglas(siglas);
+    }
 
     public TDepartamento getDepartamento() {
         return departamento;
@@ -63,9 +72,6 @@ public class TDepartamentoCompleto extends TDepartamento {
     public void setEmpleados(HashMap<Long, TEmpleado> empleados) {
         this.empleados = empleados;
     }
-
-
-
 
 
     @Override

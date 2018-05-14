@@ -331,7 +331,7 @@ class SA_ProyectoImplTest {
 
         log.info("Creando proyecto");
         TProyectoCompleto p = new TProyectoCompleto();
-        p.setProyecto(sa.crearProyecto(new TProyecto("Eliminar2")));
+        p.setProyecto(sa.crearProyecto(new TProyecto("Eliminar 6")));
 
         log.info("Asignando empleado a proyecto");
         TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(emple1.getEmpleado(), p.getProyecto(), 5);

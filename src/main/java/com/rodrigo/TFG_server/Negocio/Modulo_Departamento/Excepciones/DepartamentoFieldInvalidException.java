@@ -11,6 +11,13 @@ public class DepartamentoFieldInvalidException extends DepartamentoException {
     private String propertyName;
 
 
+
+    public DepartamentoFieldInvalidException(String message) {
+        super(message);
+        this.message = message;
+    }
+
+
     public DepartamentoFieldInvalidException(PropertyValueException cause) {
         super(cause);
 
