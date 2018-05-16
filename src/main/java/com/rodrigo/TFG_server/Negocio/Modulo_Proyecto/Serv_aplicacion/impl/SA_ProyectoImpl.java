@@ -294,18 +294,14 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
 
     @Override
-    public boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
+    public boolean eliminarProyecto(Long id) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
 
         boolean result;
 
-        log.info("proyectoEliminar = [" + proyectoEliminar + "]");
+        log.info("id = [" + id + "]");
 
-        if (proyectoEliminar == null) {
-            log.error("Proyecto es null");
-            throw new ProyectoException("El proyecto para eliminar en null");
-        }
 
-        if (proyectoEliminar.getId() == null || proyectoEliminar.getId() <= 0) {
+        if (id == null || id <= 0) {
             log.error("El id para buscar en null, 0 o negativo");
             throw new ProyectoFieldInvalidException("El id para buscar en null, 0 o negativo");
         }
@@ -319,7 +315,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
             try {
 
-                Proyecto proy = em.find(Proyecto.class, proyectoEliminar.getId());
+                Proyecto proy = em.find(Proyecto.class, id);
                 if (proy != null) {
                     log.debug("Proyectos: ");
                     proy.getEmpleados().stream()

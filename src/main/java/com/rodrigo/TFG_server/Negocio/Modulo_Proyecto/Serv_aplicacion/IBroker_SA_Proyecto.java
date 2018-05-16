@@ -31,7 +31,7 @@ public interface IBroker_SA_Proyecto {
     TProyectoCompleto buscarByNombre(@WebParam(name = "nombre") String nombre) throws ProyectoFieldInvalidException, ProyectoException;
 
     @WebMethod(operationName="eliminarProyecto")
-    public boolean eliminarProyecto(@WebParam(name = "Proyecto") TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException;
+    public boolean eliminarProyecto(@WebParam(name = "id") Long id) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException;
 
 
     @WebMethod(operationName="listarProyectos")

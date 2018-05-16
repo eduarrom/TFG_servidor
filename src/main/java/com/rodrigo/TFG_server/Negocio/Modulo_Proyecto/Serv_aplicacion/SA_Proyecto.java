@@ -24,7 +24,7 @@ public interface SA_Proyecto {
 
     TProyectoCompleto buscarByID(Long id) throws ProyectoFieldInvalidException, ProyectoException;
 
-    boolean eliminarProyecto(TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException;
+    boolean eliminarProyecto(Long id) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException;
 
     List<TProyecto> listarProyectos();
 

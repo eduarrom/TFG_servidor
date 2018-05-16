@@ -99,7 +99,7 @@ class Broker_SA_EmpleadoImplTest {
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
 */
         log.info("Eliminado empleado");
-        b.eliminarEmpleado(e1.getEmpleado());
+        b.eliminarEmpleado(e1.getEmpleado().getId());
     }
 
 
@@ -128,7 +128,7 @@ class Broker_SA_EmpleadoImplTest {
         assertEquals(e.toString(), empleCreado.getEmpleado().toString());
 
 
-        b.eliminarEmpleado(empleCreado.getEmpleado());
+        b.eliminarEmpleado(empleCreado.getEmpleado().getId());
     }
 
 
@@ -303,7 +303,7 @@ class Broker_SA_EmpleadoImplTest {
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());
 
         log.info("Eliminando empleado");
-        boolean resutl = b.eliminarEmpleado(e.getEmpleado());
+        boolean resutl = b.eliminarEmpleado(e.getEmpleado().getId());
 
         log.debug("resutl = '" + resutl + "'");
 
@@ -464,20 +464,23 @@ class Broker_SA_EmpleadoImplTest {
     @ParameterizedTest
     @CsvSource({"buscar1, 1234, EMPLEADO", "buscar2, 1234, EMPLEADO"})
     void buscarByEmail(String nombre, String pass, String rol) throws EmpleadoException {
-        TEmpleadoCompleto nuevo, e1 = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId()), dept.getDepartamento());
-        dept.getEmpleados().put(e1.getId(), e1.getEmpleado());
 
-        String email = e1.getEmail();
+        TEmpleadoCompleto nuevo;
+
+        TEmpleadoCompleto emple = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId()), dept.getDepartamento());
+        dept.getEmpleados().put(emple.getId(), emple.getEmpleado());
+
+        String email = emple.getEmail();
 
         log.info("Creando empleado");
-        nuevo = b.crearEmpleado(e1.getEmpleado());
+        nuevo = b.crearEmpleado(emple.getEmpleado());
 
         log.info("buscnado empleado");
-        e1 = b.buscarByEmail(email);
+        emple = b.buscarByEmail(email);
 
-        assertEquals(e1.toString(), nuevo.toString());
+        assertEquals(emple.toString(), nuevo.toString());
 
-        b.eliminarEmpleado(nuevo.getEmpleado());
+        b.eliminarEmpleado(nuevo.getEmpleado().getId());
 
     }
 

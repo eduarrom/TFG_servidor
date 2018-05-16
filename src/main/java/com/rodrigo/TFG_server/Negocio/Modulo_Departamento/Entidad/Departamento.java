@@ -106,7 +106,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     }
 
 
-
     public Departamento(long id) {
         this.id = id;
     }
@@ -202,10 +201,13 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
      ****************************/
 
     public double calcularNominaMes() {
+        if (empleados != null) {
 
-        return empleados.stream()
-                .map(Empleado::calcularNominaMes)
-                .reduce(0.0, (acum, val) -> acum + val);
+            return empleados.stream()
+                    .map(Empleado::calcularNominaMes)
+                    .reduce(0.0, (acum, val) -> acum + val);
+        }
+        return 0;
     }
 
 

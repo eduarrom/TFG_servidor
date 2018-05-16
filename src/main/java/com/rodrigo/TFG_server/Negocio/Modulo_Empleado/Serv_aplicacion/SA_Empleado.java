@@ -18,7 +18,7 @@ public interface SA_Empleado {
 
     TEmpleadoCompleto buscarByID(Long id) throws EmpleadoException;
 
-    boolean eliminarEmpleado(TEmpleado empleadoEliminar) throws EmpleadoFieldInvalidException, EmpleadoException;
+    boolean eliminarEmpleado(Long id) throws EmpleadoFieldInvalidException, EmpleadoException;
 
     List<TEmpleado> listarEmpleados();
 

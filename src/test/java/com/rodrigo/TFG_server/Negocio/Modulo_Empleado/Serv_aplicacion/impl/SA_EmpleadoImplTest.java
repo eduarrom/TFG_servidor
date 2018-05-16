@@ -100,7 +100,7 @@ class SA_EmpleadoImplTest {
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
 */
         log.info("Eliminado empleado");
-        sa.eliminarEmpleado(e1.getEmpleado());
+        sa.eliminarEmpleado(e1.getEmpleado().getId());
     }
 
 
@@ -129,7 +129,7 @@ class SA_EmpleadoImplTest {
         assertEquals(e.toString(), empleCreado.getEmpleado().toString());
 
 
-        sa.eliminarEmpleado(empleCreado.getEmpleado());
+        sa.eliminarEmpleado(empleCreado.getEmpleado().getId());
     }
 
 
@@ -304,7 +304,7 @@ class SA_EmpleadoImplTest {
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());
 
         log.info("Eliminando empleado");
-        boolean resutl = sa.eliminarEmpleado(e.getEmpleado());
+        boolean resutl = sa.eliminarEmpleado(e.getEmpleado().getId());
 
         log.debug("resutl = '" + resutl + "'");
 
@@ -338,7 +338,7 @@ class SA_EmpleadoImplTest {
 
         Throwable exception = assertThrows(EmpleadoException.class, () -> {
 
-            boolean result = sa.eliminarEmpleado(emple);
+            boolean result = sa.eliminarEmpleado(emple.getId());
 
         });
 
@@ -511,7 +511,7 @@ class SA_EmpleadoImplTest {
 
         assertEquals(e1.toString(), nuevo.toString());
 
-        sa.eliminarEmpleado(nuevo.getEmpleado());
+        sa.eliminarEmpleado(nuevo.getEmpleado().getId());
 
     }
 

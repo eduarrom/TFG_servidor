@@ -100,7 +100,7 @@ class Broker_SA_ProyectoImplTest {
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
 */
         log.info("Eliminado proyecto");
-        b.eliminarProyecto(p1);
+        b.eliminarProyecto(p1.getId());
     }
 
 
@@ -129,7 +129,7 @@ class Broker_SA_ProyectoImplTest {
         assertEquals(p.toString(), proyCreado.toString());
 
 
-        b.eliminarProyecto(proyCreado);
+        b.eliminarProyecto(proyCreado.getId());
     }
 
 
@@ -314,7 +314,7 @@ class Broker_SA_ProyectoImplTest {
         if (p != null) {
 
             log.info("Eliminando proyecto");
-            boolean resutl = b.eliminarProyecto(p);
+            boolean resutl = b.eliminarProyecto(p.getId());
 
             log.debug("resutl = '" + resutl + "'");
             assertNull(b.buscarByID(p.getId()));
@@ -342,7 +342,7 @@ class Broker_SA_ProyectoImplTest {
         p.agregarEmpleadoProyecto(ep, emple1.getEmpleado());
 
         log.info("Eliminando proyecto");
-        boolean resutl = b.eliminarProyecto(p.getProyecto());
+        boolean resutl = b.eliminarProyecto(p.getProyecto().getId());
 
         log.debug("resutl = '" + resutl + "'");
 
@@ -376,7 +376,7 @@ class Broker_SA_ProyectoImplTest {
 
         Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
 
-            boolean result = b.eliminarProyecto(proy);
+            boolean result = b.eliminarProyecto(proy.getId());
 
         });
 
@@ -441,7 +441,7 @@ class Broker_SA_ProyectoImplTest {
         assertTrue(nuevo.getFechaFin().getDate() == p1.getProyecto().getFechaFin().getDate());
 
 
-        b.eliminarProyecto(nuevo);
+        b.eliminarProyecto(nuevo.getId());
 
     }
 

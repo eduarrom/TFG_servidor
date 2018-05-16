@@ -23,7 +23,7 @@ public interface IBroker_SA_Empleado {
 
 
     @WebMethod(operationName="eliminarEmpleado")
-    public boolean eliminarEmpleado(@WebParam(name = "empleadoEliminar") TEmpleado empleadoEliminar) throws EmpleadoException;
+    public boolean eliminarEmpleado(@WebParam(name = "id") Long id) throws EmpleadoException;
 
 
     @WebMethod(operationName="listarEmpleados")

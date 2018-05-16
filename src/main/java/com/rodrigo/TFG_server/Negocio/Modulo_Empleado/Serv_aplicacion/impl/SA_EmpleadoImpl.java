@@ -32,13 +32,14 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      *
      * @param empleadoNuevo
      * @return Empleado  insertado en BBDD o null si la entidad ya existe
-     * @throws EmpleadoNullException      Si el param es null
+     * @throws EmpleadoNullException         Si el param es null
      * @throws EmpleadoFieldInvalidException Si algún parámetro es null
      */
     public TEmpleadoCompleto crearEmpleado(TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
         log.info("creando empleado...");
 
         Empleado emple = null;
+        TEmpleadoCompleto transfer = null;
         log.debug("empleadoNuevo = '" + empleadoNuevo + "'");
 
         if (empleadoNuevo == null) {
@@ -67,8 +68,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             .setParameter("email", empleadoNuevo.getEmail())
                             .getSingleResult();
 
-//                    emple = (obj instanceof EmpleadoTParcial) ? (EmpleadoTParcial) obj : (EmpleadoTCompleto) obj;
-
 
                 } catch (NoResultException e) {
                     log.info("Empleado con email '" + empleadoNuevo.getEmail() + "' no encontrado");
@@ -80,10 +79,10 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                     try {
 
                         Empleado e = null;
-                        if(empleadoNuevo instanceof TEmpleadoTCompleto){
+                        if (empleadoNuevo instanceof TEmpleadoTCompleto) {
                             e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
                                     ((TEmpleadoTCompleto) empleadoNuevo).getAntiguedad(), ((TEmpleadoTCompleto) empleadoNuevo).getSueldoBase());
-                        }else if(empleadoNuevo instanceof TEmpleadoTParcial){
+                        } else if (empleadoNuevo instanceof TEmpleadoTParcial) {
                             e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
                                     ((TEmpleadoTParcial) empleadoNuevo).getHorasJornada(), ((TEmpleadoTParcial) empleadoNuevo).getPrecioHora());
                         }
@@ -95,6 +94,8 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         log.info("Persistiendo empleado en BBDD...");
                         emple = em.merge(e);
                         log.debug("result = '" + emple + "'");
+
+                        transfer = emple.crearTransferCompleto();
 
 
                         log.info("TRANSACCION --> COMMIT");
@@ -129,7 +130,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             }
         }
 
-        return emple.crearTransferCompleto();
+        return transfer;
     }
 
 
@@ -185,18 +186,13 @@ public class SA_EmpleadoImpl implements SA_Empleado {
     }
 
     @Override
-    public boolean eliminarEmpleado(TEmpleado empleadoEliminar) throws EmpleadoNullException, EmpleadoException {
+    public boolean eliminarEmpleado(Long id) throws EmpleadoNullException, EmpleadoException {
 
         boolean result;
 
-        log.info("empleadoEliminar = [" + empleadoEliminar + "]");
+        log.info("id = [" + id + "]");
 
-        if (empleadoEliminar == null) {
-            log.error("Empleado es null");
-            throw new EmpleadoNullException("El empleado para eliminar en null");
-        }
-
-        if (empleadoEliminar.getId() == null || empleadoEliminar.getId() <= 0) {
+        if (id == null || id <= 0) {
             log.error("El id para buscar en null, 0 o negativo");
             throw new EmpleadoException("El id para buscar en null, 0 o negativo");
         }
@@ -209,7 +205,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.getTransaction().begin();
 
             try {
-                Empleado emple = em.find(Empleado.class, empleadoEliminar.getId());
+                Empleado emple = em.find(Empleado.class, id);
                 if (emple != null) {
                     log.debug("Proyectos: ");
                     emple.getProyectos().stream()
@@ -264,7 +260,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
         return lista.stream()
-                .map((e)-> e.crearTransferSimple())
+                .map((e) -> e.crearTransferSimple())
                 .collect(Collectors.toList());
     }
 
@@ -392,6 +388,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
      */
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
         Empleado emple = null;
+        TEmpleadoCompleto transfer = null;
         log.debug("email = '" + email + "'");
 
 
@@ -432,7 +429,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 log.info("*********************************************************");
                 log.info("*********************************************************");
 
-
+                transfer = (emple != null) ? emple.crearTransferCompleto() : null;
             } catch (NoResultException e) {
                 log.info("Empleado con email '" + email + "' no encontrado");
                 emple = null;
@@ -447,7 +444,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.close();
 
 
-        return (emple != null) ? emple.crearTransferCompleto() : null;
+        return transfer;
     }
 
 }

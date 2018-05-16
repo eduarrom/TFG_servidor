@@ -98,7 +98,7 @@ class SA_ProyectoImplTest {
         assertFalse(b.emIsOpen(), "Entity Manager no cerrado");
 */
         log.info("Eliminado proyecto");
-        sa.eliminarProyecto(p1);
+        sa.eliminarProyecto(p1.getId());
     }
 
 
@@ -127,7 +127,7 @@ class SA_ProyectoImplTest {
         assertEquals(p.toString(), proyCreado.toString());
 
 
-        sa.eliminarProyecto(proyCreado);
+        sa.eliminarProyecto(proyCreado.getId());
     }
 
 
@@ -312,7 +312,7 @@ class SA_ProyectoImplTest {
         if (p != null) {
 
             log.info("Eliminando proyecto");
-            boolean resutl = sa.eliminarProyecto(p);
+            boolean resutl = sa.eliminarProyecto(p.getId());
 
             log.debug("resutl = '" + resutl + "'");
             assertNull(sa.buscarByID(p.getId()));
@@ -340,7 +340,7 @@ class SA_ProyectoImplTest {
         p.agregarEmpleadoProyecto(ep, emple1.getEmpleado());
 
         log.info("Eliminando proyecto");
-        boolean resutl = sa.eliminarProyecto(p.getProyecto());
+        boolean resutl = sa.eliminarProyecto(p.getProyecto().getId());
 
         log.debug("resutl = '" + resutl + "'");
 
@@ -374,7 +374,7 @@ class SA_ProyectoImplTest {
 
         Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
 
-            boolean result = sa.eliminarProyecto(proy);
+            boolean result = sa.eliminarProyecto(proy.getId());
 
         });
 
@@ -439,7 +439,7 @@ class SA_ProyectoImplTest {
         assertTrue(nuevo.getFechaFin().getDate() == p1.getProyecto().getFechaFin().getDate());
 
 
-        sa.eliminarProyecto(nuevo);
+        sa.eliminarProyecto(nuevo.getId());
 
     }
 

@@ -86,9 +86,9 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         return emple;
     }
 
-    public boolean eliminarEmpleado(@WebParam(name="Empleado") TEmpleado empleadoEliminar) throws EmpleadoException {
+    public boolean eliminarEmpleado(@WebParam(name="Empleado") Long id) throws EmpleadoException {
 
-        return FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(empleadoEliminar);
+        return FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(id);
     }
 
     public List<TEmpleado> listarEmpleados() {

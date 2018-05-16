@@ -49,9 +49,9 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
-    public boolean eliminarProyecto(@WebParam(name = "proyectoEliminar") TProyecto proyectoEliminar) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
+    public boolean eliminarProyecto(@WebParam(name = "id") Long id) throws ProyectoConEmpleadosException, ProyectoFieldInvalidException, ProyectoException {
 
-        return FactoriaSA.getInstance().crearSA_Proyecto().eliminarProyecto(proyectoEliminar);
+        return FactoriaSA.getInstance().crearSA_Proyecto().eliminarProyecto(id);
     }
 
     @Override

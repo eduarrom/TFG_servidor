@@ -242,12 +242,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
 
-    public static void main(String[] args) {
-        List<TDepartamento> lista = new SA_DepartamentoImpl().listarDepartamentos();
-
-        System.out.println("lista = [" + lista + "]");
-
-    }
 
 
     public TDepartamentoCompleto buscarBySiglas(String siglas) throws DepartamentoException {

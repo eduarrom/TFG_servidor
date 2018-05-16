@@ -116,7 +116,7 @@ class SA_DepartamentoImplTest {
     @AfterEach
     void finalizarContexto() throws DepartamentoException, EmpleadoException {
 
-        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado());
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado().getId());
 
         log.info("Eliminado departamento");
         sa.eliminarDepartamento(d1.getId());
@@ -361,7 +361,7 @@ class SA_DepartamentoImplTest {
 
         log.info("Excepcion capturada:" + ex1.getMessage());
 
-        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado().getId());
         boolean result = sa.eliminarDepartamento(finalD.getId());
 
     }

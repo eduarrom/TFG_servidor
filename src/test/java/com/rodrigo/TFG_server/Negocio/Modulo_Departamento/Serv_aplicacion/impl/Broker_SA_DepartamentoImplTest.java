@@ -108,7 +108,7 @@ class Broker_SA_DepartamentoImplTest {
     @AfterEach
     void finalizarContexto() throws DepartamentoException, EmpleadoException {
 
-        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado());
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(e1.getEmpleado().getId());
 
         log.info("Eliminado departamento");
         b.eliminarDepartamento(d1.getId());
@@ -350,7 +350,7 @@ class Broker_SA_DepartamentoImplTest {
         assertTrue(res2.getStatus() == Response.Status.BAD_GATEWAY.getStatusCode());
 
 
-        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado());
+        FactoriaSA.getInstance().crearSA_Empleado().eliminarEmpleado(auxE.getEmpleado().getId());
         res2 = b.eliminarDepartamento(finalD.getId());
 
     }
