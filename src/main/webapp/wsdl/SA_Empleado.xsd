@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns1="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/"
+                  name="IBroker_SA_Empleado"
+                  targetNamespace="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/"
+                   attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                   targetNamespace="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/">
+            <xs:element name="buscarByEmail" type="tns:buscarByEmail"/>
+            <xs:element name="buscarByEmailResponse" type="tns:buscarByEmailResponse"/>
+            <xs:element name="buscarByID" type="tns:buscarByID"/>
+            <xs:element name="buscarByIDResponse" type="tns:buscarByIDResponse"/>
+            <xs:element name="buscarByIDTransfer" type="tns:buscarByIDTransfer"/>
+            <xs:element name="buscarByIDTransferResponse" type="tns:buscarByIDTransferResponse"/>
+            <xs:element name="crearEmpleado" type="tns:crearEmpleado"/>
+            <xs:element name="crearEmpleadoResponse" type="tns:crearEmpleadoResponse"/>
+            <xs:element name="eliminarEmpleado" type="tns:eliminarEmpleado"/>
+            <xs:element name="eliminarEmpleadoResponse" type="tns:eliminarEmpleadoResponse"/>
+            <xs:element name="listarEmpleados" type="tns:listarEmpleados"/>
+            <xs:element name="listarEmpleadosResponse" type="tns:listarEmpleadosResponse"/>
+            <xs:element name="loginEmpleado" type="tns:loginEmpleado"/>
+            <xs:element name="loginEmpleadoResponse" type="tns:loginEmpleadoResponse"/>
+            <xs:element name="saludar" type="tns:saludar"/>
+            <xs:element name="saludarResponse" type="tns:saludarResponse"/>
+            <xs:element name="tDepartamento" type="tns:tDepartamento"/>
+            <xs:element name="tEmpleadoCompleto" type="tns:tEmpleadoCompleto"/>
+            <xs:complexType name="crearEmpleado">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Empleado" type="tns:tEmpleado"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleado">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departamento" type="xs:long"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rol" type="tns:rol"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoTParcial">
+                <xs:complexContent>
+                    <xs:extension base="tns:tEmpleado">
+                        <xs:sequence>
+                            <xs:element name="horasJornada" type="xs:int"/>
+                            <xs:element name="precioHora" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoTCompleto">
+                <xs:complexContent>
+                    <xs:extension base="tns:tEmpleado">
+                        <xs:sequence>
+                            <xs:element name="antiguedad" type="xs:int"/>
+                            <xs:element name="sueldoBase" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="crearEmpleadoResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tEmpleadoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoCompleto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="empleado" type="tns:tEmpleado"/>
+                    <xs:element minOccurs="0" name="departamento" type="tns:tDepartamento"/>
+                    <xs:element name="empleadoProyecto">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:long"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:tEmpleadoProyecto"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="proyectos">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:long"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:tProyecto"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tDepartamento">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                    <xs:element minOccurs="0" name="siglas" type="xs:string"/>
+                    <xs:element name="nominaMes" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="empleado" type="xs:long"/>
+                    <xs:element minOccurs="0" name="proyecto" type="xs:long"/>
+                    <xs:element name="horas" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                    <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaInicio" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="fechaFin" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="saludar">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="saludarResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByEmail">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByEmailResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tEmpleadoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByIDTransfer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByIDTransferResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tEmpleadoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="loginEmpleado">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                    <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="loginEmpleadoResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByID">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByIDResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tEmpleadoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="eliminarEmpleado">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="eliminarEmpleadoResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="listarEmpleados">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="listarEmpleadosResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:tEmpleado"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="rol">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="EMPLEADO"/>
+                    <xs:enumeration value="ADMIN"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="EmpleadoYaExisteExcepcion" type="tns:EmpleadoYaExisteExcepcion"/>
+            <xs:complexType name="EmpleadoYaExisteExcepcion">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="EmpleadoException" type="tns:EmpleadoException"/>
+            <xs:complexType name="EmpleadoException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="EmpleadoFieldInvalidException" type="tns:EmpleadoFieldInvalidException"/>
+            <xs:complexType name="EmpleadoFieldInvalidException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="entityName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="propertyName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="EmpleadoLoginErroneo" type="tns:EmpleadoLoginErroneo"/>
+            <xs:complexType name="EmpleadoLoginErroneo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="saludar">
+        <wsdl:part element="ns1:saludar" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByIDTransfer">
+        <wsdl:part element="ns1:buscarByIDTransfer" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="loginEmpleado">
+        <wsdl:part element="ns1:loginEmpleado" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="crearEmpleadoResponse">
+        <wsdl:part element="ns1:crearEmpleadoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByID">
+        <wsdl:part element="ns1:buscarByID" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EmpleadoException">
+        <wsdl:part element="ns1:EmpleadoException" name="EmpleadoException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EmpleadoYaExisteExcepcion">
+        <wsdl:part element="ns1:EmpleadoYaExisteExcepcion" name="EmpleadoYaExisteExcepcion">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByEmailResponse">
+        <wsdl:part element="ns1:buscarByEmailResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarEmpleado">
+        <wsdl:part element="ns1:eliminarEmpleado" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="listarEmpleados">
+        <wsdl:part element="ns1:listarEmpleados" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="crearEmpleado">
+        <wsdl:part element="ns1:crearEmpleado" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByEmail">
+        <wsdl:part element="ns1:buscarByEmail" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByIDResponse">
+        <wsdl:part element="ns1:buscarByIDResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByIDTransferResponse">
+        <wsdl:part element="ns1:buscarByIDTransferResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EmpleadoLoginErroneo">
+        <wsdl:part element="ns1:EmpleadoLoginErroneo" name="EmpleadoLoginErroneo">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EmpleadoFieldInvalidException">
+        <wsdl:part element="ns1:EmpleadoFieldInvalidException" name="EmpleadoFieldInvalidException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarEmpleadoResponse">
+        <wsdl:part element="ns1:eliminarEmpleadoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="listarEmpleadosResponse">
+        <wsdl:part element="ns1:listarEmpleadosResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="loginEmpleadoResponse">
+        <wsdl:part element="ns1:loginEmpleadoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="saludarResponse">
+        <wsdl:part element="ns1:saludarResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="IBroker_SA_Empleado">
+        <wsdl:operation name="crearEmpleado">
+            <wsdl:input message="ns1:crearEmpleado" name="crearEmpleado">
+            </wsdl:input>
+            <wsdl:output message="ns1:crearEmpleadoResponse" name="crearEmpleadoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:EmpleadoYaExisteExcepcion" name="EmpleadoYaExisteExcepcion">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="saludar">
+            <wsdl:input message="ns1:saludar" name="saludar">
+            </wsdl:input>
+            <wsdl:output message="ns1:saludarResponse" name="saludarResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByEmail">
+            <wsdl:input message="ns1:buscarByEmail" name="buscarByEmail">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByEmailResponse" name="buscarByEmailResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:EmpleadoFieldInvalidException" name="EmpleadoFieldInvalidException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByIDTransfer">
+            <wsdl:input message="ns1:buscarByIDTransfer" name="buscarByIDTransfer">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByIDTransferResponse" name="buscarByIDTransferResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="loginEmpleado">
+            <wsdl:input message="ns1:loginEmpleado" name="loginEmpleado">
+            </wsdl:input>
+            <wsdl:output message="ns1:loginEmpleadoResponse" name="loginEmpleadoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoLoginErroneo" name="EmpleadoLoginErroneo">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:EmpleadoFieldInvalidException" name="EmpleadoFieldInvalidException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByID">
+            <wsdl:input message="ns1:buscarByID" name="buscarByID">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByIDResponse" name="buscarByIDResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleado">
+            <wsdl:input message="ns1:eliminarEmpleado" name="eliminarEmpleado">
+            </wsdl:input>
+            <wsdl:output message="ns1:eliminarEmpleadoResponse" name="eliminarEmpleadoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="listarEmpleados">
+            <wsdl:input message="ns1:listarEmpleados" name="listarEmpleados">
+            </wsdl:input>
+            <wsdl:output message="ns1:listarEmpleadosResponse" name="listarEmpleadosResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

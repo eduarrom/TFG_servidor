@@ -2,6 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.rodrigo.TFG_server.Integracion.EMFSingleton;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
@@ -75,53 +76,66 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
                 if (emple == null) {
+                    Departamento dept = em.find(Departamento.class, empleadoNuevo.getDepartamento(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
 
-                    try {
+                    if (dept != null) {
+                        try {
 
-                        Empleado e = null;
-                        if (empleadoNuevo instanceof TEmpleadoTCompleto) {
-                            e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
-                                    ((TEmpleadoTCompleto) empleadoNuevo).getAntiguedad(), ((TEmpleadoTCompleto) empleadoNuevo).getSueldoBase());
-                        } else if (empleadoNuevo instanceof TEmpleadoTParcial) {
-                            e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
-                                    ((TEmpleadoTParcial) empleadoNuevo).getHorasJornada(), ((TEmpleadoTParcial) empleadoNuevo).getPrecioHora());
+
+                            Empleado e = null;
+                            if (empleadoNuevo instanceof TEmpleadoTCompleto) {
+                                e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                        ((TEmpleadoTCompleto) empleadoNuevo).getAntiguedad(), ((TEmpleadoTCompleto) empleadoNuevo).getSueldoBase());
+                            } else if (empleadoNuevo instanceof TEmpleadoTParcial) {
+                                e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                        ((TEmpleadoTParcial) empleadoNuevo).getHorasJornada(), ((TEmpleadoTParcial) empleadoNuevo).getPrecioHora());
+                            }
+
+                            log.info("Asignando departamento a empleado");
+                            //e.setDepartamento(em.find(Departamento.class, empleadoNuevo.getDepartamento()));
+                            e.getDepartamento().setId(empleadoNuevo.getDepartamento());
+
+//                            Departamento dept = em.find(Departamento.class, e.getDepartamento().getId(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+
+                            if (dept != null) {
+//                            prosegiir con la operacion
+                            } else {
+//                           rechazar operacion
+                            }
+                            log.info("Persistiendo empleado en BBDD...");
+                            emple = em.merge(e);
+                            log.debug("result = '" + emple + "'");
+
+                            transfer = emple.crearTransferCompleto();
+
+
+                            log.info("TRANSACCION --> COMMIT");
+                            em.getTransaction().commit();
+
+
+                        } catch (PersistenceException e2) {
+                            log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
+                            log.error(e2.getStackTrace().toString());
+                            //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+
+
+                            throw e2;
+                            //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
+
+                        } catch (Exception e) {
+                            log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
+                            log.error("EXCEPCION!", e);
+                            log.info("TRANSACCION --> ROLLBACK");
+                            em.getTransaction().rollback();
+
+                            throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
+                        } finally {
+
+                            if (em.isOpen())
+                                em.close();
                         }
-
-                        log.info("Asignando departamento a empleado");
-                        //e.setDepartamento(em.find(Departamento.class, empleadoNuevo.getDepartamento()));
-                        e.getDepartamento().setId(empleadoNuevo.getDepartamento());
-
-                        log.info("Persistiendo empleado en BBDD...");
-                        emple = em.merge(e);
-                        log.debug("result = '" + emple + "'");
-
-                        transfer = emple.crearTransferCompleto();
-
-
-                        log.info("TRANSACCION --> COMMIT");
-                        em.getTransaction().commit();
-
-
-                    } catch (PersistenceException e2) {
-                        log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
-                        log.error(e2.getStackTrace().toString());
-                        //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
-
-
-                        throw e2;
-                        //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
-
-                    } catch (Exception e) {
-                        log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
-                        log.error("EXCEPCION!", e);
-                        log.info("TRANSACCION --> ROLLBACK");
-                        em.getTransaction().rollback();
-
-                        throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
-                    } finally {
-
-                        if (em.isOpen())
-                            em.close();
+                    } else {
+                        throw new EmpleadoException("El departamento no existe");
                     }
 
                 } else {

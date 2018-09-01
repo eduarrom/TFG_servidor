@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+                  xmlns:ns1="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/"
+                  name="Broker_SA_ProyectoImpl"
+                  targetNamespace="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+    <wsdl:import location="http://localhost:8080/TFG_server/wsdl/SA_Proyecto.xsd"
+                 namespace="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+    </wsdl:import>
+    <wsdl:binding name="Broker_SA_ProyectoImplSoapBinding" type="ns1:IBroker_SA_Proyecto">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="buscarByNombre">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="buscarByNombre">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buscarByNombreResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ProyectoFieldInvalidException">
+                <soap:fault name="ProyectoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearProyecto">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="crearProyecto">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="crearProyectoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ProyectoFieldInvalidException">
+                <soap:fault name="ProyectoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoYaExistenteException">
+                <soap:fault name="ProyectoYaExistenteException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="listarProyectos">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="listarProyectos">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="listarProyectosResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="añadirEmpleadoAProyecto">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="añadirEmpleadoAProyecto">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="añadirEmpleadoAProyectoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarProyecto">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="eliminarProyecto">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="eliminarProyectoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ProyectoFieldInvalidException">
+                <soap:fault name="ProyectoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoConEmpleadosException">
+                <soap:fault name="ProyectoConEmpleadosException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByID">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="buscarByID">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buscarByIDResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ProyectoFieldInvalidException">
+                <soap:fault name="ProyectoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Broker_SA_ProyectoImpl">
+        <wsdl:port binding="tns:Broker_SA_ProyectoImplSoapBinding" name="Broker_SA_ProyectoImplPort">
+            <soap:address location="https://localhost:8443/TFG_server/services/SA_Proyecto"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

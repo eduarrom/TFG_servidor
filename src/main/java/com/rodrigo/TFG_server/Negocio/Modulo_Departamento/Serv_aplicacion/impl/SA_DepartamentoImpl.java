@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import org.hibernate.exception.ConstraintViolationException;
@@ -130,7 +131,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
                 log.info("Buscando departamento en BBDD");
-                depart = em.find(Departamento.class, id);
+                depart = em.find(Departamento.class, id, LockModeType.OPTIMISTIC);
 
 
                 log.debug("depart = '" + depart + "'");
@@ -183,6 +184,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             em.getTransaction().begin();
 
             try {
+//                COMPORABAR QUE TNEGA EMPLEADOS Y REVCHZAR SI ES ASI
                 em.remove(em.find(Departamento.class, id));
                 result = true;
                 log.info("TRANSACCION --> COMMIT");

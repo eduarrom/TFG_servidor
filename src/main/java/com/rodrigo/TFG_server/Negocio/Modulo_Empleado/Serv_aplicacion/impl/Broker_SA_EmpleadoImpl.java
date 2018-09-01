@@ -20,8 +20,10 @@ import java.util.List;
 
 //@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
 @WebService(
+//        targetNamespace = "https://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/",
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
-        serviceName="Broker_SA_EmpleadoImpl")
+        serviceName="Broker_SA_EmpleadoImpl"
+        /*portName = "Broker_SA_EmpleadoPort"*/)
 @Path("/empleado")
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 

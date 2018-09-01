@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+					xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+                  xmlns:ns1="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/"
+                  name="Broker_SA_EmpleadoImpl"
+                  targetNamespace="http://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/">
+    <wsdl:import location="http://localhost:8080/TFG_server/wsdl/SA_Empleado.xsd"
+                 namespace="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/">
+    </wsdl:import>
+    <wsdl:binding name="Broker_SA_EmpleadoImplSoapBinding" type="ns1:IBroker_SA_Empleado">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="crearEmpleado">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="crearEmpleado">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="crearEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="EmpleadoYaExisteExcepcion">
+                <soap:fault name="EmpleadoYaExisteExcepcion" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="saludar">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="saludar">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="saludarResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByEmail">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="buscarByEmail">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buscarByEmailResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="EmpleadoFieldInvalidException">
+                <soap:fault name="EmpleadoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByIDTransfer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="buscarByIDTransfer">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buscarByIDTransferResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="loginEmpleado">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="loginEmpleado">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="loginEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoLoginErroneo">
+                <soap:fault name="EmpleadoLoginErroneo" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="EmpleadoFieldInvalidException">
+                <soap:fault name="EmpleadoFieldInvalidException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByID">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="buscarByID">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buscarByIDResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleado">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="eliminarEmpleado">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="eliminarEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="listarEmpleados">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="listarEmpleados">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="listarEmpleadosResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Broker_SA_EmpleadoImpl">
+        <wsdl:port binding="tns:Broker_SA_EmpleadoImplSoapBinding" name="Broker_SA_EmpleadoImplPort">
+            <soap:address location="https://localhost:8443/TFG_server/services/SA_Empleado"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

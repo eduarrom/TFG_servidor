@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/" name="IBroker_SA_Proyecto" targetNamespace="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+            <xs:element name="añadirEmpleadoAProyecto" type="tns:añadirEmpleadoAProyecto"/>
+            <xs:element name="añadirEmpleadoAProyectoResponse" type="tns:añadirEmpleadoAProyectoResponse"/>
+            <xs:element name="buscarByID" type="tns:buscarByID"/>
+            <xs:element name="buscarByIDResponse" type="tns:buscarByIDResponse"/>
+            <xs:element name="buscarByNombre" type="tns:buscarByNombre"/>
+            <xs:element name="buscarByNombreResponse" type="tns:buscarByNombreResponse"/>
+            <xs:element name="crearProyecto" type="tns:crearProyecto"/>
+            <xs:element name="crearProyectoResponse" type="tns:crearProyectoResponse"/>
+            <xs:element name="eliminarProyecto" type="tns:eliminarProyecto"/>
+            <xs:element name="eliminarProyectoResponse" type="tns:eliminarProyectoResponse"/>
+            <xs:element name="listarProyectos" type="tns:listarProyectos"/>
+            <xs:element name="listarProyectosResponse" type="tns:listarProyectosResponse"/>
+            <xs:element name="tProyectoCompleto" type="tns:tProyectoCompleto"/>
+            <xs:complexType name="buscarByNombre">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByNombreResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tProyectoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tProyectoCompleto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="proyecto" type="tns:tProyecto"/>
+                    <xs:element name="empleadoProyecto">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:long"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:tEmpleadoProyecto"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="empleados">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:long"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:tEmpleado"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                    <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaInicio" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="fechaFin" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="empleado" type="xs:long"/>
+                    <xs:element minOccurs="0" name="proyecto" type="xs:long"/>
+                    <xs:element name="horas" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleado">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departamento" type="xs:long"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rol" type="tns:rol"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoTParcial">
+                <xs:complexContent>
+                    <xs:extension base="tns:tEmpleado">
+                        <xs:sequence>
+                            <xs:element name="horasJornada" type="xs:int"/>
+                            <xs:element name="precioHora" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="tEmpleadoTCompleto">
+                <xs:complexContent>
+                    <xs:extension base="tns:tEmpleado">
+                        <xs:sequence>
+                            <xs:element name="antiguedad" type="xs:int"/>
+                            <xs:element name="sueldoBase" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="crearProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Proyecto" type="tns:tProyecto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="crearProyectoResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tProyecto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="listarProyectos">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="listarProyectosResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:tProyecto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="añadirEmpleadoAProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="e" type="tns:tEmpleado"/>
+                    <xs:element minOccurs="0" name="p" type="tns:tProyecto"/>
+                    <xs:element name="horas" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="añadirEmpleadoAProyectoResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tEmpleadoProyecto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="eliminarProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="eliminarProyectoResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByID">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByIDResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tProyectoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="rol">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="EMPLEADO"/>
+                    <xs:enumeration value="ADMIN"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="ProyectoFieldInvalidException" type="tns:ProyectoFieldInvalidException"/>
+            <xs:complexType name="ProyectoFieldInvalidException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                    <xs:element minOccurs="0" name="entityName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="propertyName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ProyectoException" type="tns:ProyectoException"/>
+            <xs:complexType name="ProyectoException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ProyectoYaExistenteException" type="tns:ProyectoYaExistenteException"/>
+            <xs:complexType name="ProyectoYaExistenteException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ProyectoConEmpleadosException" type="tns:ProyectoConEmpleadosException"/>
+            <xs:complexType name="ProyectoConEmpleadosException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="buscarByNombre">
+        <wsdl:part element="ns1:buscarByNombre" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ProyectoConEmpleadosException">
+        <wsdl:part element="ns1:ProyectoConEmpleadosException" name="ProyectoConEmpleadosException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ProyectoException">
+        <wsdl:part element="ns1:ProyectoException" name="ProyectoException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="listarProyectos">
+        <wsdl:part element="ns1:listarProyectos" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="añadirEmpleadoAProyectoResponse">
+        <wsdl:part element="ns1:añadirEmpleadoAProyectoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ProyectoFieldInvalidException">
+        <wsdl:part element="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="añadirEmpleadoAProyecto">
+        <wsdl:part element="ns1:añadirEmpleadoAProyecto" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="listarProyectosResponse">
+        <wsdl:part element="ns1:listarProyectosResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="crearProyectoResponse">
+        <wsdl:part element="ns1:crearProyectoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByID">
+        <wsdl:part element="ns1:buscarByID" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="crearProyecto">
+        <wsdl:part element="ns1:crearProyecto" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByNombreResponse">
+        <wsdl:part element="ns1:buscarByNombreResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarProyecto">
+        <wsdl:part element="ns1:eliminarProyecto" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarProyectoResponse">
+        <wsdl:part element="ns1:eliminarProyectoResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buscarByIDResponse">
+        <wsdl:part element="ns1:buscarByIDResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ProyectoYaExistenteException">
+        <wsdl:part element="ns1:ProyectoYaExistenteException" name="ProyectoYaExistenteException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="IBroker_SA_Proyecto">
+        <wsdl:operation name="buscarByNombre">
+            <wsdl:input message="ns1:buscarByNombre" name="buscarByNombre">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByNombreResponse" name="buscarByNombreResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearProyecto">
+            <wsdl:input message="ns1:crearProyecto" name="crearProyecto">
+            </wsdl:input>
+            <wsdl:output message="ns1:crearProyectoResponse" name="crearProyectoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoYaExistenteException" name="ProyectoYaExistenteException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="listarProyectos">
+            <wsdl:input message="ns1:listarProyectos" name="listarProyectos">
+            </wsdl:input>
+            <wsdl:output message="ns1:listarProyectosResponse" name="listarProyectosResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="añadirEmpleadoAProyecto">
+            <wsdl:input message="ns1:añadirEmpleadoAProyecto" name="añadirEmpleadoAProyecto">
+            </wsdl:input>
+            <wsdl:output message="ns1:añadirEmpleadoAProyectoResponse" name="añadirEmpleadoAProyectoResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarProyecto">
+            <wsdl:input message="ns1:eliminarProyecto" name="eliminarProyecto">
+            </wsdl:input>
+            <wsdl:output message="ns1:eliminarProyectoResponse" name="eliminarProyectoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoConEmpleadosException" name="ProyectoConEmpleadosException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="buscarByID">
+            <wsdl:input message="ns1:buscarByID" name="buscarByID">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByIDResponse" name="buscarByIDResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
