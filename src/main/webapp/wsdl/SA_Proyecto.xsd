@@ -80,7 +80,6 @@
                     <xs:element minOccurs="0" name="id" type="xs:long"/>
                     <xs:element minOccurs="0" name="nombre" type="xs:string"/>
                     <xs:element minOccurs="0" name="password" type="xs:string"/>
-                    <xs:element minOccurs="0" name="rol" type="tns:rol"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="tEmpleadoTParcial">
@@ -153,12 +152,6 @@
                     <xs:element minOccurs="0" name="return" type="tns:tProyectoCompleto"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:simpleType name="rol">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="EMPLEADO"/>
-                    <xs:enumeration value="ADMIN"/>
-                </xs:restriction>
-            </xs:simpleType>
             <xs:element name="ProyectoFieldInvalidException" type="tns:ProyectoFieldInvalidException"/>
             <xs:complexType name="ProyectoFieldInvalidException">
                 <xs:sequence>

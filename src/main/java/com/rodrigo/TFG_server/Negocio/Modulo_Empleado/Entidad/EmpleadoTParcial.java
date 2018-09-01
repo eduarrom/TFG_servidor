@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement
+//@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "empleadoTParcial")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -54,26 +54,26 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
     public EmpleadoTParcial() {
     }
 
-    public EmpleadoTParcial(String nombre, String password, Rol rol) {
-        super(nombre, password, rol);
+    public EmpleadoTParcial(String nombre, String password) {
+        super(nombre, password);
         this.departamento = new Departamento();
     }
 
-    public EmpleadoTParcial(String nombre, String password, Rol rol, Departamento d) {
-        super(nombre, password, rol);
+    public EmpleadoTParcial(String nombre, String password, Departamento d) {
+        super(nombre, password);
         this.departamento = d;
     }
 
 
-    public EmpleadoTParcial(String nombre, String password, Rol rol, int horasJornada, int precioHora) {
-        super(nombre, password, rol);
+    public EmpleadoTParcial(String nombre, String password, int horasJornada, int precioHora) {
+        super(nombre, password);
         this.horasJornada = horasJornada;
         this.precioHora = precioHora;
     }
 
 
-    public EmpleadoTParcial(Long id, String nombre, String password, Rol rol, int antiguedad, int sueldoBase) {
-        super(id, nombre, password, rol);
+    public EmpleadoTParcial(Long id, String nombre, String password, int antiguedad, int sueldoBase) {
+        super(id, nombre, password);
         this.horasJornada = horasJornada;
         this.precioHora = precioHora;
     }
@@ -104,7 +104,7 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
 
     @Override
     public TEmpleado crearTransferSimple() {
-        return new TEmpleadoTParcial(id, nombre, email, password, rol,
+        return new TEmpleadoTParcial(id, nombre, email, password,
                 departamento.getId(), horasJornada, precioHora);
     }
 

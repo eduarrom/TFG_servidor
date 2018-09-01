@@ -1,6 +1,5 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 
 public class TEmpleadoTParcial extends TEmpleado {
 
@@ -13,31 +12,30 @@ public class TEmpleadoTParcial extends TEmpleado {
     public TEmpleadoTParcial() {
     }
 
-    public TEmpleadoTParcial(String nombre, String password,
-                             Rol rol, Long departamento) {
+    public TEmpleadoTParcial(String nombre, String password, Long departamento) {
 
-        super(nombre, password, rol, departamento);
+        super(nombre, password, departamento);
     }
 
 
     public TEmpleadoTParcial(String nombre, String email, String password,
-                             Rol rol, Long departamento) {
+                              Long departamento) {
 
-        super(nombre, email, password, rol, departamento);
+        super(nombre, email, password, departamento);
     }
 
     public TEmpleadoTParcial(Long id, String nombre, String email, String password,
-                             Rol rol, Long departamento) {
+             Long departamento) {
 
-        super(id, nombre, email, password, rol, departamento);
+        super(id, nombre, email, password, departamento);
     }
 
 
 
     public TEmpleadoTParcial(Long id, String nombre, String email, String password,
-                             Rol rol, Long departamento, int horasJornada, int precioHora) {
+                              Long departamento, int horasJornada, int precioHora) {
 
-        super(id, nombre, email, password, rol, departamento);
+        super(id, nombre, email, password, departamento);
 
         this.horasJornada = horasJornada;
         this.precioHora = precioHora;

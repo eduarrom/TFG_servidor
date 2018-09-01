@@ -12,10 +12,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import java.util.List;
 
 //@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
@@ -24,7 +20,6 @@ import java.util.List;
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
         serviceName="Broker_SA_EmpleadoImpl"
         /*portName = "Broker_SA_EmpleadoPort"*/)
-@Path("/empleado")
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     public Broker_SA_EmpleadoImpl() {}
@@ -37,11 +32,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     }
 
 
-
-    @GET
-    @Path("/{id}")
-    @Produces("application/xml")
-    public TEmpleadoCompleto buscarByIDREST(@PathParam("id") Long id) throws EmpleadoException {
+    public TEmpleadoCompleto buscarByIDREST( Long id) throws EmpleadoException {
         TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
 
 

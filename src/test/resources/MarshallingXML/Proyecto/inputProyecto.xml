@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<proyecto>
-   <id>1</id>
-   <nombre>Proy1</nombre>
-   <descripcion>Descripción del proyecto Proy1</descripcion>
-   <fechaInicio>2018-07-09T02:00:00+02:00</fechaInicio>
-   <fechaFin>2018-09-07T02:00:00+02:00</fechaFin>
-   <version>0</version>
-</proyecto>

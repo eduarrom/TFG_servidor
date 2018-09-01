@@ -18,8 +18,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+////@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "empleadoTCompleto")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -52,23 +51,23 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
     public EmpleadoTCompleto() {
     }
 
-    public EmpleadoTCompleto(String nombre, String password, Rol rol) {
-        super(nombre, password, rol);
+    public EmpleadoTCompleto(String nombre, String password) {
+        super(nombre, password);
         this.departamento = new Departamento();
     }
-    public EmpleadoTCompleto(String nombre, String password, Rol rol, Departamento d) {
-        super(nombre, password, rol);
+    public EmpleadoTCompleto(String nombre, String password, Departamento d) {
+        super(nombre, password);
         this.departamento = d;
     }
 
-    public EmpleadoTCompleto(String nombre, String password, Rol rol, int antiguedad, int sueldoBase) {
-        super(nombre, password, rol);
+    public EmpleadoTCompleto(String nombre, String password, int antiguedad, int sueldoBase) {
+        super(nombre, password);
         this.antiguedad = antiguedad;
         this.sueldoBase = sueldoBase;
     }
 
-    public EmpleadoTCompleto(Long id, String nombre, String password, Rol rol, int antiguedad, int sueldoBase) {
-        super(id, nombre, password, rol);
+    public EmpleadoTCompleto(Long id, String nombre, String password, int antiguedad, int sueldoBase) {
+        super(id, nombre, password);
         this.antiguedad = antiguedad;
         this.sueldoBase = sueldoBase;
     }
@@ -100,7 +99,7 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
 
     @Override
     public TEmpleado crearTransferSimple() {
-        return new TEmpleadoTCompleto(id, nombre, email, password, rol,
+        return new TEmpleadoTCompleto(id, nombre, email, password,
                 departamento.getId(), antiguedad, sueldoBase);
     }
 

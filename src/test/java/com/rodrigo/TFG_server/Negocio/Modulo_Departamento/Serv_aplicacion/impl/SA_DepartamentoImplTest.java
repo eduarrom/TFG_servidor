@@ -9,11 +9,8 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
@@ -102,7 +99,7 @@ class SA_DepartamentoImplTest {
         TEmpleadoCompleto auxE = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
 
         if (auxE == null) {
-            e1 = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, d1.getId()));
+            e1 = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", d1.getId()));
         } else
             e1 = auxE;
 
@@ -344,7 +341,7 @@ class SA_DepartamentoImplTest {
         TEmpleadoCompleto auxE = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
 
         if (auxE == null) {
-            auxE = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, d.getId()));
+            auxE = FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", d.getId()));
         }
 
         d = sa.buscarBySiglas(d.getSiglas());

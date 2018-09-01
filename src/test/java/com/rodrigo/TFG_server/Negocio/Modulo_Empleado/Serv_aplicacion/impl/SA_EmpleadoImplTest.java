@@ -1,14 +1,14 @@
-package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion;
+package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoException;
@@ -86,7 +86,7 @@ class SA_EmpleadoImplTest {
         TEmpleadoCompleto aux = sa.buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
 
         if (aux == null) {
-            e1 = sa.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, dept.getId()));
+            e1 = sa.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", dept.getId()));
         } else
             e1 = aux;
     }
@@ -110,11 +110,11 @@ class SA_EmpleadoImplTest {
 
 
     @ParameterizedTest
-    @CsvSource({"crear1, 1234, ADMIN", "crear2, 1234, EMPLEADO", "crear3, 1234, EMPLEADO"})
-    void crearEmpleado(String nombre, String pass, String rol) throws EmpleadoException {
+    @CsvSource({"crear1, 1234, ADMIN", "crear2, 1234", "crear3, 1234"})
+    void crearEmpleado(String nombre, String pass) throws EmpleadoException {
 
 
-        TEmpleadoTParcial e = new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId());
+        TEmpleadoTParcial e = new TEmpleadoTParcial(nombre, pass, dept.getId());
 
         TEmpleadoCompleto empleCreado = sa.crearEmpleado(e);
 
@@ -295,10 +295,13 @@ class SA_EmpleadoImplTest {
 
 
         log.info("Creando empleado");
-        TEmpleadoCompleto e = sa.crearEmpleado(new TEmpleadoTParcial("Eliminar1", "pass", Rol.EMPLEADO, dept.getId()));
+        TEmpleadoCompleto e = sa.crearEmpleado(new TEmpleadoTCompleto("Eliminar1", "pass", dept.getId()));
 
         log.info("Asignando proyecto a empleado");
-        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
+        TEmpleadoProyecto ep = FactoriaSA
+                .getInstance()
+                .crearSA_Proyecto()
+                .añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
 
         proy1.agregarEmpleadoProyecto(ep, e.getEmpleado());
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());
@@ -332,7 +335,7 @@ class SA_EmpleadoImplTest {
     @Test
     void eliminarEmpleadoIDNegativo() throws EmpleadoException {
 
-        TEmpleado emple = new TEmpleadoTParcial("juan", "1234", Rol.EMPLEADO, dept.getId());
+        TEmpleado emple = new TEmpleadoTParcial("juan", "1234", dept.getId());
         emple.setId(-23L);
 
 
@@ -498,7 +501,7 @@ class SA_EmpleadoImplTest {
     @ParameterizedTest
     @CsvSource({"buscar1, 1234, EMPLEADO", "buscar2, 1234, EMPLEADO"})
     void buscarByEmail(String nombre, String pass, String rol) throws EmpleadoException {
-        TEmpleadoCompleto nuevo, e1 = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId()), dept.getDepartamento());
+        TEmpleadoCompleto nuevo, e1 = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, dept.getId()), dept.getDepartamento());
         dept.getEmpleados().put(e1.getId(), e1.getEmpleado());
 
         String email = e1.getEmail();

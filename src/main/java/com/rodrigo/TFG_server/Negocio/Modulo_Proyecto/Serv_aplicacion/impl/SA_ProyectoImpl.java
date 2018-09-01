@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -79,8 +80,9 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
                     try {
 
+                        proy = new Proyecto(proyectoNuevo);
                         log.info("Persistiendo proyecto en BBDD...");
-                        proy = em.merge(new Proyecto(proyectoNuevo));
+                        proy = em.merge(proy);
                         log.debug("result = '" + proy + "'");
 
 
@@ -91,8 +93,8 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                     } catch (PersistenceException e2) {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
-                        //log.info("TRANSACCION --> ROLLBACK");
-                        // em.getTransaction().rollback();
+                        log.info("TRANSACCION --> ROLLBACK");
+                        em.getTransaction().rollback();
 
 
                         throw e2;
@@ -157,7 +159,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
         {
             log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
             log.info("Buscando proyecto en BBDD");
-            proy = em.find(Proyecto.class, id);
+            proy = em.find(Proyecto.class, id, LockModeType.OPTIMISTIC);
             log.debug("proy = '" + proy + "'");
             proy.getEmpleados().stream()
                     .forEach(ep -> {
@@ -259,7 +261,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
             try {
 
 
-                proy = em.find(Proyecto.class, id);
+                proy = em.find(Proyecto.class, id, LockModeType.OPTIMISTIC);
 
 
                 log.debug("proy = '" + proy + "'");
@@ -315,7 +317,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
             try {
 
-                Proyecto proy = em.find(Proyecto.class, id);
+                Proyecto proy = em.find(Proyecto.class, id, LockModeType.OPTIMISTIC);
                 if (proy != null) {
                     log.debug("Proyectos: ");
                     proy.getEmpleados().stream()
@@ -331,8 +333,8 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                 em.getTransaction().commit();
 
             } catch (Exception e) {
-                //log.info("TRANSACCION --> ROLLBACK");
-                // em.getTransaction().rollback();
+                log.info("TRANSACCION --> ROLLBACK");
+                em.getTransaction().rollback();
                 result = false;
                 if(e.getCause().getCause() instanceof ConstraintViolationException){
                     throw new ProyectoConEmpleadosException();

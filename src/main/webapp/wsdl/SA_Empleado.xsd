@@ -38,7 +38,6 @@
                     <xs:element minOccurs="0" name="id" type="xs:long"/>
                     <xs:element minOccurs="0" name="nombre" type="xs:string"/>
                     <xs:element minOccurs="0" name="password" type="xs:string"/>
-                    <xs:element minOccurs="0" name="rol" type="tns:rol"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="tEmpleadoTParcial">
@@ -193,12 +192,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:tEmpleado"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:simpleType name="rol">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="EMPLEADO"/>
-                    <xs:enumeration value="ADMIN"/>
-                </xs:restriction>
-            </xs:simpleType>
             <xs:element name="EmpleadoYaExisteExcepcion" type="tns:EmpleadoYaExisteExcepcion"/>
             <xs:complexType name="EmpleadoYaExisteExcepcion">
                 <xs:sequence>

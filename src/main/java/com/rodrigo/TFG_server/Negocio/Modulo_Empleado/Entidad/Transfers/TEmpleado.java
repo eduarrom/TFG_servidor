@@ -1,6 +1,5 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 
@@ -16,8 +15,6 @@ public class TEmpleado {
 
     protected String password;
 
-    protected Rol rol;
-
     protected Long departamento;
 
 
@@ -28,30 +25,27 @@ public class TEmpleado {
     }
 
 
-    public TEmpleado(String nombre, String password, Rol rol, Long departamento) {
+    public TEmpleado(String nombre, String password,  Long departamento) {
         this.nombre = nombre;
         this.email = nombre.toLowerCase().concat("@gmail.com");
 
         this.password = password;
-        this.rol = rol;
         this.departamento = departamento;
     }
 
-    public TEmpleado(String nombre, String email, String password, Rol rol, Long departamento) {
+    public TEmpleado(String nombre, String email, String password, Long departamento) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.rol = rol;
         this.departamento = departamento;
     }
 
 
-    public TEmpleado(Long id, String nombre, String email, String password, Rol rol, Long departamento) {
+    public TEmpleado(Long id, String nombre, String email, String password, Long departamento) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.rol = rol;
         this.departamento = departamento;
     }
 
@@ -88,14 +82,6 @@ public class TEmpleado {
         this.password = password;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     public Long getDepartamento() {
         return departamento;
     }
@@ -112,7 +98,6 @@ public class TEmpleado {
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rol=" + rol +
                 ", departamento=" + departamento +
                 '}';
     }

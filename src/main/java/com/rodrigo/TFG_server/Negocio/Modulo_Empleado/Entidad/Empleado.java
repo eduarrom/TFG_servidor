@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({EmpleadoTCompleto.class, EmpleadoTParcial.class})
+//@XmlRootElement
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlSeeAlso({EmpleadoTCompleto.class, EmpleadoTParcial.class})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
@@ -67,10 +67,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     @Column(nullable = false)
     protected String password;
 
-    @NotNull
-    @Column(nullable = false)
-    protected Rol rol;
-
 
     @ManyToOne(fetch = FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
     //@JoinColumn(nullable = false)
@@ -101,46 +97,31 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     public Empleado() {
     }
 
-    public Empleado(String nombre, String password, Rol rol) {
-        this.nombre = nombre;
-        this.password = password;
-        this.email = nombre.toLowerCase().concat("@gmail.com");
-        this.rol = rol;
-    }
-
-
-    /**
-     * Constructor
-     * Rol por defecto = Rol.EMPLEADO
-     */
     public Empleado(String nombre, String password) {
         this.nombre = nombre;
         this.password = password;
-        this.rol = Rol.EMPLEADO;
         this.email = nombre.toLowerCase().concat("@gmail.com");
     }
 
-    public Empleado(Long id, String nombre, String password, String email, Rol rol, long version) {
+
+    public Empleado(Long id, String nombre, String password, String email, long version) {
         this.id = id;
         this.nombre = nombre;
         this.password = password;
-        this.rol = rol;
         this.email = email;
         this.version = version;
     }
 
-    public Empleado(String nombre, String password, String email, Rol rol) {
+    public Empleado(String nombre, String password, String email) {
         this.nombre = nombre;
         this.password = password;
-        this.rol = rol;
         this.email = email;
     }
 
-    public Empleado(Long id, String nombre, String password, Rol rol) {
+    public Empleado(Long id, String nombre, String password) {
         this.id = id;
         this.nombre = nombre;
         this.password = password;
-        this.rol = rol;
         this.email = nombre.toLowerCase().concat("@gmail.com");
     }
 
@@ -155,7 +136,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
         this.id = e.id;
         this.nombre = e.nombre;
         this.password = e.password;
-        this.rol = e.rol;
         this.email = e.email;
         this.version = e.version;
 //        this.departamento = new Departamento(e.departamento);
@@ -180,10 +160,10 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     public static Empleado crearEmpleado(TEmpleado te){
         Empleado e = null;
         if(te instanceof TEmpleadoTCompleto){
-            e = new EmpleadoTCompleto(te.getId(), te.getNombre(), te.getPassword(), te.getRol(),
+            e = new EmpleadoTCompleto(te.getId(), te.getNombre(), te.getPassword(),
                     ((TEmpleadoTCompleto) te).getAntiguedad(), ((TEmpleadoTCompleto) te).getSueldoBase());
         }else if(te instanceof TEmpleadoTParcial){
-            e = new EmpleadoTParcial(te.getId(), te.getNombre(), te.getPassword(), te.getRol(),
+            e = new EmpleadoTParcial(te.getId(), te.getNombre(), te.getPassword(),
                     ((TEmpleadoTParcial) te).getHorasJornada(), ((TEmpleadoTParcial) te).getPrecioHora());
         }
 
@@ -226,14 +206,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
         this.password = password;
     }
 
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 
 
     public long getVersion() {
@@ -283,7 +255,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rol=" + rol +
                 ", dept='" + ((departamento == null) ? "null" : departamento.getSiglas()) + '\'' +
                 ", proySize=" + ((proyectos == null) ? "0" : proyectos.size()) +
                 ", version=" + version +
@@ -306,7 +277,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
                 Objects.equals(getPassword(), empleado.getPassword()) &&
-                getRol() == empleado.getRol() &&
                 Objects.equals(getDepartamento(), empleado.getDepartamento()) &&
                 Objects.equals(proyectos, empleado.proyectos);
     }
@@ -319,7 +289,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 Objects.equals(getNombre(), empleado.getNombre()) &&
                 Objects.equals(getEmail(), empleado.getEmail()) &&
                 Objects.equals(getPassword(), empleado.getPassword()) &&
-                getRol() == empleado.getRol() &&
                 Objects.equals(getDepartamento(), empleado.getDepartamento()) &&
                 Objects.equals(proyectos, empleado.proyectos);
     }
@@ -328,7 +297,7 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getId(), getNombre(), getEmail(), getPassword(), getRol(),
+        return Objects.hash(getId(), getNombre(), getEmail(), getPassword(),
                 getDepartamento(), proyectos, getVersion());
     }
 }

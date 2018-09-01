@@ -14,7 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+
 import org.hibernate.exception.ConstraintViolationException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,9 +70,9 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 if (depart == null) {
 
                     try {
-
+                        depart = new Departamento(departamentoNuevo);
                         log.info("Persistiendo departamento en BBDD...");
-                        depart = em.merge(new Departamento(departamentoNuevo));
+                        em.persist(depart);
                         log.debug("result = '" + depart + "'");
 
 
@@ -81,7 +83,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                     } catch (PersistenceException e2) {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
-                        //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+                        log.info("TRANSACCION --> ROLLBACK");
+                        em.getTransaction().rollback();
 
 
                         throw e2;
@@ -96,6 +99,7 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                         throw new DepartamentoException("Ocurrió una error al persisitir en BBDD.");
                     } finally {
 
+                        em.getTransaction().isActive();
                         if (em.isOpen())
                             em.close();
                     }
@@ -176,7 +180,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
         }
 
 
-
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
         {
@@ -185,18 +188,19 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
             try {
 //                COMPORABAR QUE TNEGA EMPLEADOS Y REVCHZAR SI ES ASI
-                em.remove(em.find(Departamento.class, id));
+                em.remove(em.find(Departamento.class, id, LockModeType.OPTIMISTIC));
                 result = true;
                 log.info("TRANSACCION --> COMMIT");
                 em.getTransaction().commit();
+
             } catch (Exception e) {
-                //log.info("TRANSACCION --> ROLLBACK");
-                //em.getTransaction().rollback();
+                log.info("TRANSACCION --> ROLLBACK");
+                em.getTransaction().rollback();
 
                 log.debug("e = '" + e + "'");
                 result = false;
 
-                if(e.getCause().getCause() instanceof ConstraintViolationException ){
+                if (e.getCause().getCause() instanceof ConstraintViolationException) {
                     throw new DepartamentoConEmpleadosException("Departamento con empleados asignados.");
                 }
 
@@ -242,8 +246,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 .map((d) -> d.crearTransferSimple())
                 .collect(Collectors.toList());
     }
-
-
 
 
     public TDepartamentoCompleto buscarBySiglas(String siglas) throws DepartamentoException {
@@ -296,11 +298,4 @@ public class SA_DepartamentoImpl implements SA_Departamento {
     }
 
 
-
-
-
-
-
-
-
-    }
+}

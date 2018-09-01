@@ -42,7 +42,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     private String siglas;
 
 
-    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy="departamento", fetch= FetchType.EAGER, cascade={CascadeType.PERSIST})*/
     //@LazyCollection(LazyCollectionOption.FALSE)
     //@Cascade(org.hibernate.annotations.CascadeType.ALL)
     //@XmlAnyElement(lax = true)
@@ -52,6 +51,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     })*/
 //    @XmlInverseReference(mappedBy = "departamento")
 //    @XmlElementRef
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy="departamento", fetch= FetchType.EAGER, cascade={CascadeType.PERSIST})*/
     private Collection<Empleado> empleados = new ArrayList();
 
     @Version

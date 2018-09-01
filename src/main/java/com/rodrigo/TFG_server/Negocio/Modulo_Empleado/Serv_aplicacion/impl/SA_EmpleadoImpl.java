@@ -84,29 +84,24 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
                             Empleado e = null;
                             if (empleadoNuevo instanceof TEmpleadoTCompleto) {
-                                e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                e = new EmpleadoTCompleto(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(),
                                         ((TEmpleadoTCompleto) empleadoNuevo).getAntiguedad(), ((TEmpleadoTCompleto) empleadoNuevo).getSueldoBase());
                             } else if (empleadoNuevo instanceof TEmpleadoTParcial) {
-                                e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(), empleadoNuevo.getRol(),
+                                e = new EmpleadoTParcial(empleadoNuevo.getNombre(), empleadoNuevo.getPassword(),
                                         ((TEmpleadoTParcial) empleadoNuevo).getHorasJornada(), ((TEmpleadoTParcial) empleadoNuevo).getPrecioHora());
                             }
 
                             log.info("Asignando departamento a empleado");
                             //e.setDepartamento(em.find(Departamento.class, empleadoNuevo.getDepartamento()));
-                            e.getDepartamento().setId(empleadoNuevo.getDepartamento());
+                            e.setDepartamento(dept);
 
-//                            Departamento dept = em.find(Departamento.class, e.getDepartamento().getId(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
 
-                            if (dept != null) {
-//                            prosegiir con la operacion
-                            } else {
-//                           rechazar operacion
-                            }
                             log.info("Persistiendo empleado en BBDD...");
-                            emple = em.merge(e);
+                            em.persist(e);
+
                             log.debug("result = '" + emple + "'");
 
-                            transfer = emple.crearTransferCompleto();
+                            transfer = e.crearTransferCompleto();
 
 
                             log.info("TRANSACCION --> COMMIT");
@@ -116,11 +111,11 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         } catch (PersistenceException e2) {
                             log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                             log.error(e2.getStackTrace().toString());
-                            //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+                            log.info("TRANSACCION --> ROLLBACK");
+                            em.getTransaction().rollback();
 
 
                             throw e2;
-                            //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
 
                         } catch (Exception e) {
                             log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
@@ -225,17 +220,28 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                     emple.getProyectos().stream()
                             .forEach(ep -> {
                                 System.out.println("Eliminando ep: " + ep);
-                                em.remove(ep);
+                                //em.remove(ep);
+                                em.createQuery("delete from EmpleadoProyecto where id = :id")
+                                        .setParameter("id", ep.getId())
+                                        .executeUpdate();
                             });
                 }
 
 
-                em.remove(emple);
+                //em.remove(emple);
+                em.createQuery("delete from Empleado where id = :id")
+                        .setParameter("id", emple.getId())
+                        .executeUpdate();
+
                 result = true;
                 log.info("TRANSACCION --> COMMIT");
-                em.getTransaction().commit();
+                if(em.getTransaction().isActive())
+                    em.getTransaction().commit();
             } catch (Exception e) {
-                //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+                log.error("EXCEPCION!!", e);
+                log.info("TRANSACCION --> ROLLBACK");
+                if(em.getTransaction().isActive())
+                    em.getTransaction().rollback();
                 result = false;
             }
 
@@ -356,7 +362,8 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         /*} catch (PersistenceException e2) {
             log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
             log.error(e2.getStackTrace().toString());
-            log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+            log.info("TRANSACCION --> ROLLBACK");
+            em.getTransaction().rollback();
 
             throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());*/
 
@@ -364,7 +371,8 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             log.error("Ocurrió una error al persisitir en BBDD.");
             log.error("Mensaje: " + e.getMessage());
             log.error(e.getStackTrace().toString());
-            //log.info("TRANSACCION --> ROLLBACK");                 em.getTransaction().rollback();
+            log.info("TRANSACCION --> ROLLBACK");
+             em.getTransaction().rollback();
 
             throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
         } finally {

@@ -58,7 +58,7 @@ class EmpleadoTest {
         assertFalse(admin.equals(emple));
 
 
-        Empleado emple3 = new EmpleadoTParcial("emple3", "1234", Rol.EMPLEADO);
+        Empleado emple3 = new EmpleadoTParcial("emple3", "1234");
         log.debug("emple3 = '" + emple3 + "'");
 
         log.debug("emple.equalsWithOutVersion(emple3)");

@@ -3,7 +3,6 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Rol;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
@@ -84,7 +83,7 @@ class Broker_SA_EmpleadoImplTest {
         TEmpleadoCompleto aux = b.buscarByEmail(nombre.toLowerCase().concat("@gmail.com"));
 
         if (aux == null) {
-            e1 = b.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", Rol.EMPLEADO, dept.getId()));
+            e1 = b.crearEmpleado(new TEmpleadoTCompleto(nombre, "1234", dept.getId()));
 
         } else
             e1 = aux;
@@ -113,7 +112,7 @@ class Broker_SA_EmpleadoImplTest {
     void crearEmpleado(String nombre, String pass, String rol) throws EmpleadoException {
 
 
-        TEmpleadoTParcial e = new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId());
+        TEmpleadoTParcial e = new TEmpleadoTParcial(nombre, pass, dept.getId());
 
         TEmpleadoCompleto empleCreado = b.crearEmpleado(e);
 
@@ -290,11 +289,10 @@ class Broker_SA_EmpleadoImplTest {
 
     @Test
     void eliminarEmpleado() throws EmpleadoException {
-        log.info("SA_EmpleadoImplTest.eliminarEmpleado");
-
+        log.info("Broker_SA_EmpleadoImplTest.eliminarEmpleado");
 
         log.info("Creando empleado");
-        TEmpleadoCompleto e = b.crearEmpleado(new TEmpleadoTParcial("Eliminar4", "pass", Rol.EMPLEADO, dept.getId()));
+        TEmpleadoCompleto e = b.crearEmpleado(new TEmpleadoTParcial("Eliminar4", "pass", dept.getId()));
 
         log.info("Asignando proyecto a empleado");
         TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
@@ -467,7 +465,7 @@ class Broker_SA_EmpleadoImplTest {
 
         TEmpleadoCompleto nuevo;
 
-        TEmpleadoCompleto emple = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, Rol.valueOf(rol), dept.getId()), dept.getDepartamento());
+        TEmpleadoCompleto emple = new TEmpleadoCompleto(new TEmpleadoTParcial(nombre, pass, dept.getId()), dept.getDepartamento());
         dept.getEmpleados().put(emple.getId(), emple.getEmpleado());
 
         String email = emple.getEmail();
