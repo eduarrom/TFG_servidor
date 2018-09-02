@@ -143,7 +143,14 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 log.debug("depart = '" + depart + "'");
                 if (depart != null) {
                     log.debug("Empleados: ");
-                    depart.getEmpleados().stream().forEach(System.out::println);
+                    double nomina = depart.getEmpleados().stream()
+                            .map((e) -> {
+                                System.out.println(e);
+                                em.lock(e, LockModeType.OPTIMISTIC);
+                                return e.calcularNominaMes();
+                            })
+                            .reduce(0.0, (acum, val) -> acum + val);
+                    depart.setNominaMes(nomina);
                 }
 
                 log.info("TRANSACCION --> COMMIT");
@@ -301,9 +308,18 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 depart = null;
             }
 
-            log.info("depart = [" + depart + "]");
-            if (depart != null)
-                depart.getEmpleados().stream().forEach(System.out::println);
+            log.debug("depart = '" + depart + "'");
+            if (depart != null) {
+                log.debug("Empleados: ");
+                double nomina = depart.getEmpleados().stream()
+                        .map((e) -> {
+                            System.out.println(e);
+                            em.lock(e, LockModeType.OPTIMISTIC);
+                            return e.calcularNominaMes();
+                        })
+                        .reduce(0.0, (acum, val) -> acum + val);
+                depart.setNominaMes(nomina);
+            }
 
             log.info("Cerrando transaccion");
             log.info("TRANSACCION --> COMMIT");

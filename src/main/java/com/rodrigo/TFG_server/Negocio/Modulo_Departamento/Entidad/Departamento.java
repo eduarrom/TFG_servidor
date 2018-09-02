@@ -59,6 +59,10 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     protected long version;
 
 
+    @Transient
+    private double nominaMes;
+
+
     /****************************
      ******* CONSTRUCTORES ******
      ****************************/
@@ -118,7 +122,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
 
 
     public TDepartamento crearTransferSimple() {
-        return new TDepartamento(id, nombre, siglas, calcularNominaMes());
+        return new TDepartamento(id, nombre, siglas, nominaMes);
     }
 
 
@@ -149,7 +153,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
      **** GETTERS AND SETTERS ***
      ****************************/
 
-    //@XmlAttribute(name = "id", required = true)
     public Long getId() {
         return id;
     }
@@ -158,7 +161,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
         this.id = id;
     }
 
-    //@XmlElement(name = "nombre", required = true)
     public String getNombre() {
         return nombre;
     }
@@ -168,7 +170,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     }
 
 
-    //@XmlElement(name = "version", required = true)
     public long getVersion() {
         return version;
     }
@@ -177,7 +178,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
         this.version = version;
     }
 
-    //@XmlElement(name = "siglas", required = true)
     public String getSiglas() {
         return siglas;
     }
@@ -187,8 +187,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     }
 
 
-    //@XmlElement
-
     public Collection<Empleado> getEmpleados() {
         return empleados;
     }
@@ -197,19 +195,15 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
         this.empleados = empleados;
     }
 
-    /****************************
-     ********** METODOS *********
-     ****************************/
 
-    public double calcularNominaMes() {
-        if (empleados != null) {
-
-            return empleados.stream()
-                    .map(Empleado::calcularNominaMes)
-                    .reduce(0.0, (acum, val) -> acum + val);
-        }
-        return 0;
+    public double getNominaMes() {
+        return nominaMes;
     }
+
+    public void setNominaMes(double nominaMes) {
+        this.nominaMes = nominaMes;
+    }
+
 
 
     /****************************
