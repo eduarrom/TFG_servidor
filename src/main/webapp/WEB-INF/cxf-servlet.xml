@@ -76,19 +76,19 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 
 
 
-    <jaxrs:server id="Broker_Empleado"
+    <!--<jaxrs:server id="Broker_Empleado"
                   address="/SA_EmpleadoREST">
 
         <jaxrs:serviceBeans>
             <ref bean="broker_SA_Empleado" />
-        </jaxrs:serviceBeans>
+        </jaxrs:serviceBeans>-->
         <!--<jaxrs:providers>-->
         <!--<bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>-->
         <!--</jaxrs:providers>-->
-    </jaxrs:server>
+    <!--</jaxrs:server>
 
     <bean id="broker_SA_Empleado"
-          class="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl" />
+          class="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl" />-->
 
 
 </beans>

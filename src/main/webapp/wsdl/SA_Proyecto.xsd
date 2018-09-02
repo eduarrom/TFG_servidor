@@ -9,6 +9,8 @@
             <xs:element name="buscarByNombreResponse" type="tns:buscarByNombreResponse"/>
             <xs:element name="crearProyecto" type="tns:crearProyecto"/>
             <xs:element name="crearProyectoResponse" type="tns:crearProyectoResponse"/>
+            <xs:element name="eliminarEmpleadoAProyecto" type="tns:eliminarEmpleadoAProyecto"/>
+            <xs:element name="eliminarEmpleadoAProyectoResponse" type="tns:eliminarEmpleadoAProyectoResponse"/>
             <xs:element name="eliminarProyecto" type="tns:eliminarProyecto"/>
             <xs:element name="eliminarProyectoResponse" type="tns:eliminarProyectoResponse"/>
             <xs:element name="listarProyectos" type="tns:listarProyectos"/>
@@ -120,6 +122,17 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:tProyecto"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:complexType name="eliminarEmpleadoAProyecto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                    <xs:element minOccurs="0" name="arg1" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="eliminarEmpleadoAProyectoResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:complexType name="añadirEmpleadoAProyecto">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="e" type="tns:tEmpleado"/>
@@ -172,6 +185,12 @@
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:element name="EmpleadoException" type="tns:EmpleadoException"/>
+            <xs:complexType name="EmpleadoException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="ProyectoConEmpleadosException" type="tns:ProyectoConEmpleadosException"/>
             <xs:complexType name="ProyectoConEmpleadosException">
                 <xs:sequence>
@@ -200,8 +219,16 @@
         <wsdl:part element="ns1:añadirEmpleadoAProyectoResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="eliminarEmpleadoAProyecto">
+        <wsdl:part element="ns1:eliminarEmpleadoAProyecto" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="ProyectoFieldInvalidException">
         <wsdl:part element="ns1:ProyectoFieldInvalidException" name="ProyectoFieldInvalidException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="EmpleadoException">
+        <wsdl:part element="ns1:EmpleadoException" name="EmpleadoException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="añadirEmpleadoAProyecto">
@@ -218,6 +245,10 @@
     </wsdl:message>
     <wsdl:message name="buscarByID">
         <wsdl:part element="ns1:buscarByID" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarEmpleadoAProyectoResponse">
+        <wsdl:part element="ns1:eliminarEmpleadoAProyectoResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="crearProyecto">
@@ -273,11 +304,25 @@
             <wsdl:output message="ns1:listarProyectosResponse" name="listarProyectosResponse">
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleadoAProyecto">
+            <wsdl:input message="ns1:eliminarEmpleadoAProyecto" name="eliminarEmpleadoAProyecto">
+            </wsdl:input>
+            <wsdl:output message="ns1:eliminarEmpleadoAProyectoResponse" name="eliminarEmpleadoAProyectoResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="añadirEmpleadoAProyecto">
             <wsdl:input message="ns1:añadirEmpleadoAProyecto" name="añadirEmpleadoAProyecto">
             </wsdl:input>
             <wsdl:output message="ns1:añadirEmpleadoAProyectoResponse" name="añadirEmpleadoAProyectoResponse">
             </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+            <wsdl:fault message="ns1:ProyectoException" name="ProyectoException">
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="eliminarProyecto">
             <wsdl:input message="ns1:eliminarProyecto" name="eliminarProyecto">

@@ -6,7 +6,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoLoginErroneo;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado;
 
@@ -30,34 +29,6 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         return FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(empleadoNuevo);
         //return null;
     }
-
-
-    public TEmpleadoCompleto buscarByIDREST( Long id) throws EmpleadoException {
-        TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(id);
-
-
-
-        System.out.println("***********************************************");
-        System.out.println(" -------------   BUSCANDO POR ID REST  ----------- ");
-        System.out.println("***********************************************");
-
-        System.out.println("***********************************************");
-        System.out.println("***********************************************");
-        System.out.println("***********************************************");
-        System.out.println();
-
-        System.out.println("emple = [" + emple + "]");
-
-        System.out.println("emple.depart = [" + emple.getDepartamento() + "]");
-
-        System.out.println();
-        System.out.println("***********************************************");
-        System.out.println("***********************************************");
-        System.out.println("***********************************************");
-
-        return emple;
-    }
-
 
 
     @Override
@@ -87,8 +58,6 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     public List<TEmpleado> listarEmpleados() {
         return FactoriaSA.getInstance().crearSA_Empleado().listarEmpleados();
     }
-
-
 
     @Override
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {

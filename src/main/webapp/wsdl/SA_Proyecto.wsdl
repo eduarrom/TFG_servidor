@@ -1,14 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-                  xmlns:tns="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/"
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
-                  xmlns:ns1="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/"
-                  name="Broker_SA_ProyectoImpl"
-                  targetNamespace="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
-    <wsdl:import location="http://localhost:8080/TFG_server/wsdl/SA_Proyecto.xsd"
-                 namespace="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/" name="Broker_SA_ProyectoImpl" targetNamespace="http://impl.Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
+    <wsdl:import location="http://localhost:8080/TFG_server/wsdl/SA_Proyecto.xsd" namespace="http://Serv_aplicacion.Modulo_Proyecto.Negocio.TFG_server.rodrigo.com/">
     </wsdl:import>
     <wsdl:binding name="Broker_SA_ProyectoImplSoapBinding" type="ns1:IBroker_SA_Proyecto">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -54,6 +45,21 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleadoAProyecto">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="eliminarEmpleadoAProyecto">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="eliminarEmpleadoAProyectoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="añadirEmpleadoAProyecto">
             <soap:operation soapAction="" style="document"/>
             <wsdl:input name="añadirEmpleadoAProyecto">
@@ -62,6 +68,12 @@
             <wsdl:output name="añadirEmpleadoAProyectoResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="EmpleadoException">
+                <soap:fault name="EmpleadoException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="ProyectoException">
+                <soap:fault name="ProyectoException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="eliminarProyecto">
             <soap:operation soapAction="" style="document"/>
