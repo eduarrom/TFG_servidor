@@ -21,6 +21,8 @@ public interface SA_Proyecto {
 
     TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws EmpleadoException, ProyectoException;
 
+    boolean eliminarEmpleadoAProyecto(Long idEmple, Long idProy) throws ProyectoException, EmpleadoException;
+
     TProyectoCompleto buscarByNombre(String nombre) throws ProyectoFieldInvalidException, ProyectoException;
 
     TProyectoCompleto buscarByID(Long id) throws ProyectoFieldInvalidException, ProyectoException;

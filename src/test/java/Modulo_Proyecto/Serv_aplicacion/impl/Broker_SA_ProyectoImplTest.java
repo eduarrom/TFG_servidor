@@ -315,13 +315,12 @@ class Broker_SA_ProyectoImplTest {
     @Test
     void asignarEmpleadoAProyecto_ProyInvalido() throws ProyectoException, EmpleadoException {
 
+        TProyecto p = b.crearProyecto(new TProyecto("prueba"));
+
+        Long idAux = p.getId();
 
         Throwable exception = assertThrows(ProyectoException.class, () -> {
 
-            TProyecto p = FactoriaSA
-                    .getInstance()
-                    .crearSA_Proyecto()
-                    .crearProyecto(new TProyecto("prueba"));
 
             p.setId(3000L);
 
@@ -333,7 +332,12 @@ class Broker_SA_ProyectoImplTest {
 
         log.error("----  EXCEPCION! ----", exception);
 
+        boolean result = b.eliminarProyecto(idAux);
+
+        assertTrue(result);
+
     }
+
 
 
     /******************************************************************

@@ -227,7 +227,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             .forEach(ep -> {
                                 System.out.println("Eliminando ep: " + ep);
                                 //em.remove(ep);
-                                em.createNamedQuery("EmpleadoProyecto.eliminar")
+                                em.createNamedQuery("EmpleadoProyecto.eliminarByID")
                                         .setParameter("id", ep.getId())
                                         .executeUpdate();
                             });

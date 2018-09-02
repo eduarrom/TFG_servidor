@@ -51,9 +51,9 @@ public class TEmpleadoTCompleto extends TEmpleado {
 
     @Override
     public String toString() {
-        return "TEmpleadoTCompleto{" +
+        return  super.toString() + " TEmpleadoTCompleto{" +
                 "antiguedad=" + antiguedad +
                 ", sueldoBase=" + sueldoBase +
-                "} " + super.toString();
+                "} ";
     }
 }

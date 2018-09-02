@@ -28,8 +28,10 @@ import java.io.Serializable;
 @NamedQueries({
         @NamedQuery(name = "EmpleadoProyecto.buscarEmpleProy",
                 query = "from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" ),
-        @NamedQuery(name = "EmpleadoProyecto.eliminar",
-                query = "delete from EmpleadoProyecto where id = :id" )
+        @NamedQuery(name = "EmpleadoProyecto.eliminarByID",
+                query = "delete from EmpleadoProyecto where id = :id" ),
+        @NamedQuery(name = "EmpleadoProyecto_eliminarByEmpleProy",
+                query = "delete from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" )
 
 })
 public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {

@@ -62,9 +62,9 @@ public class TEmpleadoTParcial extends TEmpleado {
 
     @Override
     public String toString() {
-        return "TEmpleadoTParcial{" +
+        return  super.toString() + " TEmpleadoTParcial{" +
                 "horasJornada=" + horasJornada +
                 ", precioHora=" + precioHora +
-                "} " + super.toString();
+                "} ";
     }
 }

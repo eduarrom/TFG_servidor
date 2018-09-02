@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TEmpleadoProyecto {
 
 
+
     private Long empleado;
 
 
