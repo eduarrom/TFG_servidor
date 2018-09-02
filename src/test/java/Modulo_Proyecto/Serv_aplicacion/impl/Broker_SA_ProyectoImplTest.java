@@ -6,6 +6,7 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDep
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
@@ -29,36 +30,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class Broker_SA_ProyectoImplTest {
 
 
-        static Broker_SA_ProyectoImpl b;
+    static Broker_SA_ProyectoImpl b;
 
-        static private TProyecto p1;
-        static TProyectoCompleto p2;
-        //    static Proyecto emple2;
-        static TDepartamentoCompleto dept;
+    static private TProyecto p1;
+    static TProyectoCompleto p2;
+    //    static Proyecto emple2;
+    static TDepartamentoCompleto dept;
 
-        static TEmpleadoCompleto emple1;
+    static TEmpleadoCompleto emple1;
 
-        final static Logger log = LoggerFactory.getLogger(Broker_SA_ProyectoImplTest.class);
+    final static Logger log = LoggerFactory.getLogger(Broker_SA_ProyectoImplTest.class);
 
 
-        /*******************************************************************
-         **********************   METODOS INICIALES   **********************
-         *******************************************************************/
+    /*******************************************************************
+     **********************   METODOS INICIALES   **********************
+     *******************************************************************/
 
-        @BeforeAll
-        static void initSA() throws DepartamentoException, ProyectoException, EmpleadoException {
-            log.info("Creando SA...");
-            b = new Broker_SA_ProyectoImpl();
+    @BeforeAll
+    static void initSA() throws DepartamentoException, ProyectoException, EmpleadoException {
+        log.info("Creando SA...");
+        b = new Broker_SA_ProyectoImpl();
 
 
 //        p2 = new ProyectoTParcial("p2", "1234", Rol.ADMIN);
-            p2 = b.buscarByNombre("Proy1");
+        p2 = b.buscarByNombre("Proy1");
 
 //        dept1 = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas(dept1.getSiglas());
 
-            dept = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas("DdP");
+        dept = FactoriaSA.getInstance().crearSA_Departamento().buscarBySiglas("DdP");
 
-            emple1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
+        emple1 = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
 
 
@@ -74,7 +75,7 @@ class Broker_SA_ProyectoImplTest {
         p1.setDepartamento(dept);
 
         p1 = FactoriaSA.getInstance().crearSA_Proyecto().buscarByEmail(p1.getEmail());*/
-        }
+    }
 
     @BeforeEach
     void iniciarContexto() throws ProyectoException {
@@ -221,6 +222,121 @@ class Broker_SA_ProyectoImplTest {
 
 
     /******************************************************************
+     *************   TEST ASIGNAR EMPLEADO A PROYECTO   ***************
+     ******************************************************************/
+
+    @Test
+    void asignarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
+
+
+        TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+
+        assertNotNull(tep);
+
+
+        TEmpleadoCompleto e = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(emple1.getId());
+
+        assertTrue(e.getProyectos().containsKey(p1.getId()));
+
+        TProyectoCompleto p = b.buscarByID(p1.getId());
+
+        assertTrue(p.getEmpleados().containsKey(emple1.getId()));
+
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_EmpleNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(null, p1, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+    @Test
+    void asignarEmpleadoAProyecto_ProyNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_horasNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+    @Test
+    void asignarEmpleadoAProyecto_EmpleInvalido() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoException.class, () -> {
+
+            TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
+
+            ec.setId(3000L);
+            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_ProyInvalido() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoException.class, () -> {
+
+            TProyecto p = FactoriaSA
+                    .getInstance()
+                    .crearSA_Proyecto()
+                    .crearProyecto(new TProyecto("prueba"));
+
+            p.setId(3000L);
+
+            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    /******************************************************************
      ******************   TEST BUSCAR PROYECTO ID  ********************
      ******************************************************************/
 
@@ -319,7 +435,7 @@ class Broker_SA_ProyectoImplTest {
             log.debug("resutl = '" + resutl + "'");
             assertNull(b.buscarByID(p.getId()));
 
-        }else
+        } else
             fail("Proyecto no creado");
 
 
@@ -327,7 +443,7 @@ class Broker_SA_ProyectoImplTest {
 
 
     @Test
-    void eliminarProyectoConEmpleados() throws ProyectoException {
+    void eliminarProyectoConEmpleados() throws ProyectoException, EmpleadoException {
         log.info("SA_ProyectoImplTest.eliminarProyecto");
 
 

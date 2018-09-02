@@ -3,6 +3,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
@@ -39,7 +40,7 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
-    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) {
+    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws EmpleadoException, ProyectoException {
         return FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e, p, horas);
     }
 

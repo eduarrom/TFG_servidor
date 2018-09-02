@@ -18,7 +18,8 @@ import java.util.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Departamento.listar", query = "FROM Departamento"),
-        @NamedQuery(name = "Departamento.buscarPorSiglas", query = "from Departamento e where e.siglas = :siglas")
+        @NamedQuery(name = "Departamento.buscarPorSiglas", query = "from Departamento e where e.siglas = :siglas"),
+        @NamedQuery(name = "Departamento.eliminarByID", query = "delete from Departamento where id = :id")
 
 })
 @XmlRootElement

@@ -3,8 +3,12 @@ package Modulo_Proyecto.Serv_aplicacion.impl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
@@ -219,6 +223,133 @@ class SA_ProyectoImplTest {
 
 
     /******************************************************************
+     ********************   TEST CREAR PROYECTO   *********************
+     ******************************************************************/
+
+    @Test
+    void asignarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
+
+
+        TEmpleadoProyecto tep = FactoriaSA
+                .getInstance()
+                .crearSA_Proyecto()
+                .añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+
+        assertNotNull(tep);
+
+
+        TEmpleadoCompleto e = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(emple1.getId());
+
+        assertTrue(e.getProyectos().containsKey(p1.getId()));
+
+        TProyectoCompleto p = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(p1.getId());
+
+        assertTrue(p.getEmpleados().containsKey(emple1.getId()));
+
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_EmpleNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(null, p1, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+    @Test
+    void asignarEmpleadoAProyecto_ProyNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_horasNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
+            TEmpleadoProyecto tep = FactoriaSA
+                    .getInstance()
+                    .crearSA_Proyecto()
+                    .añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+    @Test
+    void asignarEmpleadoAProyecto_EmpleInvalido() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoException.class, () -> {
+
+            TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
+
+            ec.setId(3000L);
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
+
+            assertNull(tep);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void asignarEmpleadoAProyecto_ProyInvalido() throws ProyectoException, EmpleadoException {
+
+
+        TProyecto p = sa.crearProyecto(new TProyecto("prueba"));
+
+        Long idAux = p.getId();
+        p.setId(3000L);
+        Throwable exception = assertThrows(ProyectoException.class, () -> {
+
+
+            TEmpleadoProyecto tep = FactoriaSA
+                    .getInstance()
+                    .crearSA_Proyecto()
+                    .añadirEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
+
+            assertNull(tep);
+
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+        boolean result = sa.eliminarProyecto(idAux);
+
+        assertTrue(result);
+
+    }
+
+
+    /******************************************************************
      ******************   TEST BUSCAR PROYECTO ID  ********************
      ******************************************************************/
 
@@ -302,30 +433,51 @@ class SA_ProyectoImplTest {
      ******************************************************************/
 
     @Test
-    void eliminarProyecto() throws ProyectoException {
-        log.info("SA_ProyectoImplTest.eliminarProyecto");
+    void eliminarProyecto() throws EmpleadoException, ProyectoException {
+        log.info("SA_EmpleadoImplTest.eliminarEmpleado");
 
 
         log.info("Creando proyecto");
-        TProyecto p = sa.crearProyecto(new TProyecto("Eliminar3"));
+        TProyecto p = sa.crearProyecto(new TProyecto("Eliminar1"));
+        TProyectoCompleto tpc = new TProyectoCompleto(p);
 
-        if (p != null) {
+        log.info("Eliminando proyecto");
+        boolean resutl = sa.eliminarProyecto(tpc.getProyecto().getId());
 
-            log.info("Eliminando proyecto");
-            boolean resutl = sa.eliminarProyecto(p.getId());
+        log.debug("resutl = '" + resutl + "'");
 
-            log.debug("resutl = '" + resutl + "'");
-            assertNull(sa.buscarByID(p.getId()));
 
-        }else
-         fail("Proyecto no creado");
-
+        assertNull(sa.buscarByID(tpc.getId()));
 
     }
 
+    @Test
+    void eliminarProyecto_conEmpleados() throws EmpleadoException, ProyectoException {
+        log.info("SA_EmpleadoImplTest.eliminarEmpleado");
+
+
+        log.info("Creando proyecto");
+        TProyecto p = sa.crearProyecto(new TProyecto("Eliminar1"));
+        TProyectoCompleto tpc = new TProyectoCompleto(p);
+
+        log.info("Asignando proyecto a empleado");
+        TEmpleadoProyecto ep = sa.añadirEmpleadoAProyecto(emple1.getEmpleado(), tpc.getProyecto(), 5);
+
+        tpc.agregarEmpleadoProyecto(ep, emple1.getEmpleado());
+        emple1.agregarEmpleadoProyecto(ep, tpc.getProyecto());
+
+        log.info("Eliminando proyecto");
+        boolean resutl = sa.eliminarProyecto(tpc.getProyecto().getId());
+
+        log.debug("resutl = '" + resutl + "'");
+
+
+        assertNull(sa.buscarByID(tpc.getId()));
+
+    }
 
     @Test
-    void eliminarProyectoConEmpleados() throws ProyectoException {
+    void eliminarProyectoConEmpleados() throws ProyectoException, EmpleadoException {
         log.info("SA_ProyectoImplTest.eliminarProyecto");
 
 

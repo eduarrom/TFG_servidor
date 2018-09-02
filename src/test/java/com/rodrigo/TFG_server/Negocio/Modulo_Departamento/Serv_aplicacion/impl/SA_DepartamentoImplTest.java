@@ -23,7 +23,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -169,7 +168,7 @@ class SA_DepartamentoImplTest {
         });
 
 
-        sa.eliminarDepartamento(d.getId());
+        assertTrue(sa.eliminarDepartamento(d.getId()));
 
     }
 

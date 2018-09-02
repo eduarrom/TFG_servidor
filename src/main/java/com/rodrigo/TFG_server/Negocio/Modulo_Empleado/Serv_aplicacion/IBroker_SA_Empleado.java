@@ -29,12 +29,6 @@ public interface IBroker_SA_Empleado {
     @WebMethod(operationName="listarEmpleados")
     public List<TEmpleado> listarEmpleados();
 
-    @WebMethod(operationName="saludar")
-    public String saludar(@WebParam(name="nombre") String nombre);
-
-    @WebMethod(operationName="loginEmpleado")
-    public boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException;
-
     @WebMethod(operationName="buscarByEmail")
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException;
 

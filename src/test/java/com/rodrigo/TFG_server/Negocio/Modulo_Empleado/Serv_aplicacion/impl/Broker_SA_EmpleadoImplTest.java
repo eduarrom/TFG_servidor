@@ -288,7 +288,7 @@ class Broker_SA_EmpleadoImplTest {
 
 
     @Test
-    void eliminarEmpleado() throws EmpleadoException {
+    void eliminarEmpleado() throws EmpleadoException, ProyectoException {
         log.info("Broker_SA_EmpleadoImplTest.eliminarEmpleado");
 
         log.info("Creando empleado");
@@ -347,112 +347,6 @@ class Broker_SA_EmpleadoImplTest {
     */
 
 
-    /******************************************************************
-     ********************   TEST LOGIN EMPLEADO   *********************
-     ******************************************************************/
-
-
-    //@ParameterizedTest(name = "-> {0}, {1}")
-    //@CsvSource({"emple, 1234, EMPLEADO", "admin, 1234, ADMIN"})
-    @Test
-    void loginTest() throws EmpleadoException {
-        String email = e1.getEmail();
-        String pass = e1.getEmpleado().getPassword();
-
-
-        log.info("Login: {email='" + email + ", pass='" + pass + "'}");
-        Boolean result = b.loginEmpleado(email, pass);
-
-        log.debug("result = '" + result + "'");
-        assertTrue(result);
-
-    }
-
-    @Test
-    void loginParamErroneosTest() {
-
-        log.info("Login email erroneo");
-        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-
-            boolean login = b.loginEmpleado("kajsdnflaf", "1234");
-
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
-
-    }
-
-
-    @Test
-    void loginEmpleadoInexistenteTest() {
-
-        log.info("Login empleado inexistente");
-        Throwable ex1 = assertThrows(EmpleadoLoginErroneo.class, () -> {
-
-            boolean login = b.loginEmpleado("kajsdnflaf@gmail.com", "1234");
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
-
-    }
-
-    @Test
-    void loginEmailNulloVacioTest() {
-
-        log.info("Login email null");
-        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-
-            boolean login = b.loginEmpleado(null, "1234");
-
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
-
-
-        log.info("Login email vacio");
-        Throwable ex2 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-
-            boolean login = b.loginEmpleado("", "1234");
-
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex2.getMessage());
-
-
-    }
-
-    @Test
-    void loginPassNulloVacioTest() {
-
-        log.info("Login pass null");
-        Throwable ex1 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-
-            boolean login = b.loginEmpleado("kajsdnflaf", null);
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex1.getMessage());
-
-        log.info("Login pass vacia");
-        Throwable ex2 = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-
-            boolean login = b.loginEmpleado("kajsdnflaf", "");
-            assertFalse(login);
-
-        });
-
-        log.info("Excepcion capturada:" + ex2.getMessage());
-
-    }
 
 
     /******************************************************************

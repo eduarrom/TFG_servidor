@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
@@ -24,7 +25,7 @@ public interface IBroker_SA_Proyecto {
     public TProyectoCompleto buscarByID(@WebParam(name = "id") Long id) throws ProyectoFieldInvalidException, ProyectoException;
 
     @WebMethod(operationName="añadirEmpleadoAProyecto")
-    TEmpleadoProyecto añadirEmpleadoAProyecto(@WebParam(name = "e") TEmpleado e, @WebParam(name = "p") TProyecto p, @WebParam(name = "horas") int horas);
+    TEmpleadoProyecto añadirEmpleadoAProyecto(@WebParam(name = "e") TEmpleado e, @WebParam(name = "p") TProyecto p, @WebParam(name = "horas") int horas) throws EmpleadoException, ProyectoException;
 
 
     @WebMethod(operationName="buscarByNombre")

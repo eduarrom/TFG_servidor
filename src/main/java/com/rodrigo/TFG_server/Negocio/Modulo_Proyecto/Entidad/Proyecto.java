@@ -27,6 +27,7 @@ import java.util.*;
 @NamedQueries({
         @NamedQuery(name = "Proyecto.buscarPorNombre", query = "from Proyecto e where e.nombre = :nombre"),
         @NamedQuery(name = "Proyecto.listar", query = "FROM Proyecto"),
+        @NamedQuery(name = "Proyecto.eliminarByID", query = "delete from Proyecto where id = :id")
 })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)

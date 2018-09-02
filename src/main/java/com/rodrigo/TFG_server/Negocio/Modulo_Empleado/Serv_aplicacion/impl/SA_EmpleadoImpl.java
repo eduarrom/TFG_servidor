@@ -105,6 +105,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
                             log.info("TRANSACCION --> COMMIT");
+                            if (em.getTransaction().isActive())
                             em.getTransaction().commit();
 
 
@@ -112,6 +113,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                             log.error(e2.getStackTrace().toString());
                             log.info("TRANSACCION --> ROLLBACK");
+                            if (em.getTransaction().isActive())
                             em.getTransaction().rollback();
 
 
@@ -121,6 +123,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
                             log.error("EXCEPCION!", e);
                             log.info("TRANSACCION --> ROLLBACK");
+                            if (em.getTransaction().isActive())
                             em.getTransaction().rollback();
 
                             throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
@@ -175,12 +178,14 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 }
 
                 log.info("TRANSACCION --> COMMIT");
+                if (em.getTransaction().isActive())
                 em.getTransaction().commit();
 
             } catch (IllegalArgumentException e) {
                 log.error("Ocurrió una error al buscar en BBDD: " + e.getMessage());
                 log.error("EXCEPCION!", e);
                 log.info("TRANSACCION --> ROLLBACK");
+                if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
 
                 throw new EmpleadoException("Ocurrió una error al buscar en BBDD.");
@@ -214,6 +219,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             em.getTransaction().begin();
 
             try {
+                //si se coloca el LockModeType.OPTIMISTIC salta excepcion al commit por tenerlo bloqueado
                 Empleado emple = em.find(Empleado.class, id);
                 if (emple != null) {
                     log.debug("Proyectos: ");
@@ -221,7 +227,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             .forEach(ep -> {
                                 System.out.println("Eliminando ep: " + ep);
                                 //em.remove(ep);
-                                em.createQuery("delete from EmpleadoProyecto where id = :id")
+                                em.createNamedQuery("EmpleadoProyecto.eliminar")
                                         .setParameter("id", ep.getId())
                                         .executeUpdate();
                             });
@@ -229,7 +235,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
 
 
                 //em.remove(emple);
-                em.createQuery("delete from Empleado where id = :id")
+                em.createNamedQuery("Empleado.eliminarByID")
                         .setParameter("id", emple.getId())
                         .executeUpdate();
 
@@ -270,6 +276,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
             lista = em.createNamedQuery("Empleado.listar").getResultList();
 
             log.info("TRANSACCION --> COMMIT");
+            if (em.getTransaction().isActive())
             em.getTransaction().commit();
         }
 
@@ -282,122 +289,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
         return lista.stream()
                 .map((e) -> e.crearTransferSimple())
                 .collect(Collectors.toList());
-    }
-
-    public String saludar(String nombre) {
-        return "Hola " + nombre + ", un saludo desde el servidor CXF :)";
-    }
-
-    public Boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException {
-        Empleado emple = null;
-        log.debug("email = '" + email + "'");
-
-
-        //Validacion del email
-        if (email == null || email == "" || !new EmailValidator().validate(email)) {
-            log.error("El email es invalido");
-
-            try {
-                throw new EmpleadoFieldInvalidException(
-                        new PropertyValueException("Empleado.email es erroneo.",
-                                Empleado.class.toString(),
-                                Empleado.class.getDeclaredField("email").toString()));
-            } catch (NoSuchFieldException e) {
-                log.error("Ocurrio un error inesperado.");
-                throw new EmpleadoException("Ocurrio un error con el email.");
-            }
-        }
-
-
-        //Validacion del pass
-        log.debug("pass = '" + pass + "'");
-        if (pass == null || pass == "") {
-            log.error("La password es invalido");
-
-            try {
-                throw new EmpleadoFieldInvalidException(
-                        new PropertyValueException("Empleado.password es erroneo.",
-                                Empleado.class.toString(),
-                                Empleado.class.getDeclaredField("password").toString()));
-            } catch (NoSuchFieldException e) {
-                log.error("Ocurrio un error inesperado.");
-                throw new EmpleadoException("Ocurrio un error con la password.");
-            }
-        }
-
-        EntityManager em = EMFSingleton.getInstance().createEntityManager();
-        try {
-
-
-            {
-                log.debug("Iniciando transacción...");
-                log.info("TRANSACCION --> BEGIN");
-                em.getTransaction().begin();
-                {
-                    log.info("Buscando empleado en BBDD...");
-
-                    log.info("Buscando empleado...");
-                    try {
-                        emple = (Empleado) em
-                                .createNamedQuery("Empleado.buscarPorEmail")
-                                .setParameter("email", email)
-                                .getSingleResult();
-
-
-                    } catch (NoResultException e) {
-                        log.info("Empleado con email '" + email + "' no encontrado");
-                        emple = null;
-                    }
-                    /*if (result.size() > 0) {
-                        emple = (Empleado) result.get(0);
-                    }*/
-                    log.debug("emple = '" + emple + "'");
-
-                }
-                log.debug("Terminando transacción...");
-                log.info("TRANSACCION --> COMMIT");
-                em.getTransaction().commit();
-            }
-
-        /*} catch (PersistenceException e2) {
-            log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
-            log.error(e2.getStackTrace().toString());
-            log.info("TRANSACCION --> ROLLBACK");
-            em.getTransaction().rollback();
-
-            throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());*/
-
-        } catch (Exception e) {
-            log.error("Ocurrió una error al persisitir en BBDD.");
-            log.error("Mensaje: " + e.getMessage());
-            log.error(e.getStackTrace().toString());
-            log.info("TRANSACCION --> ROLLBACK");
-             em.getTransaction().rollback();
-
-            throw new EmpleadoException("Ocurrió una error al persisitir en BBDD.");
-        } finally {
-
-            if (em.isOpen())
-                em.close();
-        }
-
-
-        if (emple == null) {
-            throw new EmpleadoLoginErroneo("Datos loginEmpleado incorrectos");
-        }
-
-        log.info("Comporbando credenciales");
-
-        if (email != null && emple.getEmail().equals(email) &&
-                pass != null && emple.getPassword().equals(pass)) {
-
-            log.info("LOGIN CORRECTO");
-            return true;
-        } else {
-            log.info("LOGIN ERRONEO");
-            return false;
-        }
-
     }
 
 
@@ -460,6 +351,7 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 emple = (Empleado) result.get(0);
             }*/
             log.info("TRANSACCION --> COMMIT");
+            if (em.getTransaction().isActive())
             em.getTransaction().commit();
         }
         if (em.isOpen())

@@ -77,14 +77,16 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
                         log.info("TRANSACCION --> COMMIT");
-                        em.getTransaction().commit();
+                        if (em.getTransaction().isActive())
+                            em.getTransaction().commit();
 
 
                     } catch (PersistenceException e2) {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
                         log.info("TRANSACCION --> ROLLBACK");
-                        em.getTransaction().rollback();
+                        if (em.getTransaction().isActive())
+                            em.getTransaction().rollback();
 
 
                         throw e2;
@@ -94,12 +96,12 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
                         log.error("EXCEPCION!", e);
                         log.info("TRANSACCION --> ROLLBACK");
-                        em.getTransaction().rollback();
+                        if (em.getTransaction().isActive())
+                            em.getTransaction().rollback();
 
                         throw new DepartamentoException("Ocurrió una error al persisitir en BBDD.");
                     } finally {
 
-                        em.getTransaction().isActive();
                         if (em.isOpen())
                             em.close();
                     }
@@ -145,14 +147,16 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                 }
 
                 log.info("TRANSACCION --> COMMIT");
-                em.getTransaction().commit();
+                if (em.getTransaction().isActive())
+                    em.getTransaction().commit();
 
             } catch (IllegalArgumentException e) {
                 log.error("Ocurrió una error al buscar en BBDD: " + e.getMessage());
                 log.error("EXCEPCION!", e);
 
                 log.info("TRANSACCION --> ROLLBACK");
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive())
+                    em.getTransaction().rollback();
 
                 throw new DepartamentoException("Ocurrió una error al buscar en BBDD.");
             }
@@ -186,25 +190,40 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             log.info("TRANSACCION --> BEGIN");
             em.getTransaction().begin();
 
-            try {
-//                COMPORABAR QUE TNEGA EMPLEADOS Y REVCHZAR SI ES ASI
-                em.remove(em.find(Departamento.class, id, LockModeType.OPTIMISTIC));
-                result = true;
-                log.info("TRANSACCION --> COMMIT");
-                em.getTransaction().commit();
+            //con el LockModeType.OPTIMISTIC lanza excecion por estár bloqueado
+            Departamento d = em.find(Departamento.class, id);
 
-            } catch (Exception e) {
-                log.info("TRANSACCION --> ROLLBACK");
-                em.getTransaction().rollback();
+            if (d.getEmpleados().size() == 0) {
 
-                log.debug("e = '" + e + "'");
-                result = false;
+                try {
 
-                if (e.getCause().getCause() instanceof ConstraintViolationException) {
-                    throw new DepartamentoConEmpleadosException("Departamento con empleados asignados.");
+                    em.createNamedQuery("Departamento.eliminarByID")
+                            .setParameter("id", d.getId())
+                            .executeUpdate();
+                    result = true;
+                    log.info("TRANSACCION --> COMMIT");
+                    if (em.getTransaction().isActive())
+                        em.getTransaction().commit();
+
+
+                } catch (Exception e) {
+                    log.error("EXCEPCION!!", e);
+
+                    log.info("TRANSACCION --> ROLLBACK");
+                    if (em.getTransaction().isActive())
+                        em.getTransaction().rollback();
+
+                    result = false;
+
+                    if (e.getCause().getCause() instanceof ConstraintViolationException) {
+                        throw new DepartamentoConEmpleadosException("Departamento con empleados asignados.");
+                    }
+
+                    throw new DepartamentoException("Hubo un error al eliminar el departamento");
                 }
+            } else {
 
-                throw new DepartamentoException("Hubo un error al eliminar el departamento");
+                throw new DepartamentoConEmpleadosException("Departamento con empleados asignados.");
             }
 
         }
@@ -234,7 +253,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
             log.info("Cerrando transaccion");
             log.info("TRANSACCION --> COMMIT");
-            em.getTransaction().commit();
+            if (em.getTransaction().isActive())
+                em.getTransaction().commit();
         }
 
         log.info("Cerrando Entity Manager");
@@ -287,7 +307,8 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
             log.info("Cerrando transaccion");
             log.info("TRANSACCION --> COMMIT");
-            em.getTransaction().commit();
+            if (em.getTransaction().isActive())
+                em.getTransaction().commit();
         }
 
         log.info("Cerrando Entity Manager");

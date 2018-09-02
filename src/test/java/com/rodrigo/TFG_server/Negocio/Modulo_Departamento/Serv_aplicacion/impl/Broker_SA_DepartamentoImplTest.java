@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
+import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
@@ -163,7 +164,7 @@ class Broker_SA_DepartamentoImplTest {
         Response res2 = b.crearDepartamento(d2);
 
 
-        assertTrue(res2.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
+        assertTrue(res2.getStatus() == Response.Status.BAD_GATEWAY.getStatusCode());
 
 
         b.eliminarDepartamento(d.getId());
@@ -176,7 +177,7 @@ class Broker_SA_DepartamentoImplTest {
 
         Response res = b.crearDepartamento(null);
 
-        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
 
     }
@@ -187,7 +188,7 @@ class Broker_SA_DepartamentoImplTest {
 
         Response res = b.crearDepartamento(new TDepartamento());
 
-        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
 
     }
@@ -205,13 +206,13 @@ class Broker_SA_DepartamentoImplTest {
         Response res = b.crearDepartamento(d);
 
         System.out.println("res.getStatus() = [" + res.getStatus() + "]");
-        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
 
     }
 
     @Test
-    void crearDepartamentoSiglaVacio() {
+    void crearDepartamentoSiglasVacio() {
 
 
         log.info("forzando siglas = ''");
@@ -222,7 +223,7 @@ class Broker_SA_DepartamentoImplTest {
         Response res = b.crearDepartamento(d);
 
         System.out.println("res.getStatus() = [" + res.getStatus() + "]");
-        assertTrue(res.getStatus() == Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        assertTrue(res.getStatus() == Response.Status.BAD_REQUEST.getStatusCode());
 
 
     }
@@ -309,7 +310,7 @@ class Broker_SA_DepartamentoImplTest {
         assertTrue(res.getStatus() == Response.Status.OK.getStatusCode());
 
 
-        assertNull(b.buscarByID(d.getId()));
+        assertNull((Departamento) b.buscarByID(d.getId()).getEntity());
 
     }
 

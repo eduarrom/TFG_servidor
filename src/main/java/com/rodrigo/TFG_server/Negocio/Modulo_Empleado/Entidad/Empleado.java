@@ -30,7 +30,8 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
         @NamedQuery(name = "Empleado.listar", query = "FROM Empleado"),
-        @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email")
+        @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email"),
+        @NamedQuery(name = "Empleado.eliminarByID", query = "delete from Empleado where id = :id")
 
 })
 //@XmlClassExtractor(EmpleadoClassExtractor.class)

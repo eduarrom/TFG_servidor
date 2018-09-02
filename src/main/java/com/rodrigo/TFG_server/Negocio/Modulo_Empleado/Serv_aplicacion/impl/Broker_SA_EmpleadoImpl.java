@@ -88,16 +88,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         return FactoriaSA.getInstance().crearSA_Empleado().listarEmpleados();
     }
 
-    @Override
-    public String saludar(@WebParam(name="nombre") String nombre) {
-        return FactoriaSA.getInstance().crearSA_Empleado().saludar(nombre);
-    }
 
-
-
-    public boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException {
-        return FactoriaSA.getInstance().crearSA_Empleado().loginEmpleado(email, pass);
-    }
 
     @Override
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {

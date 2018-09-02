@@ -6,6 +6,8 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
@@ -20,10 +22,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,6 +86,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
 
                         log.info("TRANSACCION --> COMMIT");
+                        if (em.getTransaction().isActive())
                         em.getTransaction().commit();
 
 
@@ -94,6 +94,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                         log.error("Ocurrio una excepcion al persisitir: " + e2.getMessage());
                         log.error(e2.getStackTrace().toString());
                         log.info("TRANSACCION --> ROLLBACK");
+                        if (em.getTransaction().isActive())
                         em.getTransaction().rollback();
 
 
@@ -103,6 +104,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
                         log.error("EXCEPCION!", e);
                         log.info("TRANSACCION --> ROLLBACK");
+                        if (em.getTransaction().isActive())
                         em.getTransaction().rollback();
 
                         throw new ProyectoException("Ocurrió una error al persisitir en BBDD.");
@@ -122,57 +124,106 @@ public class SA_ProyectoImpl implements SA_Proyecto {
     }
 
     @Override
-    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) {
+    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws ProyectoException, EmpleadoException {
         Proyecto proy;
+        Empleado emple;
+        EmpleadoProyecto ep;
+
+
+        if (e == null || e.getId() == null || e.getId() <= 0) {
+            log.error("El id para buscar en null, 0 o negativo");
+            throw new EmpleadoFieldInvalidException("El id para buscar en null, 0 o negativo");
+        }
+        if (p == null || p.getId() == null || p.getId() <= 0) {
+            log.error("El id para buscar en null, 0 o negativo");
+            throw new ProyectoFieldInvalidException("El id para buscar en null, 0 o negativo");
+        }
+        if (horas <= 0) {
+            log.error("El número de horas de la asigancion debe ser positivo");
+            throw new ProyectoFieldInvalidException("EL número de horas de la asigancion debe ser positivo");
+        }
+
 
         log.info("Creando Entity Manager");
         EntityManager em = EMFSingleton.getInstance().createEntityManager();
 
-
-        EmpleadoProyecto ep = new EmpleadoProyecto(
-                Empleado.crearEmpleado(e),
-                new Proyecto(p),
-                horas);
         {
             log.info("TRANSACCION --> BEGIN");
             em.getTransaction().begin();
 
-            log.info("Persistiendo proyecto en BBDD");
-            ep = em.merge(ep);
 
-            log.info("TRANSACCION --> COMMIT");
-            em.getTransaction().commit();
+            log.info("Buscando empleado en BBDD");
+            emple = em.find(Empleado.class, e.getId(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+
+            if (emple != null) {
+
+                proy = em.find(Proyecto.class, p.getId(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+
+                if (proy != null) {
+
+                    try {
+                        ep = new EmpleadoProyecto(emple, proy, horas);
+
+                        try {
+
+                            log.debug("proy = '" + proy + "'");
+                            log.info("emple = '" + emple + "'");
+
+                            EmpleadoProyecto epAux = (EmpleadoProyecto) em.createNamedQuery("EmpleadoProyecto.buscarEmpleProy")
+                                    .setParameter("idEmple", emple.getId())
+                                    .setParameter("idProy", proy.getId())
+                                    .getSingleResult();
+
+                            if (epAux != null) {
+
+                                epAux.setHoras(horas);
+                                em.merge(epAux);
+                            }
+
+
+                        } catch (NoResultException ex) {
+
+                            em.persist(ep);
+
+                            log.info("TRANSACCION --> COMMIT");
+                            if (em.getTransaction().isActive())
+                                em.getTransaction().commit();
+
+                        }
+
+                    } catch (IllegalArgumentException ex2) {
+                        log.error("EXCEPCION!", ex2);
+
+                        log.info("TRANSACCION --> ROLLBACK");
+                        if (em.getTransaction().isActive())
+                            em.getTransaction().rollback();
+
+                        throw new ProyectoException("Ocurrió una error al buscar en BBDD.");
+                    } catch (EntityExistsException ex3) {
+                        log.error("EXCEPCION!", ex3);
+
+                        log.info("TRANSACCION --> ROLLBACK");
+                        if (em.getTransaction().isActive())
+                            em.getTransaction().rollback();
+
+                        throw new ProyectoException("Esa asociacion ya existe");
+                    }
+
+                } else {
+                    throw new ProyectoException("El proyecto no existe en BBDD");
+                }
+            } else {
+                throw new EmpleadoException("El empleado no existe en BBDD");
+            }
+
         }
-        em.close();
+        log.info("Cerrando Entity Manager");
+        if (em.isOpen())
+            em.close();
+
 
         return ep.crearTransferSimple();
     }
-
-
-    /*@Override
-    public TProyectoCompleto buscarByID(Long id) {
-        Proyecto proy;
-
-        log.info("Creando Entity Manager");
-        EntityManager em = EMFSingleton.getInstance().createEntityManager();
-
-        {
-            log.info("TRANSACCION --> BEGIN");                 em.getTransaction().begin();
-            log.info("Buscando proyecto en BBDD");
-            proy = em.find(Proyecto.class, id, LockModeType.OPTIMISTIC);
-            log.debug("proy = '" + proy + "'");
-            proy.getEmpleados().stream()
-                    .forEach(ep -> {
-                        ep.getEmpleado().toString();
-                        ep.getProyecto().toString();
-                    });
-
-            log.info("TRANSACCION --> COMMIT");                 em.getTransaction().commit();
-        }
-        em.close();
-
-        return proy.crearTransferCompleto();
-    }*/
 
 
     @Override
@@ -220,12 +271,15 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                 }
 
                 log.info("TRANSACCION --> COMMIT");
+                if (em.getTransaction().isActive())
                 em.getTransaction().commit();
 
             } catch (IllegalArgumentException e) {
                 log.error("Ocurrió una error al buscar en BBDD: " + e.getMessage());
                 log.error("EXCEPCION!", e);
+
                 log.info("TRANSACCION --> ROLLBACK");
+                if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
 
                 throw new ProyectoException("Ocurrió una error al buscar en BBDD.");
@@ -275,12 +329,15 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                 }
 
                 log.info("TRANSACCION --> COMMIT");
+                if (em.getTransaction().isActive())
                 em.getTransaction().commit();
 
             } catch (IllegalArgumentException e) {
                 log.error("Ocurrió una error al buscar en BBDD: " + e.getMessage());
                 log.error("EXCEPCION!", e);
+
                 log.info("TRANSACCION --> ROLLBACK");
+                if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
 
                 throw new ProyectoException("Ocurrió una error al buscar en BBDD.");
@@ -317,26 +374,37 @@ public class SA_ProyectoImpl implements SA_Proyecto {
 
             try {
 
-                Proyecto proy = em.find(Proyecto.class, id, LockModeType.OPTIMISTIC);
+                Proyecto proy = em.find(Proyecto.class, id/*, LockModeType.OPTIMISTIC*/);
+
                 if (proy != null) {
                     log.debug("Proyectos: ");
                     proy.getEmpleados().stream()
                             .forEach(ep -> {
                                 System.out.println("Eliminando ep: " + ep);
-                                em.remove(ep);
+                                em.createNamedQuery("EmpleadoProyecto.eliminar")
+                                        .setParameter("id", ep.getId())
+                                        .executeUpdate();
                             });
                 }
 
-                em.remove(proy);
+                //em.remove(proy);
+                em.createNamedQuery("Proyecto.eliminarByID")
+                        .setParameter("id", proy.getId())
+                        .executeUpdate();
                 result = true;
+
                 log.info("TRANSACCION --> COMMIT");
-                em.getTransaction().commit();
+                if (em.getTransaction().isActive())
+                    em.getTransaction().commit();
 
             } catch (Exception e) {
                 log.info("TRANSACCION --> ROLLBACK");
-                em.getTransaction().rollback();
+                if (em.getTransaction().isActive())
+                    em.getTransaction().rollback();
+
                 result = false;
-                if(e.getCause().getCause() instanceof ConstraintViolationException){
+
+                if (e.getCause().getCause() instanceof ConstraintViolationException) {
                     throw new ProyectoConEmpleadosException();
                 }
 
@@ -367,6 +435,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
             lista = em.createNamedQuery("Proyecto.listar").getResultList();
 
             log.info("TRANSACCION --> COMMIT");
+            if (em.getTransaction().isActive())
             em.getTransaction().commit();
         }
         em.close();

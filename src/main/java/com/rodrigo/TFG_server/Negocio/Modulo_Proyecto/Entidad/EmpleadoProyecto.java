@@ -25,7 +25,13 @@ import java.io.Serializable;
 })
 @XmlRootElement/*(name = "EmpleadoProyecto")*/
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlCustomizer(EmpleadoProyectoCustomizer.class)
+@NamedQueries({
+        @NamedQuery(name = "EmpleadoProyecto.buscarEmpleProy",
+                query = "from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" ),
+        @NamedQuery(name = "EmpleadoProyecto.eliminar",
+                query = "delete from EmpleadoProyecto where id = :id" )
+
+})
 public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoProyecto.class);

@@ -22,9 +22,6 @@ public interface SA_Empleado {
 
     List<TEmpleado> listarEmpleados();
 
-    String saludar(String nombre);
-
-    Boolean loginEmpleado(String email, String pass) throws EmpleadoLoginErroneo, EmpleadoFieldInvalidException, EmpleadoException;
 
     TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException ;
 
