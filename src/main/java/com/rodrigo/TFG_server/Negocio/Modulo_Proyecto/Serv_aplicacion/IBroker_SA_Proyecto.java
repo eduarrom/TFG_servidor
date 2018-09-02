@@ -27,6 +27,9 @@ public interface IBroker_SA_Proyecto {
     @WebMethod(operationName="añadirEmpleadoAProyecto")
     TEmpleadoProyecto añadirEmpleadoAProyecto(@WebParam(name = "e") TEmpleado e, @WebParam(name = "p") TProyecto p, @WebParam(name = "horas") int horas) throws EmpleadoException, ProyectoException;
 
+    @WebMethod(operationName="eliminarEmpleadoAProyecto")
+    boolean eliminarEmpleadoAProyecto(Long idEmple, Long idProy) throws ProyectoException, EmpleadoException;
+
 
     @WebMethod(operationName="buscarByNombre")
     TProyectoCompleto buscarByNombre(@WebParam(name = "nombre") String nombre) throws ProyectoFieldInvalidException, ProyectoException;

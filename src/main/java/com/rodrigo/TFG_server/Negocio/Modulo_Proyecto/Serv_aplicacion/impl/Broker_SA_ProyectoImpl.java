@@ -45,6 +45,12 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
+    public boolean eliminarEmpleadoAProyecto(Long idEmple, Long idProy) throws ProyectoException, EmpleadoException {
+        return FactoriaSA.getInstance().crearSA_Proyecto().eliminarEmpleadoAProyecto(idEmple, idProy);
+
+    }
+
+    @Override
     public TProyectoCompleto buscarByNombre(@WebParam(name = "nombre") String nombre) throws ProyectoFieldInvalidException, ProyectoException {
         return FactoriaSA.getInstance().crearSA_Proyecto().buscarByNombre(nombre);
     }

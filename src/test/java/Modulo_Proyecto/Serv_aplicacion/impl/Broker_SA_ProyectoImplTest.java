@@ -340,6 +340,101 @@ class Broker_SA_ProyectoImplTest {
 
 
 
+
+    /******************************************************************
+     **************   TEST ELIMINAR EMPLEADO PROYECTO   ***************
+     ******************************************************************/
+
+    @Test
+    void eliminarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
+
+
+        TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+
+        assertNotNull(tep);
+
+        boolean result = b.eliminarEmpleadoAProyecto(tep.getEmpleado(), tep.getProyecto());
+
+        assertTrue(result);
+
+        assertFalse(emple1.getProyectos().containsKey(p1.getId()));
+
+
+    }
+
+
+    @Test
+    void eliminarEmpleadoAProyecto_EmpleNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoFieldInvalidException.class, () -> {
+
+            boolean result = b.eliminarEmpleadoAProyecto(null, 23L);
+
+
+        });
+
+
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+    @Test
+    void eliminarEmpleadoAProyecto_ProyNull() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
+            boolean result = b.eliminarEmpleadoAProyecto(33L, null);
+
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void eliminarEmpleadoAProyecto_EmpleInvalido() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(EmpleadoException.class, () -> {
+
+            TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
+
+            ec.setId(3000L);
+            boolean result = b.eliminarEmpleadoAProyecto(ec.getEmpleado().getId(), p1.getId());
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+    }
+
+
+    @Test
+    void eliminarEmpleadoAProyecto_ProyInvalido() throws ProyectoException, EmpleadoException {
+
+
+        Throwable exception = assertThrows(ProyectoException.class, () -> {
+
+            TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
+
+            boolean result = b.eliminarEmpleadoAProyecto(ec.getEmpleado().getId(),3000L);
+
+        });
+
+        log.error("----  EXCEPCION! ----", exception);
+
+
+    }
+
+
+
+
+
+
     /******************************************************************
      ******************   TEST BUSCAR PROYECTO ID  ********************
      ******************************************************************/

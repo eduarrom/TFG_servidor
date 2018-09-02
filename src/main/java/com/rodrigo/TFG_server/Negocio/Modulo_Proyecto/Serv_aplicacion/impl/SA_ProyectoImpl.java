@@ -208,9 +208,23 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                     }
 
                 } else {
+                    log.info("TRANSACCION --> ROLLBACK");
+                    if (em.getTransaction().isActive())
+                        em.getTransaction().rollback();
+
+                    log.info("Cerrando Entity Manager");
+                    if (em.isOpen())
+                        em.close();
                     throw new ProyectoException("El proyecto no existe en BBDD");
                 }
             } else {
+                log.info("TRANSACCION --> ROLLBACK");
+                if (em.getTransaction().isActive())
+                    em.getTransaction().rollback();
+
+                log.info("Cerrando Entity Manager");
+                if (em.isOpen())
+                    em.close();
                 throw new EmpleadoException("El empleado no existe en BBDD");
             }
 
@@ -482,15 +496,13 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                     em.getTransaction().commit();
 
             } catch (Exception e) {
+                log.error("EXCEPCION!!", e);
+
                 log.info("TRANSACCION --> ROLLBACK");
                 if (em.getTransaction().isActive())
                     em.getTransaction().rollback();
 
                 result = false;
-
-                if (e.getCause().getCause() instanceof ConstraintViolationException) {
-                    throw new ProyectoConEmpleadosException();
-                }
 
                 throw new ProyectoException("Hubo un error al eliminar el proyecto.");
 
