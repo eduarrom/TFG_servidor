@@ -284,6 +284,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                                 .setParameter("idProy", proy.getId())
                                 .getSingleResult();
 
+                        log.info("epAux = '" + epAux + "'");
                         if (epAux != null) {
 
                             int resultSet = em.createNamedQuery("EmpleadoProyecto.eliminarByID")
@@ -304,6 +305,8 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                         log.info("TRANSACCION --> COMMIT");
                         if (em.getTransaction().isActive())
                             em.getTransaction().commit();
+
+                        throw new ProyectoException("El empleado no está asigando al proyecto");
 
                     }
 
