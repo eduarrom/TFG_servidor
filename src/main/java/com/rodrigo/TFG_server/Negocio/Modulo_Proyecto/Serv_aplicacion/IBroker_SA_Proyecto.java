@@ -24,8 +24,8 @@ public interface IBroker_SA_Proyecto {
     @WebMethod(operationName="buscarByID")
     public TProyectoCompleto buscarByID(@WebParam(name = "id") Long id) throws ProyectoFieldInvalidException, ProyectoException;
 
-    @WebMethod(operationName="añadirEmpleadoAProyecto")
-    TEmpleadoProyecto añadirEmpleadoAProyecto(@WebParam(name = "e") TEmpleado e, @WebParam(name = "p") TProyecto p, @WebParam(name = "horas") int horas) throws EmpleadoException, ProyectoException;
+    @WebMethod(operationName="agregarEmpleadoAProyecto")
+    TEmpleadoProyecto agregarEmpleadoAProyecto(@WebParam(name = "e") TEmpleado e, @WebParam(name = "p") TProyecto p, @WebParam(name = "horas") int horas) throws EmpleadoException, ProyectoException;
 
     @WebMethod(operationName="eliminarEmpleadoAProyecto")
     boolean eliminarEmpleadoAProyecto(Long idEmple, Long idProy) throws ProyectoException, EmpleadoException;

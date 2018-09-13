@@ -6,7 +6,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
-//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -15,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,15 +28,13 @@ import java.util.*;
         @NamedQuery(name = "Proyecto.listar", query = "FROM Proyecto"),
         @NamedQuery(name = "Proyecto.eliminarByID", query = "delete from Proyecto where id = :id")
 })
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Proyecto implements Serializable/*, CycleRecoverable*/ {
+public class Proyecto implements Serializable {
 
 
     private final static Logger log = LoggerFactory.getLogger(Proyecto.class);
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    @Column/*(name = "id_proyecto")*/
+    @Column
     @Id
     protected Long id;
 
@@ -52,7 +49,7 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date fechaInicio;// = new Date();
+    private Date fechaInicio;
 
 
     @Temporal(TemporalType.DATE)
@@ -68,7 +65,6 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Fetch(value = FetchMode.SUBSELECT)
-//    @XmlInverseReference(mappedBy = "proyecto")
     private Collection<EmpleadoProyecto> empleados;
 
 
@@ -88,8 +84,6 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
         this.descripcion = "Descripción del proyecto " + this.nombre;
 
 
-//        Date aux = new Date();
-//        fechaInicio = new Date(aux.getYear(), aux.getMonth(), aux.getDate());
         fechaInicio = new Date();
 
         try {
@@ -362,17 +356,6 @@ public class Proyecto implements Serializable/*, CycleRecoverable*/ {
                 getFechaInicio(), getFechaFin(), getEmpleados(), getVersion());
     }
 
-/*
-    @Override
-    public Object onCycleDetected(Context context) {
-        // Context provides access to the Marshaller being used:
-        //log.info("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-
-        log.info("Proyecto.onCycleDetected");
-        Proyecto p = new Proyecto(this);
-        return null;
-    }
-*/
 
 }
 

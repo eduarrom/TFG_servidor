@@ -4,7 +4,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoLoginErroneo;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
 
 import java.util.List;

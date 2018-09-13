@@ -16,7 +16,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoExcept
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExistenteException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,7 +121,7 @@ public class SA_ProyectoImpl implements SA_Proyecto {
     }
 
     @Override
-    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws ProyectoException, EmpleadoException {
+    public TEmpleadoProyecto agregarEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws ProyectoException, EmpleadoException {
         Proyecto proy;
         Empleado emple;
         EmpleadoProyecto ep;
@@ -173,20 +172,22 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                                     .getSingleResult();
 
                             if (epAux != null) {
-
+                                log.info("Asociacion existente!");
+                                log.info("epAux = '" + epAux + "'");
+                                log.info("Modificando horas a: " + horas);
                                 epAux.setHoras(horas);
-                                em.merge(epAux);
                             }
 
 
                         } catch (NoResultException ex) {
 
+                            log.info("La asociacion no existe. Creando...");
                             em.persist(ep);
 
+                        } finally {
                             log.info("TRANSACCION --> COMMIT");
                             if (em.getTransaction().isActive())
                                 em.getTransaction().commit();
-
                         }
 
                     } catch (IllegalArgumentException ex2) {
@@ -488,7 +489,6 @@ public class SA_ProyectoImpl implements SA_Proyecto {
                             });
                 }
 
-                //em.remove(proy);
                 em.createNamedQuery("Proyecto.eliminarByID")
                         .setParameter("id", proy.getId())
                         .executeUpdate();

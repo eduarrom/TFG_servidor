@@ -1,13 +1,10 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-@XmlAccessorType(XmlAccessType.FIELD)
 public class ClavesEmpleadoProyecto implements Serializable {
 
     /****************************
@@ -16,8 +13,6 @@ public class ClavesEmpleadoProyecto implements Serializable {
 
     private static final long serialVersionUID = 0;
 
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Id private Long id;
 
     private Long idEmpleado;
 
@@ -53,9 +48,9 @@ public class ClavesEmpleadoProyecto implements Serializable {
 
     @Override
     public String toString() {
-        return "ClavesEmpleadoProyecto{" +
-                "idEmpleado=" + idEmpleado +
-                ", idProyecto=" + idProyecto +
+        return "Clave{" +
+                "e_id=" + idEmpleado +
+                ", p_id=" + idProyecto +
                 '}';
     }
 

@@ -295,7 +295,7 @@ class Broker_SA_EmpleadoImplTest {
         TEmpleadoCompleto e = b.crearEmpleado(new TEmpleadoTParcial("Eliminar4", "pass", dept.getId()));
 
         log.info("Asignando proyecto a empleado");
-        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
+        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
 
         proy1.agregarEmpleadoProyecto(ep, e.getEmpleado());
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());

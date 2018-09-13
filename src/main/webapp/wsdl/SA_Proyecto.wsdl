@@ -60,12 +60,12 @@
                 <soap:fault name="ProyectoException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="añadirEmpleadoAProyecto">
+        <wsdl:operation name="agregarEmpleadoAProyecto">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="añadirEmpleadoAProyecto">
+            <wsdl:input name="agregarEmpleadoAProyecto">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="añadirEmpleadoAProyectoResponse">
+            <wsdl:output name="agregarEmpleadoAProyectoResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
             <wsdl:fault name="EmpleadoException">

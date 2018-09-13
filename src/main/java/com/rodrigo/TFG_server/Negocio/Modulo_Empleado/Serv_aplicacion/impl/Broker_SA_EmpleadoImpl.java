@@ -13,12 +13,10 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-//@WebService(targetNamespace = "http://Servicio_Empleados/", portName = "Broker_SA_EmpleadoImpl", serviceName = "Broker_SA_EmpleadoImpl")
 @WebService(
-//        targetNamespace = "https://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/",
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
         serviceName="Broker_SA_EmpleadoImpl"
-        /*portName = "Broker_SA_EmpleadoPort"*/)
+        )
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     public Broker_SA_EmpleadoImpl() {}
@@ -27,7 +25,6 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
 
         return FactoriaSA.getInstance().crearSA_Empleado().crearEmpleado(empleadoNuevo);
-        //return null;
     }
 
 

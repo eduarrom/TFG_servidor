@@ -5,8 +5,6 @@
          version="3.1">
 
 
-    <!--<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/> -->
-
 
     <display-name>TFG_server</display-name>
 
@@ -56,64 +54,30 @@
     <!-- https://www.itworld.com/article/2769041/development/how-to-configure-tomcat-to-always-require-https.html -->
 
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>HTTPS usuario escritura</web-resource-name>
-            <!--<url-pattern>/services/*</url-pattern>-->
-            <url-pattern>/services/SA_Empleado?wsdl</url-pattern>
-        </web-resource-collection>
-        <!--<auth-constraint>-->
-        <!--&lt;!&ndash;<role-name>escritura</role-name>&ndash;&gt;-->
-        <!--</auth-constraint>-->
-        <user-data-constraint>
-            <!--<transport-guarantee>NONE</transport-guarantee>-->
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-
-    </security-constraint>
 
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>HTTPS usuario escritura</web-resource-name>
             <url-pattern>/services/SA_Empleado</url-pattern>
-            <!--<url-pattern>/services/SA_Empleado?wsdl</url-pattern>-->
         </web-resource-collection>
         <auth-constraint>
             <role-name>escritura</role-name>
         </auth-constraint>
         <user-data-constraint>
-            <!--<transport-guarantee>NONE</transport-guarantee>-->
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
 
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>HTTPS usuario escritura</web-resource-name>
-            <!--<url-pattern>/services/*</url-pattern>-->
-            <url-pattern>/services/SA_Proyecto?wsdl</url-pattern>
-        </web-resource-collection>
-        <!--<auth-constraint>-->
-        <!--&lt;!&ndash;<role-name>escritura</role-name>&ndash;&gt;-->
-        <!--</auth-constraint>-->
-        <user-data-constraint>
-            <!--<transport-guarantee>NONE</transport-guarantee>-->
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-
-    </security-constraint>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>HTTPS usuario escritura</web-resource-name>
             <url-pattern>/services/SA_Proyecto</url-pattern>
-            <!--<url-pattern>/services/SA_Empleado?wsdl</url-pattern>-->
         </web-resource-collection>
         <auth-constraint>
             <role-name>escritura</role-name>
         </auth-constraint>
         <user-data-constraint>
-            <!--<transport-guarantee>NONE</transport-guarantee>-->
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
@@ -158,34 +122,5 @@
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
-
-
-    <!-- ************************************************************************* -->
-    <!-- ********************************* REST ********************************** -->
-    <!-- ************************************************************************* -->
-
-    <!--<context-param>
-        <param-name>contextConfigLocationREST</param-name>
-        <param-value>WEB-INF/rest-servlet.xml</param-value>
-    </context-param>-->
-
-    <!-- <servlet>
-         <servlet-name>CXFServletREST</servlet-name>
-         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-         &lt;!&ndash;rest&ndash;&gt;
-         <init-param>
-             <param-name>javax.ws.rs.Application</param-name>
-             <param-value>
-                 com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.DeptApplication
-             </param-value>
-         </init-param>
-         &lt;!&ndash;rest&ndash;&gt;
-     </servlet>
-
-     <servlet-mapping>
-         <servlet-name>CXFServletREST</servlet-name>
-         <url-pattern>/rest/*</url-pattern>
-     </servlet-mapping>-->
-
 
 </web-app>

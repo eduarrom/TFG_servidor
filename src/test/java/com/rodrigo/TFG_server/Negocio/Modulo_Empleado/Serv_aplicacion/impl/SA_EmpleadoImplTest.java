@@ -321,7 +321,7 @@ class SA_EmpleadoImplTest {
         TEmpleadoProyecto ep = FactoriaSA
                 .getInstance()
                 .crearSA_Proyecto()
-                .añadirEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
+                .agregarEmpleadoAProyecto(e.getEmpleado(), proy1.getProyecto(), 5);
 
         proy1.agregarEmpleadoProyecto(ep, e.getEmpleado());
         e.agregarEmpleadoProyecto(ep, proy1.getProyecto());

@@ -3,12 +3,9 @@ package Modulo_Proyecto.Serv_aplicacion.impl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
-import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyectoCompleto;
@@ -233,7 +230,38 @@ class SA_ProyectoImplTest {
         TEmpleadoProyecto tep = FactoriaSA
                 .getInstance()
                 .crearSA_Proyecto()
-                .añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+                .agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 555);
+
+        assertNotNull(tep);
+
+
+        TEmpleadoCompleto e = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(emple1.getId());
+
+        assertTrue(e.getProyectos().containsKey(p1.getId()));
+
+        TProyectoCompleto p = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(p1.getId());
+
+        assertTrue(p.getEmpleados().containsKey(emple1.getId()));
+
+
+    }
+
+    @Test
+    void asignarEmpleadoAProyectoExistente() throws ProyectoException, EmpleadoException {
+
+
+        TEmpleadoProyecto tep = FactoriaSA
+                .getInstance()
+                .crearSA_Proyecto()
+                .agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 222);
+
+        assertNotNull(tep);
+
+        tep = FactoriaSA
+                .getInstance()
+                .crearSA_Proyecto()
+                .agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 555);
+
 
         assertNotNull(tep);
 
@@ -255,7 +283,7 @@ class SA_ProyectoImplTest {
 
 
         Throwable exception = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(null, p1, 5);
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(null, p1, 5);
 
             assertNull(tep);
 
@@ -270,7 +298,7 @@ class SA_ProyectoImplTest {
 
 
         Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
-            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
 
             assertNull(tep);
 
@@ -289,7 +317,7 @@ class SA_ProyectoImplTest {
             TEmpleadoProyecto tep = FactoriaSA
                     .getInstance()
                     .crearSA_Proyecto()
-                    .añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
+                    .agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
 
             assertNull(tep);
 
@@ -308,7 +336,7 @@ class SA_ProyectoImplTest {
             TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
             ec.setId(3000L);
-            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
+            TEmpleadoProyecto tep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
 
             assertNull(tep);
 
@@ -333,7 +361,7 @@ class SA_ProyectoImplTest {
             TEmpleadoProyecto tep = FactoriaSA
                     .getInstance()
                     .crearSA_Proyecto()
-                    .añadirEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
+                    .agregarEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
 
             assertNull(tep);
 
@@ -359,7 +387,7 @@ class SA_ProyectoImplTest {
     void eliminarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
 
 
-        TEmpleadoProyecto tep = sa.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+        TEmpleadoProyecto tep = sa.agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
 
         assertNotNull(tep);
 
@@ -556,7 +584,7 @@ class SA_ProyectoImplTest {
         TProyectoCompleto tpc = new TProyectoCompleto(p);
 
         log.info("Asignando proyecto a empleado");
-        TEmpleadoProyecto ep = sa.añadirEmpleadoAProyecto(emple1.getEmpleado(), tpc.getProyecto(), 5);
+        TEmpleadoProyecto ep = sa.agregarEmpleadoAProyecto(emple1.getEmpleado(), tpc.getProyecto(), 5);
 
         tpc.agregarEmpleadoProyecto(ep, emple1.getEmpleado());
         emple1.agregarEmpleadoProyecto(ep, tpc.getProyecto());
@@ -581,7 +609,7 @@ class SA_ProyectoImplTest {
         p.setProyecto(sa.crearProyecto(new TProyecto("Eliminar 6")));
 
         log.info("Asignando empleado a proyecto");
-        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(emple1.getEmpleado(), p.getProyecto(), 5);
+        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(emple1.getEmpleado(), p.getProyecto(), 5);
 
         emple1.agregarEmpleadoProyecto(ep, p.getProyecto());
         p.agregarEmpleadoProyecto(ep, emple1.getEmpleado());

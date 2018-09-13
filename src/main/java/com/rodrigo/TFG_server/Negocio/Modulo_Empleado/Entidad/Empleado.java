@@ -6,7 +6,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.EmpleadoProyecto;
-//import org.eclipse.persistence.oxm.annotations.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -16,16 +15,11 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-//@XmlRootElement
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlSeeAlso({EmpleadoTCompleto.class, EmpleadoTParcial.class})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
@@ -34,13 +28,7 @@ import java.util.Objects;
         @NamedQuery(name = "Empleado.eliminarByID", query = "delete from Empleado where id = :id")
 
 })
-//@XmlClassExtractor(EmpleadoClassExtractor.class)
-//@XmlRootElement
-//@XmlTransient
-//@XmlDiscriminatorNode("@tipo")
-//@XmlCustomizer(EmpleadoCustomizer.class)
-//@XmlType/*(name = "Empleado")*/
-public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
+public abstract class Empleado implements Serializable {
 
     /****************************
      ********* ATRIBUTOS ********
@@ -50,7 +38,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     private final static Logger log = LoggerFactory.getLogger(Empleado.class);
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    //@Column(name = "id")
     @Id
     protected Long id;
 
@@ -69,20 +56,13 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
     protected String password;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)/*(fetch = FetchType.EAGER, cascade = CascadeType.ALL)*/
-    //@JoinColumn(nullable = false)
-//    @XmlInverseReference(mappedBy = "empleados")
-    //@XmlTransient
-    //@NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
     protected Departamento departamento = new Departamento();
-//    protected Departamento departamento = new Departamento();
 
 
-    //    protected List<EmpleadoProyecto> proyectos = null;
     @OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Fetch(value = FetchMode.SUBSELECT)
-//    @XmlInverseReference(mappedBy = "empleado")
     protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
 
 
@@ -139,10 +119,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
         this.password = e.password;
         this.email = e.email;
         this.version = e.version;
-//        this.departamento = new Departamento(e.departamento);
-//        this.proyectos = e.proyectos.stream()
-//                .map((ep) -> new EmpleadoProyecto(ep))
-//                .collect(Collectors.toList());
     }
 
 
@@ -262,11 +238,6 @@ public abstract class Empleado implements Serializable/*, CycleRecoverable*/ {
                 '}';
     }
 
-
-//    @Override
-//    public Object onCycleDetected(Context context) {
-//        return null;
-//    }
 
     @Override
     public boolean equals(Object o) {

@@ -229,7 +229,7 @@ class Broker_SA_ProyectoImplTest {
     void asignarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
 
 
-        TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+        TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
 
         assertNotNull(tep);
 
@@ -251,7 +251,7 @@ class Broker_SA_ProyectoImplTest {
 
 
         Throwable exception = assertThrows(EmpleadoFieldInvalidException.class, () -> {
-            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(null, p1, 5);
+            TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(null, p1, 5);
 
             assertNull(tep);
 
@@ -266,7 +266,7 @@ class Broker_SA_ProyectoImplTest {
 
 
         Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
-            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
+            TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(emple1.getEmpleado(), null, 5);
 
             assertNull(tep);
 
@@ -282,7 +282,7 @@ class Broker_SA_ProyectoImplTest {
 
 
         Throwable exception = assertThrows(ProyectoFieldInvalidException.class, () -> {
-            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
+            TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 0);
 
             assertNull(tep);
 
@@ -301,7 +301,7 @@ class Broker_SA_ProyectoImplTest {
             TEmpleadoCompleto ec = FactoriaSA.getInstance().crearSA_Empleado().buscarByID(20L);
 
             ec.setId(3000L);
-            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
+            TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(ec.getEmpleado(), p1, 5);
 
             assertNull(tep);
 
@@ -324,7 +324,7 @@ class Broker_SA_ProyectoImplTest {
 
             p.setId(3000L);
 
-            TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
+            TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(emple1.getEmpleado(), p, 5);
 
             assertNull(tep);
 
@@ -349,7 +349,7 @@ class Broker_SA_ProyectoImplTest {
     void eliminarEmpleadoAProyecto() throws ProyectoException, EmpleadoException {
 
 
-        TEmpleadoProyecto tep = b.añadirEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
+        TEmpleadoProyecto tep = b.agregarEmpleadoAProyecto(emple1.getEmpleado(), p1, 6);
 
         assertNotNull(tep);
 
@@ -551,7 +551,7 @@ class Broker_SA_ProyectoImplTest {
         p.setProyecto(b.crearProyecto(new TProyecto("Eliminar2")));
 
         log.info("Asignando empleado a proyecto");
-        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(emple1.getEmpleado(), p.getProyecto(), 5);
+        TEmpleadoProyecto ep = FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(emple1.getEmpleado(), p.getProyecto(), 5);
 
         emple1.agregarEmpleadoProyecto(ep, p.getProyecto());
         p.agregarEmpleadoProyecto(ep, emple1.getEmpleado());

@@ -4,13 +4,11 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDep
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
-//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -22,14 +20,12 @@ import java.util.*;
         @NamedQuery(name = "Departamento.eliminarByID", query = "delete from Departamento where id = :id")
 
 })
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Departamento implements Serializable/*, CycleRecoverable */ {
+public class Departamento implements Serializable{
 
     private final static Logger log = LoggerFactory.getLogger(Departamento.class);
 
     @GeneratedValue(strategy = GenerationType.AUTO) //IDENTITY
-    @Column/*(name = "id_depart")*/
+    @Column
     @Id
     protected long id;
 
@@ -43,16 +39,7 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
     private String siglas;
 
 
-    //@LazyCollection(LazyCollectionOption.FALSE)
-    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
-    //@XmlAnyElement(lax = true)
-    /*@XmlElements({ //Con esto hace que se guarde la lista como -->
-            @XmlElement(name = "EmpleadoTParcial", type = EmpleadoTParcial.class), //<empleados xsi:type="empleadoTParcial">
-            @XmlElement(name = "EmpleadoTCompleto", type = EmpleadoTCompleto.class) //<empleados xsi:type="empleadoTCompleto">
-    })*/
-//    @XmlInverseReference(mappedBy = "departamento")
-//    @XmlElementRef
-    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)/*(mappedBy="departamento", fetch= FetchType.EAGER, cascade={CascadeType.PERSIST})*/
+    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
     private Collection<Empleado> empleados = new ArrayList();
 
     @Version
@@ -247,42 +234,6 @@ public class Departamento implements Serializable/*, CycleRecoverable */ {
         return Objects.hash(getId(), getNombre(), getVersion());
     }
 
-
-    /*@Override
-    public Object onCycleDetected(Context cycleRecoveryContext) {
-        // Context provides access to the Marshaller being used:
-        //log.info("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-
-        System.out.println(" -------- Departamento.onCycleDetected -------- ");
-        Object obj;
-
-        //Esta opción peta por no tener un DepartmantePointer como field
-        //obj = new DepartmentPointer(this.id);
-        //System.out.println("Enviando Departamento pointer por ciclo ");
-
-
-        // Retorna un departamento vacio
-        //Departamento --> empleados --> Departamento(vacio)
-        //obj = new Departamento();
-
-
-        // Retorna un departamento solo con el ID
-        //Departamento --> empleados --> Departamento(Solo con el ID)
-        //obj = new Departamento(this.id);
-
-
-        // Retorna un departamento sin los empleados
-        // Departamento --> empleados --> Departamento(Sin empleados)
-        //obj = new Departamento(this);
-
-
-        //Con null al detectar el ciclo envia un <departamento/>
-        // Departamento --> empleados --> <departamento/>
-        obj = null;
-
-        return obj;
-
-    }*/
 
 }
 

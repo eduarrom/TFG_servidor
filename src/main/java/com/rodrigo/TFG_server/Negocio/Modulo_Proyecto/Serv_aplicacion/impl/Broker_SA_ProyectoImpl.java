@@ -17,7 +17,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-//@WebService(targetNamespace = "http://Servicio_Proyectos/", portName = "Broker_SA_ProyectoImpl", serviceName = "Broker_SA_ProyectoImpl")
 @WebService(
         endpointInterface = "com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.IBroker_SA_Proyecto",
         serviceName = "Broker_SA_ProyectoImpl")
@@ -30,7 +29,6 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     public TProyecto crearProyecto(@WebParam(name = "proyectoNuevo") TProyecto proyectoNuevo) throws ProyectoYaExistenteException, ProyectoFieldInvalidException, ProyectoException {
 
         return FactoriaSA.getInstance().crearSA_Proyecto().crearProyecto(proyectoNuevo);
-        //return null;
     }
 
 
@@ -40,8 +38,8 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
     }
 
     @Override
-    public TEmpleadoProyecto añadirEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws EmpleadoException, ProyectoException {
-        return FactoriaSA.getInstance().crearSA_Proyecto().añadirEmpleadoAProyecto(e, p, horas);
+    public TEmpleadoProyecto agregarEmpleadoAProyecto(TEmpleado e, TProyecto p, int horas) throws EmpleadoException, ProyectoException {
+        return FactoriaSA.getInstance().crearSA_Proyecto().agregarEmpleadoAProyecto(e, p, horas);
     }
 
     @Override

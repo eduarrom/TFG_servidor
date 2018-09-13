@@ -10,14 +10,20 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTParcial;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.*;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoFieldInvalidException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoNullException;
+import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoYaExisteExcepcion;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Utils.EmailValidator;
 import org.hibernate.PropertyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,7 +98,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                             }
 
                             log.info("Asignando departamento a empleado");
-                            //e.setDepartamento(em.find(Departamento.class, empleadoNuevo.getDepartamento()));
                             e.setDepartamento(dept);
 
 
@@ -234,7 +239,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 }
 
 
-                //em.remove(emple);
                 em.createNamedQuery("Empleado.eliminarByID")
                         .setParameter("id", emple.getId())
                         .executeUpdate();
@@ -334,7 +338,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                         .setParameter("email", email)
                         .getSingleResult();
 
-                //emple = (obj instanceof EmpleadoTParcial) ? (EmpleadoTParcial) obj : (EmpleadoTCompleto) obj;
 
                 log.info("*********************************************************");
                 log.info("*********************************************************");
@@ -347,9 +350,6 @@ public class SA_EmpleadoImpl implements SA_Empleado {
                 log.info("Empleado con email '" + email + "' no encontrado");
                 emple = null;
             }
-            /*if (result.size() > 0) {
-                emple = (Empleado) result.get(0);
-            }*/
             log.info("TRANSACCION --> COMMIT");
             if (em.getTransaction().isActive())
             em.getTransaction().commit();

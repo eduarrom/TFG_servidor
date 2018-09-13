@@ -8,7 +8,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
-import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.IBroker_SA_Departamento;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/departamento")
-public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
+public class Broker_SA_DepartamentoImpl {
 
     private final static Logger log = LoggerFactory.getLogger(Broker_SA_DepartamentoImpl.class);
 
@@ -32,9 +31,7 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
      * - INTERNAL_SERVER_ERROR otro error
      */
     @PUT
-    //@Path("/crear")
     @Produces("application/xml")
-    @Override
     public Response crearDepartamento(TDepartamento departamentoNuevo) {
         System.out.println("********************************************");
         System.out.println("************ crearDepartamento **********");
@@ -78,7 +75,6 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("/{id}")
     @Produces("application/xml")
-    @Override
     public Response buscarByID(@PathParam("id") Long id) {
         System.out.println("********************************************");
         System.out.println("************ buscarByID **********");
@@ -121,7 +117,6 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("bySiglas/{siglas}")
     @Produces("application/xml")
-    @Override
     public Response buscarBySiglas(@PathParam("siglas") String siglas)  {
         System.out.println("********************************************");
         System.out.println("************ buscarBySiglas **********");
@@ -162,7 +157,6 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @DELETE
     @Path("/{id}")
     @Produces("application/xml")
-    @Override
     public Response eliminarDepartamento(@PathParam("id") Long id) {
         System.out.println("********************************************");
         System.out.println("************ eliminarDepart **********");
@@ -221,7 +215,6 @@ public class Broker_SA_DepartamentoImpl implements IBroker_SA_Departamento {
     @GET
     @Path("/listar")
     @Produces("application/xml")
-    @Override
     public TDepartamento[] listarDepartamentos() {
         System.out.println("Listando Departamentos simple");
         List<TDepartamento> lista = FactoriaSA.getInstance().crearSA_Departamento().listarDepartamentos();

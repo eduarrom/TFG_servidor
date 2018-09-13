@@ -15,20 +15,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
-//@XmlRootElement
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlType(name = "empleadoTParcial")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name = "id")
-//@XmlRootElement/*(name = "EmpleadoTParcial")*/
-//@XmlRootElement
-//@XmlDiscriminatorValue("EmpleadoTParcial")
-//@XmlType/*(name = "EmpleadoTParcial")*/
 public class EmpleadoTParcial extends Empleado implements Serializable {
 
     /****************************
@@ -36,11 +28,9 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
      ****************************/
 
     @NotNull
-//    @XmlAttribute
     private int horasJornada = 5;
 
     @NotNull
-//    @XmlAttribute
     private int precioHora = 10;
 
 
@@ -72,7 +62,7 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
     }
 
 
-    public EmpleadoTParcial(Long id, String nombre, String password, int antiguedad, int sueldoBase) {
+    public EmpleadoTParcial(Long id, String nombre, String password, int horasJornada, int precioHora) {
         super(id, nombre, password);
         this.horasJornada = horasJornada;
         this.precioHora = precioHora;
@@ -156,23 +146,10 @@ public class EmpleadoTParcial extends Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "EmpleadoTParcial{" +
+        return super.toString() + "EmpleadoTParcial{" +
                 "horasJornada=" + horasJornada +
                 ", precioHora=" + precioHora +
-                "} " + super.toString();
+                "} ";
     }
 
-    /*@Override
-    public Object onCycleDetected(Context cycleRecoveryContext) {
-        // Context provides access to the Marshaller being used:
-        //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-
-        System.out.println(" -------- EmpleadoTParcial.onCycleDetected -------- ");
-
-
-        EmpleadoTParcial e = new EmpleadoTParcial(this);
-        //e.getDepartamento().setEmpleados(new ArrayList<Empleado>());
-
-        return e;
-    }*/
 }

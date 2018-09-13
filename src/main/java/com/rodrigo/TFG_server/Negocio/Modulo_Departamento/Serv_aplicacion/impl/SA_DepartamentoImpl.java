@@ -20,9 +20,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * The type Sa departamento.
- */
 public class SA_DepartamentoImpl implements SA_Departamento {
 
     private final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImpl.class);
@@ -75,7 +72,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
                         em.persist(depart);
                         log.debug("result = '" + depart + "'");
 
-
                         log.info("TRANSACCION --> COMMIT");
                         if (em.getTransaction().isActive())
                             em.getTransaction().commit();
@@ -90,7 +86,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
 
 
                         throw e2;
-                        //throw new EmpleadoFieldInvalidException((PropertyValueException) e2.getCause());
 
                     } catch (Exception e) {
                         log.error("Ocurrió una error al persisitir en BBDD: " + e.getMessage());
@@ -197,7 +192,6 @@ public class SA_DepartamentoImpl implements SA_Departamento {
             log.info("TRANSACCION --> BEGIN");
             em.getTransaction().begin();
 
-            //con el LockModeType.OPTIMISTIC lanza excecion por estár bloqueado
             Departamento d = em.find(Departamento.class, id);
 
             if (d.getEmpleados().size() == 0) {

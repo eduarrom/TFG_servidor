@@ -18,9 +18,6 @@ public class TEmpleado {
     protected Long departamento;
 
 
-//    protected Collection<EmpleadoProyecto> proyectos = new ArrayList<>();
-
-
     public TEmpleado() {
     }
 

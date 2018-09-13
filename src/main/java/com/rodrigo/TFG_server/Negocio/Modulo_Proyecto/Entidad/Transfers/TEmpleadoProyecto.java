@@ -1,10 +1,8 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers;
 
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TEmpleadoProyecto {

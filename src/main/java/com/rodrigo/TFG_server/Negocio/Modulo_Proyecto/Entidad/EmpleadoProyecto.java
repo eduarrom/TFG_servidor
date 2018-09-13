@@ -3,28 +3,17 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.EmpleadoTParcial;
-import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
-import com.sun.xml.bind.CycleRecoverable;
-//import org.eclipse.persistence.oxm.annotations.XmlCustomizer;
-//import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @Entity
-//@IdClass(ClavesEmpleadoProyecto.class)
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"empleado_id", "proyecto_id"})
 })
-@XmlRootElement/*(name = "EmpleadoProyecto")*/
-@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = "EmpleadoProyecto.buscarEmpleProy",
                 query = "from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" ),
@@ -34,7 +23,7 @@ import java.io.Serializable;
                 query = "delete from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" )
 
 })
-public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
+public class EmpleadoProyecto implements Serializable {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoProyecto.class);
     private static final long serialVersionUID = 0;
@@ -44,12 +33,10 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
 
     @ManyToOne
     @MapsId("idEmpleado")
-//    @XmlInverseReference(mappedBy = "proyectos")
     private Empleado empleado;
 
     @ManyToOne
     @MapsId("idProyecto")
-//    @XmlInverseReference(mappedBy = "empleados")
     private Proyecto proyecto;
 
 
@@ -85,10 +72,6 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
         this.empleado = (ep.empleado instanceof EmpleadoTParcial) ?
                 new EmpleadoTParcial() :
                 new EmpleadoTCompleto();
-//        new EmpleadoTParcial((EmpleadoTParcial) ep.empleado):
-//                new EmpleadoTCompleto((EmpleadoTCompleto) ep.empleado);
-
-//        this.proyecto = new Proyecto(ep.proyecto);
         this.proyecto = new Proyecto(ep.proyecto);
     }
 
@@ -157,23 +140,12 @@ public class EmpleadoProyecto implements Serializable/*, CycleRecoverable*/ {
     public String toString() {
         return "EmpleadoProyecto{" +
                 "id=" + id +
+                ", horas=" + horas +
                 ", empleado=" + empleado +
                 ", proyecto=" + proyecto +
-                ", horas=" + horas +
                 ", version=" + version +
                 '}';
     }
 
 
-
-
-
-    /*@Override
-    public Object onCycleDetected(Context context) {
-
-        log.info("EmpleadoProyecto.onCycleDetected");
-
-        EmpleadoProyecto ep = new EmpleadoProyecto(this);
-        return null;
-    }*/
 }

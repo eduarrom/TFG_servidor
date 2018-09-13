@@ -7,26 +7,19 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmplead
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoTCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TEmpleadoProyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.Transfers.TProyecto;
-//import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
 
-////@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlType(name = "empleadoTCompleto")
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name="id")
-//@XmlRootElement(name ="EmpleadoTCompleto")
-//@XmlRootElement
-//@XmlDiscriminatorValue("EmpleadoTCompleto")
-//@XmlType/*(name = "EmpleadoTCompleto")*/
 public class EmpleadoTCompleto extends Empleado implements Serializable {
 
 
@@ -35,11 +28,9 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
      ****************************/
 
     @NotNull
-//    @XmlAttribute
     private int antiguedad = 0;
 
     @NotNull
-//    @XmlAttribute
     private int sueldoBase = 1200;
 
 
@@ -153,19 +144,10 @@ public class EmpleadoTCompleto extends Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "EmpleadoTCompleto{" +
+        return super.toString() + "EmpleadoTCompleto{" +
                 "antiguedad=" + antiguedad +
                 ", sueldoBase=" + sueldoBase +
-                "} " + super.toString();
+                "} ";
     }
 
-    /*@Override
-    public Object onCycleDetected(Context cycleRecoveryContext) {
-        // Context provides access to the Marshaller being used:
-        //System.out.println("JAXB Marshaller is: " + cycleRecoveryContext.getMarshaller());
-        System.out.println(" -------- EmpleadoTCompleto.onCycleDetected -------- ");
-
-        EmpleadoTCompleto e = new EmpleadoTCompleto(this);
-        return e;
-    }*/
 }
