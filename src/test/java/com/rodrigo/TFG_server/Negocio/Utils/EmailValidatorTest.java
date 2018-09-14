@@ -11,7 +11,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Email validator Testing
  *
- * @author rodri
+ *  @Author Rodrigo de Miguel González
+ *  @Date 2017-2018
+ *  TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ *
  * Original code of mkyong
  * http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
  *

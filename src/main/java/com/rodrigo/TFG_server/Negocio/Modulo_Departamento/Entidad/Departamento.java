@@ -12,7 +12,11 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.*;
 
-
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Departamento.listar", query = "FROM Departamento"),

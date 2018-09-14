@@ -5,6 +5,11 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Dep
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.SA_Empleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 public abstract class FactoriaSA {
 
     private static FactoriaSA ourInstance = new FactoriaSAImpl();

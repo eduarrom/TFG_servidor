@@ -10,7 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 class EmpleadoTest {
 
     private final static Logger log = LoggerFactory.getLogger(EmpleadoTest.class);

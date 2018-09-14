@@ -13,6 +13,11 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 @WebService(
         endpointInterface= "com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA_Empleado",
         serviceName="Broker_SA_EmpleadoImpl"

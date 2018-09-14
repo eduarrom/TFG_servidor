@@ -28,7 +28,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * The type Sa empleado.
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
  */
 public class SA_EmpleadoImpl implements SA_Empleado {
 

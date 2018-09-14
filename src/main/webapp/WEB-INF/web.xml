@@ -4,8 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-
-
+    <!--
+    * @Author Rodrigo de Miguel González
+    * @Date 2017-2018
+    * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+    -->
     <display-name>TFG_server</display-name>
 
     <description>Descripcion del fichero</description>

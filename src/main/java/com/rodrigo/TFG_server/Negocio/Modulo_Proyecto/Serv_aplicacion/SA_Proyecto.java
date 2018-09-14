@@ -13,7 +13,9 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Excepciones.ProyectoYaExis
 import java.util.List;
 
 /**
- * Created by Rodrigo de Miguel on 06/05/2017.
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
  */
 public interface SA_Proyecto {
 

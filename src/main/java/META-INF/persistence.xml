@@ -4,6 +4,11 @@
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
+    <!--
+    * @Author Rodrigo de Miguel González
+    * @Date 2017-2018
+    * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+    -->
     <persistence-unit name="TFG_server" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 

@@ -8,6 +8,11 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.SA_Em
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.SA_Proyecto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl.SA_ProyectoImpl;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 public class FactoriaSAImpl extends FactoriaSA {
 
 

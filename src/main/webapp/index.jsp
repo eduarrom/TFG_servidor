@@ -1,9 +1,7 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: macrodri
-  Date: 19/11/17
-  Time: 15:19
-  To change this template use File | Settings | File Templates.
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

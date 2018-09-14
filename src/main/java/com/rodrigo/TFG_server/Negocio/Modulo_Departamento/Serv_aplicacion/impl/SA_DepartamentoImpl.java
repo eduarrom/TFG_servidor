@@ -20,6 +20,11 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 public class SA_DepartamentoImpl implements SA_Departamento {
 
     private final static Logger log = LoggerFactory.getLogger(SA_DepartamentoImpl.class);

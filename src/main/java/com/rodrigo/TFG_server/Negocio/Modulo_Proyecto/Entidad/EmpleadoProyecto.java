@@ -10,6 +10,11 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"empleado_id", "proyecto_id"})

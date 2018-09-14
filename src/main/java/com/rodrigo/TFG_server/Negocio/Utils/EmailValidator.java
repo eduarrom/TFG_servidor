@@ -2,6 +2,11 @@ package com.rodrigo.TFG_server.Negocio.Utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @Author Rodrigo de Miguel González
+ * @Date 2017-2018
+ * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
+ */
 public class EmailValidator {
 
     private Pattern pattern;
