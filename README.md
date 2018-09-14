@@ -2,7 +2,7 @@
 
 Proyecto con el backend de mi TFG, usa **JAX-WS** y **JAX-RS** con la implementación **CXF** usando servicios **SOAP** y **REST**.
 
-Está montado con **Maven** y se usa **Jenkins** para hacer pruebas iniciales con la Integración Continua y **JUnit** para las pruebas unitarias. Posterior mente se usará **JMeter** para las pruebas de carga.
+Está montado con **Maven** y se usa **Jenkins** para hacer pruebas iniciales con la Integración Continua y **JUnit** para las pruebas unitarias.
 
 El proyecto forma parte de mi TFG [Trabajo de Final de Grado](https://hunzagit.github.io/Portfolio-Online/#TFG) de Ingeniería del Software.
 
