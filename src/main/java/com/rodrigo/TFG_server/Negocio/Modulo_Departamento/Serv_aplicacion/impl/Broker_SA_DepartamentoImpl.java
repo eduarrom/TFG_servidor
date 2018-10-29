@@ -8,6 +8,9 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +29,7 @@ public class Broker_SA_DepartamentoImpl {
     private final static Logger log = LoggerFactory.getLogger(Broker_SA_DepartamentoImpl.class);
 
     public Broker_SA_DepartamentoImpl() {
+
     }
 
 
