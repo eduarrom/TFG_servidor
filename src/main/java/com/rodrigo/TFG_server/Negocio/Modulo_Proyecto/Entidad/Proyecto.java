@@ -29,8 +29,8 @@ import java.util.*;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Proyecto.buscarPorNombre", query = "from Proyecto e where e.nombre = :nombre"),
-        @NamedQuery(name = "Proyecto.listar", query = "FROM Proyecto"),
+        @NamedQuery(name = "Proyecto.buscarPorNombre", query = "select e from Proyecto e where e.nombre = :nombre"),
+        @NamedQuery(name = "Proyecto.listar", query = "select obj FROM Proyecto obj"),
         @NamedQuery(name = "Proyecto.eliminarByID", query = "delete from Proyecto where id = :id")
 })
 public class Proyecto implements Serializable {

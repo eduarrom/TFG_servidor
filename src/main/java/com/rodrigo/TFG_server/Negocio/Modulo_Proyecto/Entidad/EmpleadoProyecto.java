@@ -21,7 +21,7 @@ import java.io.Serializable;
 })
 @NamedQueries({
         @NamedQuery(name = "EmpleadoProyecto.buscarEmpleProy",
-                query = "from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" ),
+                query = "select ep from EmpleadoProyecto ep where ep.empleado.id = :idEmple and ep.proyecto.id = :idProy" ),
         @NamedQuery(name = "EmpleadoProyecto.eliminarByID",
                 query = "delete from EmpleadoProyecto where id = :id" ),
         @NamedQuery(name = "EmpleadoProyecto_eliminarByEmpleProy",

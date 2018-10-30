@@ -29,8 +29,8 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "Empleado.listar", query = "FROM Empleado"),
-        @NamedQuery(name = "Empleado.buscarPorEmail", query = "from Empleado e where e.email = :email"),
+        @NamedQuery(name = "Empleado.listar", query = "select obj FROM Empleado obj"),
+        @NamedQuery(name = "Empleado.buscarPorEmail", query = "select e from Empleado e where e.email = :email"),
         @NamedQuery(name = "Empleado.eliminarByID", query = "delete from Empleado where id = :id")
 
 })
