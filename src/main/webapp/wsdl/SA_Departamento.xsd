@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/" name="SSP_SA_Departamento" targetNamespace="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/">
+            <xs:element name="buscarByID" type="tns:buscarByID"/>
+            <xs:element name="buscarByIDResponse" type="tns:buscarByIDResponse"/>
+            <xs:element name="tDepartamentoCompleto" type="tns:tDepartamentoCompleto"/>
+            <xs:complexType name="buscarByID">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="buscarByIDResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:tDepartamentoCompleto"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="buscarByID">
+        <wsdl:part element="ns1:buscarByID" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="DepartamentoException">
+        <wsdl:part element="ns1:DepartamentoException" name="DepartamentoException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="DepartamentoFieldInvalidException">
+        <wsdl:part element="ns1:DepartamentoFieldInvalidException" name="DepartamentoFieldInvalidException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="SSP_SA_Departamento">
+        <wsdl:operation name="buscarByID">
+            <wsdl:input message="ns1:buscarByID" name="buscarByID">
+            </wsdl:input>
+            <wsdl:output message="ns1:buscarByIDResponse" name="buscarByIDResponse">
+            </wsdl:output>
+            <wsdl:fault message="ns1:EmpleadoException" name="EmpleadoException">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
