@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/" name="Broker_SA_EmpleadoImpl" targetNamespace="http://impl.Serv_aplicacion.Modulo_Empleado.Negocio.TFG_server.rodrigo.com/">
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/" name="Broker_SA_EmpleadoImpl" targetNamespace="http://impl.Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/">
     <wsdl:import location="http://localhost:8080/TFG_server/wsdl/SA_Departamento.xsd"
                  namespace="http://Serv_aplicacion.modulo_departamento.negocio.TFG_server.eduardosergio.com/">
     </wsdl:import>
@@ -19,7 +19,7 @@
     </wsdl:binding>
     <wsdl:service name="SSP_SA_DepartamentoImpl">
         <wsdl:port binding="tns:SSP_SA_DepartamentoImplSoapBinding" name="SSP_SA_DepartamentoImplPort">
-            <soap:address location="https://localhost:8443/TFG_server/services/SA_Departamento"/>
+            <soap:address location="https://localhost:8443/TFG_server/services/SA_DepartamentoSOAP"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

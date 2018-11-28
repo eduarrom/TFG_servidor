@@ -1,4 +1,4 @@
-package com.eduardosergio.TFG_server.negocio.modulo_Departamento;
+package com.eduardosergio.TFG_server.negocio.modulo_Departamento.serv_aplicacion;
 
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoException;
