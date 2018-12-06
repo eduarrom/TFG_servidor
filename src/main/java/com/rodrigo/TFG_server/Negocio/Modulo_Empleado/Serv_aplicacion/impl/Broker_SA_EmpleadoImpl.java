@@ -34,14 +34,16 @@ import java.util.List;
         serviceName="Broker_SA_EmpleadoImpl"
         )
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
-
+	
+	private ControlEmpleadosImpl ControlEmpleados;
+	
     public Broker_SA_EmpleadoImpl() {
     	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name;
 		try {
-			name = new ObjectName("controlEmpleados:type=Control");
-			ControlEmpleadosImpl impl = new ControlEmpleadosImpl(listarEmpleados());
-	        StandardMBean mbean = new StandardMBean(impl,ControlEmpleadosMBean.class, false);
+			name = new ObjectName("Empleados:type=Control");
+			ControlEmpleados = new ControlEmpleadosImpl();
+	        StandardMBean mbean = new StandardMBean(ControlEmpleados,ControlEmpleadosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +82,9 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
         System.out.println("***********************************************");
-
+        
+        ControlEmpleados.añadirEmpleadoVisto(emple);
+        
         return emple;
     }
 
@@ -95,7 +99,9 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     @Override
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
-        return FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
+    	TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
+        ControlEmpleados.añadirEmpleadoVisto(emple);
+        return emple;
     }
 
 
@@ -121,7 +127,8 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
 
-
+        ControlEmpleados.añadirEmpleadoVisto(tec);
+        
         return tec;
     }
 }
