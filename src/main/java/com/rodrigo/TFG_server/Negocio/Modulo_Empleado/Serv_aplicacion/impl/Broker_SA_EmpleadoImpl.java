@@ -1,6 +1,8 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
+import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
+import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlEmpleadosImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
@@ -11,6 +13,15 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
+import javax.management.StandardMBean;
+
+import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
@@ -24,7 +35,28 @@ import java.util.List;
         )
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
-    public Broker_SA_EmpleadoImpl() {}
+    public Broker_SA_EmpleadoImpl() {
+    	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name;
+		try {
+			name = new ObjectName("controlEmpleados:type=Control");
+			ControlEmpleadosImpl impl = new ControlEmpleadosImpl(listarEmpleados());
+	        StandardMBean mbean = new StandardMBean(impl,ControlEmpleadosMBean.class, false);
+	        mbs.registerMBean(mbean, name);
+		} catch (MalformedObjectNameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstanceAlreadyExistsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MBeanRegistrationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotCompliantMBeanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
     @Override
     public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
