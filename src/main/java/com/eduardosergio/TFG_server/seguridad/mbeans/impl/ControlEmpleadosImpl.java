@@ -1,8 +1,5 @@
 package com.eduardosergio.TFG_server.seguridad.mbeans.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
 
@@ -18,12 +15,12 @@ public class ControlEmpleadosImpl implements ControlEmpleadosMBean{
 	
 	@Override
 	public String ultimoEmpleadoVisto() { 	
-		return this.empleados.size() > 0 ? this.empleados.get(this.empleados.size()-1).toString() : null;
+		return empleados.size() > 0 ? empleados.get(empleados.size()-1).toString() : "No se ha visualizado ningun empleado";
 	}
 	
 	@Override
 	public String listarEmpleadosVistos() { 	
-		return this.empleados.size() > 0 ? this.empleados.toString().replace(',', '\n') : null;
+		return empleados.size() > 0 ? empleados.toString().replace(',', '\n') :  "No se ha visualizado ningun empleado";
 	}
 
 }

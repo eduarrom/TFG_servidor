@@ -41,22 +41,18 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name;
 		try {
-			name = new ObjectName("Empleados:type=Control");
+			name = new ObjectName("Empleados:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlEmpleadosMBean");
 			ControlEmpleados = new ControlEmpleadosImpl();
 	        StandardMBean mbean = new StandardMBean(ControlEmpleados,ControlEmpleadosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		} catch (InstanceAlreadyExistsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		} catch (MBeanRegistrationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		} catch (NotCompliantMBeanException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
     }
 
