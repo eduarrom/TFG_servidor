@@ -70,7 +70,13 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
 
     @Override
     public TProyectoCompleto buscarByID(@WebParam(name = "id") Long id) throws ProyectoFieldInvalidException, ProyectoException {
-        return FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(id);
+        TProyectoCompleto pro = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(id);
+        
+        if (pro != null) {
+        	ControlProyectos.añadirProyectoVisto(pro);
+        }
+        
+        return pro;
     }
 
     @Override
@@ -86,7 +92,13 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
 
     @Override
     public TProyectoCompleto buscarByNombre(@WebParam(name = "nombre") String nombre) throws ProyectoFieldInvalidException, ProyectoException {
-        return FactoriaSA.getInstance().crearSA_Proyecto().buscarByNombre(nombre);
+        TProyectoCompleto pro = FactoriaSA.getInstance().crearSA_Proyecto().buscarByNombre(nombre);
+        
+        if (pro != null) {
+        	ControlProyectos.añadirProyectoVisto(pro);
+        }
+        
+        return pro;
     }
 
     @Override

@@ -79,7 +79,9 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
         
-        ControlEmpleados.añadirEmpleadoVisto(emple);
+        if (emple != null) {
+        	ControlEmpleados.añadirEmpleadoVisto(emple);
+        }
         
         return emple;
     }
@@ -96,7 +98,11 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     @Override
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
     	TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
-        ControlEmpleados.añadirEmpleadoVisto(emple);
+    	
+    	if (emple != null) {
+    		ControlEmpleados.añadirEmpleadoVisto(emple);
+    	}
+    	
         return emple;
     }
 
@@ -122,8 +128,10 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
         System.out.println("***********************************************");
-
-        ControlEmpleados.añadirEmpleadoVisto(tec);
+        
+        if (tec != null) {
+        	ControlEmpleados.añadirEmpleadoVisto(tec);
+        }
         
         return tec;
     }

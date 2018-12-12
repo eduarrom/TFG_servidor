@@ -129,6 +129,9 @@ public class Broker_SA_DepartamentoImpl {
             System.out.println("dept = [" + dept + "]");
 
             if (dept != null) {
+            	
+                ControlDepartamentos.añadirDepartamentoVisto(dept);
+
                 return Response
                         .status(Response.Status.OK)
                         .entity(dept)
@@ -170,6 +173,9 @@ public class Broker_SA_DepartamentoImpl {
             System.out.println("dept = [" + dept + "]");
 
             if (dept != null) {
+            	
+            	ControlDepartamentos.añadirDepartamentoVisto(dept);
+
                 return Response
                         .status(Response.Status.OK)
                         .entity(dept)
