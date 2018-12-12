@@ -1,6 +1,10 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 
+import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
+import com.eduardosergio.TFG_server.seguridad.mbeans.ControlProyectosMBean;
+import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlEmpleadosImpl;
+import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlProyectosImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
@@ -15,6 +19,15 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.IBroker_SA
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
+import javax.management.StandardMBean;
+
+import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
@@ -26,8 +39,26 @@ import java.util.List;
         endpointInterface = "com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.IBroker_SA_Proyecto",
         serviceName = "Broker_SA_ProyectoImpl")
 public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
-
+	
+	private ControlProyectosImpl ControlProyectos;
+	
     public Broker_SA_ProyectoImpl() {
+    	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name;
+		try {
+			name = new ObjectName("Proyectos:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlProyectosMBean");
+			ControlProyectos = new ControlProyectosImpl();
+	        StandardMBean mbean = new StandardMBean(ControlProyectos,ControlProyectosMBean.class, false);
+	        mbs.registerMBean(mbean, name);
+		} catch (MalformedObjectNameException e) {
+
+		} catch (InstanceAlreadyExistsException e) {
+
+		} catch (MBeanRegistrationException e) {
+
+		} catch (NotCompliantMBeanException e) {
+
+		}
     }
 
     @Override
