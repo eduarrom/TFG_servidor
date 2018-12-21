@@ -102,6 +102,43 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		</jaxws:outInterceptors>
     </jaxws:endpoint>
 
+	<jaxws:endpoint id="SSP_SA_Departamento"
+                    implementor="com.eduardosergio.TFG_server.negocio.modulo_Departamento.serv_aplicacion.impl.SSP_SA_DepartamentoImpl"
+                    address="/SA_DepartamentoSOAP">
+        <jaxws:features>
+            <bean class="org.apache.cxf.feature.LoggingFeature"/>
+        </jaxws:features>
+        
+        <jaxws:inInterceptors>
+              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                 <constructor-arg>
+                    <map>
+                       <entry key="user" value="testkey"/>
+                       <entry key="action" value="Encrypt"/>
+                       <entry key="passwordType" value="PasswordText"/>
+                       <entry key="decryptionParts" value="{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
+                       <entry key="decryptionPropFile" value="serverkeystore.properties"/>
+                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
+                    </map>
+                 </constructor-arg>
+              </bean>
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+                 <constructor-arg>
+                    <map>
+                       <entry key="user" value="clienttestkey"/>
+                       <entry key="action" value="Encrypt"/> 
+                       <entry key="passwordType" value="PasswordText"/>
+                       <entry key="signaturePropFile" value="serverkeystore.properties"/>
+              		   <entry key="encryptionPropFile" value="serverkeystore.properties"/>
+                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
+                      
+           			</map>
+                 </constructor-arg>
+              </bean>
+		</jaxws:outInterceptors>
+    </jaxws:endpoint>
 
     <!--  ***********************************************************************************  -->
     <!--  ***********************************  JAX-RS  **************************************  -->

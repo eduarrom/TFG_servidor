@@ -1,6 +1,8 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
+import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
+import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlEmpleadosImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
@@ -11,6 +13,15 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.IBroker_SA
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
+import javax.management.StandardMBean;
+
+import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
@@ -23,8 +34,27 @@ import java.util.List;
         serviceName="Broker_SA_EmpleadoImpl"
         )
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
+	
+	private ControlEmpleadosImpl ControlEmpleados;
+	
+    public Broker_SA_EmpleadoImpl() {
+    	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name;
+		try {
+			name = new ObjectName("Empleados:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlEmpleadosMBean");
+			ControlEmpleados = new ControlEmpleadosImpl();
+	        StandardMBean mbean = new StandardMBean(ControlEmpleados,ControlEmpleadosMBean.class, false);
+	        mbs.registerMBean(mbean, name);
+		} catch (MalformedObjectNameException e) {
 
-    public Broker_SA_EmpleadoImpl() {}
+		} catch (InstanceAlreadyExistsException e) {
+
+		} catch (MBeanRegistrationException e) {
+
+		} catch (NotCompliantMBeanException e) {
+
+		}
+    }
 
     @Override
     public TEmpleadoCompleto crearEmpleado(@WebParam(name="Empleado") TEmpleado empleadoNuevo) throws EmpleadoYaExisteExcepcion, EmpleadoException {
@@ -48,7 +78,11 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
         System.out.println("***********************************************");
-
+        
+        if (emple != null) {
+        	ControlEmpleados.añadirEmpleadoVisto(emple);
+        }
+        
         return emple;
     }
 
@@ -63,7 +97,13 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 
     @Override
     public TEmpleadoCompleto buscarByEmail(String email) throws EmpleadoFieldInvalidException, EmpleadoException {
-        return FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
+    	TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
+    	
+    	if (emple != null) {
+    		ControlEmpleados.añadirEmpleadoVisto(emple);
+    	}
+    	
+        return emple;
     }
 
 
@@ -88,8 +128,11 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         System.out.println("***********************************************");
         System.out.println("***********************************************");
-
-
+        
+        if (tec != null) {
+        	ControlEmpleados.añadirEmpleadoVisto(tec);
+        }
+        
         return tec;
     }
 }

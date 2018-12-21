@@ -1,6 +1,8 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 
+import com.eduardosergio.TFG_server.seguridad.mbeans.ControlDepartamentosMBean;
+import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlDepartamentosImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
@@ -14,8 +16,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
+import javax.management.StandardMBean;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+
+import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
@@ -26,10 +37,27 @@ import java.util.List;
 @Path("/departamento")
 public class Broker_SA_DepartamentoImpl {
 
+	private ControlDepartamentosImpl ControlDepartamentos;
+	
     private final static Logger log = LoggerFactory.getLogger(Broker_SA_DepartamentoImpl.class);
 
     public Broker_SA_DepartamentoImpl() {
+    	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name;
+		try {
+			name = new ObjectName("Departamentos:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlDepartamentosMBean");
+			ControlDepartamentos = new ControlDepartamentosImpl();
+	        StandardMBean mbean = new StandardMBean(ControlDepartamentos,ControlDepartamentosMBean.class, false);
+	        mbs.registerMBean(mbean, name);
+		} catch (MalformedObjectNameException e) {
 
+		} catch (InstanceAlreadyExistsException e) {
+
+		} catch (MBeanRegistrationException e) {
+
+		} catch (NotCompliantMBeanException e) {
+
+		}
     }
 
 
@@ -101,6 +129,9 @@ public class Broker_SA_DepartamentoImpl {
             System.out.println("dept = [" + dept + "]");
 
             if (dept != null) {
+            	
+                ControlDepartamentos.añadirDepartamentoVisto(dept);
+
                 return Response
                         .status(Response.Status.OK)
                         .entity(dept)
@@ -142,6 +173,9 @@ public class Broker_SA_DepartamentoImpl {
             System.out.println("dept = [" + dept + "]");
 
             if (dept != null) {
+            	
+            	ControlDepartamentos.añadirDepartamentoVisto(dept);
+
                 return Response
                         .status(Response.Status.OK)
                         .entity(dept)
