@@ -1,6 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 
+import com.eduardosergio.TFG_server.negocio.modulo_Departamento.transferOfuscado.ObfuscatedTransferObjectDepartamento;
 import com.eduardosergio.TFG_server.seguridad.mbeans.ControlDepartamentosMBean;
 import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlDepartamentosImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
@@ -37,7 +38,7 @@ import java.util.List;
 @Path("/departamento")
 public class Broker_SA_DepartamentoImpl {
 
-	private ControlDepartamentosImpl ControlDepartamentos;
+	private ControlDepartamentosImpl controlDepartamentos;
 	
     private final static Logger log = LoggerFactory.getLogger(Broker_SA_DepartamentoImpl.class);
 
@@ -46,8 +47,8 @@ public class Broker_SA_DepartamentoImpl {
         ObjectName name;
 		try {
 			name = new ObjectName("Departamentos:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlDepartamentosMBean");
-			ControlDepartamentos = new ControlDepartamentosImpl();
-	        StandardMBean mbean = new StandardMBean(ControlDepartamentos,ControlDepartamentosMBean.class, false);
+			controlDepartamentos = new ControlDepartamentosImpl();
+	        StandardMBean mbean = new StandardMBean(controlDepartamentos, ControlDepartamentosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {
 
@@ -59,14 +60,57 @@ public class Broker_SA_DepartamentoImpl {
 
 		}
     }
-
-
+    
     /**
      * @param departamentoNuevo
      * @return - CREATED y depart
      * - BAD_REQUEST depart existente
      * - INTERNAL_SERVER_ERROR otro error
      */
+    @PUT
+    @Produces("application/xml")
+    public Response crearDepartamento(ObfuscatedTransferObjectDepartamento departamentoNuevo) {
+        System.out.println("********************************************");
+        System.out.println("************ crearDepartamento con transfer ofuscado **********");
+        System.out.println("********************************************");
+        System.out.println("departamentoNuevo = [" + departamentoNuevo + "]");
+
+        try {
+        	
+        	TDepartamento departamento = departamentoNuevo.defuse();         
+        	
+            TDepartamento dept = FactoriaSA
+                    .getInstance()
+                    .crearSA_Departamento()
+                    .crearDepartamento(departamento);
+
+
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(dept)
+                    .build();
+
+
+        } catch (DepartamentoYaExisteExcepcion e) {
+            System.out.println("********* DEPARTAMENTO EXISTENTE!!");
+            return Response.status(Response.Status.BAD_GATEWAY).build();
+        } catch (DepartamentoFieldInvalidException e3) {
+            e3.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (DepartamentoException e2) {
+            e2.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+
+    /*
+    /**
+     * @param departamentoNuevo
+     * @return - CREATED y depart
+     * - BAD_REQUEST depart existente
+     * - INTERNAL_SERVER_ERROR otro error
+     
     @PUT
     @Produces("application/xml")
     public Response crearDepartamento(TDepartamento departamentoNuevo) {
@@ -101,6 +145,7 @@ public class Broker_SA_DepartamentoImpl {
         }
 
     }
+    */
 
     /**
      * @param id
@@ -130,7 +175,7 @@ public class Broker_SA_DepartamentoImpl {
 
             if (dept != null) {
             	
-                ControlDepartamentos.añadirDepartamentoVisto(dept);
+                controlDepartamentos.añadirDepartamentoVisto(dept);
 
                 return Response
                         .status(Response.Status.OK)
@@ -174,7 +219,7 @@ public class Broker_SA_DepartamentoImpl {
 
             if (dept != null) {
             	
-            	ControlDepartamentos.añadirDepartamentoVisto(dept);
+            	controlDepartamentos.añadirDepartamentoVisto(dept);
 
                 return Response
                         .status(Response.Status.OK)
