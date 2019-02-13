@@ -34,7 +34,7 @@ FilterConfig filterConfig= null;
 		String b64credentials = ((HttpServletRequest) request).getHeader("Authorization").substring("Basic".length()).trim();
 	    String credentials = new String(Base64.getDecoder().decode(b64credentials), StandardCharsets.UTF_8);
 	    
-		if (credentials.equals("usuario:contra")) {
+		if (credentials.equals("usuario:contra") || credentials.equals("user:pass")) {
 			chain.doFilter(request, response);
 		} else {
 			HttpServletResponse resp = (HttpServletResponse) response;
