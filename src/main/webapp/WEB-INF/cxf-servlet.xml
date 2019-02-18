@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:cxf="http://cxf.apache.org/core"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
 http://www.springframework.org/schema/beans
@@ -10,7 +11,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://cxf.apache.org/jaxrs
 http://cxf.apache.org/schemas/jaxrs.xsd
 http://cxf.apache.org/jaxws
-http://cxf.apache.org/schemas/jaxws.xsd">
+http://cxf.apache.org/schemas/jaxws.xsd
+http://cxf.apache.org/core
+http://cxf.apache.org/schemas/core.xsd">
 
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
@@ -45,6 +48,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
                     </map>
                  </constructor-arg>
               </bean>
+<!--               <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -84,6 +88,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
                     </map>
                  </constructor-arg>
               </bean>
+<!--                <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -122,6 +127,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
                     </map>
                  </constructor-arg>
               </bean>
+<!--                <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -137,7 +143,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
            			</map>
                  </constructor-arg>
               </bean>
-		</jaxws:outInterceptors>
+ 	</jaxws:outInterceptors>
     </jaxws:endpoint>
 
     <!--  ***********************************************************************************  -->
@@ -155,5 +161,12 @@ http://cxf.apache.org/schemas/jaxws.xsd">
     <bean id="broker_SA_Depart"
           class="com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.Broker_SA_DepartamentoImpl" />
 
+	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
+	
+	<cxf:bus>
+		<cxf:inInterceptors>
+			<ref bean="messageInterceptor" />
+		</cxf:inInterceptors>
+	</cxf:bus>
 
 </beans>

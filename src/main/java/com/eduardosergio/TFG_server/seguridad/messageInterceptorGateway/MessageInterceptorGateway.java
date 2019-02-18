@@ -1,54 +1,43 @@
 package com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.cxf.helpers.IOUtils;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.io.CachedOutputStream;
+import org.apache.cxf.message.Message;
+import org.apache.cxf.phase.AbstractPhaseInterceptor;
+import org.apache.cxf.phase.Phase;
 
-public class MessageInterceptorGateway implements Filter{
+public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message> {
 
-FilterConfig filterConfig= null;
-	
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException 
-	{
-	      this.filterConfig = filterConfig;
+	public MessageInterceptorGateway() {
+		super(Phase.RECEIVE);
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void handleMessage(Message message) throws Fault {
 		
-		//String user = ((HttpServletRequest) request).getUserPrincipal().getName();
-		//Como asi podia sacar el usuario pero la contraseña no he optado por sacar las credenciales
-		//del header
-		
-		String b64credentials = ((HttpServletRequest) request).getHeader("Authorization").substring("Basic".length()).trim();
-	    String credentials = new String(Base64.getDecoder().decode(b64credentials), StandardCharsets.UTF_8);
-	    
-		if (credentials.equals("usuario:contra") || credentials.equals("user:pass")) {
-			chain.doFilter(request, response);
-		} else {
-			HttpServletResponse resp = (HttpServletResponse) response;
-			
-			resp.sendError(400);
+        try {
+        	
+        	InputStream reader = message.getContent(InputStream.class);
+    		
+        	CachedOutputStream writer = new CachedOutputStream();
+        	IOUtils.copy(reader, writer);
+        	String content = writer.toString().substring(47);
+        	
+        	System.out.println(content);
+        	
+        	message.setContent(InputStream.class, new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
-	}
 
-	@Override
-	public void destroy() 
-	{
-	   this.filterConfig = null;
 	}
 
 }
