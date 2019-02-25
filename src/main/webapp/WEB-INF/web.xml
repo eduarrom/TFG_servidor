@@ -126,4 +126,14 @@
         <session-timeout>60</session-timeout>
     </session-config>
 
+<!--     <filter> -->
+<!-- 		<filter-name>mig</filter-name> -->
+<!-- 		<filter-class>com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway2</filter-class> -->
+<!-- 	</filter> -->
+	
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>mig</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+
 </web-app>
