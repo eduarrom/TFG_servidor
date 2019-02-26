@@ -1,139 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-
-    <!--
-    * @Author Rodrigo de Miguel González
-    * @Date 2017-2018
-    * TFG - Atravesando las Capas de una Aplicación Empresarial: Demostrador Tecnológico J2EE
-    -->
-    <display-name>TFG_server</display-name>
-
-    <description>Descripcion del fichero</description>
-
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!-- ************************************************************************* -->
-    <!-- ********************************* SOAP ********************************** -->
-    <!-- ************************************************************************* -->
-
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/cxf-servlet.xml</param-value>
-    </context-param>
-
-    <servlet>
-        <description>Apache CXF Endpoint</description>
-        <display-name>cxf</display-name>
-        <servlet-name>cxf</servlet-name>
-        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>cxf</servlet-name>
-        <url-pattern>/services/*</url-pattern>
-    </servlet-mapping>
-
-
-    <!-- ************************************************************************* -->
-    <!-- ***************************  SEGURIDAD SOAP  **************************** -->
-    <!-- ************************************************************************* -->
-
-
-    <security-role>
-        <description>usuario escritura</description>
-        <role-name>escritura</role-name>
-    </security-role>
-
-
-    <!--  Fuerza conexión https y usuario registrado -->
-    <!-- https://www.itworld.com/article/2769041/development/how-to-configure-tomcat-to-always-require-https.html -->
-
-
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>HTTPS usuario escritura</web-resource-name>
-            <url-pattern>/services/SA_Empleado</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>escritura</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>HTTPS usuario escritura</web-resource-name>
-            <url-pattern>/services/SA_Proyecto</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>escritura</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-
-
-    <!-- ************************************************************************* -->
-    <!-- ***************************  SEGURIDAD REST  **************************** -->
-    <!-- ************************************************************************* -->
-
-
-    <security-role>
-        <description>usuario escritura</description>
-        <role-name>write</role-name>
-    </security-role>
-
-
-    <!--Fuerza conexión https y usuario registrado-->
-    <!--https://www.itworld.com/article/2769041/development/how-to-configure-tomcat-to-always-require-https.html-->
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>HTTPs usuario escritura</web-resource-name>
-            <url-pattern>/services/SA_Departamento/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>write</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-
-
-    <login-config>
-        <auth-method>BASIC</auth-method>
-    </login-config>
-
-
-    <!-- ************************************************************************* -->
-    <!-- ****************************** OTRA CONFIG ****************************** -->
-    <!-- ************************************************************************* -->
-
-    <session-config>
-        <session-timeout>60</session-timeout>
-    </session-config>
-
-<!--     <filter> -->
-<!-- 		<filter-name>mig</filter-name> -->
-<!-- 		<filter-class>com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway2</filter-class> -->
-<!-- 	</filter> -->
-	
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>mig</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>TFG_server</display-name>
+  <description>Descripcion del fichero</description>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>WEB-INF/cxf-servlet.xml</param-value>
+  </context-param>
+  <servlet>
+    <description>Apache CXF Endpoint</description>
+    <display-name>cxf</display-name>
+    <servlet-name>cxf</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cxf</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <security-role>
+    <description>usuario escritura</description>
+    <role-name>escritura</role-name>
+  </security-role>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPS usuario escritura</web-resource-name>
+      <url-pattern>/services/SA_Empleado</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>escritura</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPS usuario escritura</web-resource-name>
+      <url-pattern>/services/SA_Proyecto</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>escritura</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <security-role>
+    <description>usuario escritura</description>
+    <role-name>write</role-name>
+  </security-role>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPs usuario escritura</web-resource-name>
+      <url-pattern>/services/SA_Departamento/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>write</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
 </web-app>

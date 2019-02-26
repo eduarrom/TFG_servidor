@@ -46,8 +46,8 @@ public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message>
     	    if (!credentials.equals("usuario:contra") && !credentials.equals("user:pass")) {
 
     			res.sendError(500);
-    		}
-            
+    		}  
+
     	    /*
         	InputStream reader = message.getContent(InputStream.class);
     		

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HelloWorldService" targetNamespace="http://helloWorld.negocio.TFG_server.eduardosergio.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://helloWorld.negocio.TFG_server.eduardosergio.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://helloWorld.negocio.TFG_server.eduardosergio.com/" schemaLocation="helloworld_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="saluteResponse">
+    <wsdl:part name="parameters" element="tns:saluteResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="salute">
+    <wsdl:part name="parameters" element="tns:salute">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HelloWorld">
+    <wsdl:operation name="salute">
+      <wsdl:input name="salute" message="tns:salute">
+    </wsdl:input>
+      <wsdl:output name="saluteResponse" message="tns:saluteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloWorldServiceSoapBinding" type="tns:HelloWorld">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="salute">
+      <soap:operation soapAction="urn:Salute" style="document"/>
+      <wsdl:input name="salute">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saluteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloWorldService">
+    <wsdl:port name="HelloWorldPort" binding="tns:HelloWorldServiceSoapBinding">
+      <soap:address location="http://localhost/TFG_server/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
