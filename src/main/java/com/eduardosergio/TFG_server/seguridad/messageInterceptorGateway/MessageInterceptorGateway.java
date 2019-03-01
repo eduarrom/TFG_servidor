@@ -8,6 +8,10 @@ import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.ResponseProcessingException;
+import javax.ws.rs.core.Response;
+import javax.xml.soap.SOAPFault;
 
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.interceptor.Fault;
@@ -15,6 +19,7 @@ import org.apache.cxf.io.CachedOutputStream;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
+import org.springframework.http.HttpStatus;
 
 public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message> {
 
@@ -25,48 +30,28 @@ public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message>
 	@Override
 	public void handleMessage(Message message) throws Fault {
 		
-        try {
-        	
-        	HttpServletRequest req = (HttpServletRequest)message.get("HTTP.REQUEST");
-        	HttpServletResponse res = (HttpServletResponse)message.get("HTTP.RESPONSE");
-        	
-        	if (req != null) {
-	        	String ipAddress = req.getHeader("X-FORWARDED-FOR");  
-	            if (ipAddress == null) {  
-	              ipAddress = req.getRemoteAddr();
-	            }
-	            
-	            if (ipAddress.equals("192.168.2.1")) {
-	            	res.sendError(500);
-	            }
-	
-	            String b64credentials = req.getHeader("Authorization").substring("Basic".length()).trim();
-	    	    String credentials = new String(Base64.getDecoder().decode(b64credentials), StandardCharsets.UTF_8);
-	    	    
-	    	    System.out.println(credentials);
-	    	    if (!credentials.equals("usuario:contra") && !credentials.equals("user:pass")) {
-	
-	    			res.sendError(500);
-	    		}  
-        	}
+    	HttpServletRequest req = (HttpServletRequest)message.get("HTTP.REQUEST");
+    	HttpServletResponse res = (HttpServletResponse)message.get("HTTP.RESPONSE");
+    	
+    	if (req != null) {
+        	String ipAddress = req.getHeader("X-FORWARDED-FOR");  
+            if (ipAddress == null) {  
+              ipAddress = req.getRemoteAddr();
+            }
+            
+            if (ipAddress.equals("127.0.0.1")) {
+            	new WebApplicationException("La IP no esta autorizada");
+            }
+            
+            String b64credentials = req.getHeader("Authorization").substring("Basic".length()).trim();
+    	    String credentials = new String(Base64.getDecoder().decode(b64credentials), StandardCharsets.UTF_8);
+    	    
+    	    System.out.println(credentials);
+    	    if (!credentials.equals("usuario:contra") && !credentials.equals("user:pass")) {
 
-    	    /*
-        	InputStream reader = message.getContent(InputStream.class);
-    		
-        	CachedOutputStream writer = new CachedOutputStream();
-        	IOUtils.copy(reader, writer);
-        	String content = writer.toString().substring(47);
-        	
-        	System.out.println(content);
-        	
-        	message.setContent(InputStream.class, new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
-			*/
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+    	    	throw new WebApplicationException("Las credenciales no son correctas");
+    		}  
+    	}
 	}
 
 }
