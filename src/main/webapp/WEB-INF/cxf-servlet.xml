@@ -238,7 +238,6 @@ http://cxf.apache.org/schemas/core.xsd">
           class="com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.Broker_SA_DepartamentoImpl" />
 
 	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
-	<bean id="errorHandlerInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.ErrorHandlerInterceptor" />
 	
 	<cxf:bus>
 		<cxf:inInterceptors>
