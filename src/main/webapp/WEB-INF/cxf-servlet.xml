@@ -36,7 +36,7 @@ http://cxf.apache.org/schemas/core.xsd">
             <bean class="org.apache.cxf.feature.LoggingFeature"/>
         </jaxws:features>
         
-        <jaxws:inInterceptors>
+        <!-- <jaxws:inInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
                  <constructor-arg>
                     <map>
@@ -64,7 +64,7 @@ http://cxf.apache.org/schemas/core.xsd">
            			</map>
                  </constructor-arg>
               </bean>
-		</jaxws:outInterceptors>
+		</jaxws:outInterceptors> -->
     </jaxws:endpoint>
     
     <jaxws:endpoint id="holamundo"
@@ -239,10 +239,10 @@ http://cxf.apache.org/schemas/core.xsd">
 
 	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
 	
-	<cxf:bus>
+<!-- 	<cxf:bus>
 		<cxf:inInterceptors>
 			<ref bean="messageInterceptor" />
 		</cxf:inInterceptors>
-	</cxf:bus>
+	</cxf:bus> -->
 
 </beans>
