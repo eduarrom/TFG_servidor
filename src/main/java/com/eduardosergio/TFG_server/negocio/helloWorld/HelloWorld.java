@@ -4,9 +4,24 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-@WebService(name = "HelloWorld", targetNamespace = "http://helloWorld.negocio.TFG_server.eduardosergio.com/", wsdlLocation = "/wsdl/helloworld.wsdl")
-public interface HelloWorld {
+import org.apache.cxf.annotations.Policies;
+import org.apache.cxf.annotations.Policy;
 
-	@WebMethod(operationName = "salute", action = "urn:Salute")
+@WebService
+public interface HelloWorld {
+	
+	@Policies({
+		@Policy(uri="inputPolicy.xml",
+				placement=Policy.Placement.BINDING_OPERATION_INPUT,
+				includeInWSDL=true),
+		@Policy(uri="outputPolicy.xml",
+				placement=Policy.Placement.BINDING_OPERATION_OUTPUT,
+				includeInWSDL=true),
+		@Policy(uri="policy.xml",
+				placement=Policy.Placement.BINDING_OPERATION,
+				includeInWSDL=true),
+	})
+	
+	@WebMethod
 	public String salute();
 }
