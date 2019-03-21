@@ -36,6 +36,10 @@ http://cxf.apache.org/schemas/core.xsd">
             <bean class="org.apache.cxf.feature.LoggingFeature"/>
         </jaxws:features>
         
+        <jaxws:properties>
+          	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
+        </jaxws:properties>
         <!-- <jaxws:inInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
                  <constructor-arg>

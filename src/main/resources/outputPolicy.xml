@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="outputPolicy" 
-targetNamespace="http://helloWorld.negocio.TFG_server.eduardosergio.com/" 
-   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-   xmlns:wsp="http://www.w3.org/ns/ws-policy"
-   xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-   xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
-   xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"   
-   xmlns:t="http://docs.oasis-open.org/ws-sx/ws-trust/200512" 
-   xmlns:wsaw="http://www.w3.org/2005/08/addressing" 
-   xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
-<wsp:Policy wsu:Id="Output_Policy">
+<wsp:Policy
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   	xmlns:wsp="http://www.w3.org/ns/ws-policy"
+   	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+   	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+   	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"   
+   	xmlns:t="http://docs.oasis-open.org/ws-sx/ws-trust/200512" 
+   	xmlns:wsaw="http://www.w3.org/2005/08/addressing" 
+   	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+   	wsu:Id="Output_Policy">
    <wsp:ExactlyOne>
       <wsp:All>
          <sp:EncryptedParts>
@@ -32,4 +31,3 @@ targetNamespace="http://helloWorld.negocio.TFG_server.eduardosergio.com/"
       </wsp:All>
    </wsp:ExactlyOne>
 </wsp:Policy>
-</wsdl:definitions>
