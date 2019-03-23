@@ -29,7 +29,7 @@
                         </wsp:Policy>
                         <sp:Issuer>
                            <wsaw:Address>https://localhost:8443/TFG_STS/STS</wsaw:Address>
-                           <wsaw:Metadata>
+	                       <wsaw:Metadata>
                               <wsx:Metadata>
                                  <wsx:MetadataSection>
                                     <wsx:MetadataReference>
