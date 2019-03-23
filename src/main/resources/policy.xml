@@ -27,6 +27,13 @@
                         <wsp:Policy>
                            <sp:RequireInternalReference/>
                         </wsp:Policy>
+                        <wsp:Policy>
+                           <sp:UsernameToken
+                              sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                              <wsp:Policy>
+                              </wsp:Policy>
+                           </sp:UsernameToken>
+                        </wsp:Policy>
                         <sp:Issuer>
                            <wsaw:Address>https://localhost:8443/TFG_STS/STS</wsaw:Address>
 	                       <wsaw:Metadata>
