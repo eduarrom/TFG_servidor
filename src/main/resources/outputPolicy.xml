@@ -11,13 +11,6 @@
    	wsu:Id="Output_Policy">
    <wsp:ExactlyOne>
       <wsp:All>
-         <wsp:Policy>
-            <sp:UsernameToken
-               sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
-               <wsp:Policy>
-               </wsp:Policy>
-            </sp:UsernameToken>
-         </wsp:Policy>
          <sp:EncryptedParts>
             <sp:Body/>
          </sp:EncryptedParts>
