@@ -21,7 +21,7 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.springframework.http.HttpStatus;
 
-public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message> {
+public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message>  {
 
 	public MessageInterceptorGateway() {
 		super(Phase.RECEIVE);
