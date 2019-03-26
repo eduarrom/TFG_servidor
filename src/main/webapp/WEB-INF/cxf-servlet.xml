@@ -40,35 +40,6 @@ http://cxf.apache.org/schemas/core.xsd">
           	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
 			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
         </jaxws:properties>
-        <!-- <jaxws:inInterceptors>
-              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
-                 <constructor-arg>
-                    <map>
-                       <entry key="user" value="testkey"/>
-                       <entry key="action" value="Encrypt"/>
-                       <entry key="passwordType" value="PasswordText"/>
-                       <entry key="decryptionParts" value="{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
-                       <entry key="decryptionPropFile" value="serverkeystore.properties"/>
-                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
-                    </map>
-                 </constructor-arg>
-              </bean>
-		</jaxws:inInterceptors>
-		<jaxws:outInterceptors>
-              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
-                 <constructor-arg>
-                    <map>
-                       <entry key="user" value="clienttestkey"/>
-                       <entry key="action" value="Encrypt"/> 
-                       <entry key="passwordType" value="PasswordText"/>
-                       <entry key="signaturePropFile" value="serverkeystore.properties"/>
-              		   <entry key="encryptionPropFile" value="serverkeystore.properties"/>
-                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
-                      
-           			</map>
-                 </constructor-arg>
-              </bean>
-		</jaxws:outInterceptors> -->
     </jaxws:endpoint>
     
     <jaxws:endpoint id="holamundo"
@@ -78,35 +49,10 @@ http://cxf.apache.org/schemas/core.xsd">
             <bean class="org.apache.cxf.feature.LoggingFeature"/>
         </jaxws:features>
         
-        <jaxws:inInterceptors>
-              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
-                 <constructor-arg>
-                    <map>
-                       <entry key="user" value="testkey"/>
-                       <entry key="action" value="Encrypt"/>
-                       <entry key="passwordType" value="PasswordText"/>
-                       <entry key="decryptionParts" value="{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
-                       <entry key="decryptionPropFile" value="serverkeystore.properties"/>
-                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
-                    </map>
-                 </constructor-arg>
-              </bean>
-		</jaxws:inInterceptors>
-		<jaxws:outInterceptors>
-              <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
-                 <constructor-arg>
-                    <map>
-                       <entry key="user" value="clienttestkey"/>
-                       <entry key="action" value="Encrypt"/> 
-                       <entry key="passwordType" value="PasswordText"/>
-                       <entry key="signaturePropFile" value="serverkeystore.properties"/>
-              		   <entry key="encryptionPropFile" value="serverkeystore.properties"/>
-                       <entry key="passwordCallbackClass" value="com.eduardosergio.TFG_server.seguridad.ServerPasswordCallback"/>
-                      
-           			</map>
-                 </constructor-arg>
-              </bean>
-		</jaxws:outInterceptors>
+        <jaxws:properties>
+          	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
+        </jaxws:properties>
     </jaxws:endpoint>
 	
     <jaxws:endpoint id="Broker_SA_Empleado"
@@ -243,7 +189,7 @@ http://cxf.apache.org/schemas/core.xsd">
 
 	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
 	
-<!-- 	<cxf:bus>
+ 	<!-- <cxf:bus>
 		<cxf:inInterceptors>
 			<ref bean="messageInterceptor" />
 		</cxf:inInterceptors>
