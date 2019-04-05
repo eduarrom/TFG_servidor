@@ -29,6 +29,32 @@ http://cxf.apache.org/schemas/core.xsd">
     <!--  ***********************************  JAX-WS  **************************************  -->
     <!--  ***********************************************************************************  -->
 
+	<jaxws:endpoint id="helloworld"
+                    implementor="com.eduardosergio.TFG_server.negocio.helloWorld.impl.HelloWorldImpl"
+                    address="/helloworld">
+        <jaxws:features>
+            <bean class="org.apache.cxf.feature.LoggingFeature"/>
+        </jaxws:features>
+        
+        <jaxws:properties>
+          	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
+        </jaxws:properties>
+    </jaxws:endpoint>
+    
+    <jaxws:endpoint id="holamundo"
+                    implementor="com.eduardosergio.TFG_server.negocio.holaMundo.impl.HolaMundoImpl"
+                    address="/holamundo">
+        <jaxws:features>
+            <bean class="org.apache.cxf.feature.LoggingFeature"/>
+        </jaxws:features>
+        
+        <jaxws:properties>
+          	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
+        </jaxws:properties>
+    </jaxws:endpoint>
+	
     <jaxws:endpoint id="Broker_SA_Empleado"
                     implementor="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl"
                     address="/SA_Empleado">
@@ -48,8 +74,8 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-<!--               <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
-		</jaxws:inInterceptors>
+              <ref bean="messageInterceptor" />
+  		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
                  <constructor-arg>
@@ -88,7 +114,7 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-<!--                <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
+				<ref bean="messageInterceptor" />
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -127,7 +153,7 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-<!--                <bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" /> -->
+              <ref bean="messageInterceptor" />
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -156,6 +182,10 @@ http://cxf.apache.org/schemas/core.xsd">
         <jaxrs:serviceBeans>
             <ref bean="broker_SA_Depart" />
         </jaxrs:serviceBeans>
+        
+        <jaxrs:inInterceptors>
+        	<ref bean="messageInterceptor" />
+        </jaxrs:inInterceptors>
     </jaxrs:server>
 
     <bean id="broker_SA_Depart"
@@ -163,10 +193,8 @@ http://cxf.apache.org/schemas/core.xsd">
 
 	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
 	
-	<cxf:bus>
-		<cxf:inInterceptors>
-			<ref bean="messageInterceptor" />
-		</cxf:inInterceptors>
+ 	<cxf:bus>
+		
 	</cxf:bus>
 
 </beans>
