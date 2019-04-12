@@ -54,6 +54,19 @@ http://cxf.apache.org/schemas/core.xsd">
 			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
         </jaxws:properties>
     </jaxws:endpoint>
+    
+    <jaxws:endpoint id="ciaomondo"
+                    implementor="com.eduardosergio.TFG_server.negocio.ciaoMondo.impl.CiaoMondoImpl"
+                    address="/ciaomondo">
+        <jaxws:features>
+            <bean class="org.apache.cxf.feature.LoggingFeature"/>
+        </jaxws:features>
+        
+        <jaxws:properties>
+          	<entry key="ws-security.callback-handler" value="com.eduardosergio.TFG_server.seguridad.ServiceKeystorePasswordCallback"/>
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
+        </jaxws:properties>
+    </jaxws:endpoint>
 	
     <jaxws:endpoint id="Broker_SA_Empleado"
                     implementor="com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl.Broker_SA_EmpleadoImpl"
