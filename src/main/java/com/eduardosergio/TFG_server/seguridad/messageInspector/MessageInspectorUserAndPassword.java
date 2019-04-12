@@ -1,4 +1,4 @@
-package com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway;
+package com.eduardosergio.TFG_server.seguridad.messageInspector;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,9 +21,9 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.springframework.http.HttpStatus;
 
-public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message>  {
+public class MessageInspectorUserAndPassword extends AbstractPhaseInterceptor<Message>  {
 
-	public MessageInterceptorGateway() {
+	public MessageInspectorUserAndPassword() {
 		super(Phase.RECEIVE);
 	}
 
@@ -34,15 +34,7 @@ public class MessageInterceptorGateway extends AbstractPhaseInterceptor<Message>
     	HttpServletResponse res = (HttpServletResponse)message.get("HTTP.RESPONSE");
     	
     	if (req != null) {
-        	String ipAddress = req.getHeader("X-FORWARDED-FOR");  
-            if (ipAddress == null) {  
-              ipAddress = req.getRemoteAddr();
-            }
-            
-            if (ipAddress.equals("127.0.0.1")) {
-            	new WebApplicationException("La IP no esta autorizada");
-            }
-            
+        	
             String b64credentials = req.getHeader("Authorization").substring("Basic".length()).trim();
     	    String credentials = new String(Base64.getDecoder().decode(b64credentials), StandardCharsets.UTF_8);
     	    

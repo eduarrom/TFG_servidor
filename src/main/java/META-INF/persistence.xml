@@ -22,6 +22,8 @@
         <class>com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Entidad.ClavesEmpleadoProyecto</class>
 
 
+		<class>com.eduardosergio.TFG_server.seguridad.auditInterceptor.entity.AuditInterceptorLog</class>
+
         <properties>
             <!--MYSQL-REMOTO-->
 

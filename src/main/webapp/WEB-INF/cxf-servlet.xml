@@ -87,7 +87,9 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-              <ref bean="messageInterceptor" />
+              <ref bean="messageInspectorUserAndPassword" />
+               <ref bean="messageInspectorIP" />
+               <ref bean="auditInterceptor" />
   		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -127,7 +129,9 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-				<ref bean="messageInterceptor" />
+				<ref bean="messageInspectorUserAndPassword" />
+				 <ref bean="messageInspectorIP" />
+				 <ref bean="auditInterceptor" />
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -166,7 +170,9 @@ http://cxf.apache.org/schemas/core.xsd">
                     </map>
                  </constructor-arg>
               </bean>
-              <ref bean="messageInterceptor" />
+              <ref bean="messageInspectorUserAndPassword" />
+              <ref bean="messageInspectorIP" />
+              <ref bean="auditInterceptor" />
 		</jaxws:inInterceptors>
 		<jaxws:outInterceptors>
               <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -197,17 +203,20 @@ http://cxf.apache.org/schemas/core.xsd">
         </jaxrs:serviceBeans>
         
         <jaxrs:inInterceptors>
-        	<ref bean="messageInterceptor" />
+        	<ref bean="messageInspectorUserAndPassword" />
+        	 <ref bean="messageInspectorIP" />
+        	 <ref bean="auditInterceptor" />
         </jaxrs:inInterceptors>
     </jaxrs:server>
 
     <bean id="broker_SA_Depart"
           class="com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.Broker_SA_DepartamentoImpl" />
 
-	<bean id="messageInterceptor" class="com.eduardosergio.TFG_server.seguridad.messageInterceptorGateway.MessageInterceptorGateway" />
+	<bean id="messageInspectorUserAndPassword" class="com.eduardosergio.TFG_server.seguridad.messageInspector.MessageInspectorUserAndPassword" />
+	<bean id="messageInspectorIP" class="com.eduardosergio.TFG_server.seguridad.messageInspector.MessageInspectorIP" />
+	<bean id="auditInterceptor" class="com.eduardosergio.TFG_server.seguridad.auditInterceptor.AuditInterceptor" />
 	
- 	<cxf:bus>
-		
-	</cxf:bus>
+	
+ 
 
 </beans>
