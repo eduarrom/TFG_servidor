@@ -27,7 +27,7 @@ public class MessageInspectorIP extends AbstractPhaseInterceptor<Message>  {
             }
             
             if (ipAddress.equals("127.0.0.1")) {
-            	new WebApplicationException("La IP no esta autorizada");
+            	throw new WebApplicationException("La IP no esta autorizada");
             }
             System.out.println(ipAddress);
     	}

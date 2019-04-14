@@ -31,7 +31,6 @@ public class MessageInspectorUserAndPassword extends AbstractPhaseInterceptor<Me
     	    
     	    System.out.println(credentials);
     	    if (!credentials.equals("usuario:contra") && !credentials.equals("user:pass")) {
-
     	    	throw new WebApplicationException("Las credenciales no son correctas");
     		}  
     	}
