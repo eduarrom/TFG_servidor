@@ -9,6 +9,7 @@ public class ControlDepartamentosImpl implements ControlDepartamentosMBean {
 		super();
 	}
 	
+	@Override
 	public void añadirDepartamentoVisto(TDepartamentoCompleto departamento) {
 		departamentos.add(departamento);
 	}

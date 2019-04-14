@@ -9,6 +9,7 @@ public class ControlEmpleadosImpl implements ControlEmpleadosMBean{
 		super();
 	}
 	
+	@Override
 	public void añadirEmpleadoVisto(TEmpleadoCompleto empleado) {
 		empleados.add(empleado);
 	}

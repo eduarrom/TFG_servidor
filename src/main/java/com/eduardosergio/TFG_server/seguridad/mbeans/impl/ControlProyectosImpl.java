@@ -9,6 +9,7 @@ public class ControlProyectosImpl implements ControlProyectosMBean {
 		super();
 	}
 	
+	@Override
 	public void añadirProyectoVisto(TProyectoCompleto proyecto) {
 		proyectos.add(proyecto);
 	}

@@ -9,6 +9,8 @@ public interface ControlDepartamentosMBean {
 	
 	List<TDepartamentoCompleto> departamentos = new ArrayList<TDepartamentoCompleto>();
 	
+	public void añadirDepartamentoVisto(TDepartamentoCompleto departamento);
+	
 	public String ultimoDepartamentoVisto();
 	
 	public String listarDepartamentosVistos();

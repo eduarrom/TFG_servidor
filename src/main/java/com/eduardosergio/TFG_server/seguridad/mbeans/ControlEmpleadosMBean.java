@@ -9,6 +9,8 @@ public interface ControlEmpleadosMBean {
 	
 	List<TEmpleadoCompleto> empleados = new ArrayList<TEmpleadoCompleto>();
 	
+	public void añadirEmpleadoVisto(TEmpleadoCompleto empleado);
+	
 	public String ultimoEmpleadoVisto();
 	
 	public String listarEmpleadosVistos();

@@ -3,7 +3,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl;
 
 import com.eduardosergio.TFG_server.negocio.modulo_Departamento.transferOfuscado.ObfuscatedTransferObjectDepartamento;
 import com.eduardosergio.TFG_server.seguridad.mbeans.ControlDepartamentosMBean;
-import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlDepartamentosImpl;
+import com.eduardosergio.TFG_server.seguridad.mbeans.factory.MBeansFactory;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Entidad.Transfers.TDepartamentoCompleto;
@@ -12,7 +12,6 @@ import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.Departamen
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoFieldInvalidException;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Excepciones.DepartamentoYaExisteExcepcion;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ import java.util.List;
 @Path("/departamento")
 public class Broker_SA_DepartamentoImpl {
 
-	private ControlDepartamentosImpl controlDepartamentos;
+	private ControlDepartamentosMBean controlDepartamentos;
 	
     private final static Logger log = LoggerFactory.getLogger(Broker_SA_DepartamentoImpl.class);
 
@@ -47,7 +46,7 @@ public class Broker_SA_DepartamentoImpl {
         ObjectName name;
 		try {
 			name = new ObjectName("Departamentos:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlDepartamentosMBean");
-			controlDepartamentos = new ControlDepartamentosImpl();
+			controlDepartamentos = MBeansFactory.getInstance().getDepartamentoMBean();
 	        StandardMBean mbean = new StandardMBean(controlDepartamentos, ControlDepartamentosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {

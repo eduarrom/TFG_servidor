@@ -2,7 +2,7 @@ package com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Serv_aplicacion.impl;
 
 
 import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
-import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlEmpleadosImpl;
+import com.eduardosergio.TFG_server.seguridad.mbeans.factory.MBeansFactory;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleadoCompleto;
@@ -35,15 +35,15 @@ import java.util.List;
         )
 public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
 	
-	private ControlEmpleadosImpl ControlEmpleados;
+	private ControlEmpleadosMBean controlEmpleados;
 	
     public Broker_SA_EmpleadoImpl() {
     	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name;
 		try {
 			name = new ObjectName("Empleados:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlEmpleadosMBean");
-			ControlEmpleados = new ControlEmpleadosImpl();
-	        StandardMBean mbean = new StandardMBean(ControlEmpleados,ControlEmpleadosMBean.class, false);
+			controlEmpleados = MBeansFactory.getInstance().getEmpleadoMBean();
+	        StandardMBean mbean = new StandardMBean(controlEmpleados,ControlEmpleadosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {
 
@@ -80,7 +80,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         
         if (emple != null) {
-        	ControlEmpleados.añadirEmpleadoVisto(emple);
+        	controlEmpleados.añadirEmpleadoVisto(emple);
         }
         
         return emple;
@@ -100,7 +100,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
     	TEmpleadoCompleto emple = FactoriaSA.getInstance().crearSA_Empleado().buscarByEmail(email);
     	
     	if (emple != null) {
-    		ControlEmpleados.añadirEmpleadoVisto(emple);
+    		controlEmpleados.añadirEmpleadoVisto(emple);
     	}
     	
         return emple;
@@ -130,7 +130,7 @@ public class Broker_SA_EmpleadoImpl implements IBroker_SA_Empleado {
         System.out.println("***********************************************");
         
         if (tec != null) {
-        	ControlEmpleados.añadirEmpleadoVisto(tec);
+        	controlEmpleados.añadirEmpleadoVisto(tec);
         }
         
         return tec;

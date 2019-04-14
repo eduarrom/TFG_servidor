@@ -7,8 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.WebApplicationException;
+
 
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.message.Message;
@@ -16,7 +15,6 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 
 import com.eduardosergio.TFG_server.seguridad.auditInterceptor.entity.AuditInterceptorLog;
-import com.rodrigo.TFG_server.Integracion.EMFSingleton;
 
 public class AuditInterceptor extends AbstractPhaseInterceptor<Message>  {
 
@@ -28,7 +26,6 @@ public class AuditInterceptor extends AbstractPhaseInterceptor<Message>  {
 	public void handleMessage(Message message) throws Fault {
 		
     	HttpServletRequest req = (HttpServletRequest)message.get("HTTP.REQUEST");
-    	HttpServletResponse res = (HttpServletResponse)message.get("HTTP.RESPONSE");
     	
     	
     	if (req != null) {

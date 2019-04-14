@@ -1,10 +1,9 @@
 package com.rodrigo.TFG_server.Negocio.Modulo_Proyecto.Serv_aplicacion.impl;
 
 
-import com.eduardosergio.TFG_server.seguridad.mbeans.ControlEmpleadosMBean;
+
 import com.eduardosergio.TFG_server.seguridad.mbeans.ControlProyectosMBean;
-import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlEmpleadosImpl;
-import com.eduardosergio.TFG_server.seguridad.mbeans.impl.ControlProyectosImpl;
+import com.eduardosergio.TFG_server.seguridad.mbeans.factory.MBeansFactory;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Entidad.Transfers.TEmpleado;
 import com.rodrigo.TFG_server.Negocio.Modulo_Empleado.Excepciones.EmpleadoException;
@@ -40,15 +39,15 @@ import java.util.List;
         serviceName = "Broker_SA_ProyectoImpl")
 public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
 	
-	private ControlProyectosImpl ControlProyectos;
+	private ControlProyectosMBean controlProyectos;
 	
     public Broker_SA_ProyectoImpl() {
     	MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name;
 		try {
 			name = new ObjectName("Proyectos:type=com.eduardosergio.TFG_server.negocio.seguridad.mbeans.ControlProyectosMBean");
-			ControlProyectos = new ControlProyectosImpl();
-	        StandardMBean mbean = new StandardMBean(ControlProyectos,ControlProyectosMBean.class, false);
+			controlProyectos = MBeansFactory.getInstance().getProyectoMBean();
+	        StandardMBean mbean = new StandardMBean(controlProyectos,ControlProyectosMBean.class, false);
 	        mbs.registerMBean(mbean, name);
 		} catch (MalformedObjectNameException e) {
 
@@ -73,7 +72,7 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
         TProyectoCompleto pro = FactoriaSA.getInstance().crearSA_Proyecto().buscarByID(id);
         
         if (pro != null) {
-        	ControlProyectos.añadirProyectoVisto(pro);
+        	controlProyectos.añadirProyectoVisto(pro);
         }
         
         return pro;
@@ -95,7 +94,7 @@ public class Broker_SA_ProyectoImpl implements IBroker_SA_Proyecto {
         TProyectoCompleto pro = FactoriaSA.getInstance().crearSA_Proyecto().buscarByNombre(nombre);
         
         if (pro != null) {
-        	ControlProyectos.añadirProyectoVisto(pro);
+        	controlProyectos.añadirProyectoVisto(pro);
         }
         
         return pro;

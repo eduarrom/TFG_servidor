@@ -9,6 +9,8 @@ public interface ControlProyectosMBean {
 	
 	List<TProyectoCompleto> proyectos = new ArrayList<TProyectoCompleto>();
 	
+	public void añadirProyectoVisto(TProyectoCompleto proyecto);
+	
 	public String ultimoProyectoVisto();
 	
 	public String listarProyectosVistos();
