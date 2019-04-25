@@ -1,4 +1,4 @@
-package com.eduardosergio.TFG_server.negocio.ciaoMondo;
+package com.eduardosergio.TFG_server.negocio.passwordSynchronizerSTS2;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -8,7 +8,7 @@ import org.apache.cxf.annotations.Policies;
 import org.apache.cxf.annotations.Policy;
 
 @WebService
-public interface CiaoMondo {
+public interface PasswordSynchronizerSTS2 {
 	
 	@Policies({
 		@Policy(uri="policy2.xml",
@@ -23,5 +23,5 @@ public interface CiaoMondo {
 	})
 
 	@WebMethod
-	public String saludar();
+	public void synchronize(String user, String pass);
 }

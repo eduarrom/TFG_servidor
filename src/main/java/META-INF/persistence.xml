@@ -23,6 +23,9 @@
 
 
 		<class>com.eduardosergio.TFG_server.seguridad.auditInterceptor.entity.AuditInterceptorLog</class>
+		<class>com.eduardosergio.TFG_server.negocio.passwordSynchronizerREST.entidad.CredencialesREST</class>
+		<class>com.eduardosergio.TFG_server.negocio.passwordSynchronizerSTS2.entidad.CredencialesSTS2</class>
+		<class>com.eduardosergio.TFG_server.negocio.passwordSynchronizerSTS1.entidad.CredencialesSTS1</class>
 
         <properties>
             <!--MYSQL-REMOTO-->

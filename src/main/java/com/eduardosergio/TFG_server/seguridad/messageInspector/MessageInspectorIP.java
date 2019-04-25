@@ -26,7 +26,7 @@ public class MessageInspectorIP extends AbstractPhaseInterceptor<Message>  {
               ipAddress = req.getRemoteAddr();
             }
             
-            if (ipAddress.equals("127.0.0.1")) {
+            if (!ipAddress.equals("127.0.0.1")) {
             	throw new WebApplicationException("La IP no esta autorizada");
             }
             System.out.println(ipAddress);

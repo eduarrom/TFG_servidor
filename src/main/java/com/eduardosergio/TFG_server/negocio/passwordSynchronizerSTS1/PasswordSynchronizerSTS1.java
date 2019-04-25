@@ -1,14 +1,15 @@
-package com.eduardosergio.TFG_server.negocio.holaMundo;
+package com.eduardosergio.TFG_server.negocio.passwordSynchronizerSTS1;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.soap.Addressing;
 
 import org.apache.cxf.annotations.Policies;
 import org.apache.cxf.annotations.Policy;
 
 @WebService
-public interface HolaMundo {
+public interface PasswordSynchronizerSTS1 {
 	
 	@Policies({
 		@Policy(uri="policy.xml",
@@ -21,7 +22,7 @@ public interface HolaMundo {
 				placement=Policy.Placement.BINDING_OPERATION_OUTPUT,
 				includeInWSDL=true)
 	})
-
+	
 	@WebMethod
-	public String saludar();
+	public void synchronize(String user, String pass);
 }

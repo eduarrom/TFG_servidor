@@ -1,5 +1,7 @@
 package com.rodrigo.TFG_server.Negocio.FactoriaSA.impl;
 
+import com.eduardosergio.TFG_server.negocio.passwordSynchronizerREST.SA_PasswordSynchronizerRest;
+import com.eduardosergio.TFG_server.negocio.passwordSynchronizerREST.impl.SA_PasswordSynchronizerRestImpl;
 import com.rodrigo.TFG_server.Negocio.FactoriaSA.FactoriaSA;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.SA_Departamento;
 import com.rodrigo.TFG_server.Negocio.Modulo_Departamento.Serv_aplicacion.impl.SA_DepartamentoImpl;
@@ -30,4 +32,11 @@ public class FactoriaSAImpl extends FactoriaSA {
     public SA_Proyecto crearSA_Proyecto() {
         return new SA_ProyectoImpl();
     }
+    
+    @Override
+    public SA_PasswordSynchronizerRest crearSA_PasswordSynchronizerRest() {
+        return new SA_PasswordSynchronizerRestImpl();
+    }
+    
+    
 }
