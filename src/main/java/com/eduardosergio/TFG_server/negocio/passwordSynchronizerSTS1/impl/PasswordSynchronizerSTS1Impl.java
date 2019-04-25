@@ -15,6 +15,7 @@ public class PasswordSynchronizerSTS1Impl implements PasswordSynchronizerSTS1{
 	public void synchronize(String user, String pass) {
 		EntityManager em = EMFSingleton.getInstance().createEntityManager();
 		
+		em.getTransaction().begin();
 		try {
 		CredencialesSTS1 c = (CredencialesSTS1) em
                 .createNamedQuery("CredencialesSTS1.buscarPorUsuario")
@@ -22,8 +23,17 @@ public class PasswordSynchronizerSTS1Impl implements PasswordSynchronizerSTS1{
                 .getSingleResult();
 		
 		c.setPass(pass);
+		
+		em.getTransaction().commit();
 		} catch (NoResultException e) {
             em.persist(new CredencialesSTS1(user, pass));
+            
+            em.getTransaction().commit();
+        }  finally {
+
+            if (em.isOpen()) {
+                em.close();
+            }
         }
 		
 		
